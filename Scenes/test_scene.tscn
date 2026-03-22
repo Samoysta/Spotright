@@ -5,8 +5,7 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dogw"]
 
 [sub_resource type="Gradient" id="Gradient_r5l72"]
-offsets = PackedFloat32Array(0.68028843, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.4, 0.85882354, 0.21568628, 1)
+colors = PackedColorArray(0.14644858, 0.12802637, 0, 1, 0.4, 0.85882354, 0.21568628, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_50ct6"]
 gradient = SubResource("Gradient_r5l72")

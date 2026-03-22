@@ -1,0 +1,14 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1774208627
+icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
+::res://Assets/::1774191363
+Character.png::CompressedTexture2D::3483364258645260571::1774191321::1774191363::1::::<><><>0<>0<>2526958e07dd3a485a6afb6025356332<>res://.godot/imported/Character.png-f98bfd4a519deb39a93cee80b0823610.ctex::
+::res://Scenes/::1774205376
+character.tscn::PackedScene::1771483939617051374::1774191321::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn
+test_scene.tscn::PackedScene::8267793320165344159::1774205376::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn
+::res://Scenes/Effects/::1774191321
+jump_effect.tscn::PackedScene::183098906266672845::1774191321::0::1::::<><><>0<>0<><>::uid://24y2vn7ev125::::res://Scripts/Effect.cs
+::res://Scripts/::1774191321
+Character.cs::CSharpScript::5646290253741580454::1774191321::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
