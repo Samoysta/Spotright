@@ -168,7 +168,11 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62315273, 1, 1, 1, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
 size = Vector2(2.51, 16.31)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect")]
+[sub_resource type="Curve" id="Curve_owm7s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect", "rightWallEffect", "leftWallEffect")]
 z_index = 1
 script = ExtResource("1_ushfy")
 Speed = 300.0
@@ -181,6 +185,8 @@ anim = NodePath("CollisionShape2D/Body/Foot/CharacterSprite/AnimationPlayer")
 runEffect = NodePath("CollisionShape2D/Body/Foot/RunEffect")
 jumpEf = ExtResource("2_owm7s")
 wallSpeed = 200.0
+rightWallEffect = NodePath("RightWallEffect")
+leftWallEffect = NodePath("LeftWallEffect")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 position = Vector2(0.25, 0)
@@ -222,6 +228,30 @@ position = Vector2(-8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWallCheck" unique_id=739879858]
 shape = SubResource("RectangleShape2D_owm7s")
+
+[node name="RightWallEffect" type="CPUParticles2D" parent="." unique_id=2146122562]
+position = Vector2(8, 16)
+emitting = false
+amount = 30
+lifetime = 0.4
+gravity = Vector2(0, 0)
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_owm7s")
+
+[node name="LeftWallEffect" type="CPUParticles2D" parent="." unique_id=121176310]
+position = Vector2(-8, 16)
+emitting = false
+amount = 30
+lifetime = 0.4
+gravity = Vector2(0, 0)
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_owm7s")
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]

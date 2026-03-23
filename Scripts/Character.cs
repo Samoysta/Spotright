@@ -15,6 +15,8 @@ public partial class Character : CharacterBody2D
 	[Export] CpuParticles2D runEffect;
 	[Export] PackedScene jumpEf;
 	[Export] float wallSpeed;
+	[Export] CpuParticles2D rightWallEffect;
+	[Export] CpuParticles2D leftWallEffect;
 	public Queue<Effect> jumpEfs = new ();
 	int dir;
 	Vector2 firstScale;
@@ -39,7 +41,9 @@ public partial class Character : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-
+		//WallEffects
+		rightWallEffect.Emitting = Velocity.Y > 0 && isRightWalled;
+		leftWallEffect.Emitting = Velocity.Y > 0 && isLeftWalled;
 		//Wall Checks
 		if (rightWallAmount > 0)
 		{
@@ -58,15 +62,24 @@ public partial class Character : CharacterBody2D
 		{
 			isLeftWalled = false;
 		}
+		//WallSpeed Sürtünme
 		if (Velocity.Y > 0)
 		{
 			if (isRightWalled || isLeftWalled)
 			{
 				if (velocity.Y > wallSpeed)
 				{
-					velocity.Y = wallSpeed;	
+					velocity.Y = wallSpeed;
+					if (isRightWalled)
+					{
+						rightWallEffect.Emitting = true;
+					}
+					else
+					{
+						leftWallEffect.Emitting = true;
+					}
 				}
-			}	
+			}
 		}
 		
 		// Add the gravity.
@@ -194,6 +207,4 @@ public partial class Character : CharacterBody2D
 			leftWallAmount --;
 		}
 	}
-
-
 }
