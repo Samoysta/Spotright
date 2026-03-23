@@ -165,6 +165,9 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.682266, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62315273, 1, 1, 1, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
+size = Vector2(2.51, 16.31)
+
 [node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect")]
 z_index = 1
 script = ExtResource("1_ushfy")
@@ -177,6 +180,7 @@ foot = NodePath("CollisionShape2D/Body/Foot")
 anim = NodePath("CollisionShape2D/Body/Foot/CharacterSprite/AnimationPlayer")
 runEffect = NodePath("CollisionShape2D/Body/Foot/RunEffect")
 jumpEf = ExtResource("2_owm7s")
+wallSpeed = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 position = Vector2(0.25, 0)
@@ -206,3 +210,20 @@ scale_amount_min = 6.0
 scale_amount_max = 10.0
 scale_amount_curve = SubResource("Curve_ushfy")
 color_ramp = SubResource("Gradient_ushfy")
+
+[node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
+position = Vector2(8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWallCheck" unique_id=289782243]
+shape = SubResource("RectangleShape2D_owm7s")
+
+[node name="LeftWallCheck" type="Area2D" parent="." unique_id=303059102]
+position = Vector2(-8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWallCheck" unique_id=739879858]
+shape = SubResource("RectangleShape2D_owm7s")
+
+[connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
+[connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]
+[connection signal="body_entered" from="LeftWallCheck" to="." method="LeftWallEntered"]
+[connection signal="body_exited" from="LeftWallCheck" to="." method="LeftWallExited"]

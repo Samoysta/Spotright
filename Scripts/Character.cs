@@ -14,10 +14,15 @@ public partial class Character : CharacterBody2D
 	[Export] AnimationPlayer anim;
 	[Export] CpuParticles2D runEffect;
 	[Export] PackedScene jumpEf;
+	[Export] float wallSpeed;
 	public Queue<Effect> jumpEfs = new ();
 	int dir;
 	Vector2 firstScale;
 	bool isGrounded;
+	bool isRightWalled;
+	bool isLeftWalled;
+	int leftWallAmount;
+	int rightWallAmount;
 
     public override void _Ready()
     {
@@ -35,6 +40,35 @@ public partial class Character : CharacterBody2D
 	{
 		Vector2 velocity = Velocity;
 
+		//Wall Checks
+		if (rightWallAmount > 0)
+		{
+			isRightWalled = true;
+		}
+		else
+		{
+			isRightWalled = false;
+		}
+
+		if (leftWallAmount > 0)
+		{
+			isLeftWalled = true;
+		}
+		else
+		{
+			isLeftWalled = false;
+		}
+		if (Velocity.Y > 0)
+		{
+			if (isRightWalled || isLeftWalled)
+			{
+				if (velocity.Y > wallSpeed)
+				{
+					velocity.Y = wallSpeed;	
+				}
+			}	
+		}
+		
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
@@ -62,14 +96,6 @@ public partial class Character : CharacterBody2D
 			else
 			{
 				runEffect.Emitting = false;
-			}
-			//Jump
-			if (Input.IsActionJustPressed("W"))
-			{
-				SpawnJumpEffect();
-				velocity.Y = -JumpVelocity;
-				anim.Play("Jump");
-				anim.Seek(0);
 			}
 		}
 		//sprite yönü
@@ -100,6 +126,31 @@ public partial class Character : CharacterBody2D
 		{
 			dir = 0;
 		}
+		//Jump
+		if (Input.IsActionJustPressed("W"))
+		{
+			if (IsOnFloor())
+			{
+				SpawnJumpEffect();
+				velocity.Y = -JumpVelocity;
+				anim.Play("Jump");
+				anim.Seek(0);		
+			}
+			else if(isRightWalled || isLeftWalled)
+			{
+				SpawnJumpEffect();	
+				if (isLeftWalled)
+				{
+					velocity = new Vector2(Speed *2,-JumpVelocity);
+				}
+				else if (isRightWalled)
+				{
+					velocity = new Vector2(-Speed *2,-JumpVelocity);
+				}
+				anim.Play("Jump");
+				anim.Seek(0);	
+			}
+		}
 		velocity.X = Mathf.Lerp(velocity.X, dir * Speed, accel * (float)delta); 
 		Velocity = velocity;
 		MoveAndSlide();
@@ -112,4 +163,37 @@ public partial class Character : CharacterBody2D
 		ef.setOn();
 		jumpEfs.Enqueue(ef);
 	}
+
+	void RightWallEntered(Node2D body)
+	{
+		if (body.IsInGroup("Ground"))
+		{
+			rightWallAmount ++;
+		}
+	}
+	void LeftWallEntered(Node2D body)
+	{
+		if (body.IsInGroup("Ground"))
+		{
+			leftWallAmount ++;
+		}
+	}
+
+	void RightWallExited(Node2D body)
+	{
+		if (body.IsInGroup("Ground"))
+		{
+			rightWallAmount --;
+		}
+	}
+
+	void LeftWallExited(Node2D body)
+	{
+		if (body.IsInGroup("Ground"))
+		{
+			leftWallAmount --;
+		}
+	}
+
+
 }
