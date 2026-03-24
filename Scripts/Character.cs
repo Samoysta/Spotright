@@ -5,8 +5,11 @@ using System.Collections.Generic;
 
 public partial class Character : CharacterBody2D
 {
+	[Export] Camera2d camera;
 	[Export] float Speed;
 	[Export] float JumpVelocity;
+	[Export] float jumpTime;
+	float jumpT;
 	[Export] float Gravity;
 	[Export] float accel;
 	[Export] Sprite2D characterSprite;
@@ -17,8 +20,11 @@ public partial class Character : CharacterBody2D
 	[Export] float wallSpeed;
 	[Export] CpuParticles2D rightWallEffect;
 	[Export] CpuParticles2D leftWallEffect;
+	Vector2 spawnPos;
+	Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
 	int dir;
+	bool isJumping;
 	Vector2 firstScale;
 	bool isGrounded;
 	bool isRightWalled;
@@ -40,7 +46,7 @@ public partial class Character : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
+		velocity = Velocity;
 		//WallEffects
 		rightWallEffect.Emitting = Velocity.Y > 0 && isRightWalled;
 		leftWallEffect.Emitting = Velocity.Y > 0 && isLeftWalled;
@@ -104,11 +110,11 @@ public partial class Character : CharacterBody2D
 			//RunEffect
 			if (Mathf.Abs(Velocity.X - 0) > 10)
 			{
-				runEffect.Emitting = true;
+				runEffect.CallDeferred("set_emitting",true);
 			}
 			else
 			{
-				runEffect.Emitting = false;
+				runEffect.CallDeferred("set_emitting", false);
 			}
 		}
 		//sprite yönü
@@ -145,28 +151,69 @@ public partial class Character : CharacterBody2D
 			if (IsOnFloor())
 			{
 				SpawnJumpEffect();
-				velocity.Y = -JumpVelocity;
 				anim.Play("Jump");
-				anim.Seek(0);		
+				anim.Seek(0);
+				jumpT = jumpTime;
+				isJumping = true;		
 			}
 			else if(isRightWalled || isLeftWalled)
 			{
 				SpawnJumpEffect();	
 				if (isLeftWalled)
 				{
-					velocity = new Vector2(Speed *2,-JumpVelocity);
+					velocity.X = Speed;
 				}
 				else if (isRightWalled)
 				{
-					velocity = new Vector2(-Speed *2,-JumpVelocity);
+					velocity.X = -Speed;
 				}
 				anim.Play("Jump");
 				anim.Seek(0);	
+				isJumping = true;
+				jumpT = jumpTime;
 			}
 		}
-		velocity.X = Mathf.Lerp(velocity.X, dir * Speed, accel * (float)delta); 
+		if (isJumping)
+		{
+			velocity.Y = -JumpVelocity;
+			jumpT -= (float)delta;
+			if (Input.IsActionJustReleased("W"))
+			{
+				isJumping = false;
+			}
+			if (jumpT <= 0)
+			{
+				isJumping = false;
+			}
+			if (IsOnCeiling())
+			{
+				isJumping = false;
+			}
+		}
+		//movement apply
+		if (IsOnFloor())
+		{
+			velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel * (float)delta); 	
+		}
+		else
+		{
+			velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.2f * (float)delta); 
+		}
 		Velocity = velocity;
 		MoveAndSlide();
+		//Çarpışma kontrol
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			var collision = GetSlideCollision(i);
+			Node2D col = (Node2D)collision.GetCollider();
+			if (col.IsInGroup("DamageTile"))
+			{
+				GlobalPosition = spawnPos;
+                velocity = Vector2.Zero;
+				Velocity = Vector2.Zero;
+				camera.Call("Shake", 10f);
+			}
+		}
 	}
 
 	void SpawnJumpEffect()
@@ -206,5 +253,10 @@ public partial class Character : CharacterBody2D
 		{
 			leftWallAmount --;
 		}
+	}
+
+	public void SetSpawnPos(Vector2 pos)
+	{
+		spawnPos = pos;
 	}
 }

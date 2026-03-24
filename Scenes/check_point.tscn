@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://btt4fcdfixipy"]
+
+[ext_resource type="Script" uid="uid://yarlnvufhowr" path="res://Scripts/CheckPoint.cs" id="1_oampm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryujq"]
+size = Vector2(45.595, 123.915)
+
+[node name="CheckPoint" type="Area2D" unique_id=1205404910]
+script = ExtResource("1_oampm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=180739963]
+shape = SubResource("RectangleShape2D_ryujq")
+
+[connection signal="body_entered" from="." to="." method="PlayerEntered"]
