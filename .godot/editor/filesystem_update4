@@ -1,7 +1,5 @@
-res://Scenes/test_scene.tscn
-res://Scenes/character.tscn
-res://Scripts/Character.cs
-res://Scripts/Effect.cs
-res://Scenes/check_point.tscn
 res://Scripts/CheckPoint.cs
 res://Scripts/Camera2d.cs
+res://Scripts/Effect.cs
+res://Scripts/Character.cs
+res://Scenes/test_scene.tscn

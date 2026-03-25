@@ -211,7 +211,8 @@ public partial class Character : CharacterBody2D
 				GlobalPosition = spawnPos;
                 velocity = Vector2.Zero;
 				Velocity = Vector2.Zero;
-				camera.Call("Shake", 10f);
+				isJumping = false;
+				camera.Call("Shake", 20f);
 			}
 		}
 	}
