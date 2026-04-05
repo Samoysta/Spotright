@@ -48,6 +48,7 @@ public partial class Camera2d : Camera2D
             direction = Vector2.Zero;
             Offset = originalOffset;
         }
+        GlobalPosition = GlobalPosition.Round();
     }
 
     // 🔥 normal shake
