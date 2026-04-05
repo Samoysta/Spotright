@@ -3,9 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://bpvmraqjijdix" path="res://Assets/Character.png" id="1_lkv7d"]
 [ext_resource type="Script" uid="uid://cmpdttlitf0fa" path="res://Scripts/Character.cs" id="1_ushfy"]
 [ext_resource type="PackedScene" uid="uid://cuxu20j3t8pt" path="res://Scenes/Effects/jump_effect.tscn" id="2_owm7s"]
+[ext_resource type="Texture2D" uid="uid://c7avoy721vhud" path="res://Assets/Character Normal.png" id="4_nytcm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.5, 32)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ejsiy"]
+diffuse_texture = ExtResource("1_lkv7d")
+normal_texture = ExtResource("4_nytcm")
 
 [sub_resource type="Animation" id="Animation_nytcm"]
 resource_name = "Fall"
@@ -200,7 +205,7 @@ position = Vector2(-0.25, 16)
 
 [node name="CharacterSprite" type="Sprite2D" parent="CollisionShape2D/Body/Foot" unique_id=687188638]
 position = Vector2(0, -16)
-texture = ExtResource("1_lkv7d")
+texture = SubResource("CanvasTexture_ejsiy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/Body/Foot/CharacterSprite" unique_id=1307934145]
 libraries/ = SubResource("AnimationLibrary_nytcm")

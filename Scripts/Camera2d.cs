@@ -3,6 +3,7 @@ using System;
 
 public partial class Camera2d : Camera2D
 {
+    [Export] Node2D target;
     [Export] public float ShakeStrength = 0f;
     [Export] public float ShakeFade = 5f;
     [Export] public float NoiseSpeed = 20f;
@@ -48,7 +49,7 @@ public partial class Camera2d : Camera2D
             direction = Vector2.Zero;
             Offset = originalOffset;
         }
-        GlobalPosition = GlobalPosition.Round();
+        GlobalPosition = GlobalPosition.Lerp(target.GlobalPosition, 5 * (float)delta);
     }
 
     // 🔥 normal shake
