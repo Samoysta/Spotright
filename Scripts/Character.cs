@@ -10,6 +10,9 @@ public partial class Character : CharacterBody2D
 	[Export] float JumpVelocity;
 	[Export] float jumpTime;
 	float jumpT;
+	[Export] float inputBufTimer;
+	float ibt;
+	bool isZjustPressed;
 	[Export] float Gravity;
 	[Export] float accel;
 	[Export] Sprite2D characterSprite;
@@ -35,7 +38,7 @@ public partial class Character : CharacterBody2D
     public override void _Ready()
     {
         firstScale = characterSprite.Scale;
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 12; i++)
 		{
 			Effect jef = (Effect)jumpEf.Instantiate();
 			GetTree().CurrentScene.CallDeferred("add_child", jef);
@@ -47,6 +50,26 @@ public partial class Character : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity = Velocity;
+		//JumpBufferInput
+		if (Input.IsActionJustPressed("Z"))
+		{
+			ibt = inputBufTimer;
+			isZjustPressed = true;
+		}
+		if (Input.IsActionJustReleased("Z"))
+		{
+			ibt = 0;
+			isZjustPressed = false;
+		}
+		if (ibt > 0)
+		{
+			ibt -= (float)delta;
+		}
+		else
+		{
+			isZjustPressed = false;
+		}
+		
 		//WallEffects
 		rightWallEffect.Emitting = Velocity.Y > 0 && isRightWalled;
 		leftWallEffect.Emitting = Velocity.Y > 0 && isLeftWalled;
@@ -127,14 +150,14 @@ public partial class Character : CharacterBody2D
 			characterSprite.Scale = firstScale;
 		}
 		//Run
-		if (Input.IsActionPressed("D"))
+		if (Input.IsActionPressed("Right"))
 		{
 			if (Velocity.X < Speed)
 			{
 				dir = 1;
 			}
 		}
-		else if (Input.IsActionPressed("A"))
+		else if (Input.IsActionPressed("Left"))
 		{
 			if (Velocity.X > -Speed)
 			{
@@ -146,7 +169,7 @@ public partial class Character : CharacterBody2D
 			dir = 0;
 		}
 		//Jump
-		if (Input.IsActionJustPressed("W"))
+		if (isZjustPressed)
 		{
 			if (IsOnFloor())
 			{
@@ -154,7 +177,8 @@ public partial class Character : CharacterBody2D
 				anim.Play("Jump");
 				anim.Seek(0);
 				jumpT = jumpTime;
-				isJumping = true;		
+				isJumping = true;	
+				isZjustPressed = false;	
 			}
 			else if(isRightWalled || isLeftWalled)
 			{
@@ -171,13 +195,14 @@ public partial class Character : CharacterBody2D
 				anim.Seek(0);	
 				isJumping = true;
 				jumpT = jumpTime;
+				isZjustPressed = false;
 			}
 		}
 		if (isJumping)
 		{
 			velocity.Y = -JumpVelocity;
 			jumpT -= (float)delta;
-			if (Input.IsActionJustReleased("W"))
+			if (Input.IsActionJustReleased("Z"))
 			{
 				isJumping = false;
 			}
@@ -197,7 +222,7 @@ public partial class Character : CharacterBody2D
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.2f * (float)delta); 
+			velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.1f * (float)delta); 
 		}
 		Velocity = velocity;
 		MoveAndSlide();

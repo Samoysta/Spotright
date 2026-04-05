@@ -66,7 +66,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.395, 0, 0, 0, 0, 1, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0.67, 0, 0, 0, 0, 1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.4)
 }
 tracks/1/type = "bezier"
@@ -162,23 +162,22 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5894267), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_ushfy"]
-offsets = PackedFloat32Array(0, 0.682266, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62315273, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.3372549, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
-size = Vector2(2.51, 27.28)
+size = Vector2(5.738, 27.28)
 
 [sub_resource type="Curve" id="Curve_owm7s"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("camera", "characterSprite", "foot", "anim", "runEffect", "rightWallEffect", "leftWallEffect")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect", "rightWallEffect", "leftWallEffect")]
 z_index = 1
 script = ExtResource("1_ushfy")
-camera = NodePath("")
 Speed = 250.0
-JumpVelocity = 450.0
-jumpTime = 0.15
+JumpVelocity = 370.0
+jumpTime = 0.19
+inputBufTimer = 0.1
 Gravity = 2.0
 accel = 1300.0
 characterSprite = NodePath("CollisionShape2D/Body/Foot/CharacterSprite")
@@ -229,6 +228,7 @@ shape = SubResource("RectangleShape2D_owm7s")
 position = Vector2(-8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWallCheck" unique_id=739879858]
+position = Vector2(-0.06375027, 0)
 shape = SubResource("RectangleShape2D_owm7s")
 
 [node name="RightWallEffect" type="CPUParticles2D" parent="." unique_id=2146122562]
