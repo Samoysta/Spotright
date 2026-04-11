@@ -23,6 +23,7 @@ public partial class Character : CharacterBody2D
 	[Export] float wallSpeed;
 	[Export] CpuParticles2D rightWallEffect;
 	[Export] CpuParticles2D leftWallEffect;
+	[Export] AnimationPlayer dieAnim;
 	Vector2 spawnPos;
 	Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
@@ -233,11 +234,10 @@ public partial class Character : CharacterBody2D
 			Node2D col = (Node2D)collision.GetCollider();
 			if (col.IsInGroup("DamageTile"))
 			{
-				GlobalPosition = spawnPos;
-                velocity = Vector2.Zero;
-				Velocity = Vector2.Zero;
-				isJumping = false;
 				camera.Call("Shake", 20f);
+				dieAnim.Play("Die");
+				SetProcess(false);
+				SetPhysicsProcess(false);
 			}
 		}
 	}
@@ -284,5 +284,21 @@ public partial class Character : CharacterBody2D
 	public void SetSpawnPos(Vector2 pos)
 	{
 		spawnPos = pos;
+	}
+
+	void DieFinished(string animName)
+	{
+		if (animName == "Die")
+		{
+			GlobalPosition = spawnPos;
+            velocity = Vector2.Zero;
+			Velocity = Vector2.Zero;
+			isJumping = false;
+			isZjustPressed = false;
+			dieAnim.Play("Birth");
+			SetProcess(true);
+			SetPhysicsProcess(true);
+			camera.GlobalPosition = GlobalPosition;
+		}
 	}
 }

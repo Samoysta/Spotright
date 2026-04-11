@@ -12,13 +12,10 @@ texture = ExtResource("2_r5l72")
 5:0/0 = 0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, -7, 8, -7, 8, 8, -7, 8)
 0:1/0 = 0
-0:1/0/z_index = 1
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
-1:1/0/z_index = 1
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
-2:1/0/z_index = 1
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, 8, -8, 8)
@@ -35,7 +32,6 @@ texture = ExtResource("2_r5l72")
 3:0/0 = 0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, 8, -8, 8)
 3:1/0 = 0
-3:1/0/z_index = 1
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
 3:2/0/z_index = 1
@@ -47,6 +43,7 @@ sources/0 = SubResource("TileSetAtlasSource_50ct6")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r5l72"]
 texture = ExtResource("2_r5l72")
 6:1/0 = 0
+6:1/0/z_index = 1
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -2, 5, -2, 5, 8, -5, 8)
 
 [sub_resource type="TileSet" id="TileSet_50ct6"]
@@ -73,8 +70,12 @@ tile_set = SubResource("TileSet_hb2xm")
 tile_map_data = PackedByteArray("AAAHAAgAAAAGAAEAAAAGAAgAAAAGAAEAAAD5/wYAAAAGAAEAADD8/wYAAAAGAAEAADD6/wYAAAAGAAEAADD7/wYAAAAGAAEAADD0/wgAAAAGAAEAAADz/wgAAAAGAAEAAADy/wgAAAAGAAEAAADy//7/AAAGAAEAADDz//7/AAAGAAEAADD0//7/AAAGAAEAADDq//7/AAAGAAEAADDp//7/AAAGAAEAADDo//7/AAAGAAEAADDd//7/AAAGAAEAADDe//7/AAAGAAEAADDf//7/AAAGAAEAADDT//7/AAAGAAEAADDU//7/AAAGAAEAADDV//7/AAAGAAEAADDJ//7/AAAGAAEAADDK//7/AAAGAAEAADDL//7/AAAGAAEAADDN/wEAAAAGAAEAAADO/wEAAAAGAAEAAADP/wEAAAAGAAEAAADQ/wEAAAAGAAEAAADR/wEAAAAGAAEAAAA=")
 tile_set = SubResource("TileSet_50ct6")
 
-[node name="CheckPoint" parent="." unique_id=1205404910 instance=ExtResource("3_50ct6")]
-position = Vector2(175, 68)
+[node name="CheckPoints" type="Node2D" parent="." unique_id=194979227]
 
-[node name="CheckPoint2" parent="." unique_id=231111102 instance=ExtResource("3_50ct6")]
-position = Vector2(-321, 83)
+[node name="CheckPoint" parent="CheckPoints" unique_id=1205404910 instance=ExtResource("3_50ct6")]
+position = Vector2(178, 113)
+scale = Vector2(1.72, 1)
+
+[node name="CheckPoint2" parent="CheckPoints" unique_id=231111102 instance=ExtResource("3_50ct6")]
+position = Vector2(-320, 136)
+scale = Vector2(2.7599988, 1)

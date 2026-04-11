@@ -1,3 +1,9 @@
+Node2D
+Sprite2D
+CanvasLayer
+CPUParticles2D
+AnimationPlayer
+DirectionalLight2D
 PointLight2D
 SubViewport
 SubViewportContainer
@@ -5,5 +11,4 @@ Camera2D
 CollisionShape2D
 Area2D
 TileMapLayer
-CPUParticles2D
 WorldEnvironment

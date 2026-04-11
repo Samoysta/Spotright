@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cmpdttlitf0fa" path="res://Scripts/Character.cs" id="1_ushfy"]
 [ext_resource type="PackedScene" uid="uid://cuxu20j3t8pt" path="res://Scenes/Effects/jump_effect.tscn" id="2_owm7s"]
 [ext_resource type="Texture2D" uid="uid://c7avoy721vhud" path="res://Assets/Character Normal.png" id="4_nytcm"]
+[ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.5, 32)
@@ -176,7 +177,186 @@ size = Vector2(5.738, 27.28)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect", "rightWallEffect", "leftWallEffect")]
+[sub_resource type="Animation" id="Animation_ejsiy"]
+resource_name = "Birth"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/blackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D/Body/Foot/CharacterSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2mse5"]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterDie:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterDie/CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D/Body/Foot/CharacterSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D/Body/Foot/RunEffect:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/blackScreen:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.73333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_reotu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterDie:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterDie/CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D/Body/Foot/CharacterSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D/Body/Foot/RunEffect:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/blackScreen:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5ess"]
+_data = {
+&"Birth": SubResource("Animation_ejsiy"),
+&"Die": SubResource("Animation_2mse5"),
+&"RESET": SubResource("Animation_reotu")
+}
+
+[sub_resource type="Curve" id="Curve_ejsiy"]
+_data = [Vector2(0, 0.08067286), 0.0, 0.0, 0, 0, Vector2(0.7033898, 0.04497087), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_2mse5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.44915253, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_reotu"]
+offsets = PackedFloat32Array(0, 0.12561576, 0.29802954, 0.47044334, 0.5985222)
+colors = PackedColorArray(1, 1, 1, 1, 0.46666667, 0.7764706, 1, 1, 1, 1, 1, 1, 0.46666667, 0.7764706, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ejsiy"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2mse5"]
+gradient = SubResource("Gradient_ejsiy")
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect", "rightWallEffect", "leftWallEffect", "dieAnim")]
 z_index = 1
 script = ExtResource("1_ushfy")
 Speed = 250.0
@@ -193,6 +373,7 @@ jumpEf = ExtResource("2_owm7s")
 wallSpeed = 200.0
 rightWallEffect = NodePath("RightWallEffect")
 leftWallEffect = NodePath("LeftWallEffect")
+dieAnim = NodePath("CharacterDie/AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 position = Vector2(0.25, 0)
@@ -213,6 +394,7 @@ libraries/ = SubResource("AnimationLibrary_nytcm")
 [node name="RunEffect" type="CPUParticles2D" parent="CollisionShape2D/Body/Foot" unique_id=826592140]
 z_index = -1
 position = Vector2(0, -5)
+emitting = false
 amount = 20
 lifetime = 0.4
 gravity = Vector2(0, -200)
@@ -260,7 +442,46 @@ scale_amount_min = 3.0
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_owm7s")
 
+[node name="CharacterDie" type="Sprite2D" parent="." unique_id=1067407102]
+texture = ExtResource("5_ejsiy")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterDie" unique_id=1854281589]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_a5ess")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CharacterDie" unique_id=410001754]
+z_index = 2
+emitting = false
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 240.0
+initial_velocity_max = 240.0
+linear_accel_min = -240.0
+linear_accel_max = -240.0
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+split_scale = true
+scale_curve_x = SubResource("Curve_ejsiy")
+scale_curve_y = SubResource("Curve_2mse5")
+color_ramp = SubResource("Gradient_reotu")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
+
+[node name="blackScreen" type="Sprite2D" parent="UI" unique_id=1484928868]
+modulate = Color(1, 1, 1, 0)
+z_index = 1000
+position = Vector2(969.4999, 542)
+scale = Vector2(31.296871, 17.9375)
+texture = SubResource("GradientTexture2D_2mse5")
+
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]
 [connection signal="body_entered" from="LeftWallCheck" to="." method="LeftWallEntered"]
 [connection signal="body_exited" from="LeftWallCheck" to="." method="LeftWallExited"]
+[connection signal="animation_finished" from="CharacterDie/AnimationPlayer" to="." method="DieFinished"]
