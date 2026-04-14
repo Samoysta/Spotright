@@ -234,10 +234,7 @@ public partial class Character : CharacterBody2D
 			Node2D col = (Node2D)collision.GetCollider();
 			if (col.IsInGroup("DamageTile"))
 			{
-				camera.Call("Shake", 20f);
-				dieAnim.Play("Die");
-				SetProcess(false);
-				SetPhysicsProcess(false);
+				KillSelf();
 			}
 		}
 	}
@@ -285,7 +282,13 @@ public partial class Character : CharacterBody2D
 	{
 		spawnPos = pos;
 	}
-
+	public void KillSelf()
+	{
+		camera.Call("Shake", 20f);
+		dieAnim.Play("Die");
+		SetProcess(false);
+		SetPhysicsProcess(false);
+	}
 	void DieFinished(string animName)
 	{
 		if (animName == "Die")

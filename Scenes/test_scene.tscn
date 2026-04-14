@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://y5iy8g2iaqnp" path="res://Scripts/Camera2d.cs" id="2_hb2xm"]
 [ext_resource type="Texture2D" uid="uid://cdhvp5efkxh6a" path="res://Assets/Tilemaps/Area1.png" id="2_r5l72"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="3_50ct6"]
+[ext_resource type="PackedScene" uid="uid://bkbl2485nfyon" path="res://Scenes/DamageItem/circle_boys.tscn" id="5_ak5v8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50ct6"]
 texture = ExtResource("2_r5l72")
@@ -44,11 +45,18 @@ sources/0 = SubResource("TileSetAtlasSource_50ct6")
 texture = ExtResource("2_r5l72")
 6:1/0 = 0
 6:1/0/z_index = 1
-6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -2, 5, -2, 5, 8, -5, 8)
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -2, 6, -2, 6, 8, -6, 8)
 
 [sub_resource type="TileSet" id="TileSet_50ct6"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_r5l72")
+
+[sub_resource type="Gradient" id="Gradient_hb2xm"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.1939793, 0.27459678, 0.19395602, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ak5v8"]
+gradient = SubResource("Gradient_hb2xm")
 
 [node name="testScene" type="Node2D" unique_id=676339024]
 
@@ -73,9 +81,30 @@ tile_set = SubResource("TileSet_50ct6")
 [node name="CheckPoints" type="Node2D" parent="." unique_id=194979227]
 
 [node name="CheckPoint" parent="CheckPoints" unique_id=1205404910 instance=ExtResource("3_50ct6")]
-position = Vector2(178, 113)
+position = Vector2(-1048, -91)
 scale = Vector2(1.72, 1)
 
 [node name="CheckPoint2" parent="CheckPoints" unique_id=231111102 instance=ExtResource("3_50ct6")]
 position = Vector2(-320, 136)
 scale = Vector2(2.7599988, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=210884163]
+z_index = -4
+position = Vector2(-250.00006, 27.49997)
+scale = Vector2(31.562502, 11.765626)
+texture = SubResource("GradientTexture2D_ak5v8")
+
+[node name="CircleBoys" parent="." unique_id=880544901 instance=ExtResource("5_ak5v8")]
+position = Vector2(-617, -40)
+
+[node name="CircleBoys2" parent="." unique_id=837464586 instance=ExtResource("5_ak5v8")]
+position = Vector2(-444, -43)
+
+[node name="CircleBoys3" parent="." unique_id=1280739741 instance=ExtResource("5_ak5v8")]
+position = Vector2(-444, 119)
+
+[node name="CircleBoys4" parent="." unique_id=494089151 instance=ExtResource("5_ak5v8")]
+position = Vector2(172, 30)
+
+[node name="CircleBoys5" parent="." unique_id=802492200 instance=ExtResource("5_ak5v8")]
+position = Vector2(-1106, 137)

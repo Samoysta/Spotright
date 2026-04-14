@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bkbl2485nfyon"]
+
+[ext_resource type="Script" uid="uid://me47iktoq02o" path="res://Scripts/DamageItems/CircleBoys.cs" id="1_i2gil"]
+[ext_resource type="Texture2D" uid="uid://b86dib6ouotg0" path="res://Assets/CircleBoys.png" id="1_ymife"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i2gil"]
+radius = 22.022715
+
+[node name="CircleBoys" type="Area2D" unique_id=880544901]
+script = ExtResource("1_i2gil")
+speed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=204533754]
+texture = ExtResource("1_ymife")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=174831117]
+shape = SubResource("CircleShape2D_i2gil")
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
