@@ -1,3 +1,6 @@
+VisibleOnScreenEnabler2D
+VisibleOnScreenNotifier2D
+AnimationPlayer
 CollisionShape2D
 Sprite2D
 Area2D
@@ -7,8 +10,6 @@ SubViewportContainer
 Node2D
 CanvasLayer
 CPUParticles2D
-AnimationPlayer
 DirectionalLight2D
 PointLight2D
 Camera2D
-TileMapLayer

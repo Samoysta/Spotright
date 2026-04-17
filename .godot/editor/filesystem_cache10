@@ -1,12 +1,13 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1776408450
+::res://::1776415617
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
-::res://Assets/::1776408428
+::res://Assets/::1776416003
 Character Normal.png::CompressedTexture2D::7020185733022482799::1775403875::1775403859::1::::<><><>0<>0<>84fd36d038a4aab3968dba109465584d<>res://.godot/imported/Character Normal.png-69c5cc92ca273589c31a8574f192fab2.ctex::
 Character.png::CompressedTexture2D::3483364258645260571::1774381755::1774381755::1::::<><><>0<>0<>2526958e07dd3a485a6afb6025356332<>res://.godot/imported/Character.png-f98bfd4a519deb39a93cee80b0823610.ctex::
 CharacterDieEffect-Sheet.png::CompressedTexture2D::8265667248776480102::1775893318::1775893318::1::::<><><>0<>0<>d844af82a7a7ae8d4aa7638b09a1cb18<>res://.godot/imported/CharacterDieEffect-Sheet.png-f937428a2f6661adbc0fcfb3b548b24a.ctex::
 CircleBoys.png::CompressedTexture2D::4766844772529243489::1776182200::1776182200::1::::<><><>0<>0<>ed2b47add37f561d505d229291f90aa9<>res://.godot/imported/CircleBoys.png-d237ad125984c53f2c6cc4f92eee5cd7.ctex::
+Plant1.png::CompressedTexture2D::419322031997786063::1776416003::1776416003::1::::<><><>0<>0<>49e46be7bdb55bc489a04c19ca8ea970<>res://.godot/imported/Plant1.png-96450b792805ca417a30a0544770d3a8.ctex::
 ::res://Assets/Tilemaps/::1776408428
 Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::::<><><>0<>0<>082115d3df84b40d9c2bf32d86a33787<>res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex::
 ::res://Scenes/::1776408428

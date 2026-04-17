@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cdhvp5efkxh6a" path="res://Assets/Tilemaps/Area1.png" id="2_r5l72"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="3_50ct6"]
 [ext_resource type="PackedScene" uid="uid://bkbl2485nfyon" path="res://Scenes/DamageItem/circle_boys.tscn" id="5_ak5v8"]
+[ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="6_x033f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50ct6"]
 texture = ExtResource("2_r5l72")
@@ -90,7 +91,7 @@ scale = Vector2(2.7599988, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=210884163]
 z_index = -4
-position = Vector2(-250.00006, 27.49997)
+position = Vector2(-109, 11)
 scale = Vector2(31.562502, 11.765626)
 texture = SubResource("GradientTexture2D_ak5v8")
 
@@ -99,3 +100,79 @@ position = Vector2(-442, -40)
 
 [node name="CircleBoys2" parent="." unique_id=1666984493 instance=ExtResource("5_ak5v8")]
 position = Vector2(-279, -43)
+
+[node name="Plant1" parent="." unique_id=1826984889 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(178, 129)
+
+[node name="Plant2" parent="." unique_id=604662861 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-753, 145)
+
+[node name="Plant3" parent="." unique_id=337365073 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-732, 145)
+
+[node name="Plant4" parent="." unique_id=1334662241 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-711, 145)
+
+[node name="Plant5" parent="." unique_id=877005663 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-685, 145)
+
+[node name="Plant6" parent="." unique_id=629361928 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-658, 149)
+
+[node name="Plant7" parent="." unique_id=2056435290 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-631, 145)
+
+[node name="Plant8" parent="." unique_id=1477767942 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-608, 142)
+
+[node name="Plant9" parent="." unique_id=566459542 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-587, 142)
+
+[node name="Plant10" parent="." unique_id=935179159 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-563, 145)
+
+[node name="Plant12" parent="." unique_id=932615312 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-558, 147)
+
+[node name="Plant13" parent="." unique_id=1292647317 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-537, 147)
+
+[node name="Plant14" parent="." unique_id=846764027 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-516, 147)
+
+[node name="Plant15" parent="." unique_id=1325609775 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-490, 147)
+
+[node name="Plant16" parent="." unique_id=1582047245 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-463, 151)
+
+[node name="Plant17" parent="." unique_id=476184511 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-436, 147)
+
+[node name="Plant18" parent="." unique_id=184542853 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-413, 144)
+
+[node name="Plant19" parent="." unique_id=1070761327 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-392, 144)
+
+[node name="Plant20" parent="." unique_id=937588671 instance=ExtResource("6_x033f")]
+z_index = 1
+position = Vector2(-368, 147)

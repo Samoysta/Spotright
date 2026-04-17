@@ -93,11 +93,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\Documents\\GitHub\\Spotright\\Skiper.csproj",
+      "projectUniqueName": "C:\\Users\\LENOVO\\Dev\\GitHub\\Spotright\\Skiper.csproj",
       "projectName": "Skiper",
-      "projectPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Spotright\\Skiper.csproj",
+      "projectPath": "C:\\Users\\LENOVO\\Dev\\GitHub\\Spotright\\Skiper.csproj",
       "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Spotright\\.godot\\mono\\temp\\obj\\",
+      "outputPath": "C:\\Users\\LENOVO\\Dev\\GitHub\\Spotright\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,0 +1,8 @@
+res://Scenes/test_scene.tscn
+res://Scenes/Enviorement/plant_1.tscn
+res://Scripts/Plants/Plant1.cs
+res://Scripts/DamageItems/CircleBoys.cs
+res://Scripts/CheckPoint.cs
+res://Scripts/Camera2d.cs
+res://Scripts/Effect.cs
+res://Scripts/Character.cs
