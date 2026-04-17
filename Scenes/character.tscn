@@ -361,6 +361,7 @@ z_index = 1
 script = ExtResource("1_ushfy")
 Speed = 250.0
 JumpVelocity = 370.0
+coyotoTime = 0.08
 jumpTime = 0.19
 inputBufTimer = 0.1
 Gravity = 2.0

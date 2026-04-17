@@ -67,4 +67,14 @@ public partial class Plant1 : Area2D
 			isShaking = false;	
 		}
 	}
+	void OnScreenEntered()
+	{
+		plantSprite.Visible = true;
+
+	}
+
+	void OnScreenExited()
+	{
+		plantSprite.Visible = false;
+	}
 }

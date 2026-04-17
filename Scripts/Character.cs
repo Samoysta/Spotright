@@ -8,6 +8,8 @@ public partial class Character : CharacterBody2D
 	[Export] Camera2d camera;
 	[Export] float Speed;
 	[Export] float JumpVelocity;
+	[Export] float coyotoTime;
+	float ct;
 	[Export] float jumpTime;
 	float jumpT;
 	[Export] float inputBufTimer;
@@ -121,6 +123,10 @@ public partial class Character : CharacterBody2D
 				isGrounded = false;
 			}
 			runEffect.Emitting = false;
+			if (ct > 0)
+			{
+				ct -= (float)delta;
+			}
 		}
 		if (IsOnFloor())
 		{
@@ -140,6 +146,8 @@ public partial class Character : CharacterBody2D
 			{
 				runEffect.CallDeferred("set_emitting", false);
 			}
+			//CoyotoTime
+			ct = coyotoTime;
 		}
 		//sprite yönü
 		if (dir > 0)
@@ -172,7 +180,7 @@ public partial class Character : CharacterBody2D
 		//Jump
 		if (isZjustPressed)
 		{
-			if (IsOnFloor())
+			if (ct > 0)
 			{
 				SpawnJumpEffect();
 				anim.Play("Jump");
@@ -180,6 +188,7 @@ public partial class Character : CharacterBody2D
 				jumpT = jumpTime;
 				isJumping = true;	
 				isZjustPressed = false;	
+				ct = 0;
 			}
 			else if(isRightWalled || isLeftWalled)
 			{
@@ -197,6 +206,7 @@ public partial class Character : CharacterBody2D
 				isJumping = true;
 				jumpT = jumpTime;
 				isZjustPressed = false;
+				ct = 0;
 			}
 		}
 		if (isJumping)

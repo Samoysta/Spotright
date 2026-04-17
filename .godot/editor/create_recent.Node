@@ -1,5 +1,6 @@
 VisibleOnScreenEnabler2D
 VisibleOnScreenNotifier2D
+Node2D
 AnimationPlayer
 CollisionShape2D
 Sprite2D
@@ -7,9 +8,7 @@ Area2D
 WorldEnvironment
 SubViewport
 SubViewportContainer
-Node2D
 CanvasLayer
 CPUParticles2D
 DirectionalLight2D
 PointLight2D
-Camera2D

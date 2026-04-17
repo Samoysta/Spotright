@@ -5,9 +5,11 @@ public partial class CircleBoys : Area2D
 {
 	[Export] float speed;
 	RandomNumberGenerator rnd = new();
+	Sprite2D sprt;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		sprt = GetNode<Sprite2D>("Sprite2D");
 		rnd.Randomize();
 		int a = rnd.RandiRange(0,1);
 		if (a == 1)
@@ -28,5 +30,14 @@ public partial class CircleBoys : Area2D
 		{
 			body.Call("KillSelf");
 		}
+	}
+
+	void OnScreenEntered()
+	{
+		sprt.Visible = true;
+	}
+	void OnScreenExited()
+	{
+		sprt.Visible = false;
 	}
 }

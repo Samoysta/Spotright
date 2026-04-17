@@ -101,78 +101,107 @@ position = Vector2(-442, -40)
 [node name="CircleBoys2" parent="." unique_id=1666984493 instance=ExtResource("5_ak5v8")]
 position = Vector2(-279, -43)
 
-[node name="Plant1" parent="." unique_id=1826984889 instance=ExtResource("6_x033f")]
+[node name="Plants" type="Node2D" parent="." unique_id=334974914]
+
+[node name="Plant1" parent="Plants" unique_id=1826984889 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(178, 129)
 
-[node name="Plant2" parent="." unique_id=604662861 instance=ExtResource("6_x033f")]
+[node name="Plant2" parent="Plants" unique_id=604662861 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-753, 145)
 
-[node name="Plant3" parent="." unique_id=337365073 instance=ExtResource("6_x033f")]
+[node name="Plant3" parent="Plants" unique_id=337365073 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-732, 145)
 
-[node name="Plant4" parent="." unique_id=1334662241 instance=ExtResource("6_x033f")]
+[node name="Plant4" parent="Plants" unique_id=1334662241 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-711, 145)
 
-[node name="Plant5" parent="." unique_id=877005663 instance=ExtResource("6_x033f")]
+[node name="Plant5" parent="Plants" unique_id=877005663 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-685, 145)
 
-[node name="Plant6" parent="." unique_id=629361928 instance=ExtResource("6_x033f")]
+[node name="Plant6" parent="Plants" unique_id=629361928 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-658, 149)
 
-[node name="Plant7" parent="." unique_id=2056435290 instance=ExtResource("6_x033f")]
+[node name="Plant7" parent="Plants" unique_id=2056435290 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-631, 145)
 
-[node name="Plant8" parent="." unique_id=1477767942 instance=ExtResource("6_x033f")]
+[node name="Plant8" parent="Plants" unique_id=1477767942 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-608, 142)
 
-[node name="Plant9" parent="." unique_id=566459542 instance=ExtResource("6_x033f")]
+[node name="Plant9" parent="Plants" unique_id=566459542 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-587, 142)
 
-[node name="Plant10" parent="." unique_id=935179159 instance=ExtResource("6_x033f")]
+[node name="Plant10" parent="Plants" unique_id=935179159 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-563, 145)
 
-[node name="Plant12" parent="." unique_id=932615312 instance=ExtResource("6_x033f")]
+[node name="Plant12" parent="Plants" unique_id=932615312 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-558, 147)
 
-[node name="Plant13" parent="." unique_id=1292647317 instance=ExtResource("6_x033f")]
+[node name="Plant13" parent="Plants" unique_id=1292647317 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-537, 147)
 
-[node name="Plant14" parent="." unique_id=846764027 instance=ExtResource("6_x033f")]
+[node name="Plant14" parent="Plants" unique_id=846764027 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-516, 147)
 
-[node name="Plant15" parent="." unique_id=1325609775 instance=ExtResource("6_x033f")]
+[node name="Plant15" parent="Plants" unique_id=1325609775 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-490, 147)
 
-[node name="Plant16" parent="." unique_id=1582047245 instance=ExtResource("6_x033f")]
+[node name="Plant16" parent="Plants" unique_id=1582047245 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-463, 151)
 
-[node name="Plant17" parent="." unique_id=476184511 instance=ExtResource("6_x033f")]
+[node name="Plant17" parent="Plants" unique_id=476184511 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-436, 147)
 
-[node name="Plant18" parent="." unique_id=184542853 instance=ExtResource("6_x033f")]
+[node name="Plant18" parent="Plants" unique_id=184542853 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-413, 144)
 
-[node name="Plant19" parent="." unique_id=1070761327 instance=ExtResource("6_x033f")]
+[node name="Plant19" parent="Plants" unique_id=1070761327 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-392, 144)
 
-[node name="Plant20" parent="." unique_id=937588671 instance=ExtResource("6_x033f")]
+[node name="Plant20" parent="Plants" unique_id=937588671 instance=ExtResource("6_x033f")]
 z_index = 1
 position = Vector2(-368, 147)
+
+[node name="Plant11" parent="Plants" unique_id=1835982632 instance=ExtResource("6_x033f")]
+position = Vector2(-203, -64)
+
+[node name="Plant21" parent="Plants" unique_id=1797037246 instance=ExtResource("6_x033f")]
+position = Vector2(-361, -65)
+
+[node name="Plant22" parent="Plants" unique_id=1952162248 instance=ExtResource("6_x033f")]
+position = Vector2(-539, -64)
+
+[node name="Plant23" parent="Plants" unique_id=1804656034 instance=ExtResource("6_x033f")]
+position = Vector2(-707, -62)
+
+[node name="Plant24" parent="Plants" unique_id=1571031429 instance=ExtResource("6_x033f")]
+position = Vector2(-689, -62)
+
+[node name="Plant25" parent="Plants" unique_id=116249597 instance=ExtResource("6_x033f")]
+position = Vector2(-1100, -63)
+
+[node name="Plant26" parent="Plants" unique_id=754395546 instance=ExtResource("6_x033f")]
+position = Vector2(-978, -62)
+
+[node name="Plant27" parent="Plants" unique_id=1706477418 instance=ExtResource("6_x033f")]
+position = Vector2(-998, -61)
+
+[node name="Plant28" parent="Plants" unique_id=310190610 instance=ExtResource("6_x033f")]
+position = Vector2(-1085, -61)
