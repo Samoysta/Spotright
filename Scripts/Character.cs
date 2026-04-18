@@ -28,16 +28,19 @@ public partial class Character : CharacterBody2D
 	[Export] CpuParticles2D leftWallEffect;
 	[Export] float dashSpeed;
 	[Export] float dashCoolDown;
+	[Export] PackedScene dashHaloEf;
 	float dashCD;
 	bool isDashing;
 	[Export] float dashDur;
 	float dashD;
 	bool canDash;
+	float dashHaloCD;
 	[Export] AnimationPlayer dieAnim;
 	Vector2 spawnPos;
 	Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
 	public Queue<Effect> dashEfs = new ();
+	public Queue<Effect> dashHaloEfs = new ();
 	int dir;
 	bool isJumping;
 	Vector2 firstScale;
@@ -47,6 +50,7 @@ public partial class Character : CharacterBody2D
 	int leftWallAmount;
 	int rightWallAmount;
 	int lastDir;
+
 
     public override void _Ready()
     {
@@ -64,6 +68,13 @@ public partial class Character : CharacterBody2D
 			GetTree().CurrentScene.CallDeferred("add_child", def);
 			def.Scale = new Vector2(1,1);
 			dashEfs.Enqueue(def);
+		}
+		for (int i = 0; i < 50; i++)
+		{
+			Effect def = (Effect)dashHaloEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child", def);
+			def.Scale = new Vector2(1,1);
+			dashHaloEfs.Enqueue(def);
 		}
 		lastDir = -1;
     }
@@ -178,7 +189,7 @@ public partial class Character : CharacterBody2D
 			ct = 0;
 			isZjustPressed = false;
 			isJumping = false;
-			anim.Play("RESET");
+			anim.Play("Dash");
 			SpawnDashEffect();
 		}
 		if (dashD > 0)
@@ -194,9 +205,19 @@ public partial class Character : CharacterBody2D
 			velocity.X = dashSpeed * lastDir;
 			velocity.Y = 0;
 			canDash = false;
+			if (dashHaloCD > 0)
+			{
+				dashHaloCD -= (float)delta;
+			}
+			else
+			{
+				SpawnDashHaloEffect();
+				dashHaloCD = dashDur / 5;
+			}
 		}
 		else if (!isDashing)
 		{
+			dashHaloCD = 0;
 			//sprite yönü
 			if (dir > 0)
 			{
@@ -323,16 +344,29 @@ public partial class Character : CharacterBody2D
 		ef.GlobalPosition = GlobalPosition;
 		if (lastDir > 0)
 		{
-			ef.GlobalScale = new Vector2(1,-1);
-			ef.GlobalRotationDegrees = 180;
+			ef.Scale = new Vector2(-1,1);
 		}
 		else
 		{
-			ef.GlobalScale = new Vector2(1,1);
-			ef.GlobalRotationDegrees = 0;
+			ef.Scale = new Vector2(1,1);
 		}
 		ef.setOn();
 		dashEfs.Enqueue(ef);
+	}
+	void SpawnDashHaloEffect()
+	{
+		Effect ef = dashHaloEfs.Dequeue();
+		ef.GlobalPosition = GlobalPosition;
+		if (lastDir > 0)
+		{
+			ef.Scale = new Vector2(-1,1);
+		}
+		else
+		{
+			ef.Scale = new Vector2(1,1);
+		}
+		ef.setOn();
+		dashHaloEfs.Enqueue(ef);
 	}
 
 	void RightWallEntered(Node2D body)

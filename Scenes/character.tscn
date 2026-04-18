@@ -3,9 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://bpvmraqjijdix" path="res://Assets/Character.png" id="1_lkv7d"]
 [ext_resource type="Script" uid="uid://cmpdttlitf0fa" path="res://Scripts/Character.cs" id="1_ushfy"]
 [ext_resource type="PackedScene" uid="uid://cuxu20j3t8pt" path="res://Scenes/Effects/jump_effect.tscn" id="2_owm7s"]
+[ext_resource type="PackedScene" uid="uid://ba16wiucm6jo7" path="res://Scenes/Effects/dash_halo_effect.tscn" id="4_a5ess"]
 [ext_resource type="Texture2D" uid="uid://c7avoy721vhud" path="res://Assets/Character Normal.png" id="4_nytcm"]
 [ext_resource type="PackedScene" uid="uid://bwiuag338h2dt" path="res://Scenes/Effects/dash_effect.tscn" id="5_2mse5"]
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
+[ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.5, 32)
@@ -13,6 +15,46 @@ size = Vector2(15.5, 32)
 [sub_resource type="CanvasTexture" id="CanvasTexture_ejsiy"]
 diffuse_texture = ExtResource("1_lkv7d")
 normal_texture = ExtResource("4_nytcm")
+
+[sub_resource type="Animation" id="Animation_a5ess"]
+resource_name = "Dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterWhite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.15696245, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_nytcm"]
 resource_name = "Fall"
@@ -156,9 +198,22 @@ tracks/3/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CharacterWhite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nytcm"]
 _data = {
+&"Dash": SubResource("Animation_a5ess"),
 &"Fall": SubResource("Animation_nytcm"),
 &"Jump": SubResource("Animation_ushfy"),
 &"RESET": SubResource("Animation_owm7s")
@@ -378,6 +433,7 @@ rightWallEffect = NodePath("RightWallEffect")
 leftWallEffect = NodePath("LeftWallEffect")
 dashSpeed = 600.0
 dashCoolDown = 0.4
+dashHaloEf = ExtResource("4_a5ess")
 dashDur = 0.2
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
 
@@ -396,6 +452,10 @@ texture = SubResource("CanvasTexture_ejsiy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/Body/Foot/CharacterSprite" unique_id=1307934145]
 libraries/ = SubResource("AnimationLibrary_nytcm")
+
+[node name="CharacterWhite" type="Sprite2D" parent="CollisionShape2D/Body/Foot/CharacterSprite" unique_id=820183297]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("6_reotu")
 
 [node name="RunEffect" type="CPUParticles2D" parent="CollisionShape2D/Body/Foot" unique_id=826592140]
 z_index = -1

@@ -126,7 +126,7 @@ position = Vector2(-685, 145)
 
 [node name="Plant6" parent="Plants" unique_id=629361928 instance=ExtResource("6_x033f")]
 z_index = 1
-position = Vector2(-658, 149)
+position = Vector2(-661, 145)
 
 [node name="Plant7" parent="Plants" unique_id=2056435290 instance=ExtResource("6_x033f")]
 z_index = 1
@@ -134,11 +134,11 @@ position = Vector2(-631, 145)
 
 [node name="Plant8" parent="Plants" unique_id=1477767942 instance=ExtResource("6_x033f")]
 z_index = 1
-position = Vector2(-608, 142)
+position = Vector2(-609, 146)
 
 [node name="Plant9" parent="Plants" unique_id=566459542 instance=ExtResource("6_x033f")]
 z_index = 1
-position = Vector2(-587, 142)
+position = Vector2(-585, 145)
 
 [node name="Plant10" parent="Plants" unique_id=935179159 instance=ExtResource("6_x033f")]
 z_index = 1
@@ -162,7 +162,7 @@ position = Vector2(-490, 147)
 
 [node name="Plant16" parent="Plants" unique_id=1582047245 instance=ExtResource("6_x033f")]
 z_index = 1
-position = Vector2(-463, 151)
+position = Vector2(-465, 146)
 
 [node name="Plant17" parent="Plants" unique_id=476184511 instance=ExtResource("6_x033f")]
 z_index = 1
@@ -170,11 +170,11 @@ position = Vector2(-436, 147)
 
 [node name="Plant18" parent="Plants" unique_id=184542853 instance=ExtResource("6_x033f")]
 z_index = 1
-position = Vector2(-413, 144)
+position = Vector2(-413, 146)
 
 [node name="Plant19" parent="Plants" unique_id=1070761327 instance=ExtResource("6_x033f")]
 z_index = 1
-position = Vector2(-392, 144)
+position = Vector2(-395, 145)
 
 [node name="Plant20" parent="Plants" unique_id=937588671 instance=ExtResource("6_x033f")]
 z_index = 1
