@@ -22,13 +22,22 @@ public partial class Character : CharacterBody2D
 	[Export] AnimationPlayer anim;
 	[Export] CpuParticles2D runEffect;
 	[Export] PackedScene jumpEf;
+	[Export] PackedScene dashEf;
 	[Export] float wallSpeed;
 	[Export] CpuParticles2D rightWallEffect;
 	[Export] CpuParticles2D leftWallEffect;
+	[Export] float dashSpeed;
+	[Export] float dashCoolDown;
+	float dashCD;
+	bool isDashing;
+	[Export] float dashDur;
+	float dashD;
+	bool canDash;
 	[Export] AnimationPlayer dieAnim;
 	Vector2 spawnPos;
 	Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
+	public Queue<Effect> dashEfs = new ();
 	int dir;
 	bool isJumping;
 	Vector2 firstScale;
@@ -37,6 +46,7 @@ public partial class Character : CharacterBody2D
 	bool isLeftWalled;
 	int leftWallAmount;
 	int rightWallAmount;
+	int lastDir;
 
     public override void _Ready()
     {
@@ -48,6 +58,14 @@ public partial class Character : CharacterBody2D
 			jef.Scale = new Vector2(1,1);
 			jumpEfs.Enqueue(jef);
 		}
+		for (int i = 0; i < 3; i++)
+		{
+			Effect def = (Effect)dashEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child", def);
+			def.Scale = new Vector2(1,1);
+			dashEfs.Enqueue(def);
+		}
+		lastDir = -1;
     }
 
 	public override void _PhysicsProcess(double delta)
@@ -111,6 +129,7 @@ public partial class Character : CharacterBody2D
 						leftWallEffect.Emitting = true;
 					}
 				}
+				canDash = true;
 			}
 		}
 		
@@ -146,94 +165,135 @@ public partial class Character : CharacterBody2D
 			{
 				runEffect.CallDeferred("set_emitting", false);
 			}
+			canDash = true;
 			//CoyotoTime
 			ct = coyotoTime;
 		}
-		//sprite yönü
-		if (dir > 0)
+		//Dash
+		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash)
 		{
-			characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
+			dashD = dashDur;
+			dashCD = dashCoolDown;
+			isDashing = true;
+			ct = 0;
+			isZjustPressed = false;
+			isJumping = false;
+			anim.Play("RESET");
+			SpawnDashEffect();
 		}
-		else if(dir < 0)
+		if (dashD > 0)
 		{
-			characterSprite.Scale = firstScale;
+			dashD -= (float)delta;
 		}
-		//Run
-		if (Input.IsActionPressed("Right"))
+		if (dashCD > 0)
 		{
-			if (Velocity.X < Speed)
+			dashCD -= (float)delta;
+		}
+		if (isDashing)
+		{
+			velocity.X = dashSpeed * lastDir;
+			velocity.Y = 0;
+			canDash = false;
+		}
+		else if (!isDashing)
+		{
+			//sprite yönü
+			if (dir > 0)
 			{
-				dir = 1;
+				characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
 			}
-		}
-		else if (Input.IsActionPressed("Left"))
-		{
-			if (Velocity.X > -Speed)
+			else if(dir < 0)
 			{
-				dir = -1;
+				characterSprite.Scale = firstScale;
 			}
-		}
-		else
-		{
-			dir = 0;
-		}
-		//Jump
-		if (isZjustPressed)
-		{
-			if (ct > 0)
+			//Run
+			if (Input.IsActionPressed("Right"))
 			{
-				SpawnJumpEffect();
-				anim.Play("Jump");
-				anim.Seek(0);
-				jumpT = jumpTime;
-				isJumping = true;	
-				isZjustPressed = false;	
-				ct = 0;
-			}
-			else if(isRightWalled || isLeftWalled)
-			{
-				SpawnJumpEffect();	
-				if (isLeftWalled)
+				if (Velocity.X < Speed)
 				{
-					velocity.X = Speed;
+					dir = 1;
+					lastDir = 1;
 				}
-				else if (isRightWalled)
+			}
+			else if (Input.IsActionPressed("Left"))
+			{
+				if (Velocity.X > -Speed)
 				{
-					velocity.X = -Speed;
+					dir = -1;
+					lastDir = -1;
 				}
-				anim.Play("Jump");
-				anim.Seek(0);	
-				isJumping = true;
-				jumpT = jumpTime;
-				isZjustPressed = false;
-				ct = 0;
 			}
-		}
-		if (isJumping)
-		{
-			velocity.Y = -JumpVelocity;
-			jumpT -= (float)delta;
-			if (Input.IsActionJustReleased("Z"))
+			else
 			{
-				isJumping = false;
+				dir = 0;
 			}
-			if (jumpT <= 0)
+			//Jump
+			if (isZjustPressed)
 			{
-				isJumping = false;
+				if (ct > 0)
+				{
+					SpawnJumpEffect();
+					anim.Play("Jump");
+					anim.Seek(0);
+					jumpT = jumpTime;
+					isJumping = true;	
+					isZjustPressed = false;	
+					ct = 0;
+				}
+				else if(isRightWalled || isLeftWalled)
+				{
+					SpawnJumpEffect();	
+					if (isLeftWalled)
+					{
+						velocity.X = Speed;
+					}
+					else if (isRightWalled)
+					{
+						velocity.X = -Speed;
+					}
+					anim.Play("Jump");
+					anim.Seek(0);	
+					isJumping = true;
+					jumpT = jumpTime;
+					isZjustPressed = false;
+					ct = 0;
+				}
 			}
-			if (IsOnCeiling())
+			if (isJumping)
 			{
-				isJumping = false;
+				velocity.Y = -JumpVelocity;
+				jumpT -= (float)delta;
+				if (Input.IsActionJustReleased("Z"))
+				{
+					isJumping = false;
+				}
+				if (jumpT <= 0)
+				{
+					isJumping = false;
+				}
+				if (IsOnCeiling())
+				{
+					isJumping = false;
+				}
 			}
+			//movement apply
+			if (IsOnFloor())
+			{
+				velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel * (float)delta); 	
+			}
+			else
+			{
+				velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.1f * (float)delta); 
+			}	
 		}
-		//movement apply
-		if (IsOnFloor())
+		if(dashD <= 0)
 		{
-			velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel * (float)delta); 	
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.1f * (float)delta); 
+			if (isDashing)
+			{
+				Velocity = Vector2.Zero;
+				velocity = Vector2.Zero;
+				isDashing = false;
+			}
 		}
 		Velocity = velocity;
 		MoveAndSlide();
@@ -255,6 +315,24 @@ public partial class Character : CharacterBody2D
 		ef.GlobalPosition = foot.GlobalPosition;
 		ef.setOn();
 		jumpEfs.Enqueue(ef);
+	}
+
+	void SpawnDashEffect()
+	{
+		Effect ef = dashEfs.Dequeue();
+		ef.GlobalPosition = GlobalPosition;
+		if (lastDir > 0)
+		{
+			ef.GlobalScale = new Vector2(1,-1);
+			ef.GlobalRotationDegrees = 180;
+		}
+		else
+		{
+			ef.GlobalScale = new Vector2(1,1);
+			ef.GlobalRotationDegrees = 0;
+		}
+		ef.setOn();
+		dashEfs.Enqueue(ef);
 	}
 
 	void RightWallEntered(Node2D body)
@@ -308,6 +386,8 @@ public partial class Character : CharacterBody2D
 			Velocity = Vector2.Zero;
 			isJumping = false;
 			isZjustPressed = false;
+			isDashing = false;
+			dashD = 0;
 			dieAnim.Play("Birth");
 			SetProcess(true);
 			SetPhysicsProcess(true);

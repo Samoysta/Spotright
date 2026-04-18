@@ -54,7 +54,7 @@ sources/0 = SubResource("TileSetAtlasSource_r5l72")
 
 [sub_resource type="Gradient" id="Gradient_hb2xm"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.1939793, 0.27459678, 0.19395602, 1)
+colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ak5v8"]
 gradient = SubResource("Gradient_hb2xm")
@@ -90,9 +90,10 @@ position = Vector2(-320, 136)
 scale = Vector2(2.7599988, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=210884163]
+modulate = Color(0.11372549, 0.23529412, 0.12941177, 1)
 z_index = -4
-position = Vector2(-109, 11)
-scale = Vector2(31.562502, 11.765626)
+position = Vector2(-134.99995, 11)
+scale = Vector2(32.375, 11.765626)
 texture = SubResource("GradientTexture2D_ak5v8")
 
 [node name="CircleBoys" parent="." unique_id=880544901 instance=ExtResource("5_ak5v8")]

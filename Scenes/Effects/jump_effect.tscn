@@ -54,7 +54,7 @@ libraries/ = SubResource("AnimationLibrary_crfi5")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=2061612261]
 z_index = 1
 emitting = false
-amount = 45
+amount = 30
 lifetime = 0.8
 one_shot = true
 explosiveness = 1.0
