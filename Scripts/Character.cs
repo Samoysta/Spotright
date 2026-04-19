@@ -311,8 +311,32 @@ public partial class Character : CharacterBody2D
 		{
 			if (isDashing)
 			{
-				Velocity = Vector2.Zero;
-				velocity = Vector2.Zero;
+				if (Input.IsActionPressed("Right"))
+				{
+					if (velocity.X > 0)
+					{
+						velocity.X = Speed;	
+					}
+					else
+					{
+						velocity = Vector2.Zero;	
+					}
+				}
+				else if (Input.IsActionPressed("Left"))
+				{
+					if (velocity.X < 0)
+					{
+						velocity.X = -Speed;	
+					}
+					else
+					{
+						velocity = Vector2.Zero;	
+					}
+				}
+				else
+				{
+					velocity = Vector2.Zero;	
+				}
 				isDashing = false;
 			}
 		}
