@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dgnsfjxt3x2tt"]
+
+[ext_resource type="Texture2D" uid="uid://chwgfci1eod6i" path="res://Assets/fallebleStone.png" id="1_khmlr"]
+[ext_resource type="Script" uid="uid://bw64ym6ssd7ro" path="res://Scripts/DamageItems/FallebleStone.cs" id="1_s3rhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3rhl"]
+size = Vector2(64, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khmlr"]
+size = Vector2(63, 2)
+
+[node name="FallebleStone" type="CharacterBody2D" unique_id=1153185839 node_paths=PackedStringArray("rayCasts") groups=["Ground"]]
+platform_on_leave = 2
+platform_floor_layers = 0
+script = ExtResource("1_s3rhl")
+rayCasts = []
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1090428933]
+texture = ExtResource("1_khmlr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2065128917]
+shape = SubResource("RectangleShape2D_s3rhl")
+
+[node name="Area" type="Area2D" parent="." unique_id=1660979524 groups=["DamageTile"]]
+position = Vector2(0, 31)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=1731540863]
+shape = SubResource("RectangleShape2D_khmlr")
+
+[connection signal="body_entered" from="Area" to="." method="BodyEntered2D"]

@@ -69,7 +69,7 @@ public partial class Character : CharacterBody2D
 			def.Scale = new Vector2(1,1);
 			dashEfs.Enqueue(def);
 		}
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 12; i++)
 		{
 			Effect def = (Effect)dashHaloEf.Instantiate();
 			GetTree().CurrentScene.CallDeferred("add_child", def);
@@ -260,6 +260,7 @@ public partial class Character : CharacterBody2D
 					isJumping = true;	
 					isZjustPressed = false;	
 					ct = 0;
+					canDash = true;
 				}
 				else if(isRightWalled || isLeftWalled)
 				{
@@ -278,6 +279,8 @@ public partial class Character : CharacterBody2D
 					jumpT = jumpTime;
 					isZjustPressed = false;
 					ct = 0;
+					canDash = true;
+
 				}
 			}
 			if (isJumping)
@@ -352,6 +355,7 @@ public partial class Character : CharacterBody2D
 				KillSelf();
 			}
 		}
+		GlobalPosition = GlobalPosition.Round();
 	}
 
 	void SpawnJumpEffect()

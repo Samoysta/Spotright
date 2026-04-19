@@ -1,22 +1,23 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1776597026
+::res://::1776621818
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
-::res://Assets/::1776583656
+::res://Assets/::1776617495
 Character Normal.png::CompressedTexture2D::7020185733022482799::1775403875::1775403859::1::::<><><>0<>0<>84fd36d038a4aab3968dba109465584d<>res://.godot/imported/Character Normal.png-69c5cc92ca273589c31a8574f192fab2.ctex::
 Character.png::CompressedTexture2D::3483364258645260571::1776490803::1776490804::1::::<><><>0<>0<>2526958e07dd3a485a6afb6025356332<>res://.godot/imported/Character.png-f98bfd4a519deb39a93cee80b0823610.ctex::
 CharacterDieEffect-Sheet.png::CompressedTexture2D::8265667248776480102::1775893318::1775893318::1::::<><><>0<>0<>d844af82a7a7ae8d4aa7638b09a1cb18<>res://.godot/imported/CharacterDieEffect-Sheet.png-f937428a2f6661adbc0fcfb3b548b24a.ctex::
 CharacterWhite.png::CompressedTexture2D::8630368451405485223::1776539016::1776539016::1::::<><><>0<>0<>e984c77e4a794c2a70154542fc6b547d<>res://.godot/imported/CharacterWhite.png-00bac2da346d588ea5206a188d951e72.ctex::
 CircleBoys.png::CompressedTexture2D::4766844772529243489::1776182200::1776182200::1::::<><><>0<>0<>ed2b47add37f561d505d229291f90aa9<>res://.godot/imported/CircleBoys.png-d237ad125984c53f2c6cc4f92eee5cd7.ctex::
 dashSpriteSheet.png::CompressedTexture2D::6756314149825662824::1776497157::1776497157::1::::<><><>0<>0<>e2ecfcddeb6f555b9b67575cb38cfe35<>res://.godot/imported/dashSpriteSheet.png-954762d9ea06703a8d973568c235bb16.ctex::
+fallebleStone.png::CompressedTexture2D::5309952932960223906::1776617495::1776617495::1::::<><><>0<>0<>2cf0091db1514eb0f29b7a6c13afc768<>res://.godot/imported/fallebleStone.png-181734265f6ed582fbbf02f7b4b0a130.ctex::
 littleStar.png::CompressedTexture2D::2019024959031931007::1776494938::1776494938::1::::<><><>0<>0<>6e8ffefefc598d6f1b6178522ea98750<>res://.godot/imported/littleStar.png-2ed4f9f33d2393754287ac8a5060a7b3.ctex::
 Plant1.png::CompressedTexture2D::419322031997786063::1776416003::1776416003::1::::<><><>0<>0<>49e46be7bdb55bc489a04c19ca8ea970<>res://.godot/imported/Plant1.png-96450b792805ca417a30a0544770d3a8.ctex::
 ::res://Assets/Tilemaps/::1776408428
 Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::::<><><>0<>0<>082115d3df84b40d9c2bf32d86a33787<>res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex::
-::res://Scenes/::1776583718
-character.tscn::PackedScene::1771483939617051374::1776574247::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://c7avoy721vhud::::res://Assets/Character Normal.png<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
+::res://Scenes/::1776617587
+character.tscn::PackedScene::1771483939617051374::1776597061::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://c7avoy721vhud::::res://Assets/Character Normal.png<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
 check_point.tscn::PackedScene::3761001721822499150::1774383179::0::1::::<><><>0<>0<><>::uid://yarlnvufhowr::::res://Scripts/CheckPoint.cs
-test_scene.tscn::PackedScene::8267793320165344159::1776583718::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn
+test_scene.tscn::PackedScene::8267793320165344159::1776617587::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn
 ::res://Scenes/DamageItem/::1776425313
 circle_boys.tscn::PackedScene::3091091176719707713::1776425313::0::1::::<><><>0<>0<><>::uid://me47iktoq02o::::res://Scripts/DamageItems/CircleBoys.cs<>uid://b86dib6ouotg0::::res://Assets/CircleBoys.png
 ::res://Scenes/Effects/::1776542394
@@ -27,7 +28,7 @@ jump_effect.tscn::PackedScene::183098906266672845::1776491060::0::1::::<><><>0<>
 plant_1.tscn::PackedScene::4616669404082795962::1776425105::0::1::::<><><>0<>0<><>::uid://f8ef4r88to12::::res://Assets/Plant1.png<>uid://drk61swkx40jl::::res://Scripts/Plants/Plant1.cs
 ::res://Scripts/::1776417215
 Camera2d.cs::CSharpScript::1746993918707267049::1775397106::0::1::::<>Camera2D<><>0<>0<><>::
-Character.cs::CSharpScript::5646290253741580454::1776574674::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Character.cs::CSharpScript::5646290253741580454::1776600097::0::1::::<>CharacterBody2D<><>0<>0<><>::
 CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<><>0<>0<><>::
 Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
 ::res://Scripts/DamageItems/::1776408428

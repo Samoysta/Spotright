@@ -438,6 +438,7 @@ gradient = SubResource("Gradient_ejsiy")
 
 [node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "anim", "runEffect", "rightWallEffect", "leftWallEffect", "dieAnim")]
 z_index = 1
+collision_layer = 2
 script = ExtResource("1_ushfy")
 Speed = 250.0
 JumpVelocity = 370.0
