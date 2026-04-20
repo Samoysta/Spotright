@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://chwgfci1eod6i" path="res://Assets/fallebleStone.png" id="1_khmlr"]
 [ext_resource type="Script" uid="uid://bw64ym6ssd7ro" path="res://Scripts/DamageItems/FallebleStone.cs" id="1_s3rhl"]
+[ext_resource type="Texture2D" uid="uid://fq1gxc404v3w" path="res://Assets/SmokeEffect.png" id="3_58e7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3rhl"]
 size = Vector2(64, 60)
@@ -9,11 +10,89 @@ size = Vector2(64, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khmlr"]
 size = Vector2(63, 2)
 
-[node name="FallebleStone" type="CharacterBody2D" unique_id=1153185839 node_paths=PackedStringArray("rayCasts") groups=["Ground"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ron15"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpncf"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65cng"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumh8"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gyrf"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqhhb"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iw5a"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6ptd"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mbo5"]
+atlas = ExtResource("3_58e7b")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_reycm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ron15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpncf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65cng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gyrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqhhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iw5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6ptd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mbo5")
+}],
+"loop": false,
+"name": &"Start",
+"speed": 20.0
+}]
+
+[sub_resource type="Curve" id="Curve_58e7b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.48728812, 1), 0.0, 0.0, 0, 0, Vector2(0.5423729, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="FallebleStone" type="CharacterBody2D" unique_id=1153185839 node_paths=PackedStringArray("rayCasts", "hitBox", "smokeEfects", "hitEffect") groups=["Ground"]]
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_s3rhl")
-rayCasts = []
+rayCasts = [NodePath("RayCast2D"), NodePath("RayCast2D2")]
+hitBox = NodePath("Area")
+smokeEfects = [NodePath("AnimatedSprite2D"), NodePath("AnimatedSprite2D2")]
+hitEffect = NodePath("CPUParticles2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1090428933]
 texture = ExtResource("1_khmlr")
@@ -28,5 +107,48 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=1731540863]
 shape = SubResource("RectangleShape2D_khmlr")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1891528564]
+position = Vector2(-17, 32)
+target_position = Vector2(0, 200)
+collision_mask = 3
+
+[node name="RayCast2D2" type="RayCast2D" parent="." unique_id=7779378]
+position = Vector2(18, 32)
+target_position = Vector2(0, 200)
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=698029183]
+position = Vector2(28, 31)
+sprite_frames = SubResource("SpriteFrames_reycm")
+animation = &"Start"
+frame = 8
+frame_progress = 1.0
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1065313366]
+position = Vector2(-31, 31)
+sprite_frames = SubResource("SpriteFrames_reycm")
+animation = &"Start"
+frame = 8
+frame_progress = 1.0
+flip_h = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=655552505]
+position = Vector2(0, 30)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.67
+emission_shape = 3
+emission_rect_extents = Vector2(38.8, 1.825)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_58e7b")
 
 [connection signal="body_entered" from="Area" to="." method="BodyEntered2D"]

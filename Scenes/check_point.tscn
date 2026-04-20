@@ -6,6 +6,7 @@
 size = Vector2(45.595, 123.915)
 
 [node name="CheckPoint" type="Area2D" unique_id=1205404910]
+collision_mask = 2
 script = ExtResource("1_oampm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=180739963]
