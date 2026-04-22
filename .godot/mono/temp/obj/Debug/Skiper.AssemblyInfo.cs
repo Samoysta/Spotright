@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Skiper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d705374a575dab0d925b1e854d61afaf956663c5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9efb9585d824fd5e1b51dd91453e1468fd6b2bd2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Skiper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Skiper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
