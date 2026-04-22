@@ -7,9 +7,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3rhl"]
 size = Vector2(64, 60)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_khmlr"]
-size = Vector2(63, 2)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ron15"]
 atlas = ExtResource("3_58e7b")
 region = Rect2(0, 0, 128, 128)
@@ -90,7 +87,7 @@ platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_s3rhl")
 rayCasts = [NodePath("RayCast2D"), NodePath("RayCast2D2")]
-hitBox = NodePath("Area")
+hitBox = NodePath("")
 smokeEfects = [NodePath("AnimatedSprite2D"), NodePath("AnimatedSprite2D2")]
 hitEffect = NodePath("CPUParticles2D")
 
@@ -99,14 +96,6 @@ texture = ExtResource("1_khmlr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2065128917]
 shape = SubResource("RectangleShape2D_s3rhl")
-
-[node name="Area" type="Area2D" parent="." unique_id=1660979524 groups=["DamageTile"]]
-position = Vector2(0, 31)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=1731540863]
-shape = SubResource("RectangleShape2D_khmlr")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1891528564]
 position = Vector2(-17, 32)
@@ -150,5 +139,3 @@ initial_velocity_max = 10.0
 scale_amount_min = 6.0
 scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_58e7b")
-
-[connection signal="body_entered" from="Area" to="." method="BodyEntered2D"]

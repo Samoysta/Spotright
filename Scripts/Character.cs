@@ -180,6 +180,15 @@ public partial class Character : CharacterBody2D
 			//CoyotoTime
 			ct = coyotoTime;
 		}
+		//Sıkışma
+		if (IsOnFloor() && IsOnCeiling())
+		{
+			KillSelf();
+		}
+		if (isRightWalled && isLeftWalled)
+		{
+			KillSelf();
+		}
 		//Dash
 		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash)
 		{
@@ -214,6 +223,7 @@ public partial class Character : CharacterBody2D
 				SpawnDashHaloEffect();
 				dashHaloCD = dashDur / 5;
 			}
+			AttemptCorrectionX(1);
 		}
 		else if (!isDashing)
 		{
@@ -356,6 +366,60 @@ public partial class Character : CharacterBody2D
 			}
 		}
 		GlobalPosition = GlobalPosition.Round();
+		AttemptCorrection(6);
+	}
+
+	public void AttemptCorrection(int amount)
+	{
+		float delta = (float)GetPhysicsProcessDeltaTime();
+
+		// sadece yukarı giderken (tavana çarpma)
+		if (Velocity.Y < 0 &&
+			TestMove(GlobalTransform, new Vector2(0, Velocity.Y * delta)))
+		{
+			for (int i = 1; i <= amount * 2; i++)
+			{
+				for (int j = -1; j <= 1; j += 2)
+				{
+					Vector2 offset = new Vector2(i * j / 2f, 0);
+
+					if (!TestMove(GlobalTransform.Translated(offset),new Vector2(0, Velocity.Y * delta)))
+					{
+						GlobalPosition += offset;
+
+						// yatay hız ters yöndeyse sıfırla
+						if (Velocity.X * j < 0)
+							Velocity = new Vector2(0, Velocity.Y);
+
+						return;
+					}
+				}
+			}
+		}
+	}
+
+	public void AttemptCorrectionX(int amount)
+	{
+		float delta = (float)GetPhysicsProcessDeltaTime();
+		if (Velocity.X != 0 && TestMove(GlobalTransform, new Vector2(Velocity.X * delta, 0)))
+		{
+			for (int i = 1; i <= amount * 2; i++)
+			{
+				for (int j = -1; j <= 1; j += 2)
+				{
+					if (Velocity.Y * j <= 0)
+					{
+						Vector2 offset = new Vector2(0 , i * j / 2f);
+
+						if (!TestMove(GlobalTransform.Translated(offset), new Vector2(Velocity.X * delta, 0)))
+						{
+							GlobalPosition += offset;
+							return;
+						}		
+					}
+				}
+			}
+		}
 	}
 
 	void SpawnJumpEffect()

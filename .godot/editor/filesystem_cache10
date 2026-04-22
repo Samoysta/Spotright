@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1776700319
+::res://::1776864924
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1776697085
@@ -15,27 +15,27 @@ Plant1.png::CompressedTexture2D::419322031997786063::1776416003::1776416003::1::
 SmokeEffect.png::CompressedTexture2D::385564831309338682::1776697084::1776697085::1::::<><><>0<>0<>8d5cc3b7e41e7d027dd885ad951bb5f6<>res://.godot/imported/SmokeEffect.png-1ecbebf6a46a248ffa20b13df76dd077.ctex::
 ::res://Assets/Tilemaps/::1776408428
 Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::::<><><>0<>0<>082115d3df84b40d9c2bf32d86a33787<>res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex::
-::res://Scenes/::1776693200
-character.tscn::PackedScene::1771483939617051374::1776626241::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://c7avoy721vhud::::res://Assets/Character Normal.png<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
+::res://Scenes/::1776803954
+character.tscn::PackedScene::1771483939617051374::1776803954::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://c7avoy721vhud::::res://Assets/Character Normal.png<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
 check_point.tscn::PackedScene::3761001721822499150::1776693200::0::1::::<><><>0<>0<><>::uid://yarlnvufhowr::::res://Scripts/CheckPoint.cs
-test_scene.tscn::PackedScene::8267793320165344159::1776693034::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn
-::res://Scenes/DamageItem/::1776697880
+test_scene.tscn::PackedScene::8267793320165344159::1776803834::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn
+::res://Scenes/DamageItem/::1776799648
 circle_boys.tscn::PackedScene::3091091176719707713::1776626389::0::1::::<><><>0<>0<><>::uid://me47iktoq02o::::res://Scripts/DamageItems/CircleBoys.cs<>uid://b86dib6ouotg0::::res://Assets/CircleBoys.png
-falleble_stone.tscn::PackedScene::7608334367691874589::1776697880::0::1::::<><><>0<>0<><>::uid://chwgfci1eod6i::::res://Assets/fallebleStone.png<>uid://bw64ym6ssd7ro::::res://Scripts/DamageItems/FallebleStone.cs<>uid://fq1gxc404v3w::::res://Assets/SmokeEffect.png
+falleble_stone.tscn::PackedScene::7608334367691874589::1776799648::0::1::::<><><>0<>0<><>::uid://chwgfci1eod6i::::res://Assets/fallebleStone.png<>uid://bw64ym6ssd7ro::::res://Scripts/DamageItems/FallebleStone.cs<>uid://fq1gxc404v3w::::res://Assets/SmokeEffect.png
 ::res://Scenes/Effects/::1776542394
 dash_effect.tscn::PackedScene::3948304965328842925::1776499745::0::1::::<><><>0<>0<><>::uid://31bbtjuompb8::::res://Assets/littleStar.png<>uid://24y2vn7ev125::::res://Scripts/Effect.cs<>uid://c3i2riaxg4u8o::::res://Assets/dashSpriteSheet.png
 dash_halo_effect.tscn::PackedScene::2442016470731349016::1776542394::0::1::::<><><>0<>0<><>::uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png<>uid://24y2vn7ev125::::res://Scripts/Effect.cs
 jump_effect.tscn::PackedScene::183098906266672845::1776491060::0::1::::<><><>0<>0<><>::uid://24y2vn7ev125::::res://Scripts/Effect.cs
-::res://Scenes/Enviorement/::1776626341
-plant_1.tscn::PackedScene::4616669404082795962::1776626341::0::1::::<><><>0<>0<><>::uid://f8ef4r88to12::::res://Assets/Plant1.png<>uid://drk61swkx40jl::::res://Scripts/Plants/Plant1.cs
+::res://Scenes/Enviorement/::1776700501
+plant_1.tscn::PackedScene::4616669404082795962::1776700501::0::1::::<><><>0<>0<><>::uid://f8ef4r88to12::::res://Assets/Plant1.png<>uid://drk61swkx40jl::::res://Scripts/Plants/Plant1.cs
 ::res://Scripts/::1776623823
 Camera2d.cs::CSharpScript::1746993918707267049::1776624015::0::1::::<>Camera2D<><>0<>0<><>::
-Character.cs::CSharpScript::5646290253741580454::1776695470::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Character.cs::CSharpScript::5646290253741580454::1776804593::0::1::::<>CharacterBody2D<><>0<>0<><>::
 CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<><>0<>0<><>::
 Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
 GameManager.cs::CSharpScript::8499533869409038686::1776624113::0::1::::<>Node<><>0<>0<><>::
 ::res://Scripts/DamageItems/::1776623353
 CircleBoys.cs::CSharpScript::852342009385297608::1776425289::0::1::::<>Area2D<><>0<>0<><>::
-FallebleStone.cs::CSharpScript::3996375284960797320::1776697668::0::1::::<>CharacterBody2D<><>0<>0<><>::
+FallebleStone.cs::CSharpScript::3996375284960797320::1776799700::0::1::::<>CharacterBody2D<><>0<>0<><>::
 ::res://Scripts/Plants/::1776417220
 Plant1.cs::CSharpScript::8375045807775997881::1776501959::0::1::::<>Area2D<><>0<>0<><>::

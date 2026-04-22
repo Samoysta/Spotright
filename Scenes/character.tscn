@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
-size = Vector2(15.5, 32)
+size = Vector2(14, 30)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ejsiy"]
 diffuse_texture = ExtResource("1_lkv7d")
@@ -251,7 +251,7 @@ point_count = 2
 colors = PackedColorArray(1, 1, 1, 0.3372549, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
-size = Vector2(5.738, 27.28)
+size = Vector2(4, 27)
 
 [sub_resource type="Curve" id="Curve_owm7s"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -463,7 +463,6 @@ dashDur = 0.2
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
-position = Vector2(0.25, 0)
 shape = SubResource("RectangleShape2D_ushfy")
 
 [node name="Body" type="Node2D" parent="CollisionShape2D" unique_id=775583752]
