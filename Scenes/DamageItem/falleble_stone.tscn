@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://fq1gxc404v3w" path="res://Assets/SmokeEffect.png" id="3_58e7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3rhl"]
-size = Vector2(64, 60)
+size = Vector2(64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ron15"]
 atlas = ExtResource("3_58e7b")
@@ -82,12 +82,11 @@ animations = [{
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.48728812, 1), 0.0, 0.0, 0, 0, Vector2(0.5423729, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[node name="FallebleStone" type="CharacterBody2D" unique_id=1153185839 node_paths=PackedStringArray("rayCasts", "hitBox", "smokeEfects", "hitEffect") groups=["Ground"]]
+[node name="FallebleStone" type="CharacterBody2D" unique_id=1153185839 node_paths=PackedStringArray("rayCasts", "smokeEfects", "hitEffect") groups=["Ground"]]
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_s3rhl")
 rayCasts = [NodePath("RayCast2D"), NodePath("RayCast2D2")]
-hitBox = NodePath("")
 smokeEfects = [NodePath("AnimatedSprite2D"), NodePath("AnimatedSprite2D2")]
 hitEffect = NodePath("CPUParticles2D")
 

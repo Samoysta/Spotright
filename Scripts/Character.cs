@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Formats.Tar;
 
 public partial class Character : CharacterBody2D
 {
@@ -19,7 +20,7 @@ public partial class Character : CharacterBody2D
 	[Export] float accel;
 	[Export] Sprite2D characterSprite;
 	[Export] Node2D foot;
-	[Export] AnimationPlayer anim;
+	[Export] public AnimationPlayer anim;
 	[Export] CpuParticles2D runEffect;
 	[Export] PackedScene jumpEf;
 	[Export] PackedScene dashEf;
@@ -27,22 +28,23 @@ public partial class Character : CharacterBody2D
 	[Export] CpuParticles2D rightWallEffect;
 	[Export] CpuParticles2D leftWallEffect;
 	[Export] float dashSpeed;
-	[Export] float dashCoolDown;
+	[Export] public float dashCoolDown;
 	[Export] PackedScene dashHaloEf;
-	float dashCD;
-	bool isDashing;
+	public float dashCD;
+	public bool isDashing;
 	[Export] float dashDur;
 	float dashD;
 	bool canDash;
+	bool canJump = true;
 	float dashHaloCD;
 	[Export] AnimationPlayer dieAnim;
 	Vector2 spawnPos;
-	Vector2 velocity;
+	public Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
 	public Queue<Effect> dashEfs = new ();
 	public Queue<Effect> dashHaloEfs = new ();
-	int dir;
-	bool isJumping;
+	float dir;
+	public bool isJumping;
 	Vector2 firstScale;
 	bool isGrounded;
 	bool isRightWalled;
@@ -157,6 +159,10 @@ public partial class Character : CharacterBody2D
 			{
 				ct -= (float)delta;
 			}
+			if (velocity.Y < 0)
+			{
+				ct = 0;
+			}
 		}
 		if (IsOnFloor())
 		{
@@ -223,43 +229,43 @@ public partial class Character : CharacterBody2D
 				SpawnDashHaloEffect();
 				dashHaloCD = dashDur / 5;
 			}
-			AttemptCorrectionX(1);
+			AttemptCorrectionX(3);
 		}
 		else if (!isDashing)
 		{
 			dashHaloCD = 0;
 			//sprite yönü
-			if (dir > 0)
+			if (lastDir > 0)
 			{
 				characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
 			}
-			else if(dir < 0)
+			else if(lastDir < 0)
 			{
 				characterSprite.Scale = firstScale;
 			}
 			//Run
 			if (Input.IsActionPressed("Right"))
 			{
-				if (Velocity.X < Speed)
+				if (Velocity.X <= Speed)
 				{
 					dir = 1;
-					lastDir = 1;
 				}
+				lastDir = 1;
 			}
 			else if (Input.IsActionPressed("Left"))
 			{
-				if (Velocity.X > -Speed)
+				if (Velocity.X >= -Speed)
 				{
 					dir = -1;
-					lastDir = -1;
 				}
+				lastDir = -1;
 			}
 			else
 			{
 				dir = 0;
 			}
 			//Jump
-			if (isZjustPressed)
+			if (isZjustPressed && canJump)
 			{
 				if (ct > 0)
 				{
@@ -367,6 +373,23 @@ public partial class Character : CharacterBody2D
 		}
 		GlobalPosition = GlobalPosition.Round();
 		AttemptCorrection(6);
+		canJump = true;
+	}
+
+	public void AddForce(Vector2 vel)
+	{
+		canJump = false;
+		isDashing = false;
+		isJumping = false;
+		velocity = vel;
+		Velocity = vel;
+		isZjustPressed = false;
+		canDash = true;
+		if (vel.Y < -JumpVelocity)
+		{
+			anim.CallDeferred("play", "Jump");
+			anim.CallDeferred("seek", 0);
+		}
 	}
 
 	public void AttemptCorrection(int amount)
@@ -401,17 +424,17 @@ public partial class Character : CharacterBody2D
 	public void AttemptCorrectionX(int amount)
 	{
 		float delta = (float)GetPhysicsProcessDeltaTime();
-		if (Velocity.X != 0 && TestMove(GlobalTransform, new Vector2(Velocity.X * delta, 0)))
+		if (TestMove(GlobalTransform, new Vector2(velocity.X * delta, 0)))
 		{
 			for (int i = 1; i <= amount * 2; i++)
 			{
 				for (int j = -1; j <= 1; j += 2)
 				{
-					if (Velocity.Y * j <= 0)
+					if (velocity.Y * j <= 0)
 					{
 						Vector2 offset = new Vector2(0 , i * j / 2f);
 
-						if (!TestMove(GlobalTransform.Translated(offset), new Vector2(Velocity.X * delta, 0)))
+						if (!TestMove(GlobalTransform.Translated(offset), new Vector2(velocity.X * delta, 0)))
 						{
 							GlobalPosition += offset;
 							return;

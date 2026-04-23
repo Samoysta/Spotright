@@ -1,24 +1,27 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1776889402
+::res://::1776949996
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
-::res://Assets/::1776886415
+::res://Assets/::1776948014
 Character Normal.png::CompressedTexture2D::7020185733022482799::1775403875::1775403859::1::::<><><>0<>0<>84fd36d038a4aab3968dba109465584d<>res://.godot/imported/Character Normal.png-69c5cc92ca273589c31a8574f192fab2.ctex::
 Character.png::CompressedTexture2D::3483364258645260571::1776886415::1776886415::1::::<><><>0<>0<>2526958e07dd3a485a6afb6025356332<>res://.godot/imported/Character.png-f98bfd4a519deb39a93cee80b0823610.ctex::
 CharacterDieEffect-Sheet.png::CompressedTexture2D::8265667248776480102::1775893318::1775893318::1::::<><><>0<>0<>d844af82a7a7ae8d4aa7638b09a1cb18<>res://.godot/imported/CharacterDieEffect-Sheet.png-f937428a2f6661adbc0fcfb3b548b24a.ctex::
 CharacterWhite.png::CompressedTexture2D::8630368451405485223::1776885996::1776885996::1::::<><><>0<>0<>e984c77e4a794c2a70154542fc6b547d<>res://.godot/imported/CharacterWhite.png-00bac2da346d588ea5206a188d951e72.ctex::
 CircleBoys.png::CompressedTexture2D::4766844772529243489::1776182200::1776182200::1::::<><><>0<>0<>ed2b47add37f561d505d229291f90aa9<>res://.godot/imported/CircleBoys.png-d237ad125984c53f2c6cc4f92eee5cd7.ctex::
+CircleGlow.png::CompressedTexture2D::1912993618300603809::1776948014::1776948014::1::::<><><>0<>0<>b2099f85bb2ae2baa11c7e6ed4125160<>res://.godot/imported/CircleGlow.png-69f1dda385256474b80dfac86b7bbcd3.ctex::
 dashSpriteSheet.png::CompressedTexture2D::6756314149825662824::1776497157::1776497157::1::::<><><>0<>0<>e2ecfcddeb6f555b9b67575cb38cfe35<>res://.godot/imported/dashSpriteSheet.png-954762d9ea06703a8d973568c235bb16.ctex::
 fallebleStone.png::CompressedTexture2D::5309952932960223906::1776617495::1776617495::1::::<><><>0<>0<>2cf0091db1514eb0f29b7a6c13afc768<>res://.godot/imported/fallebleStone.png-181734265f6ed582fbbf02f7b4b0a130.ctex::
+JumpPad.png::CompressedTexture2D::5772980756739335260::1776920339::1776920339::1::::<><><>0<>0<>3cdf766c774769c15108f61de0b9bc3b<>res://.godot/imported/JumpPad.png-fffc1610c668c311b8df38227645e20e.ctex::
+JumpPadChains.png::CompressedTexture2D::9137227468164856790::1776920339::1776920339::1::::<><><>0<>0<>28ea04ae7a821d01ab41b12565f6b7df<>res://.godot/imported/JumpPadChains.png-7bd7d1da9b79f24397403c4fe2d346e2.ctex::
 littleStar.png::CompressedTexture2D::2019024959031931007::1776494938::1776494938::1::::<><><>0<>0<>6e8ffefefc598d6f1b6178522ea98750<>res://.godot/imported/littleStar.png-2ed4f9f33d2393754287ac8a5060a7b3.ctex::
 Plant1.png::CompressedTexture2D::419322031997786063::1776416003::1776416003::1::::<><><>0<>0<>49e46be7bdb55bc489a04c19ca8ea970<>res://.godot/imported/Plant1.png-96450b792805ca417a30a0544770d3a8.ctex::
 SmokeEffect.png::CompressedTexture2D::385564831309338682::1776697084::1776697085::1::::<><><>0<>0<>8d5cc3b7e41e7d027dd885ad951bb5f6<>res://.godot/imported/SmokeEffect.png-1ecbebf6a46a248ffa20b13df76dd077.ctex::
 ::res://Assets/Tilemaps/::1776408428
 Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::::<><><>0<>0<>082115d3df84b40d9c2bf32d86a33787<>res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex::
-::res://Scenes/::1776889308
-character.tscn::PackedScene::1771483939617051374::1776867859::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://c7avoy721vhud::::res://Assets/Character Normal.png<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
+::res://Scenes/::1776945836
+character.tscn::PackedScene::1771483939617051374::1776925613::0::1::::<><><>0<>0<><>::uid://bpvmraqjijdix::::res://Assets/Character.png<>uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://c7avoy721vhud::::res://Assets/Character Normal.png<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
 check_point.tscn::PackedScene::3761001721822499150::1776693200::0::1::::<><><>0<>0<><>::uid://yarlnvufhowr::::res://Scripts/CheckPoint.cs
-test_scene.tscn::PackedScene::8267793320165344159::1776889308::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn
+test_scene.tscn::PackedScene::8267793320165344159::1776945836::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn<>uid://bxxj4r37kfiv8::::res://Scenes/interactiveItems/jump_pad.tscn
 ::res://Scenes/DamageItem/::1776799648
 circle_boys.tscn::PackedScene::3091091176719707713::1776626389::0::1::::<><><>0<>0<><>::uid://me47iktoq02o::::res://Scripts/DamageItems/CircleBoys.cs<>uid://b86dib6ouotg0::::res://Assets/CircleBoys.png
 falleble_stone.tscn::PackedScene::7608334367691874589::1776799648::0::1::::<><><>0<>0<><>::uid://chwgfci1eod6i::::res://Assets/fallebleStone.png<>uid://bw64ym6ssd7ro::::res://Scripts/DamageItems/FallebleStone.cs<>uid://fq1gxc404v3w::::res://Assets/SmokeEffect.png
@@ -28,14 +31,18 @@ dash_halo_effect.tscn::PackedScene::2442016470731349016::1776542394::0::1::::<><
 jump_effect.tscn::PackedScene::183098906266672845::1776491060::0::1::::<><><>0<>0<><>::uid://24y2vn7ev125::::res://Scripts/Effect.cs
 ::res://Scenes/Enviorement/::1776886467
 plant_1.tscn::PackedScene::4616669404082795962::1776886467::0::1::::<><><>0<>0<><>::uid://f8ef4r88to12::::res://Assets/Plant1.png<>uid://drk61swkx40jl::::res://Scripts/Plants/Plant1.cs
-::res://Scripts/::1776623823
-Camera2d.cs::CSharpScript::1746993918707267049::1776624015::0::1::::<>Camera2D<><>0<>0<><>::
-Character.cs::CSharpScript::5646290253741580454::1776872970::0::1::::<>CharacterBody2D<><>0<>0<><>::
+::res://Scenes/interactiveItems/::1776948407
+jump_pad.tscn::PackedScene::4048843954288340435::1776948407::0::1::::<><><>0<>0<><>::uid://cfajujak6vfau::::res://Scripts/interactiveItems/JumpPad.cs<>uid://coiqfc7xgx5si::::res://Assets/JumpPad.png<>uid://d3ge2ipuqvgru::::res://Assets/JumpPadChains.png
+::res://Scripts/::1776921941
+Camera2d.cs::CSharpScript::1746993918707267049::1776942821::0::1::::<>Camera2D<><>0<>0<><>::
+Character.cs::CSharpScript::5646290253741580454::1776948491::0::1::::<>CharacterBody2D<><>0<>0<><>::
 CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<><>0<>0<><>::
 Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
 GameManager.cs::CSharpScript::8499533869409038686::1776624113::0::1::::<>Node<><>0<>0<><>::
 ::res://Scripts/DamageItems/::1776623353
 CircleBoys.cs::CSharpScript::852342009385297608::1776425289::0::1::::<>Area2D<><>0<>0<><>::
 FallebleStone.cs::CSharpScript::3996375284960797320::1776799700::0::1::::<>CharacterBody2D<><>0<>0<><>::
+::res://Scripts/interactiveItems/::1776921943
+JumpPad.cs::CSharpScript::5124368227596123264::1776948518::0::1::::<>Area2D<><>0<>0<><>::
 ::res://Scripts/Plants/::1776417220
 Plant1.cs::CSharpScript::8375045807775997881::1776872707::0::1::::<>Area2D<><>0<>0<><>::
