@@ -13,7 +13,7 @@ script = ExtResource("1_7128u")
 jumpPad = NodePath("jumpPad")
 jumpPadChains = NodePath("jumpPad/Polygon2D/jumpPadChains")
 jumpVel = 700.0
-duration = 0.2
+duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=873054715]
 position = Vector2(0, -4)

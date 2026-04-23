@@ -171,6 +171,7 @@ public partial class Character : CharacterBody2D
 				SpawnJumpEffect();
 				anim.Play("Fall");
 				anim.Seek(0);
+				velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
 				isGrounded = true;
 			}
 			//RunEffect
@@ -246,17 +247,31 @@ public partial class Character : CharacterBody2D
 			//Run
 			if (Input.IsActionPressed("Right"))
 			{
-				if (Velocity.X <= Speed)
+				if (velocity.X <= Speed)
 				{
 					dir = 1;
+				}
+				else
+				{
+					if (!IsOnFloor())
+					{
+						dir = 1.3f;
+					}
 				}
 				lastDir = 1;
 			}
 			else if (Input.IsActionPressed("Left"))
 			{
-				if (Velocity.X >= -Speed)
+				if (velocity.X >= -Speed)
 				{
 					dir = -1;
+				}
+				else
+				{
+					if (!IsOnFloor())
+					{
+						dir = -1.3f;
+					}
 				}
 				lastDir = -1;
 			}
@@ -359,6 +374,7 @@ public partial class Character : CharacterBody2D
 				isDashing = false;
 			}
 		}
+		velocity.Y = Mathf.Clamp(velocity.Y,-99999,JumpVelocity * 2);
 		Velocity = velocity;
 		MoveAndSlide();
 		//Çarpışma kontrol
