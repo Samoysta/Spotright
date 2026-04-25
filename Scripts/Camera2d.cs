@@ -50,7 +50,7 @@ public partial class Camera2d : Camera2D
             Offset = originalOffset;
         }
         GlobalPosition = GlobalPosition.Lerp(target.GlobalPosition, 5 * (float)delta);
-        Position = Position.Round();
+        //Position = Position.Round();
     }
 
     // 🔥 normal shake

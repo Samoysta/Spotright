@@ -18,9 +18,8 @@ public partial class Character : CharacterBody2D
 	bool isZjustPressed;
 	[Export] float Gravity;
 	[Export] float accel;
-	[Export] Sprite2D characterSprite;
+	[Export] AnimatedSprite2D characterSprite;
 	[Export] Node2D foot;
-	[Export] public AnimationPlayer anim;
 	[Export] CpuParticles2D runEffect;
 	[Export] PackedScene jumpEf;
 	[Export] PackedScene dashEf;
@@ -125,27 +124,40 @@ public partial class Character : CharacterBody2D
 		{
 			isLeftWalled = false;
 		}
+		//DüşmeAnim
+		if (velocity.Y > -JumpVelocity / 4 && !IsOnFloor())
+		{
+			if (characterSprite.Animation != "Fall" && !isDashing)
+			{
+				if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
+				{
+					characterSprite.Play("Fall");	
+				}
+			}
+		}
 		//WallSpeed Sürtünme
-		if (Velocity.Y > 0)
+		if (velocity.Y > -JumpVelocity)
 		{
 			if (isRightWalled || isLeftWalled)
 			{
 				if (velocity.Y > wallSpeed)
 				{
 					velocity.Y = wallSpeed;
+					characterSprite.Play("Climb");
 					if (isRightWalled)
 					{
+						characterSprite.Scale = firstScale;
 						rightWallEffect.Emitting = true;
 					}
 					else
 					{
+						characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
 						leftWallEffect.Emitting = true;
 					}
 				}
 				canDash = true;
 			}
 		}
-		
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
@@ -169,8 +181,11 @@ public partial class Character : CharacterBody2D
 			if (!isGrounded)
 			{
 				SpawnJumpEffect();
-				anim.Play("Fall");
-				anim.Seek(0);
+				if (!isDashing)
+				{
+					characterSprite.Play("Falled");	
+				}
+				characterSprite.Frame = 0;
 				velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
 				isGrounded = true;
 			}
@@ -178,10 +193,28 @@ public partial class Character : CharacterBody2D
 			if (Mathf.Abs(Velocity.X - 0) > 10)
 			{
 				runEffect.CallDeferred("set_emitting",true);
+				if (!isDashing)
+				{
+					characterSprite.Play("Run");	
+				}
 			}
 			else
 			{
 				runEffect.CallDeferred("set_emitting", false);
+				if (!isDashing)
+				{
+					if (characterSprite.Animation == "Falled")
+					{			
+						if (!characterSprite.IsPlaying())
+						{
+							characterSprite.Play("Idle");	
+						}
+					}
+					else
+					{
+						characterSprite.Play("Idle");
+					}	
+				}
 			}
 			canDash = true;
 			//CoyotoTime
@@ -205,7 +238,7 @@ public partial class Character : CharacterBody2D
 			ct = 0;
 			isZjustPressed = false;
 			isJumping = false;
-			anim.Play("Dash");
+			characterSprite.Play("Dash");
 			SpawnDashEffect();
 		}
 		if (dashD > 0)
@@ -230,19 +263,21 @@ public partial class Character : CharacterBody2D
 				SpawnDashHaloEffect();
 				dashHaloCD = dashDur / 5;
 			}
-			AttemptCorrectionX(3);
 		}
 		else if (!isDashing)
 		{
 			dashHaloCD = 0;
 			//sprite yönü
-			if (lastDir > 0)
+			if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
 			{
-				characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
-			}
-			else if(lastDir < 0)
-			{
-				characterSprite.Scale = firstScale;
+				if (lastDir < 0)
+				{
+					characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
+				}
+				else if(lastDir > 0)
+				{
+					characterSprite.Scale = firstScale;
+				}	
 			}
 			//Run
 			if (Input.IsActionPressed("Right"))
@@ -285,8 +320,8 @@ public partial class Character : CharacterBody2D
 				if (ct > 0)
 				{
 					SpawnJumpEffect();
-					anim.Play("Jump");
-					anim.Seek(0);
+					characterSprite.Play("Jump");
+					characterSprite.Frame = 0;
 					jumpT = jumpTime;
 					isJumping = true;	
 					isZjustPressed = false;	
@@ -304,8 +339,8 @@ public partial class Character : CharacterBody2D
 					{
 						velocity.X = -Speed;
 					}
-					anim.Play("Jump");
-					anim.Seek(0);	
+					characterSprite.Play("Jump");
+					characterSprite.Frame = 0;
 					isJumping = true;
 					jumpT = jumpTime;
 					isZjustPressed = false;
@@ -389,6 +424,7 @@ public partial class Character : CharacterBody2D
 		}
 		GlobalPosition = GlobalPosition.Round();
 		AttemptCorrection(6);
+		AttemptCorrectionX(3);
 		canJump = true;
 	}
 
@@ -403,8 +439,8 @@ public partial class Character : CharacterBody2D
 		canDash = true;
 		if (vel.Y < -JumpVelocity)
 		{
-			anim.CallDeferred("play", "Jump");
-			anim.CallDeferred("seek", 0);
+			characterSprite.CallDeferred("play", "Jump");
+			characterSprite.SetDeferred("frame", 0);
 		}
 	}
 
