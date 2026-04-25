@@ -37,6 +37,7 @@ public partial class Character : CharacterBody2D
 	bool canJump = true;
 	float dashHaloCD;
 	[Export] AnimationPlayer dieAnim;
+	[Export] AnimationPlayer anim;
 	Vector2 spawnPos;
 	public Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
@@ -232,6 +233,7 @@ public partial class Character : CharacterBody2D
 		//Dash
 		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash)
 		{
+			anim.Play("Dash");
 			dashD = dashDur;
 			dashCD = dashCoolDown;
 			isDashing = true;
@@ -441,6 +443,7 @@ public partial class Character : CharacterBody2D
 		{
 			characterSprite.CallDeferred("play", "Jump");
 			characterSprite.SetDeferred("frame", 0);
+			anim.Play("RESET");
 		}
 	}
 

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bwiuag338h2dt" path="res://Scenes/Effects/dash_effect.tscn" id="5_2mse5"]
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 [ext_resource type="Texture2D" uid="uid://8ekhggm5wkym" path="res://Assets/Character1-Sheet.png" id="5_reotu"]
+[ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(14, 30)
@@ -230,12 +231,42 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="Curve" id="Curve_ushfy"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5894267), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Animation" id="Animation_a5ess"]
+resource_name = "Dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WhiteSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.11198293, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
-[sub_resource type="Gradient" id="Gradient_ushfy"]
-colors = PackedColorArray(1, 1, 1, 0.3372549, 1, 1, 1, 0)
+[sub_resource type="Animation" id="Animation_wbia7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WhiteSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kq7hj"]
+_data = {
+&"Dash": SubResource("Animation_a5ess"),
+&"RESET": SubResource("Animation_wbia7")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
 size = Vector2(4, 27)
@@ -261,7 +292,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D/Body/Foot/CharacterSprite:visible")
+tracks/1/path = NodePath("CollisionShape2D/CharacterSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -300,7 +331,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D/Body/Foot/CharacterSprite:visible")
+tracks/2/path = NodePath("CollisionShape2D/CharacterSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -312,13 +343,13 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D/Body/Foot/RunEffect:emitting")
+tracks/3/path = NodePath("RunEffect:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [false]
 }
 tracks/4/type = "value"
@@ -363,7 +394,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D/Body/Foot/CharacterSprite:visible")
+tracks/2/path = NodePath("CollisionShape2D/CharacterSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -375,13 +406,13 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D/Body/Foot/RunEffect:emitting")
+tracks/3/path = NodePath("RunEffect:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [false]
 }
 tracks/4/type = "value"
@@ -423,7 +454,14 @@ colors = PackedColorArray(0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2mse5"]
 gradient = SubResource("Gradient_ejsiy")
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "runEffect", "rightWallEffect", "leftWallEffect", "dieAnim")]
+[sub_resource type="Curve" id="Curve_ushfy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5894267), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ushfy"]
+colors = PackedColorArray(1, 1, 1, 0.3372549, 1, 1, 1, 0)
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "runEffect", "rightWallEffect", "leftWallEffect", "dieAnim", "anim")]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_ushfy")
@@ -434,9 +472,9 @@ jumpTime = 0.19
 inputBufTimer = 0.1
 Gravity = 2.0
 accel = 1300.0
-characterSprite = NodePath("CollisionShape2D/Body/Foot/CharacterSprite")
-foot = NodePath("CollisionShape2D/Body/Foot")
-runEffect = NodePath("CollisionShape2D/Body/Foot/RunEffect")
+characterSprite = NodePath("CollisionShape2D/CharacterSprite")
+foot = NodePath("CollisionShape2D/Foot")
+runEffect = NodePath("RunEffect")
 jumpEf = ExtResource("2_owm7s")
 dashEf = ExtResource("5_2mse5")
 wallSpeed = 200.0
@@ -447,34 +485,26 @@ dashCoolDown = 0.4
 dashHaloEf = ExtResource("4_a5ess")
 dashDur = 0.2
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
+anim = NodePath("CollisionShape2D/CharacterSprite/AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 shape = SubResource("RectangleShape2D_ushfy")
 
-[node name="Body" type="Node2D" parent="CollisionShape2D" unique_id=775583752]
-
-[node name="Foot" type="Node2D" parent="CollisionShape2D/Body" unique_id=1352019550]
-position = Vector2(0, 16)
-
-[node name="CharacterSprite" type="AnimatedSprite2D" parent="CollisionShape2D/Body/Foot" unique_id=328205539]
-position = Vector2(0, -17)
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=328205539]
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_ejsiy")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="RunEffect" type="CPUParticles2D" parent="CollisionShape2D/Body/Foot" unique_id=826592140]
-z_index = -1
-position = Vector2(0, -5)
-emitting = false
-amount = 20
-lifetime = 0.4
-gravity = Vector2(0, -200)
-angular_velocity_min = -180.0
-angular_velocity_max = 185.2
-scale_amount_min = 6.0
-scale_amount_max = 10.0
-scale_amount_curve = SubResource("Curve_ushfy")
-color_ramp = SubResource("Gradient_ushfy")
+[node name="WhiteSprite" type="Sprite2D" parent="CollisionShape2D/CharacterSprite" unique_id=314907965]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("6_reotu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/CharacterSprite" unique_id=865406091]
+libraries/ = SubResource("AnimationLibrary_kq7hj")
+
+[node name="Foot" type="Node2D" parent="CollisionShape2D" unique_id=1352019550]
+position = Vector2(0, 16)
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
 position = Vector2(8, 0)
@@ -550,6 +580,20 @@ z_index = 1000
 position = Vector2(969.4999, 542)
 scale = Vector2(31.296871, 17.9375)
 texture = SubResource("GradientTexture2D_2mse5")
+
+[node name="RunEffect" type="CPUParticles2D" parent="." unique_id=826592140]
+z_index = -1
+position = Vector2(0, 11)
+emitting = false
+amount = 20
+lifetime = 0.4
+gravity = Vector2(0, -200)
+angular_velocity_min = -180.0
+angular_velocity_max = 185.2
+scale_amount_min = 6.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_ushfy")
+color_ramp = SubResource("Gradient_ushfy")
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]
