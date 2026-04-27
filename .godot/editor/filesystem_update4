@@ -1,5 +1,3 @@
-res://Scenes/character.tscn
-res://Scripts/Character.cs
 res://Scripts/interactiveItems/JumpPad.cs
 res://Scripts/DamageItems/FallebleStone.cs
 res://Scripts/Plants/Plant1.cs
@@ -7,3 +5,5 @@ res://Scripts/DamageItems/CircleBoys.cs
 res://Scripts/CheckPoint.cs
 res://Scripts/Camera2d.cs
 res://Scripts/Effect.cs
+res://Scripts/Character.cs
+res://Scenes/Effects/jump_effect.tscn
