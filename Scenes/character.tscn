@@ -247,6 +247,57 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_7iw6i"]
+resource_name = "Fall"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1.925, 0, 0, 0, -0.46855628, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.46666667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0.695, 0, 0, 0, 0.19971746, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.46666667)
+}
+
+[sub_resource type="Animation" id="Animation_kq7hj"]
+resource_name = "Jump"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.51, 0, 0, 0, 0.089949846, 1, -0.13333333, -0.042250752, 0.25, 0),
+"times": PackedFloat32Array(0, 0.53333336)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.6, 0, 0, 0.033333335, -0.13209069, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.53333336)
+}
+
 [sub_resource type="Animation" id="Animation_wbia7"]
 length = 0.001
 tracks/0/type = "value"
@@ -261,10 +312,56 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../..:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../..:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kq7hj"]
 _data = {
 &"Dash": SubResource("Animation_a5ess"),
+&"Fall": SubResource("Animation_7iw6i"),
+&"Jump": SubResource("Animation_kq7hj"),
 &"RESET": SubResource("Animation_wbia7")
 }
 
@@ -292,7 +389,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D/CharacterSprite:visible")
+tracks/1/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -331,7 +428,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D/CharacterSprite:visible")
+tracks/2/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -394,7 +491,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D/CharacterSprite:visible")
+tracks/2/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -472,8 +569,8 @@ jumpTime = 0.19
 inputBufTimer = 0.1
 Gravity = 2.0
 accel = 1300.0
-characterSprite = NodePath("CollisionShape2D/CharacterSprite")
-foot = NodePath("CollisionShape2D/Foot")
+characterSprite = NodePath("CollisionShape2D/body/Foot/CharacterSprite")
+foot = NodePath("CollisionShape2D/body/Foot")
 runEffect = NodePath("RunEffect")
 jumpEf = ExtResource("2_owm7s")
 dashEf = ExtResource("5_2mse5")
@@ -485,26 +582,29 @@ dashCoolDown = 0.4
 dashHaloEf = ExtResource("4_a5ess")
 dashDur = 0.2
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
-anim = NodePath("CollisionShape2D/CharacterSprite/AnimationPlayer")
+anim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 shape = SubResource("RectangleShape2D_ushfy")
 
-[node name="CharacterSprite" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=328205539]
-position = Vector2(0, -1)
+[node name="body" type="Node2D" parent="CollisionShape2D" unique_id=1189438130]
+
+[node name="Foot" type="Node2D" parent="CollisionShape2D/body" unique_id=1352019550]
+position = Vector2(0, 16)
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="CollisionShape2D/body/Foot" unique_id=328205539]
+position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_ejsiy")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="WhiteSprite" type="Sprite2D" parent="CollisionShape2D/CharacterSprite" unique_id=314907965]
+[node name="WhiteSprite" type="Sprite2D" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=314907965]
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("6_reotu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/CharacterSprite" unique_id=865406091]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=865406091]
+deterministic = true
 libraries/ = SubResource("AnimationLibrary_kq7hj")
-
-[node name="Foot" type="Node2D" parent="CollisionShape2D" unique_id=1352019550]
-position = Vector2(0, 16)
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
 position = Vector2(8, 0)

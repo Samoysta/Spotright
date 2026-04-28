@@ -1,3 +1,4 @@
+Node2D
 AnimationPlayer
 Sprite2D
 AnimatedSprite2D
@@ -10,5 +11,4 @@ CPUParticles2D
 CharacterBody2D
 RayCast2D
 Parallax2D
-Node2D
 VisibleOnScreenEnabler2D

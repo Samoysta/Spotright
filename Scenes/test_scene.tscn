@@ -73,7 +73,7 @@ camera = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
 position = Vector2(397, 0)
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 limit_top = -100
 limit_bottom = 150
 script = ExtResource("2_hb2xm")

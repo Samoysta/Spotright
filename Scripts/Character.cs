@@ -185,6 +185,8 @@ public partial class Character : CharacterBody2D
 				if (!isDashing)
 				{
 					characterSprite.Play("Falled");	
+					anim.Play("Fall");
+					anim.Seek(0);
 				}
 				characterSprite.Frame = 0;
 				velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
@@ -323,6 +325,8 @@ public partial class Character : CharacterBody2D
 				{
 					SpawnJumpEffect();
 					characterSprite.Play("Jump");
+					anim.Play("Jump");
+					anim.Seek(0);
 					characterSprite.Frame = 0;
 					jumpT = jumpTime;
 					isJumping = true;	
@@ -342,6 +346,8 @@ public partial class Character : CharacterBody2D
 						velocity.X = -Speed;
 					}
 					characterSprite.Play("Jump");
+					anim.Play("Jump");
+					anim.Seek(0);
 					characterSprite.Frame = 0;
 					isJumping = true;
 					jumpT = jumpTime;
@@ -443,7 +449,8 @@ public partial class Character : CharacterBody2D
 		{
 			characterSprite.CallDeferred("play", "Jump");
 			characterSprite.SetDeferred("frame", 0);
-			anim.Play("RESET");
+			anim.CallDeferred("play","Jump");
+			anim.CallDeferred("seek", 0);
 		}
 	}
 

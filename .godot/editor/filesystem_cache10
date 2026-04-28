@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1777316676
+::res://::1777386110
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1777112748
@@ -24,17 +24,17 @@ test_scene.tscn::PackedScene::8267793320165344159::1777301452::0::1::::<><><>0<>
 ::res://Scenes/DamageItem/::1776950445
 circle_boys.tscn::PackedScene::3091091176719707713::1776626389::0::1::::<><><>0<>0<><>::uid://me47iktoq02o::::res://Scripts/DamageItems/CircleBoys.cs<>uid://b86dib6ouotg0::::res://Assets/CircleBoys.png
 falleble_stone.tscn::PackedScene::7608334367691874589::1776950445::0::1::::<><><>0<>0<><>::uid://chwgfci1eod6i::::res://Assets/fallebleStone.png<>uid://bw64ym6ssd7ro::::res://Scripts/DamageItems/FallebleStone.cs<>uid://fq1gxc404v3w::::res://Assets/SmokeEffect.png
-::res://Scenes/Effects/::1777112797
+::res://Scenes/Effects/::1777316913
 dash_effect.tscn::PackedScene::3948304965328842925::1776499745::0::1::::<><><>0<>0<><>::uid://31bbtjuompb8::::res://Assets/littleStar.png<>uid://24y2vn7ev125::::res://Scripts/Effect.cs<>uid://c3i2riaxg4u8o::::res://Assets/dashSpriteSheet.png
 dash_halo_effect.tscn::PackedScene::2442016470731349016::1777112797::0::1::::<><><>0<>0<><>::uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png<>uid://24y2vn7ev125::::res://Scripts/Effect.cs
-jump_effect.tscn::PackedScene::183098906266672845::1776491060::0::1::::<><><>0<>0<><>::uid://24y2vn7ev125::::res://Scripts/Effect.cs
+jump_effect.tscn::PackedScene::183098906266672845::1777316913::0::1::::<><><>0<>0<><>::uid://24y2vn7ev125::::res://Scripts/Effect.cs
 ::res://Scenes/Enviorement/::1776886467
 plant_1.tscn::PackedScene::4616669404082795962::1776886467::0::1::::<><><>0<>0<><>::uid://f8ef4r88to12::::res://Assets/Plant1.png<>uid://drk61swkx40jl::::res://Scripts/Plants/Plant1.cs
 ::res://Scenes/interactiveItems/::1776967971
 jump_pad.tscn::PackedScene::4048843954288340435::1776967971::0::1::::<><><>0<>0<><>::uid://cfajujak6vfau::::res://Scripts/interactiveItems/JumpPad.cs<>uid://coiqfc7xgx5si::::res://Assets/JumpPad.png<>uid://d3ge2ipuqvgru::::res://Assets/JumpPadChains.png
 ::res://Scripts/::1776921941
 Camera2d.cs::CSharpScript::1746993918707267049::1777041595::0::1::::<>Camera2D<><>0<>0<><>::
-Character.cs::CSharpScript::5646290253741580454::1777117710::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Character.cs::CSharpScript::5646290253741580454::1777317833::0::1::::<>CharacterBody2D<><>0<>0<><>::
 CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<><>0<>0<><>::
 Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
 GameManager.cs::CSharpScript::8499533869409038686::1776624113::0::1::::<>Node<><>0<>0<><>::
