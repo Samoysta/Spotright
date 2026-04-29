@@ -20,7 +20,6 @@ public partial class Character : CharacterBody2D
 	[Export] float accel;
 	[Export] AnimatedSprite2D characterSprite;
 	[Export] Node2D foot;
-	[Export] CpuParticles2D runEffect;
 	[Export] PackedScene jumpEf;
 	[Export] PackedScene dashEf;
 	[Export] float wallSpeed;
@@ -31,6 +30,7 @@ public partial class Character : CharacterBody2D
 	[Export] PackedScene dashHaloEf;
 	public float dashCD;
 	public bool isDashing;
+	bool canDie = true;
 	[Export] float dashDur;
 	float dashD;
 	bool canDash;
@@ -167,7 +167,6 @@ public partial class Character : CharacterBody2D
 			{
 				isGrounded = false;
 			}
-			runEffect.Emitting = false;
 			if (ct > 0)
 			{
 				ct -= (float)delta;
@@ -195,7 +194,6 @@ public partial class Character : CharacterBody2D
 			//RunEffect
 			if (Mathf.Abs(Velocity.X - 0) > 10)
 			{
-				runEffect.CallDeferred("set_emitting",true);
 				if (!isDashing)
 				{
 					characterSprite.Play("Run");	
@@ -203,7 +201,6 @@ public partial class Character : CharacterBody2D
 			}
 			else
 			{
-				runEffect.CallDeferred("set_emitting", false);
 				if (!isDashing)
 				{
 					if (characterSprite.Animation == "Falled")
@@ -224,14 +221,18 @@ public partial class Character : CharacterBody2D
 			ct = coyotoTime;
 		}
 		//Sıkışma
-		if (IsOnFloor() && IsOnCeiling())
+		if (canDie)
 		{
-			KillSelf();
+			if (IsOnFloor() && IsOnCeiling())
+			{
+				KillSelf();
+			}
+			if (isRightWalled && isLeftWalled)
+			{
+				KillSelf();
+			}	
 		}
-		if (isRightWalled && isLeftWalled)
-		{
-			KillSelf();
-		}
+		
 		//Dash
 		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash)
 		{
@@ -434,6 +435,7 @@ public partial class Character : CharacterBody2D
 		AttemptCorrection(6);
 		AttemptCorrectionX(3);
 		canJump = true;
+		canDie = true;
 	}
 
 	public void AddForce(Vector2 vel)
@@ -587,6 +589,7 @@ public partial class Character : CharacterBody2D
 		dieAnim.Play("Die");
 		SetProcess(false);
 		SetPhysicsProcess(false);
+		canDie = false;
 	}
 	void DieFinished(string animName)
 	{

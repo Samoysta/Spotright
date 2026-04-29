@@ -69,10 +69,6 @@ _data = {
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.65254235, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_sg45b"]
-offsets = PackedFloat32Array(0, 0.78571427, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.91871923, 1, 1, 1, 0)
-
 [node name="DashEffect" type="Node2D" unique_id=1917157253 node_paths=PackedStringArray("anims")]
 script = ExtResource("1_sg45b")
 anims = [NodePath("AnimationPlayer")]
@@ -81,6 +77,7 @@ anims = [NodePath("AnimationPlayer")]
 libraries/ = SubResource("AnimationLibrary_lw5td")
 
 [node name="DashEffect" type="CPUParticles2D" parent="." unique_id=1277067145]
+modulate = Color(1.7686467, 1.7686467, 1.7686467, 1)
 emitting = false
 texture = ExtResource("1_kqv6k")
 one_shot = true
@@ -93,7 +90,6 @@ initial_velocity_max = 300.0
 linear_accel_min = -300.0
 linear_accel_max = -300.0
 scale_amount_curve = SubResource("Curve_pifho")
-color_ramp = SubResource("Gradient_sg45b")
 
 [node name="DashSprite" type="Sprite2D" parent="." unique_id=716768812]
 position = Vector2(0, -16)

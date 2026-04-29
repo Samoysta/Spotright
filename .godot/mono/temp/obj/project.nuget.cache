@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ac+amTRTpXM=",
+  "dgSpecHash": "SnQkytBJmDk=",
   "success": true,
   "projectFilePath": "C:\\Users\\LENOVO\\Dev\\GitHub\\Spotright\\Skiper.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\LENOVO\\.nuget\\packages\\godot.sourcegenerators\\4.6.1\\godot.sourcegenerators.4.6.1.nupkg.sha512",
-    "C:\\Users\\LENOVO\\.nuget\\packages\\godotsharp\\4.6.1\\godotsharp.4.6.1.nupkg.sha512",
-    "C:\\Users\\LENOVO\\.nuget\\packages\\godotsharpeditor\\4.6.1\\godotsharpeditor.4.6.1.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\godot.sourcegenerators\\4.6.2\\godot.sourcegenerators.4.6.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\godotsharp\\4.6.2\\godotsharp.4.6.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\godotsharpeditor\\4.6.2\\godotsharpeditor.4.6.2.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.24\\microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.24\\microsoft.windowsdesktop.app.ref.8.0.24.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.24\\microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512"
