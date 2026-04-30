@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://cehwv5je66iyk"]
 
 [ext_resource type="Texture2D" uid="uid://ch6wdyvjh5jaa" path="res://Assets/weapon1.png" id="1_j0b74"]
+[ext_resource type="Script" uid="uid://dahuwpqippvjt" path="res://Scripts/Weapon1.cs" id="1_ric17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b74"]
 size = Vector2(27, 8)
 
-[node name="weapon1" type="CharacterBody2D" unique_id=1832651126]
-platform_floor_layers = 4294901760
+[node name="weapon1" type="Area2D" unique_id=1828208836]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ric17")
+ShootAmount = 3
+weaponMaxPos = Vector2(32, 32)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=355800990]
 texture = ExtResource("1_j0b74")
@@ -14,3 +19,5 @@ texture = ExtResource("1_j0b74")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183355213]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_j0b74")
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]

@@ -18,7 +18,7 @@ public partial class Character : CharacterBody2D
 	bool isZjustPressed;
 	[Export] float Gravity;
 	[Export] float accel;
-	[Export] AnimatedSprite2D characterSprite;
+	[Export] public AnimatedSprite2D characterSprite;
 	[Export] Node2D foot;
 	[Export] PackedScene jumpEf;
 	[Export] PackedScene dashEf;
@@ -30,7 +30,7 @@ public partial class Character : CharacterBody2D
 	[Export] PackedScene dashHaloEf;
 	public float dashCD;
 	public bool isDashing;
-	bool canDie = true;
+	public bool canDie = true;
 	[Export] float dashDur;
 	float dashD;
 	bool canDash;
@@ -52,6 +52,7 @@ public partial class Character : CharacterBody2D
 	int leftWallAmount;
 	int rightWallAmount;
 	int lastDir;
+	bool canAnim;
 
 
     public override void _Ready()
@@ -194,14 +195,14 @@ public partial class Character : CharacterBody2D
 			//RunEffect
 			if (Mathf.Abs(Velocity.X - 0) > 10)
 			{
-				if (!isDashing)
+				if (!isDashing && canAnim)
 				{
 					characterSprite.Play("Run");	
 				}
 			}
 			else
 			{
-				if (!isDashing)
+				if (!isDashing && canAnim)
 				{
 					if (characterSprite.Animation == "Falled")
 					{			
@@ -436,6 +437,7 @@ public partial class Character : CharacterBody2D
 		AttemptCorrectionX(3);
 		canJump = true;
 		canDie = true;
+		canAnim = true;
 	}
 
 	public void AddForce(Vector2 vel)
@@ -453,6 +455,7 @@ public partial class Character : CharacterBody2D
 			characterSprite.SetDeferred("frame", 0);
 			anim.CallDeferred("play","Jump");
 			anim.CallDeferred("seek", 0);
+			SetDeferred("canAnim", false);
 		}
 	}
 

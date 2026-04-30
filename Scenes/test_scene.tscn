@@ -140,5 +140,7 @@ position = Vector2(430, -48)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1844952206]
 environment = SubResource("Environment_rdbpf")
 
-[node name="weapon1" parent="." unique_id=1832651126 instance=ExtResource("8_oho3u")]
+[node name="weapon1" parent="." unique_id=1832651126 node_paths=PackedStringArray("cam") instance=ExtResource("8_oho3u")]
 position = Vector2(964, -112)
+cam = NodePath("../Camera2D")
+shootCoolDown = 0.2
