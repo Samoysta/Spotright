@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cehwv5je66iyk"]
+
+[ext_resource type="Texture2D" uid="uid://ch6wdyvjh5jaa" path="res://Assets/weapon1.png" id="1_j0b74"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b74"]
+size = Vector2(27, 8)
+
+[node name="weapon1" type="CharacterBody2D" unique_id=1832651126]
+platform_floor_layers = 4294901760
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=355800990]
+texture = ExtResource("1_j0b74")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183355213]
+position = Vector2(0.5, 2)
+shape = SubResource("RectangleShape2D_j0b74")
