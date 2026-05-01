@@ -9,6 +9,8 @@ public partial class Weapon1 : Area2D
 	[Export] int ShootAmount;
 	[Export] Vector2 weaponMaxPos;
 	[Export] float shootCoolDown;
+	[Export] PackedScene bul1;
+	[Export] Node2D bulletPos;
 	float shootcd;
 	Vector2 pos;
 	Sprite2D gunSprite;
@@ -89,12 +91,12 @@ public partial class Weapon1 : Area2D
 				cam.Shake(5);
 				ShootAmount--;
 				shootcd = shootCoolDown;
+				for (int i = -1; i < 2; i++)
+				{
+					Fire(i);
+				}
 			}
-			if (ShootAmount <= 0)
-			{
-				QueueFree();
-			}
-			else if (!character.canDie)
+			if (ShootAmount <= 0 || !character.canDie)
 			{
 				QueueFree();
 			}
@@ -109,6 +111,26 @@ public partial class Weapon1 : Area2D
 			character = (Character)body;
 			selected = true;
 			CallDeferred("reparent", character);
+		}
+	}
+
+	void Fire(int index)
+	{
+		if (character.bul1s.Count > 0)
+		{
+			Wepaon1Bullet bul = character.bul1s.Dequeue();
+			bul.GlobalPosition = bulletPos.GlobalPosition;
+			bul.GlobalRotationDegrees = GlobalRotationDegrees + (index * 15f);
+			bul.setOn();
+		}
+		else
+		{
+			Wepaon1Bullet bul = (Wepaon1Bullet)bul1.Instantiate();
+			bul.GlobalPosition = bulletPos.GlobalPosition;
+			bul.GlobalRotationDegrees = GlobalRotationDegrees + (index * 15f);
+			GetTree().CurrentScene.AddChild(bul);
+			bul.Init(character);
+			bul.setOn();
 		}
 	}
 }

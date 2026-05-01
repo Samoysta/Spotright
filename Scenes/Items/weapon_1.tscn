@@ -2,16 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://ch6wdyvjh5jaa" path="res://Assets/weapon1.png" id="1_j0b74"]
 [ext_resource type="Script" uid="uid://dahuwpqippvjt" path="res://Scripts/Weapon1.cs" id="1_ric17"]
+[ext_resource type="PackedScene" uid="uid://ctn2lvp5n50qu" path="res://Scenes/bullets/wepaon_1_bullet.tscn" id="2_b75o4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b74"]
 size = Vector2(27, 8)
 
-[node name="weapon1" type="Area2D" unique_id=1828208836]
+[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ric17")
 ShootAmount = 3
 weaponMaxPos = Vector2(32, 32)
+shootCoolDown = 0.2
+bul1 = ExtResource("2_b75o4")
+bulletPos = NodePath("bulletPos")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=355800990]
 texture = ExtResource("1_j0b74")
@@ -19,5 +23,8 @@ texture = ExtResource("1_j0b74")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183355213]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_j0b74")
+
+[node name="bulletPos" type="Node2D" parent="." unique_id=1342991508]
+position = Vector2(17, 0)
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]

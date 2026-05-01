@@ -43,6 +43,7 @@ public partial class Character : CharacterBody2D
 	public Queue<Effect> jumpEfs = new ();
 	public Queue<Effect> dashEfs = new ();
 	public Queue<Effect> dashHaloEfs = new ();
+	public Queue<Wepaon1Bullet> bul1s = new();
 	float dir;
 	public bool isJumping;
 	Vector2 firstScale;
@@ -436,7 +437,6 @@ public partial class Character : CharacterBody2D
 		AttemptCorrection(6);
 		AttemptCorrectionX(3);
 		canJump = true;
-		canDie = true;
 		canAnim = true;
 	}
 
@@ -590,14 +590,15 @@ public partial class Character : CharacterBody2D
 	{
 		camera.Call("Shake", 20f);
 		dieAnim.Play("Die");
+		canDie = false;
 		SetProcess(false);
 		SetPhysicsProcess(false);
-		canDie = false;
 	}
 	void DieFinished(string animName)
 	{
 		if (animName == "Die")
 		{
+			canDie = true;
 			GlobalPosition = spawnPos;
             velocity = Vector2.Zero;
 			Velocity = Vector2.Zero;
