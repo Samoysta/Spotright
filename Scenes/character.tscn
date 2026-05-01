@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
-size = Vector2(13.7, 29.7)
+size = Vector2(14, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g2gg"]
 atlas = ExtResource("5_reotu")
@@ -366,7 +366,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
-size = Vector2(4, 27)
+size = Vector2(4, 25)
 
 [sub_resource type="Curve" id="Curve_owm7s"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -530,6 +530,7 @@ gradient = SubResource("Gradient_ejsiy")
 [node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "rightWallEffect", "leftWallEffect", "dieAnim", "anim")]
 z_index = 1
 collision_layer = 2
+safe_margin = 0.001
 script = ExtResource("1_ushfy")
 Speed = 250.0
 JumpVelocity = 370.0
