@@ -1,3 +1,4 @@
+ShapeCast2D
 Node2D
 CPUParticles2D
 AnimationPlayer
@@ -11,4 +12,3 @@ CharacterBody2D
 AnimatedSprite2D
 StaticBody2D
 Polygon2D
-ShapeCast2D

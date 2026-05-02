@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b4gnhuu12i6cg" path="res://Scripts/bullets/Wepaon1Bullet.cs" id="1_nevk8"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nevk8"]
+size = Vector2(5.05, 20)
+
 [sub_resource type="Curve" id="Curve_0uswi"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.6768643), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -16,7 +19,8 @@ ray = NodePath("RayCast2D")
 line = NodePath("Line2D")
 speed = 1000.0
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1302644705]
+[node name="RayCast2D" type="ShapeCast2D" parent="." unique_id=1266736009]
+shape = SubResource("RectangleShape2D_nevk8")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=798946049]
 points = PackedVector2Array(0, 0, 0, 0)

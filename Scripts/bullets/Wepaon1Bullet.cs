@@ -3,7 +3,7 @@ using System;
 
 public partial class Wepaon1Bullet : Node2D
 {
-	[Export] RayCast2D ray;
+	[Export] ShapeCast2D ray;
 	[Export] Line2D line;
 	[Export] float speed;
 	Character character;
@@ -22,7 +22,7 @@ public partial class Wepaon1Bullet : Node2D
 		line.SetPointPosition(1,new Vector2(velocity,0));
 		if (ray.IsColliding())
 		{
-			Node2D body = (Node2D)ray.GetCollider();
+			Node2D body = (Node2D)ray.GetCollider(0);
 			if (!(body is Character))
 			{
 				if (body.HasMethod("TakeDamage"))
@@ -60,7 +60,7 @@ public partial class Wepaon1Bullet : Node2D
 	public void spawnEffect()
 	{
 		Effect ef = character.hitEffects.Dequeue();
-		ef.GlobalPosition = ray.GetCollisionPoint();
+		ef.GlobalPosition = ray.GetCollisionPoint(0);
 		ef.GlobalRotation = GlobalRotation;
 		ef.setOn();
 		character.hitEffects.Enqueue(ef);

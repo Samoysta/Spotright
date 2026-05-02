@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1777731595
+::res://::1777736229
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1777727524
@@ -24,8 +24,8 @@ Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::
 character.tscn::PackedScene::1771483939617051374::1777729632::0::1::::<><><>0<>0<><>::uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://bc4papdi8t7ub::::res://Scenes/Effects/hit_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://8ekhggm5wkym::::res://Assets/Character1-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
 check_point.tscn::PackedScene::3761001721822499150::1776693200::0::1::::<><><>0<>0<><>::uid://yarlnvufhowr::::res://Scripts/CheckPoint.cs
 test_scene.tscn::PackedScene::8267793320165344159::1777727159::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://bxxj4r37kfiv8::::res://Scenes/interactiveItems/jump_pad.tscn<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn<>uid://cehwv5je66iyk::::res://Scenes/Items/weapon_1.tscn
-::res://Scenes/bullets/::1777703173
-wepaon_1_bullet.tscn::PackedScene::6134926437393305816::1777703173::0::1::::<><><>0<>0<><>::uid://b4gnhuu12i6cg::::res://Scripts/bullets/Wepaon1Bullet.cs
+::res://Scenes/bullets/::1777732294
+wepaon_1_bullet.tscn::PackedScene::6134926437393305816::1777732294::0::1::::<><><>0<>0<><>::uid://b4gnhuu12i6cg::::res://Scripts/bullets/Wepaon1Bullet.cs
 ::res://Scenes/DamageItem/::1777492924
 circle_boys.tscn::PackedScene::3091091176719707713::1776626389::0::1::::<><><>0<>0<><>::uid://me47iktoq02o::::res://Scripts/DamageItems/CircleBoys.cs<>uid://b86dib6ouotg0::::res://Assets/CircleBoys.png
 falleble_stone.tscn::PackedScene::7608334367691874589::1777492924::0::1::::<><><>0<>0<><>::uid://chwgfci1eod6i::::res://Assets/fallebleStone.png<>uid://bw64ym6ssd7ro::::res://Scripts/DamageItems/FallebleStone.cs<>uid://fq1gxc404v3w::::res://Assets/SmokeEffect.png
