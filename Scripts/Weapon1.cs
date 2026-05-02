@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Weapon1 : Area2D
 {
@@ -11,14 +12,24 @@ public partial class Weapon1 : Area2D
 	[Export] float shootCoolDown;
 	[Export] PackedScene bul1;
 	[Export] Node2D bulletPos;
+	[Export] Node2D effectPos;
 	float shootcd;
 	Vector2 pos;
 	Sprite2D gunSprite;
+	[Export] PackedScene fireEf;
+	public Queue<Effect> fireEfs = new();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		gunSprite = GetNode<Sprite2D>("Sprite2D");
+		
+		for (int i = 0; i < 7; i++)
+		{
+			Effect ef = (Effect)fireEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child",ef);
+			fireEfs.Enqueue(ef);
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -132,5 +143,11 @@ public partial class Weapon1 : Area2D
 			bul.Init(character);
 			bul.setOn();
 		}
+
+		Effect ef = fireEfs.Dequeue();
+		ef.GlobalPosition = effectPos.GlobalPosition;
+		ef.GlobalRotation = GlobalRotation;
+		ef.setOn();
+		fireEfs.Enqueue(ef);
 	}
 }

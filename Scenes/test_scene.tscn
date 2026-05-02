@@ -61,13 +61,16 @@ texture = ExtResource("2_r5l72")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_r5l72")
 
+[sub_resource type="Environment" id="Environment_oho3u"]
+background_mode = 3
+glow_enabled = true
+
 [node name="testScene" type="Node2D" unique_id=676339024]
 
 [node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("camera") instance=ExtResource("1_3dogw")]
 camera = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
-zoom = Vector2(3, 3)
 limit_left = -64
 limit_top = -400
 limit_right = 1104
@@ -138,3 +141,7 @@ position = Vector2(430, -48)
 [node name="weapon1" parent="." unique_id=1832651126 node_paths=PackedStringArray("cam") instance=ExtResource("8_oho3u")]
 position = Vector2(965, -112)
 cam = NodePath("../Camera2D")
+ShootAmount = 1000
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1479765730]
+environment = SubResource("Environment_oho3u")

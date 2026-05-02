@@ -30,6 +30,7 @@ public partial class Wepaon1Bullet : Node2D
 					body.Call("TakeDamage");
 				}
 				setOff();
+				spawnEffect();
 			}
 		}
 	}
@@ -54,5 +55,14 @@ public partial class Wepaon1Bullet : Node2D
 		Visible = true;
 		SetProcess(true);
 		SetPhysicsProcess(true);
+	}
+
+	public void spawnEffect()
+	{
+		Effect ef = character.hitEffects.Dequeue();
+		ef.GlobalPosition = ray.GetCollisionPoint();
+		ef.GlobalRotation = GlobalRotation;
+		ef.setOn();
+		character.hitEffects.Enqueue(ef);
 	}
 }

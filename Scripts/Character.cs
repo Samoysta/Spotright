@@ -28,6 +28,7 @@ public partial class Character : CharacterBody2D
 	[Export] float dashSpeed;
 	[Export] public float dashCoolDown;
 	[Export] PackedScene dashHaloEf;
+	[Export] PackedScene hitEf;
 	public float dashCD;
 	public bool isDashing;
 	public bool canDie = true;
@@ -43,6 +44,7 @@ public partial class Character : CharacterBody2D
 	public Queue<Effect> jumpEfs = new ();
 	public Queue<Effect> dashEfs = new ();
 	public Queue<Effect> dashHaloEfs = new ();
+	public Queue<Effect> hitEffects = new ();
 	public Queue<Wepaon1Bullet> bul1s = new();
 	float dir;
 	public bool isJumping;
@@ -72,6 +74,13 @@ public partial class Character : CharacterBody2D
 			GetTree().CurrentScene.CallDeferred("add_child", def);
 			def.Scale = new Vector2(1,1);
 			dashEfs.Enqueue(def);
+		}
+		for (int i = 0; i < 6; i++)
+		{
+			Effect ef = (Effect)hitEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child", ef);
+			ef.Scale = new Vector2(1,1);
+			hitEffects.Enqueue(ef);
 		}
 		for (int i = 0; i < 12; i++)
 		{

@@ -4,12 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cuxu20j3t8pt" path="res://Scenes/Effects/jump_effect.tscn" id="2_owm7s"]
 [ext_resource type="PackedScene" uid="uid://ba16wiucm6jo7" path="res://Scenes/Effects/dash_halo_effect.tscn" id="4_a5ess"]
 [ext_resource type="PackedScene" uid="uid://bwiuag338h2dt" path="res://Scenes/Effects/dash_effect.tscn" id="5_2mse5"]
+[ext_resource type="PackedScene" uid="uid://bc4papdi8t7ub" path="res://Scenes/Effects/hit_effect.tscn" id="5_a5ess"]
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 [ext_resource type="Texture2D" uid="uid://8ekhggm5wkym" path="res://Assets/Character1-Sheet.png" id="5_reotu"]
 [ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
-size = Vector2(14, 30)
+size = Vector2(13.6, 29.6)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g2gg"]
 atlas = ExtResource("5_reotu")
@@ -549,6 +550,7 @@ leftWallEffect = NodePath("LeftWallEffect")
 dashSpeed = 600.0
 dashCoolDown = 0.4
 dashHaloEf = ExtResource("4_a5ess")
+hitEf = ExtResource("5_a5ess")
 dashDur = 0.2
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
 anim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/AnimationPlayer")
