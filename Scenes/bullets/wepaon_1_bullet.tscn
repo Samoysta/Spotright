@@ -10,7 +10,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.6768643), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_nevk8"]
-colors = PackedColorArray(2.3422987, 2.3422987, 2.3422987, 1, 2.067836, 2.067836, 0, 1)
+colors = PackedColorArray(2.454227, 2.454227, 2.454227, 1, 2.454227, 2.454227, 0, 1)
 
 [node name="wepaon1bullet" type="Node2D" unique_id=836278390 node_paths=PackedStringArray("ray", "line")]
 z_index = 1

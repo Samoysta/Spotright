@@ -14,6 +14,7 @@ config/name="Skiper"
 run/main_scene="uid://dp18l3lq6sar4"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 run/max_fps=60
+boot_splash/image="uid://2iwywtgg12w0"
 config/icon="res://icon.svg"
 
 [display]
@@ -22,10 +23,15 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=3
 window/stretch/mode="viewport"
+window/per_pixel_transparency/allowed=true
 
 [dotnet]
 
 project/assembly_name="Skiper"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [global_group]
 
@@ -81,5 +87,5 @@ viewport/hdr_2d=true
 environment/glow/upscale_mode=0
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
-2d/size/viewport_height=1080
-2d/size/viewport_width=960
+2d/size/viewport_height=640
+2d/size/viewport_width=360

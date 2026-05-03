@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cme2g365d40uu"]
+
+[ext_resource type="Script" uid="uid://drk61swkx40jl" path="res://Scripts/Plants/Plant1.cs" id="1_bj5rk"]
+[ext_resource type="Texture2D" uid="uid://dpn7vy6djqmef" path="res://Assets/Plant2.png" id="1_hkdra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkdra"]
+size = Vector2(23, 23)
+
+[node name="Plant2" type="Area2D" unique_id=2008575144 node_paths=PackedStringArray("plantSprite")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_bj5rk")
+plantSprite = NodePath("Sprite2D")
+tweener = 4
+dur = 2.0
+isCeiling = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=191002549]
+texture = ExtResource("1_hkdra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=877280962]
+position = Vector2(-0.5, 11.5)
+shape = SubResource("RectangleShape2D_hkdra")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1911630455]
+position = Vector2(-1, 15)
+rect = Rect2(-22, -23, 46, 42)
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnScreenEntered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnScreenExited"]

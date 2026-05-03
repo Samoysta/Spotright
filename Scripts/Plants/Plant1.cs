@@ -7,6 +7,7 @@ public partial class Plant1 : Area2D
 	[Export] Sprite2D plantSprite;
 	[Export] Tween.TransitionType tweener;
 	[Export] float dur;
+	[Export] bool isCeiling;
 	Tween tween;
 	bool isShaking;
 	// Called when the node enters the scene tree for the first time.
@@ -54,11 +55,25 @@ public partial class Plant1 : Area2D
 			CharacterBody2D character = (CharacterBody2D)body;
 			if (character.Velocity.X > 0)
 			{
-				dir = 1;
+				if (isCeiling)
+				{
+					dir = -1;
+				}
+				else
+				{
+					dir = 1;
+				}
 			}
 			else if (character.Velocity.X < 0)
 			{
-				dir = -1;
+				if (isCeiling)
+				{
+					dir = 1;
+				}
+				else
+				{
+					dir = -1;
+				}
 			}
 			tween?.Kill();
 			tween = CreateTween();
