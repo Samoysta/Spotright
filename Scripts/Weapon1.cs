@@ -6,6 +6,10 @@ public partial class Weapon1 : Area2D
 {
 	Character character;
 	bool selected;
+	bool canSelect;
+	Vector2 firstPos;
+	float spawnCoolDown;
+	int shootA;
 	[Export] Camera2d cam;
 	[Export] int ShootAmount;
 	[Export] Vector2 weaponMaxPos;
@@ -13,18 +17,23 @@ public partial class Weapon1 : Area2D
 	[Export] PackedScene bul1;
 	[Export] Node2D bulletPos;
 	[Export] Node2D effectPos;
+	[Export] AnimationPlayer anim;
 	float shootcd;
 	Vector2 pos;
 	Sprite2D gunSprite;
 	[Export] PackedScene fireEf;
 	public Queue<Effect> fireEfs = new();
+	Tween t;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		shootA = ShootAmount;
+		canSelect = true;
+		firstPos = GlobalPosition;
 		gunSprite = GetNode<Sprite2D>("Sprite2D");
 		
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			Effect ef = (Effect)fireEf.Instantiate();
 			GetTree().CurrentScene.CallDeferred("add_child",ef);
@@ -35,6 +44,17 @@ public partial class Weapon1 : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (spawnCoolDown > 0)
+		{
+			spawnCoolDown -= (float)delta;
+		}
+		else
+		{
+			if (Scale.Length() < 0.01f)
+			{
+				open();
+			}
+		}
 		if (selected)
 		{
 			if (shootcd > 0)
@@ -106,22 +126,53 @@ public partial class Weapon1 : Area2D
 				{
 					Fire(i);
 				}
+				fireEffect();
 			}
 			if (ShootAmount <= 0 || !character.canDie)
 			{
-				QueueFree();
+				close();
 			}
 		}
 		
+	}
+
+	void close()
+	{
+		CallDeferred("reparent", GetTree().CurrentScene);
+		t?.Kill();
+		t = CreateTween();
+		t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
+		t.TweenProperty(this, "scale", Vector2.Zero, 0.5f);
+		selected = false;
+		spawnCoolDown = 5f;
+	}
+
+	void open()
+	{
+		ShootAmount = shootA;
+		anim.Play("RESET");
+		GlobalPosition = firstPos;
+		GlobalRotationDegrees = 0;
+		gunSprite.FlipV = false;
+		t?.Kill();
+		t = CreateTween();
+		t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
+		t.TweenProperty(this, "scale", new Vector2(1,1), 0.8f);
+		canSelect = true;
 	}
 
 	void BodyEntered2D(Node2D body)
 	{
 		if (body is Character)
 		{
-			character = (Character)body;
-			selected = true;
-			CallDeferred("reparent", character);
+			if (canSelect)
+			{
+				anim.Play("queue");
+				character = (Character)body;
+				selected = true;
+				CallDeferred("reparent", character);
+				canSelect = false;
+			}
 		}
 	}
 
@@ -143,7 +194,10 @@ public partial class Weapon1 : Area2D
 			bul.Init(character);
 			bul.setOn();
 		}
+	}
 
+	void fireEffect()
+	{
 		Effect ef = fireEfs.Dequeue();
 		ef.GlobalPosition = effectPos.GlobalPosition;
 		ef.GlobalRotation = GlobalRotation;

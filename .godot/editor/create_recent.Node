@@ -1,9 +1,9 @@
+AnimationPlayer
+Sprite2D
 ShapeCast2D
 Node2D
 CPUParticles2D
-AnimationPlayer
 Line2D
-Sprite2D
 WorldEnvironment
 RayCast2D
 Area2D

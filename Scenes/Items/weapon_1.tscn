@@ -4,11 +4,174 @@
 [ext_resource type="Script" uid="uid://dahuwpqippvjt" path="res://Scripts/Weapon1.cs" id="1_ric17"]
 [ext_resource type="PackedScene" uid="uid://ctn2lvp5n50qu" path="res://Scenes/bullets/wepaon_1_bullet.tscn" id="2_b75o4"]
 [ext_resource type="PackedScene" uid="uid://dt3am85d7pvnu" path="res://Scenes/Effects/fire_effect.tscn" id="4_w0fot"]
+[ext_resource type="Texture2D" uid="uid://1ttp8wcfgwln" path="res://Assets/square.png" id="5_yf1aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b74"]
 size = Vector2(27, 8)
 
-[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos")]
+[sub_resource type="Animation" id="Animation_yf1aa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("square:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vjohv"]
+resource_name = "Turn"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("square:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5707964]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63e2x"]
+_data = {
+&"RESET": SubResource("Animation_yf1aa"),
+&"Turn": SubResource("Animation_vjohv")
+}
+
+[sub_resource type="Animation" id="Animation_63e2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("square:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("square:self_modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("square:self_modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("square:self_modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("square:self_modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ulpxk"]
+resource_name = "queue"
+length = 0.23333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("square:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22435783),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("square:self_modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 1, -0.03888889, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("square:self_modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 1, -0.03888889, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("square:self_modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 1, -0.03888889, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("square:self_modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 0, -0.03888889, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7x64"]
+_data = {
+&"RESET": SubResource("Animation_63e2x"),
+&"queue": SubResource("Animation_ulpxk")
+}
+
+[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ric17")
@@ -18,6 +181,7 @@ shootCoolDown = 0.2
 bul1 = ExtResource("2_b75o4")
 bulletPos = NodePath("bulletPos")
 effectPos = NodePath("effectPos")
+anim = NodePath("AnimationPlayer2")
 fireEf = ExtResource("4_w0fot")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=355800990]
@@ -32,5 +196,18 @@ position = Vector2(8, 0)
 
 [node name="effectPos" type="Node2D" parent="." unique_id=1009167323]
 position = Vector2(19, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=504464263]
+libraries/ = SubResource("AnimationLibrary_63e2x")
+autoplay = &"Turn"
+
+[node name="square" type="Sprite2D" parent="." unique_id=1283016935]
+modulate = Color(2.1168277, 2.1168277, 2.1168277, 1)
+z_index = 4
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_yf1aa")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=514898849]
+libraries/ = SubResource("AnimationLibrary_c7x64")
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
