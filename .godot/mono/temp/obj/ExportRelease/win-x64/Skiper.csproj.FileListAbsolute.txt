@@ -194,3 +194,6 @@ C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\obj\ExportRelease\win-x64\
 C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\obj\ExportRelease\win-x64\refint\Skiper.dll
 C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\obj\ExportRelease\win-x64\Skiper.genruntimeconfig.cache
 C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\obj\ExportRelease\win-x64\ref\Skiper.dll
+C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\bin\ExportRelease\win-x64\Skiper.pdb
+C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\obj\ExportRelease\win-x64\Skiper.sourcelink.json
+C:\Users\LENOVO\Dev\GitHub\Spotright\.godot\mono\temp\obj\ExportRelease\win-x64\Skiper.pdb

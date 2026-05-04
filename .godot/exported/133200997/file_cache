@@ -1,4 +1,4 @@
-res://Scenes/bullets/wepaon_1_bullet.tscn::0e87e98789f6b3ec9c77c18cf90f7ab5::1777736419::res://.godot/exported/133200997/export-1c9f423fa4f952b2e60e35bb357b856f-wepaon_1_bullet.scn
+res://Scenes/bullets/wepaon_1_bullet.tscn::897dfa2a50b6e7e241746c55a7d1ec42::1777832623::res://.godot/exported/133200997/export-1c9f423fa4f952b2e60e35bb357b856f-wepaon_1_bullet.scn
 res://Scenes/DamageItem/circle_boys.tscn::34b68bea644895a2aefb27aeb4c96cb1::1776626389::res://.godot/exported/133200997/export-dfa152e197b9cb92756cc774e5d6de9a-circle_boys.scn
 res://Scenes/DamageItem/falleble_stone.tscn::3b76efec5fe2510431d3c7c9a972c528::1777492924::res://.godot/exported/133200997/export-a44b533a912c211068808d5e0c93ebd4-falleble_stone.scn
 res://Scenes/Effects/dash_effect.tscn::fafeb282ced286e5b808a87454363e29::1777493707::res://.godot/exported/133200997/export-e43f0ad1bb3eb9772cd5e1841f0691f8-dash_effect.scn
@@ -8,7 +8,9 @@ res://Scenes/Effects/hit_effect.tscn::6fec560a9487835149fd8147fca052db::17777081
 res://Scenes/Effects/jump_effect.tscn::bb06a9d275b380ea142a366770b4c32c::1777316913::res://.godot/exported/133200997/export-2188193f48870bbaceac3fcb41f7b542-jump_effect.scn
 res://Scenes/Enviorement/plant_1.tscn::29f3e5c69fcf18203117a43b836d3772::1776886467::res://.godot/exported/133200997/export-bb76c5f2544bda83f976ca47cf91376c-plant_1.scn
 res://Scenes/interactiveItems/jump_pad.tscn::4c2455bfee28c9e1e407da4656b41f57::1777562238::res://.godot/exported/133200997/export-de3d11b314b6a8e9e5f7c4b0712930e4-jump_pad.scn
-res://Scenes/Items/weapon_1.tscn::3d286a24934236c0934dba08d2fdf3b8::1777807051::res://.godot/exported/133200997/export-dd2596f6317408e02dbbfc312366b1f2-weapon_1.scn
-res://Scenes/character.tscn::beb4a31ceef38341dd1dc9fd237a664e::1777729632::res://.godot/exported/133200997/export-78ec84556dfaaee07f5c3febee60df92-character.scn
+res://Scenes/Items/weapon_1.tscn::3d286a24934236c0934dba08d2fdf3b8::1777807437::res://.godot/exported/133200997/export-dd2596f6317408e02dbbfc312366b1f2-weapon_1.scn
+res://Scenes/character.tscn::beb4a31ceef38341dd1dc9fd237a664e::1777905433::res://.godot/exported/133200997/export-78ec84556dfaaee07f5c3febee60df92-character.scn
 res://Scenes/check_point.tscn::70a88742050300c1737d1ba4da677eeb::1776693200::res://.godot/exported/133200997/export-85a8a87288329ed978f4eceeb86f6fa4-check_point.scn
-res://Scenes/test_scene.tscn::a8d7b9639f0730aa8c5a503cb5e35e6e::1777792956::res://.godot/exported/133200997/export-f355e2b0241559ee806d6869746e0f8a-test_scene.scn
+res://Scenes/test_scene.tscn::8c825e1f31787276375db657660d5530::1777908584::res://.godot/exported/133200997/export-f355e2b0241559ee806d6869746e0f8a-test_scene.scn
+res://Scenes/Enviorement/plant_2.tscn::fa202dcc5d146fe60dea0e34d9bdd30c::1777830427::res://.godot/exported/133200997/export-0f88bf693bd36b8ccdf02fef3ac2923e-plant_2.scn
+res://Scenes/Enviorement/rope.tscn::05cecbc336616455e81ecb17d510588c::1777907641::res://.godot/exported/133200997/export-280f4e2288431180b7598701e680e241-rope.scn

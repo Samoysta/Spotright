@@ -173,7 +173,10 @@ public partial class Character : CharacterBody2D
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
-			velocity += Gravity * GetGravity() * (float)delta;
+			if (velocity.Y > -JumpVelocity * 2)
+			{
+				velocity += Gravity * GetGravity() * (float)delta;	
+			}
 			if (isGrounded)
 			{
 				isGrounded = false;
@@ -429,7 +432,6 @@ public partial class Character : CharacterBody2D
 				isDashing = false;
 			}
 		}
-		velocity.Y = Mathf.Clamp(velocity.Y,-99999,JumpVelocity * 2);
 		Velocity = velocity;
 		MoveAndSlide();
 		//Çarpışma kontrol
