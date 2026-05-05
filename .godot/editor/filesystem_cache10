@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1777924317
+::res://::1777989965
 export_presets.cfg::TextFile::-1::1777909002::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
@@ -21,13 +21,14 @@ Plant2.png::CompressedTexture2D::8240913370491412205::1777829616::1777829617::1:
 SmokeEffect.png::CompressedTexture2D::385564831309338682::1776697084::1776697085::1::::<><><>0<>0<>8d5cc3b7e41e7d027dd885ad951bb5f6<>res://.godot/imported/SmokeEffect.png-1ecbebf6a46a248ffa20b13df76dd077.ctex::
 square.png::CompressedTexture2D::1865315289041180059::1777789039::1777789039::1::::<><><>0<>0<>3db2e247f621bc364ed147b590053607<>res://.godot/imported/square.png-61c4a753b7128eae57d99b6156842b1d.ctex::
 weapon1.png::CompressedTexture2D::5329501407871617636::1777561345::1777561345::1::::<><><>0<>0<>981b8f6d68fdf1d5c11064bd4c1bb7d0<>res://.godot/imported/weapon1.png-d5f15c9b10f8190a9a31f8eaad445399.ctex::
-::res://Assets/Tilemaps/::1777831797
+::res://Assets/Tilemaps/::1777991965
 are1Grounds.png::CompressedTexture2D::6260335864247839012::1777831789::1777831797::1::::<><><>0<>0<>f6b141e208695609aa6a1cc15c612555<>res://.godot/imported/are1Grounds.png-bf2f4a82c46dd781629e7b592564f274.ctex::
 Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::::<><><>0<>0<>082115d3df84b40d9c2bf32d86a33787<>res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex::
-::res://Scenes/::1777923809
+area1bgTiles.png::CompressedTexture2D::2931171889926610456::1777991965::1777991965::1::::<><><>0<>0<>c8874b15a99f2b28c918b6012cddfef3<>res://.godot/imported/area1bgTiles.png-7218fde698ea49513ce729a74ea19610.ctex::
+::res://Scenes/::1777990488
 character.tscn::PackedScene::1771483939617051374::1777922068::0::1::::<><><>0<>0<><>::uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://bc4papdi8t7ub::::res://Scenes/Effects/hit_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://8ekhggm5wkym::::res://Assets/Character1-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
 check_point.tscn::PackedScene::3761001721822499150::1776693200::0::1::::<><><>0<>0<><>::uid://yarlnvufhowr::::res://Scripts/CheckPoint.cs
-test_scene.tscn::PackedScene::8267793320165344159::1777923809::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://cvgs21q323s3u::::res://Assets/Tilemaps/are1Grounds.png<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn<>uid://cehwv5je66iyk::::res://Scenes/Items/weapon_1.tscn<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://cme2g365d40uu::::res://Scenes/Enviorement/plant_2.tscn<>uid://bxxj4r37kfiv8::::res://Scenes/interactiveItems/jump_pad.tscn
+test_scene.tscn::PackedScene::8267793320165344159::1777990488::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://cvgs21q323s3u::::res://Assets/Tilemaps/are1Grounds.png<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn<>uid://cehwv5je66iyk::::res://Scenes/Items/weapon_1.tscn<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://cme2g365d40uu::::res://Scenes/Enviorement/plant_2.tscn<>uid://bxxj4r37kfiv8::::res://Scenes/interactiveItems/jump_pad.tscn
 ::res://Scenes/bullets/::1777921686
 wepaon_1_bullet.tscn::PackedScene::6134926437393305816::1777921686::0::1::::<><><>0<>0<><>::uid://b4gnhuu12i6cg::::res://Scripts/bullets/Wepaon1Bullet.cs
 ::res://Scenes/DamageItem/::1777492924
@@ -47,8 +48,8 @@ jump_pad.tscn::PackedScene::4048843954288340435::1777562238::0::1::::<><><>0<>0<
 ::res://Scenes/Items/::1777807437
 weapon_1.tscn::PackedScene::5069422251557755778::1777807437::0::1::::<><><>0<>0<><>::uid://ch6wdyvjh5jaa::::res://Assets/weapon1.png<>uid://dahuwpqippvjt::::res://Scripts/Weapon1.cs<>uid://ctn2lvp5n50qu::::res://Scenes/bullets/wepaon_1_bullet.tscn<>uid://dt3am85d7pvnu::::res://Scenes/Effects/fire_effect.tscn<>uid://1ttp8wcfgwln::::res://Assets/square.png
 ::res://Scripts/::1777907619
-Camera2d.cs::CSharpScript::1746993918707267049::1777905006::0::1::::<>Camera2D<><>0<>0<><>::
-Character.cs::CSharpScript::5646290253741580454::1777904127::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Camera2d.cs::CSharpScript::1746993918707267049::1777990105::0::1::::<>Camera2D<><>0<>0<><>::
+Character.cs::CSharpScript::5646290253741580454::1777990696::0::1::::<>CharacterBody2D<><>0<>0<><>::
 CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<><>0<>0<><>::
 Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
 GameManager.cs::CSharpScript::8499533869409038686::1776624113::0::1::::<>Node<><>0<>0<><>::

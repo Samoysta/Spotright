@@ -1,1 +1,12 @@
+res://Scripts/Camera2d.cs
+res://Scripts/interactiveItems/JumpPad.cs
+res://Scripts/CheckPoint.cs
+res://Scripts/bullets/Wepaon1Bullet.cs
+res://Scripts/Weapon1.cs
+res://Scripts/DamageItems/FallebleStone.cs
+res://Scripts/Plants/Plant1.cs
+res://Scripts/DamageItems/CircleBoys.cs
+res://Scripts/Effect.cs
+res://Scripts/Character.cs
+res://Scripts/GameManager.cs
 res://Scenes/test_scene.tscn

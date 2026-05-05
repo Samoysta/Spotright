@@ -1,6 +1,9 @@
+Parallax2D
+ParallaxBackground
+ParallaxLayer
+TileMapLayer
 Node2D
 Line2D
-TileMapLayer
 VisibleOnScreenEnabler2D
 VisibleOnScreenNotifier2D
 CollisionShape2D
@@ -9,6 +12,3 @@ Area2D
 AnimationPlayer
 ShapeCast2D
 CPUParticles2D
-WorldEnvironment
-RayCast2D
-CharacterBody2D
