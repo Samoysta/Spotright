@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1777989965
+::res://::1778007466
 export_presets.cfg::TextFile::-1::1777909002::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
@@ -25,10 +25,10 @@ weapon1.png::CompressedTexture2D::5329501407871617636::1777561345::1777561345::1
 are1Grounds.png::CompressedTexture2D::6260335864247839012::1777831789::1777831797::1::::<><><>0<>0<>f6b141e208695609aa6a1cc15c612555<>res://.godot/imported/are1Grounds.png-bf2f4a82c46dd781629e7b592564f274.ctex::
 Area1.png::CompressedTexture2D::4999161968456562482::1774371688::1774371688::1::::<><><>0<>0<>082115d3df84b40d9c2bf32d86a33787<>res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex::
 area1bgTiles.png::CompressedTexture2D::2931171889926610456::1777991965::1777991965::1::::<><><>0<>0<>c8874b15a99f2b28c918b6012cddfef3<>res://.godot/imported/area1bgTiles.png-7218fde698ea49513ce729a74ea19610.ctex::
-::res://Scenes/::1777990488
+::res://Scenes/::1777994546
 character.tscn::PackedScene::1771483939617051374::1777922068::0::1::::<><><>0<>0<><>::uid://cmpdttlitf0fa::::res://Scripts/Character.cs<>uid://cuxu20j3t8pt::::res://Scenes/Effects/jump_effect.tscn<>uid://ba16wiucm6jo7::::res://Scenes/Effects/dash_halo_effect.tscn<>uid://bwiuag338h2dt::::res://Scenes/Effects/dash_effect.tscn<>uid://bc4papdi8t7ub::::res://Scenes/Effects/hit_effect.tscn<>uid://dp07lj0j03xby::::res://Assets/CharacterDieEffect-Sheet.png<>uid://8ekhggm5wkym::::res://Assets/Character1-Sheet.png<>uid://du7u54bw6euu6::::res://Assets/CharacterWhite.png
 check_point.tscn::PackedScene::3761001721822499150::1776693200::0::1::::<><><>0<>0<><>::uid://yarlnvufhowr::::res://Scripts/CheckPoint.cs
-test_scene.tscn::PackedScene::8267793320165344159::1777990488::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://cvgs21q323s3u::::res://Assets/Tilemaps/are1Grounds.png<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn<>uid://cehwv5je66iyk::::res://Scenes/Items/weapon_1.tscn<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://cme2g365d40uu::::res://Scenes/Enviorement/plant_2.tscn<>uid://bxxj4r37kfiv8::::res://Scenes/interactiveItems/jump_pad.tscn
+test_scene.tscn::PackedScene::8267793320165344159::1777994546::0::1::::<><><>0<>0<><>::uid://0iec1n5qwps5::::res://Scenes/character.tscn<>uid://y5iy8g2iaqnp::::res://Scripts/Camera2d.cs<>uid://cdhvp5efkxh6a::::res://Assets/Tilemaps/Area1.png<>uid://bkbl2485nfyon::::res://Scenes/DamageItem/circle_boys.tscn<>uid://cvgs21q323s3u::::res://Assets/Tilemaps/are1Grounds.png<>uid://b61l4unlje0ta::::res://Scenes/Enviorement/plant_1.tscn<>uid://bh048csbvasgu::::res://Assets/Tilemaps/area1bgTiles.png<>uid://dgnsfjxt3x2tt::::res://Scenes/DamageItem/falleble_stone.tscn<>uid://cehwv5je66iyk::::res://Scenes/Items/weapon_1.tscn<>uid://btt4fcdfixipy::::res://Scenes/check_point.tscn<>uid://cme2g365d40uu::::res://Scenes/Enviorement/plant_2.tscn<>uid://bxxj4r37kfiv8::::res://Scenes/interactiveItems/jump_pad.tscn
 ::res://Scenes/bullets/::1777921686
 wepaon_1_bullet.tscn::PackedScene::6134926437393305816::1777921686::0::1::::<><><>0<>0<><>::uid://b4gnhuu12i6cg::::res://Scripts/bullets/Wepaon1Bullet.cs
 ::res://Scenes/DamageItem/::1777492924

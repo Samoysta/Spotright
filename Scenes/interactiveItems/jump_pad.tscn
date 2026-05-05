@@ -7,13 +7,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hr5l2"]
 size = Vector2(30, 8)
 
-[node name="JumpPad" type="Area2D" unique_id=1182740953 node_paths=PackedStringArray("jumpPad", "jumpPadChains")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7128u"]
+size = Vector2(24, 6)
+
+[node name="JumpPad" type="Area2D" unique_id=1182740953 node_paths=PackedStringArray("jumpPad", "jumpPadChains", "staticCollision")]
 collision_mask = 3
 script = ExtResource("1_7128u")
 jumpPad = NodePath("jumpPad")
 jumpPadChains = NodePath("jumpPad/Polygon2D/jumpPadChains")
 jumpVel = 700.0
 duration = 0.5
+staticCollision = NodePath("StaticBody2D/CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=873054715]
 position = Vector2(0, -4)
@@ -31,5 +35,11 @@ uv = PackedVector2Array(-15, -7, -15, -1, 15, -1, 15, -7)
 [node name="jumpPadChains" type="Sprite2D" parent="jumpPad/Polygon2D" unique_id=847371320]
 position = Vector2(0, -16)
 texture = ExtResource("2_hr5l2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1836305170]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1962663997]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_7128u")
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]

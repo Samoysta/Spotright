@@ -116,8 +116,8 @@ public partial class Character : CharacterBody2D
 		}
 		
 		//WallEffects
-		rightWallEffect.Emitting = Velocity.Y > 0 && isRightWalled;
-		leftWallEffect.Emitting = Velocity.Y > 0 && isLeftWalled;
+		rightWallEffect.CallDeferred("set_emitting",Velocity.Y > 0 && isRightWalled);
+		leftWallEffect.CallDeferred("set_emitting",Velocity.Y > 0 && isLeftWalled);
 		//Wall Checks
 		if (rightWallAmount > 0)
 		{
@@ -188,6 +188,10 @@ public partial class Character : CharacterBody2D
 			if (velocity.Y < 0)
 			{
 				ct = 0;
+			}
+			if (anim.CurrentAnimation == "Fall")
+			{
+				anim.Play("RESET");
 			}
 		}
 		if (IsOnFloor())
