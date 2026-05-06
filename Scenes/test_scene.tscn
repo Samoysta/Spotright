@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cvgs21q323s3u" path="res://Assets/Tilemaps/are1Grounds.png" id="4_yglu3"]
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="5_d3awe"]
 [ext_resource type="Texture2D" uid="uid://bh048csbvasgu" path="res://Assets/Tilemaps/area1bgTiles.png" id="5_ibmi3"]
+[ext_resource type="PackedScene" uid="uid://dgnsfjxt3x2tt" path="res://Scenes/DamageItem/falleble_stone.tscn" id="9_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="9_d3awe"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="9_yglu3"]
+[ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="10_yglu3"]
 
 [sub_resource type="Gradient" id="Gradient_x033f"]
 offsets = PackedFloat32Array(1)
@@ -16,19 +18,46 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rdbpf"]
 gradient = SubResource("Gradient_x033f")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oho3u"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d3awe"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yglu3"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bwjpn"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ibmi3"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4blnk"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tnimv"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50ct6"]
 texture = ExtResource("2_r5l72")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_oho3u")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 5:0/0 = 0
+5:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4blnk")
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 0:1/0 = 0
+0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 8)
 0:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(8, 8, -8, 8, 8, -8)
 1:1/0 = 0
+1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 2:1/0 = 0
+2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
 5:1/0 = 0
+5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tnimv")
 0:2/0 = 0
 0:2/0/z_index = 1
 1:2/0 = 0
@@ -36,12 +65,16 @@ texture = ExtResource("2_r5l72")
 2:2/0 = 0
 2:2/0/z_index = 1
 1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yglu3")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 2:0/0 = 0
+2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bwjpn")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
+3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ibmi3")
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 3:1/0 = 0
+3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 8)
 3:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(8, 8, -8, 8, 8, -8)
 3:2/0 = 0
@@ -50,6 +83,7 @@ texture = ExtResource("2_r5l72")
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_hb2xm"]
+occlusion_layer_0/light_mask = 7
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_50ct6")
 
@@ -101,7 +135,7 @@ script = ExtResource("2_hb2xm")
 target = NodePath("../Character")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=595125895]
-modulate = Color(0.009775964, 0.2801442, 0.13004059, 1)
+modulate = Color(0.01171082, 0.26301283, 0.11960135, 1)
 z_index = -4
 scale = Vector2(45.34375, 26.392641)
 texture = SubResource("GradientTexture2D_rdbpf")
@@ -262,3 +296,11 @@ position = Vector2(431, -96)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1479765730]
 environment = SubResource("Environment_oho3u")
+
+[node name="FallebleStone" parent="." unique_id=1153185839 node_paths=PackedStringArray("camera") instance=ExtResource("9_bwjpn")]
+position = Vector2(576, -304)
+camera = NodePath("../Camera2D")
+
+[node name="weapon1" parent="." unique_id=1828208836 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
+position = Vector2(998, -117)
+cam = NodePath("../Camera2D")
