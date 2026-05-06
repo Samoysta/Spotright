@@ -506,7 +506,7 @@ public partial class Character : CharacterBody2D
 	public void AttemptCorrectionX(int amount)
 	{
 		float delta = (float)GetPhysicsProcessDeltaTime();
-		if (TestMove(GlobalTransform, new Vector2(velocity.X * delta, 0)))
+		if (TestMove(GlobalTransform, new Vector2(velocity.X * delta, 0)) && !IsOnFloor() && velocity.Y >= 0)
 		{
 			for (int i = 1; i <= amount * 2; i++)
 			{

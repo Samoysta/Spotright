@@ -284,7 +284,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.6, 0, 0, 0, 0.089949846, 1, -0.24087086, 0.003647089, 0.25, 0),
+"points": PackedFloat32Array(0.4, 0, 0, 0, 0.089949846, 1, -0.24087086, 0.003647089, 0.25, 0),
 "times": PackedFloat32Array(0, 0.53333336)
 }
 tracks/1/type = "bezier"
@@ -521,6 +521,15 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.12561576, 0.29802954, 0.47044334, 0.5985222)
 colors = PackedColorArray(1, 1, 1, 1, 0.46666667, 0.7764706, 1, 1, 1, 1, 1, 1, 0.46666667, 0.7764706, 1, 1, 1, 1, 1, 1)
 
+[sub_resource type="Gradient" id="Gradient_a5ess"]
+offsets = PackedFloat32Array(0, 0.69471157)
+colors = PackedColorArray(1, 1, 1, 0.7411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wbia7"]
+gradient = SubResource("Gradient_a5ess")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [sub_resource type="Gradient" id="Gradient_ejsiy"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0, 0, 0, 1)
@@ -642,6 +651,11 @@ split_scale = true
 scale_curve_x = SubResource("Curve_ejsiy")
 scale_curve_y = SubResource("Curve_2mse5")
 color_ramp = SubResource("Gradient_reotu")
+
+[node name="Ligth" type="PointLight2D" parent="." unique_id=2018140351]
+energy = 0.5
+texture = SubResource("GradientTexture2D_wbia7")
+texture_scale = 2.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
 
