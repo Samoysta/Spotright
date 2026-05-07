@@ -173,9 +173,16 @@ public partial class Character : CharacterBody2D
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
-			if (velocity.Y > -JumpVelocity * 2)
+			if (velocity.Y <= JumpVelocity * 1.5f)
 			{
-				velocity += Gravity * GetGravity() * (float)delta;	
+				if (isJumping)
+				{
+					velocity += Gravity * GetGravity() * (float)delta;
+				}
+				else
+				{
+					velocity += 1.2f * Gravity * GetGravity() * (float)delta;
+				}		
 			}
 			if (isGrounded)
 			{
