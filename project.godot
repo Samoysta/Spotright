@@ -85,8 +85,6 @@ X={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 environment/ssao/blur_passes=0
 environment/ssil/blur_passes=0
 viewport/hdr_2d=true
