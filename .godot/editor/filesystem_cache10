@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1778161991
+::res://::1778213460
 export_presets.cfg::TextFile::-1::1777909002::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
@@ -49,7 +49,7 @@ jump_pad.tscn::PackedScene::4048843954288340435::1778008194::0::1::::<><><>0<>0<
 weapon_1.tscn::PackedScene::5069422251557755778::1777807437::0::1::::<><><>0<>0<><>::uid://ch6wdyvjh5jaa::::res://Assets/weapon1.png<>uid://dahuwpqippvjt::::res://Scripts/Weapon1.cs<>uid://ctn2lvp5n50qu::::res://Scenes/bullets/wepaon_1_bullet.tscn<>uid://dt3am85d7pvnu::::res://Scenes/Effects/fire_effect.tscn<>uid://1ttp8wcfgwln::::res://Assets/square.png
 ::res://Scripts/::1777907619
 Camera2d.cs::CSharpScript::1746993918707267049::1777990105::0::1::::<>Camera2D<><>0<>0<><>::
-Character.cs::CSharpScript::5646290253741580454::1778095621::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Character.cs::CSharpScript::5646290253741580454::1778162734::0::1::::<>CharacterBody2D<><>0<>0<><>::
 CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<><>0<>0<><>::
 Effect.cs::CSharpScript::1956472281889380932::1774191321::0::1::::<>Node2D<><>0<>0<><>::
 GameManager.cs::CSharpScript::8499533869409038686::1776624113::0::1::::<>Node<><>0<>0<><>::
