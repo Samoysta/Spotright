@@ -172,7 +172,65 @@ _data = {
 &"queue": SubResource("Animation_ulpxk")
 }
 
+[sub_resource type="Animation" id="Animation_c7x64"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("square:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_7mtuy"]
+resource_name = "Shake"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.16666667, 1.0942353, 2, -0.08388196, 0, 0.08278471, 0, -1, -0.26666665, 1.718325, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5032917, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("square:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.16666667, 1.0942353, 2, -0.08388196, 0, 0.08278471, 0, -1, -0.26666665, 1.718325, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5032917, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54fwx"]
+_data = {
+&"RESET": SubResource("Animation_c7x64"),
+&"Shake": SubResource("Animation_7mtuy")
+}
+
 [node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim")]
+z_index = 4
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ric17")
@@ -206,11 +264,15 @@ autoplay = &"Turn"
 
 [node name="square" type="Sprite2D" parent="." unique_id=1283016935]
 modulate = Color(2.1168277, 2.1168277, 2.1168277, 1)
-z_index = 4
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_yf1aa")
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=514898849]
 libraries/ = SubResource("AnimationLibrary_c7x64")
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="." unique_id=345403748]
+libraries/ = SubResource("AnimationLibrary_54fwx")
+autoplay = &"Shake"
+speed_scale = 0.7
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
