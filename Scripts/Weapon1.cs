@@ -10,6 +10,9 @@ public partial class Weapon1 : Area2D
 	Vector2 firstPos;
 	float spawnCoolDown;
 	int shootA;
+	[Export] bool Golden;
+	[Export] Texture2D blueWeapon;
+	[Export] Texture2D goldenWeapon;
 	[Export] Camera2d cam;
 	[Export] int ShootAmount;
 	[Export] Vector2 weaponMaxPos;
@@ -18,6 +21,7 @@ public partial class Weapon1 : Area2D
 	[Export] Node2D bulletPos;
 	[Export] Node2D effectPos;
 	[Export] AnimationPlayer anim;
+	CollisionShape2D col;
 	float shootcd;
 	Vector2 pos;
 	Sprite2D gunSprite;
@@ -28,10 +32,18 @@ public partial class Weapon1 : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		gunSprite = GetNode<Sprite2D>("Sprite2D");
+		if (Golden)
+		{
+			gunSprite.Texture = goldenWeapon;
+		}
+		else
+		{
+			gunSprite.Texture = blueWeapon;
+		}
 		shootA = ShootAmount;
 		canSelect = true;
 		firstPos = GlobalPosition;
-		gunSprite = GetNode<Sprite2D>("Sprite2D");
 		
 		for (int i = 0; i < 10; i++)
 		{
@@ -39,6 +51,7 @@ public partial class Weapon1 : Area2D
 			GetTree().CurrentScene.CallDeferred("add_child",ef);
 			fireEfs.Enqueue(ef);
 		}
+		col = GetNode<CollisionShape2D>("CollisionShape2D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -117,7 +130,14 @@ public partial class Weapon1 : Area2D
 			{
 				if (!character.IsOnFloor())
 				{
-					character.AddForce(new Vector2(-800,0).Rotated(GlobalRotation));
+					if (Golden)
+					{
+						character.AddForce(new Vector2(-800,0).Rotated(GlobalRotation) + character.velocity);
+					}
+					else
+					{
+						character.AddForce(new Vector2(-800,0).Rotated(GlobalRotation));	
+					}
 				}
 				cam.Shake(5);
 				ShootAmount--;
@@ -136,6 +156,15 @@ public partial class Weapon1 : Area2D
 		
 	}
 
+    public override void _PhysicsProcess(double delta)
+    {
+        if (character != null)
+		{
+			col.Disabled = character.selected;
+		}
+    }
+
+
 	void close()
 	{
 		CallDeferred("reparent", GetTree().CurrentScene);
@@ -145,6 +174,7 @@ public partial class Weapon1 : Area2D
 		t.TweenProperty(this, "scale", Vector2.Zero, 0.5f);
 		selected = false;
 		spawnCoolDown = 5f;
+		character.selected = false;
 	}
 
 	void open()
@@ -167,11 +197,15 @@ public partial class Weapon1 : Area2D
 		{
 			if (canSelect)
 			{
-				anim.Play("queue");
 				character = (Character)body;
-				selected = true;
-				CallDeferred("reparent", character);
-				canSelect = false;
+				if (!character.selected)
+				{
+					anim.Play("queue");
+					selected = true;
+					CallDeferred("reparent", character);
+					canSelect = false;
+					character.selected = true;
+				}	
 			}
 		}
 	}

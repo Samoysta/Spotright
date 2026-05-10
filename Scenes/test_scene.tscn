@@ -303,3 +303,8 @@ camera = NodePath("../Camera2D")
 [node name="weapon1" parent="." unique_id=1828208836 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
 position = Vector2(998, -117)
 cam = NodePath("../Camera2D")
+
+[node name="weapon2" parent="." unique_id=420460641 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
+position = Vector2(736, -149)
+Golden = true
+cam = NodePath("../Camera2D")

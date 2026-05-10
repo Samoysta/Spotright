@@ -56,6 +56,7 @@ public partial class Character : CharacterBody2D
 	int rightWallAmount;
 	int lastDir;
 	bool canAnim;
+	public bool selected;
 
 
     public override void _Ready()
