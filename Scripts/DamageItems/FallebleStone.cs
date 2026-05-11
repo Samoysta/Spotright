@@ -37,7 +37,7 @@ public partial class FallebleStone : CharacterBody2D
 			}
 			if (falling)
 			{
-				if (!IsOnFloor())
+				if (!IsOnFloor() && vel.Y > -1000)
 				{
 					vel += GetGravity() * (float)delta;
 				}

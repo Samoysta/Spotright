@@ -9,7 +9,3 @@ res://Scripts/Character.cs
 res://Scripts/GameManager.cs
 res://Scripts/DamageItems/CircleBoys.cs
 res://Scripts/interactiveItems/JumpPad.cs
-res://Scenes/Items/weapon_1.tscn
-res://Scenes/test_scene.tscn
-res://Scenes/character.tscn
-res://Scenes/bullets/wepaon_1_bullet.tscn
