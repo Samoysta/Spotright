@@ -1,5 +1,3 @@
-res://Scenes/character.tscn
-res://Scenes/Effects/jump_effect.tscn
 res://Scripts/Character.cs
 res://Scripts/bullets/Wepaon1Bullet.cs
 res://Scripts/Weapon1.cs
@@ -11,3 +9,6 @@ res://Scripts/Effect.cs
 res://Scripts/GameManager.cs
 res://Scripts/DamageItems/CircleBoys.cs
 res://Scripts/interactiveItems/JumpPad.cs
+res://Scenes/test_scene.tscn
+res://Scenes/interactiveItems/jump_pad.tscn
+res://Scenes/character.tscn

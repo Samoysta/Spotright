@@ -118,7 +118,7 @@ public partial class Character : CharacterBody2D
 			col.CallDeferred("set_disabled",false);
 			velocity = Vector2.Zero;
 			Velocity = Vector2.Zero;
-			anim.Play("RESET");
+			anim.CallDeferred("play","RESET");
 			canDie = true;
 			isJumping = false;
 			birthTimer = -11;
@@ -258,8 +258,11 @@ public partial class Character : CharacterBody2D
 					anim.Seek(0);
 				}
 				characterSprite.Frame = 0;
-				velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
 				isGrounded = true;
+				if (Mathf.Abs(velocity.X - 0) < dashSpeed * 2)
+				{
+					velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
+				}
 			}
 			//RunEffect
 			if (Mathf.Abs(Velocity.X - 0) > 10)
@@ -357,7 +360,7 @@ public partial class Character : CharacterBody2D
 			//Run
 			if (Input.IsActionPressed("Right"))
 			{
-				if (velocity.X <= Speed)
+				if (velocity.X <= Speed * 1.3f)
 				{
 					dir = 1;
 				}
@@ -372,7 +375,7 @@ public partial class Character : CharacterBody2D
 			}
 			else if (Input.IsActionPressed("Left"))
 			{
-				if (velocity.X >= -Speed)
+				if (velocity.X >= -Speed * 1.3f)
 				{
 					dir = -1;
 				}

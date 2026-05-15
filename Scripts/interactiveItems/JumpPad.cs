@@ -23,10 +23,6 @@ public partial class JumpPad : Area2D
 		Vector2 targetPos = new Vector2(0,-16);
 		jumpPadChains.GlobalPosition = GlobalPosition + targetPos.Rotated(GlobalRotation);
 	}
-    public override void _PhysicsProcess(double delta)
-    {
-        staticCollision.Disabled = false;
-    }
 
 
 	void BodyEntered2D(Node2D body)
@@ -49,6 +45,13 @@ public partial class JumpPad : Area2D
 				t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Linear);
 				t.TweenProperty(jumpPad, "position", new Vector2(0,0), duration);
 			};
+		}
+	}
+	void BodyExited2D(Node2D body)
+	{
+		if (body is Character)
+		{
+			staticCollision.CallDeferred("set_disabled",false);
 		}
 	}
 
