@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 [ext_resource type="Texture2D" uid="uid://8ekhggm5wkym" path="res://Assets/Character1-Sheet.png" id="5_reotu"]
 [ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
+[ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(13.6, 29.6)
@@ -248,6 +249,47 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_l1rcp"]
+resource_name = "Died"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DieOrb:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DieOrb:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
 [sub_resource type="Animation" id="Animation_7iw6i"]
 resource_name = "Fall"
 length = 0.5
@@ -284,7 +326,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.4, 0, 0, 0, 0.44459304, 1, -0.24087086, 0.003647089, 0.25, 0),
+"points": PackedFloat32Array(0.4, 0, 0, 0, 0.084086716, 1, -0.26666665, -0.026896, 0.25, 0),
 "times": PackedFloat32Array(0, 0.46666667)
 }
 tracks/1/type = "bezier"
@@ -295,7 +337,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1.3, 0, 0, 0, -0.17325544, 1, -0.2742042, 0.0063613653, 0.25, 0),
+"points": PackedFloat32Array(1.3, 0, 0, 0.06666667, -0.18557465, 1, -0.06666666, 0.0045084953, 0.25, 0),
 "times": PackedFloat32Array(0, 0.46666667)
 }
 
@@ -357,10 +399,47 @@ tracks/4/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DieOrb:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DieOrb:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kq7hj"]
 _data = {
 &"Dash": SubResource("Animation_a5ess"),
+&"Died": SubResource("Animation_l1rcp"),
 &"Fall": SubResource("Animation_7iw6i"),
 &"Jump": SubResource("Animation_kq7hj"),
 &"RESET": SubResource("Animation_wbia7")
@@ -373,35 +452,9 @@ size = Vector2(4, 25)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Animation" id="Animation_ejsiy"]
-resource_name = "Birth"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/blackScreen:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.11860966, 0.53333336),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_2mse5"]
 resource_name = "Die"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -426,29 +479,38 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite:visible")
+tracks/2/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite/DieOrb:scale:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.1, 0.10305858, 1.3, -0.0091232285, -0.13333333, 0, 0, 0.8, -0.008869806, 0.08333333, 0, 0, 1.2, -0.011657458, -0.06666667, 0, 0, 1, -0.017739613, 0.033333346, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.43333334, 0.6333333)
 }
-tracks/3/type = "value"
+tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("UI/blackScreen:modulate")
+tracks/3/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite/DieOrb:scale:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.6, 0.87212986, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1.5, -0.25, 0, 0.1, -0.1141181, 0.7, -0.0091232285, 0, 0, 0, 1.3, -0.008869806, 0, 0, 0, 0.9, -0.011657458, 0, 0, 0, 1, -0.017739613, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.43333334, 0.6333333)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite/DieOrb:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_reotu"]
@@ -477,34 +539,42 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite:visible")
+tracks/2/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite/DieOrb:scale:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/3/type = "value"
+tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("UI/blackScreen:modulate")
+tracks/3/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite/DieOrb:scale:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D/body/Foot/CharacterSprite/DieOrb:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5ess"]
 _data = {
-&"Birth": SubResource("Animation_ejsiy"),
 &"Die": SubResource("Animation_2mse5"),
 &"RESET": SubResource("Animation_reotu")
 }
@@ -529,13 +599,6 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_a5ess")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Gradient" id="Gradient_ejsiy"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2mse5"]
-gradient = SubResource("Gradient_ejsiy")
 
 [node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "rightWallEffect", "leftWallEffect", "dieAnim", "anim")]
 z_index = 1
@@ -585,6 +648,12 @@ texture = ExtResource("6_reotu")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=865406091]
 deterministic = true
 libraries/ = SubResource("AnimationLibrary_kq7hj")
+
+[node name="DieOrb" type="Sprite2D" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=1546629264]
+visible = false
+z_index = 2
+position = Vector2(0, 1)
+texture = ExtResource("8_wbia7")
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
 position = Vector2(8, 0)
@@ -659,15 +728,8 @@ texture_scale = 3.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
 
-[node name="blackScreen" type="Sprite2D" parent="UI" unique_id=1484928868]
-modulate = Color(1, 1, 1, 0)
-z_index = 1000
-position = Vector2(969.4999, 542)
-scale = Vector2(31.296871, 17.9375)
-texture = SubResource("GradientTexture2D_2mse5")
-
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]
 [connection signal="body_entered" from="LeftWallCheck" to="." method="LeftWallEntered"]
 [connection signal="body_exited" from="LeftWallCheck" to="." method="LeftWallExited"]
-[connection signal="animation_finished" from="CharacterDie/AnimationPlayer" to="." method="DieFinished"]
+[connection signal="animation_finished" from="CharacterDie/AnimationPlayer" to="." method="AnimFinished"]

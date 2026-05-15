@@ -57,10 +57,20 @@ public partial class Character : CharacterBody2D
 	int lastDir;
 	bool canAnim;
 	public bool selected;
-
+	public bool cantInput;
+	CollisionShape2D col;
+	//die Effecct
+	Vector2 center;
+	Vector2 start;
+	Vector2 end;
+	float t1;
+	Tween t;
+	float dieTimer = -11;
+	float birthTimer = -11;
 
     public override void _Ready()
     {
+		col = GetNode<CollisionShape2D>("CollisionShape2D");
         firstScale = characterSprite.Scale;
 		for (int i = 0; i < 12; i++)
 		{
@@ -96,6 +106,40 @@ public partial class Character : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity = Velocity;
+		//restartAnim;
+		if (birthTimer >= 0)
+		{
+			birthTimer -= (float)delta;
+		}
+		else if (birthTimer < 0 && birthTimer > -10)
+		{
+			cantInput = false;
+			canDie = true;
+			col.CallDeferred("set_disabled",false);
+			velocity = Vector2.Zero;
+			Velocity = Vector2.Zero;
+			anim.Play("RESET");
+			canDie = true;
+			isJumping = false;
+			birthTimer = -11;
+		}
+		if (dieTimer >= 0)
+		{
+			dieTimer -= (float)delta;
+		}
+		else if (dieTimer < 0 && dieTimer > -10)
+		{
+			t?.Kill();
+			t = CreateTween();
+			t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
+			t.TweenProperty(this, nameof(t1), 1, 0.7f);
+			t1 = Mathf.Clamp(t1,0,1);
+			dieTimer = -11;
+		}
+		if (cantInput)
+		{
+			ReStartAnim();
+		}
 		//JumpBufferInput
 		if (Input.IsActionJustPressed("Z"))
 		{
@@ -172,9 +216,9 @@ public partial class Character : CharacterBody2D
 			}
 		}
 		// Add the gravity.
-		if (!IsOnFloor())
+		if (!IsOnFloor() && !cantInput)
 		{
-			if (velocity.Y <= JumpVelocity * 1.5f)
+			if (velocity.Y <= JumpVelocity * 1.5f && !cantInput)
 			{
 				if (isJumping)
 				{
@@ -202,7 +246,7 @@ public partial class Character : CharacterBody2D
 				anim.Play("RESET");
 			}
 		}
-		if (IsOnFloor())
+		if (IsOnFloor() && !cantInput)
 		{
 			if (!isGrounded)
 			{
@@ -260,7 +304,7 @@ public partial class Character : CharacterBody2D
 		}
 		
 		//Dash
-		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash)
+		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash && !cantInput)
 		{
 			anim.Play("Dash");
 			dashD = dashDur;
@@ -295,7 +339,7 @@ public partial class Character : CharacterBody2D
 				dashHaloCD = dashDur / 5;
 			}
 		}
-		else if (!isDashing)
+		else if (!isDashing && !cantInput)
 		{
 			dashHaloCD = 0;
 			//sprite yönü
@@ -465,20 +509,23 @@ public partial class Character : CharacterBody2D
 
 	public void AddForce(Vector2 vel)
 	{
-		canJump = false;
-		isDashing = false;
-		isJumping = false;
-		velocity = vel;
-		Velocity = vel;
-		isZjustPressed = false;
-		canDash = true;
-		if (vel.Y < -JumpVelocity)
+		if (!cantInput)
 		{
-			characterSprite.CallDeferred("play", "Jump");
-			characterSprite.SetDeferred("frame", 0);
-			anim.CallDeferred("play","Jump");
-			anim.CallDeferred("seek", 0);
-			SetDeferred("canAnim", false);
+			canJump = false;
+			isDashing = false;
+			isJumping = false;
+			velocity = vel;
+			Velocity = vel;
+			isZjustPressed = false;
+			canDash = true;
+			if (vel.Y < -JumpVelocity)
+			{
+				characterSprite.CallDeferred("play", "Jump");
+				characterSprite.SetDeferred("frame", 0);
+				anim.CallDeferred("play","Jump");
+				anim.CallDeferred("seek", 0);
+				SetDeferred("canAnim", false);
+			}	
 		}
 	}
 
@@ -612,27 +659,39 @@ public partial class Character : CharacterBody2D
 	public void KillSelf()
 	{
 		camera.Call("Shake", 20f);
-		dieAnim.Play("Die");
 		canDie = false;
-		SetProcess(false);
-		SetPhysicsProcess(false);
+		cantInput = true;
+		col.Disabled = true;
+		dieAnim.Play("Die");
+		t1 = 0;
+		center = (GlobalPosition + spawnPos) / 2;
+		center.Y += GlobalPosition.DistanceTo(spawnPos) * 0.9f;
+		start = GlobalPosition - center;
+		end = spawnPos - center;
+		anim.CallDeferred("seek", 0);
+		anim.CallDeferred("play","Died");
+		dieTimer = 0.3f;
 	}
-	void DieFinished(string animName)
+	void AnimFinished(string animName)
 	{
 		if (animName == "Die")
 		{
-			canDie = true;
-			GlobalPosition = spawnPos;
-            velocity = Vector2.Zero;
-			Velocity = Vector2.Zero;
-			isJumping = false;
 			isZjustPressed = false;
 			isDashing = false;
 			dashD = 0;
-			dieAnim.Play("Birth");
-			SetProcess(true);
-			SetPhysicsProcess(true);
-			camera.GlobalPosition = GlobalPosition;
+		}
+	}
+
+	void ReStartAnim()
+	{
+		Vector2 result = start.Slerp(end,t1);
+		GlobalPosition = center + result;
+		if (GlobalPosition.DistanceTo(spawnPos) < 1)
+		{
+			if (birthTimer < -10)
+			{
+				birthTimer = 0.3f;	
+			}
 		}
 	}
 }

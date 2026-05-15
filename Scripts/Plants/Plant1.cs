@@ -75,10 +75,12 @@ public partial class Plant1 : Area2D
 					dir = -1;
 				}
 			}
+			float rotAmount = Mathf.Abs(character.Velocity.X / (25 / 3));
+			rotAmount = Mathf.Clamp(rotAmount,-30,30);
 			tween?.Kill();
 			tween = CreateTween();
 			tween.SetEase(Tween.EaseType.Out).SetTrans(tweener);
-			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(dir * 30), dur / 4).Finished += () => {AnimFinished();};
+			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(dir * rotAmount), dur / 4).Finished += () => {AnimFinished();};
 			isShaking = false;	
 		}
 	}
