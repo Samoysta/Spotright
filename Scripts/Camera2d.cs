@@ -25,7 +25,7 @@ public partial class Camera2d : Camera2D
 		noise.Frequency = 1.0f;
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (ShakeStrength > 0.01f)
 		{
@@ -49,8 +49,8 @@ public partial class Camera2d : Camera2D
 			direction = Vector2.Zero;
 			Offset = originalOffset;
 		}
-		GlobalPosition = GlobalPosition.Lerp(target.GlobalPosition, 5 * (float)delta);
-		GlobalPosition = GlobalPosition.Round();
+		Vector2 pos = GlobalPosition.Lerp(target.GlobalPosition, 5 * (float)delta);
+		GlobalPosition = pos.Round();
 	}
 
 	// 🔥 normal shake

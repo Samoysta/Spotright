@@ -119,10 +119,6 @@ texture = ExtResource("5_ibmi3")
 [sub_resource type="TileSet" id="TileSet_tnimv"]
 sources/0 = SubResource("TileSetAtlasSource_4blnk")
 
-[sub_resource type="Environment" id="Environment_oho3u"]
-background_mode = 3
-glow_enabled = true
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bwjpn"]
 load_path = "res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex"
 
@@ -135,6 +131,10 @@ texture = SubResource("CompressedTexture2D_bwjpn")
 [sub_resource type="TileSet" id="TileSet_4blnk"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ibmi3")
+
+[sub_resource type="Environment" id="Environment_oho3u"]
+background_mode = 3
+glow_enabled = true
 
 [node name="testScene" type="Node2D" unique_id=676339024]
 
@@ -150,7 +150,7 @@ target = NodePath("../Character")
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=595125895]
 modulate = Color(0.01171082, 0.26301283, 0.11960135, 1)
 z_index = -4
-scale = Vector2(45.34375, 26.392641)
+scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_rdbpf")
 
 [node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("camera") instance=ExtResource("1_3dogw")]
@@ -307,15 +307,12 @@ position = Vector2(736, -175)
 [node name="CheckPoint4" parent="CheckPoints" unique_id=2095731210 instance=ExtResource("9_d3awe")]
 position = Vector2(431, -96)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1479765730]
-environment = SubResource("Environment_oho3u")
-
 [node name="FallebleStone" parent="." unique_id=1153185839 node_paths=PackedStringArray("camera") instance=ExtResource("9_bwjpn")]
 position = Vector2(576, -304)
 camera = NodePath("../Camera2D")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="FallebleStone" unique_id=1719172340 groups=["DamageTile"]]
-tile_map_data = PackedByteArray("AAACAAEAAAAGAAEAAFACAAAAAAAGAAEAAFACAP//AAAGAAEAAFACAP7/AAAGAAEAAFD9/wEAAAAGAAEAAGD9/wAAAAAGAAEAAGD9////AAAGAAEAAGD9//7/AAAGAAEAAGA=")
+tile_map_data = PackedByteArray("AAACAAEAAAAGAAEAAFD9/wAAAAAGAAEAAGA=")
 tile_set = SubResource("TileSet_4blnk")
 
 [node name="weapon1" parent="." unique_id=1828208836 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
@@ -335,3 +332,6 @@ camera = NodePath("../Camera2D")
 position = Vector2(1070, -216)
 rotation = -1.5707964
 camera = NodePath("../Camera2D")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=190148161]
+environment = SubResource("Environment_oho3u")

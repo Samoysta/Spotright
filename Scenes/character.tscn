@@ -717,6 +717,8 @@ shape = SubResource("RectangleShape2D_ushfy")
 position = Vector2(0, 16)
 
 [node name="CharacterSprite" type="AnimatedSprite2D" parent="CollisionShape2D/body/Foot" unique_id=328205539]
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_ejsiy")
 animation = &"Idle"

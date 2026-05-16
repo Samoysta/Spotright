@@ -9,11 +9,5 @@ res://Scripts/Effect.cs
 res://Scripts/Character.cs
 res://Scripts/GameManager.cs
 res://Scripts/DamageItems/CircleBoys.cs
-res://Scenes/character.tscn
-res://Scenes/Effects/dash_effect.tscn
-res://Scenes/Effects/dash_halo_effect.tscn
-res://Scenes/Effects/fire_effect.tscn
-res://Scenes/Effects/hit_effect.tscn
-res://Scenes/Effects/jump_effect.tscn
-res://Scenes/Effects/baloon_halo_ef.tscn
 res://Scenes/test_scene.tscn
+res://Scenes/character.tscn
