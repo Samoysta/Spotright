@@ -1,5 +1,9 @@
-Sprite2D
+TileMapLayer
 AnimationPlayer
+AnimatedSprite2D
+Sprite2D
+Node2D
+CPUParticles2D
 LightOccluder2D
 DirectionalLight2D
 PointLight2D
@@ -8,8 +12,3 @@ CollisionShape2D
 StaticBody2D
 ParallaxBackground
 ParallaxLayer
-TileMapLayer
-Node2D
-Line2D
-VisibleOnScreenEnabler2D
-VisibleOnScreenNotifier2D

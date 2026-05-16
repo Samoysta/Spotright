@@ -123,6 +123,19 @@ sources/0 = SubResource("TileSetAtlasSource_4blnk")
 background_mode = 3
 glow_enabled = true
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bwjpn"]
+load_path = "res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibmi3"]
+texture = SubResource("CompressedTexture2D_bwjpn")
+6:1/0 = 0
+6:1/0/z_index = 1
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 2, 5, 2, 5, 8, -5, 8)
+
+[sub_resource type="TileSet" id="TileSet_4blnk"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_ibmi3")
+
 [node name="testScene" type="Node2D" unique_id=676339024]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
@@ -150,7 +163,7 @@ tile_map_data = PackedByteArray("AAD9/wEAAAABAAAAAAD+/wEAAAACAAAAAAD//wEAAAABAAA
 tile_set = SubResource("TileSet_hb2xm")
 
 [node name="AreaHit" type="TileMapLayer" parent="Area1" unique_id=2107101390 groups=["DamageTile"]]
-tile_map_data = PackedByteArray("AAAOAAAAAAAGAAEAAAAPAAAAAAAGAAEAAAAQAAAAAAAGAAEAAAAUAAAAAAAGAAEAAAATAAAAAAAGAAEAAAAVAAAAAAAGAAEAAAAWAAAAAAAGAAEAAAAXAAAAAAAGAAEAAAAYAAAAAAAGAAEAAAAdAAAAAAAGAAEAAAAeAAAAAAAGAAEAAAAfAAAAAAAGAAEAAAAgAAAAAAAGAAEAAAAhAAAAAAAGAAEAAAAiAAAAAAAGAAEAAAAjAAAAAAAGAAEAAAAkAAAAAAAGAAEAAAAlAAAAAAAGAAEAAAAmAAAAAAAGAAEAAAAnAAAAAAAGAAEAAAAoAAAAAAAGAAEAAAApAAAAAAAGAAEAAAAqAAAAAAAGAAEAAAArAAAAAAAGAAEAAAAsAAAAAAAGAAEAAAAtAAAAAAAGAAEAAAAuAAAAAAAGAAEAAAAvAAAAAAAGAAEAAAAwAAAAAAAGAAEAAAAxAAAAAAAGAAEAAAAyAAAAAAAGAAEAAAAzAAAAAAAGAAEAAAA0AAAAAAAGAAEAAAA1AAAAAAAGAAEAAAA=")
+tile_map_data = PackedByteArray("AAAOAAAAAAAGAAEAAAAPAAAAAAAGAAEAAAAQAAAAAAAGAAEAAAAUAAAAAAAGAAEAAAATAAAAAAAGAAEAAAAVAAAAAAAGAAEAAAAWAAAAAAAGAAEAAAAXAAAAAAAGAAEAAAAYAAAAAAAGAAEAAAAdAAAAAAAGAAEAAAAeAAAAAAAGAAEAAAAfAAAAAAAGAAEAAAAgAAAAAAAGAAEAAAAhAAAAAAAGAAEAAAAiAAAAAAAGAAEAAAAjAAAAAAAGAAEAAAAkAAAAAAAGAAEAAAAlAAAAAAAGAAEAAAAmAAAAAAAGAAEAAAAnAAAAAAAGAAEAAAAoAAAAAAAGAAEAAAApAAAAAAAGAAEAAAAqAAAAAAAGAAEAAAArAAAAAAAGAAEAAAAsAAAAAAAGAAEAAAAtAAAAAAAGAAEAAAAuAAAAAAAGAAEAAAAvAAAAAAAGAAEAAAAwAAAAAAAGAAEAAAAxAAAAAAAGAAEAAAAyAAAAAAAGAAEAAAAzAAAAAAAGAAEAAAA0AAAAAAAGAAEAAAA1AAAAAAAGAAEAAAAWAO//AAAGAAEAAFAWAPD/AAAGAAEAAFAZAO7/AAAGAAEAAFAQAPH/AAAGAAEAADARAPH/AAAGAAEAADASAPH/AAAGAAEAADATAPH/AAAGAAEAADAUAPH/AAAGAAEAADA=")
 tile_set = SubResource("TileSet_50ct6")
 
 [node name="AreaGround" type="TileMapLayer" parent="Area1" unique_id=1485644528]
@@ -300,6 +313,10 @@ environment = SubResource("Environment_oho3u")
 [node name="FallebleStone" parent="." unique_id=1153185839 node_paths=PackedStringArray("camera") instance=ExtResource("9_bwjpn")]
 position = Vector2(576, -304)
 camera = NodePath("../Camera2D")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="FallebleStone" unique_id=1719172340 groups=["DamageTile"]]
+tile_map_data = PackedByteArray("AAACAAEAAAAGAAEAAFACAAAAAAAGAAEAAFACAP//AAAGAAEAAFACAP7/AAAGAAEAAFD9/wEAAAAGAAEAAGD9/wAAAAAGAAEAAGD9////AAAGAAEAAGD9//7/AAAGAAEAAGA=")
+tile_set = SubResource("TileSet_4blnk")
 
 [node name="weapon1" parent="." unique_id=1828208836 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
 position = Vector2(998, -117)

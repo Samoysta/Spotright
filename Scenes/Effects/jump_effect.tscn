@@ -19,7 +19,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_awuce"]
 resource_name = "Start"
-length = 0.3
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,6 +47,7 @@ point_count = 3
 z_index = 1
 script = ExtResource("1_p2ptd")
 anims = [NodePath("AnimationPlayer")]
+dur = 0.6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1397213023]
 libraries/ = SubResource("AnimationLibrary_crfi5")

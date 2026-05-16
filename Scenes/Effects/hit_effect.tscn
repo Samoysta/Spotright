@@ -43,6 +43,7 @@ _data = {
 [node name="hitEffect" type="Node2D" unique_id=218780739 node_paths=PackedStringArray("anims")]
 script = ExtResource("1_vm7lc")
 anims = [NodePath("AnimationPlayer")]
+dur = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=315397707]
 libraries/ = SubResource("AnimationLibrary_4kr6v")

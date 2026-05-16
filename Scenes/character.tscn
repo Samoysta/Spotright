@@ -7,8 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bc4papdi8t7ub" path="res://Scenes/Effects/hit_effect.tscn" id="5_a5ess"]
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 [ext_resource type="Texture2D" uid="uid://8ekhggm5wkym" path="res://Assets/Character1-Sheet.png" id="5_reotu"]
+[ext_resource type="PackedScene" uid="uid://decfdj753vjxf" path="res://Scenes/Effects/baloon_halo_ef.tscn" id="6_l1rcp"]
 [ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="6_reotu"]
 [ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
+[ext_resource type="Texture2D" uid="uid://2jrx3sd8krxj" path="res://Assets/BaloonBoomSheet.png" id="10_kq7hj"]
+[ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="11_7iw6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(13.6, 29.6)
@@ -600,7 +603,82 @@ gradient = SubResource("Gradient_a5ess")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "rightWallEffect", "leftWallEffect", "dieAnim", "anim")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu0ta"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivxna"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l51qt"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3gmt"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xufk"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq5a7"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80j7h"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oslv8"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t521p"]
+atlas = ExtResource("10_kq7hj")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k1duu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu0ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivxna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l51qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3gmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xufk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dq5a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80j7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oslv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t521p")
+}],
+"loop": false,
+"name": &"Start",
+"speed": 20.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_7iw6i"]
+offsets = PackedFloat32Array(0, 0.44581282, 0.8990148)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8546798, 1, 1, 1, 0)
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -623,6 +701,9 @@ dashSpeed = 600.0
 dashCoolDown = 0.4
 dashHaloEf = ExtResource("4_a5ess")
 hitEf = ExtResource("5_a5ess")
+balHaloEf = ExtResource("6_l1rcp")
+baloonBoomEf = NodePath("birthBaloonEf")
+baloonBoomEfCpu = NodePath("birthBaloonEf/birthBaloonEfCpu")
 dashDur = 0.2
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
 anim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/AnimationPlayer")
@@ -727,6 +808,29 @@ texture = SubResource("GradientTexture2D_wbia7")
 texture_scale = 3.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
+
+[node name="birthBaloonEf" type="AnimatedSprite2D" parent="." unique_id=1345008411]
+top_level = true
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_k1duu")
+animation = &"Start"
+frame = 8
+frame_progress = 1.0
+
+[node name="birthBaloonEfCpu" type="CPUParticles2D" parent="birthBaloonEf" unique_id=892318483]
+emitting = false
+texture = ExtResource("11_7iw6i")
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+linear_accel_min = -100.0
+linear_accel_max = -100.0
+color_ramp = SubResource("Gradient_7iw6i")
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]

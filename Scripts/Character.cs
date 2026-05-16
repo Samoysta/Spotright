@@ -29,6 +29,9 @@ public partial class Character : CharacterBody2D
 	[Export] public float dashCoolDown;
 	[Export] PackedScene dashHaloEf;
 	[Export] PackedScene hitEf;
+	[Export] PackedScene balHaloEf;
+	[Export] AnimatedSprite2D baloonBoomEf;
+	[Export] CpuParticles2D baloonBoomEfCpu;
 	public float dashCD;
 	public bool isDashing;
 	public bool canDie = true;
@@ -45,6 +48,7 @@ public partial class Character : CharacterBody2D
 	public Queue<Effect> dashEfs = new ();
 	public Queue<Effect> dashHaloEfs = new ();
 	public Queue<Effect> hitEffects = new ();
+	public Queue<Effect> baloonHaloEfs = new ();
 	public Queue<Wepaon1Bullet> bul1s = new();
 	float dir;
 	public bool isJumping;
@@ -67,6 +71,7 @@ public partial class Character : CharacterBody2D
 	Tween t;
 	float dieTimer = -11;
 	float birthTimer = -11;
+	float haloTimer;
 
     public override void _Ready()
     {
@@ -100,6 +105,13 @@ public partial class Character : CharacterBody2D
 			def.Scale = new Vector2(1,1);
 			dashHaloEfs.Enqueue(def);
 		}
+		for (int i = 0; i < 12; i++)
+		{
+			Effect ef = (Effect)balHaloEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child", ef);
+			ef.Scale = new Vector2(1,1);
+			baloonHaloEfs.Enqueue(ef);
+		}
 		lastDir = -1;
     }
 
@@ -121,6 +133,9 @@ public partial class Character : CharacterBody2D
 			anim.CallDeferred("play","RESET");
 			canDie = true;
 			isJumping = false;
+			baloonBoomEf.GlobalPosition = GlobalPosition;
+			baloonBoomEf.Play("Start");
+			baloonBoomEfCpu.Emitting = true;
 			birthTimer = -11;
 		}
 		if (dieTimer >= 0)
@@ -327,7 +342,7 @@ public partial class Character : CharacterBody2D
 		{
 			dashCD -= (float)delta;
 		}
-		if (isDashing)
+		if (isDashing && !cantInput)
 		{
 			velocity.X = dashSpeed * lastDir;
 			velocity.Y = 0;
@@ -665,6 +680,8 @@ public partial class Character : CharacterBody2D
 		canDie = false;
 		cantInput = true;
 		col.Disabled = true;
+		velocity = Vector2.Zero;
+		Velocity = Vector2.Zero;
 		dieAnim.Play("Die");
 		t1 = 0;
 		center = (GlobalPosition + spawnPos) / 2;
@@ -674,6 +691,7 @@ public partial class Character : CharacterBody2D
 		anim.CallDeferred("seek", 0);
 		anim.CallDeferred("play","Died");
 		dieTimer = 0.3f;
+		haloTimer = 0;
 	}
 	void AnimFinished(string animName)
 	{
@@ -689,6 +707,19 @@ public partial class Character : CharacterBody2D
 	{
 		Vector2 result = start.Slerp(end,t1);
 		GlobalPosition = center + result;
+		//Effect Halo
+		if (haloTimer > 0)
+		{
+			haloTimer -= (float)GetPhysicsProcessDeltaTime();
+		}
+		else
+		{
+			Effect ef = baloonHaloEfs.Dequeue();
+			ef.GlobalPosition = characterSprite.GlobalPosition;
+			ef.setOn();
+			baloonHaloEfs.Enqueue(ef);	
+			haloTimer = 0.05f;
+		}
 		if (GlobalPosition.DistanceTo(spawnPos) < 1)
 		{
 			if (birthTimer < -10)

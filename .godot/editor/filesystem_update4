@@ -1,4 +1,4 @@
-res://Scripts/Character.cs
+res://Scripts/interactiveItems/JumpPad.cs
 res://Scripts/bullets/Wepaon1Bullet.cs
 res://Scripts/Weapon1.cs
 res://Scripts/CheckPoint.cs
@@ -6,9 +6,14 @@ res://Scripts/DamageItems/FallebleStone.cs
 res://Scripts/Plants/Plant1.cs
 res://Scripts/Camera2d.cs
 res://Scripts/Effect.cs
+res://Scripts/Character.cs
 res://Scripts/GameManager.cs
 res://Scripts/DamageItems/CircleBoys.cs
-res://Scripts/interactiveItems/JumpPad.cs
-res://Scenes/test_scene.tscn
-res://Scenes/interactiveItems/jump_pad.tscn
 res://Scenes/character.tscn
+res://Scenes/Effects/dash_effect.tscn
+res://Scenes/Effects/dash_halo_effect.tscn
+res://Scenes/Effects/fire_effect.tscn
+res://Scenes/Effects/hit_effect.tscn
+res://Scenes/Effects/jump_effect.tscn
+res://Scenes/Effects/baloon_halo_ef.tscn
+res://Scenes/test_scene.tscn

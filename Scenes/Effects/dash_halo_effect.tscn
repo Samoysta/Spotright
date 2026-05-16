@@ -67,6 +67,7 @@ _data = {
 [node name="dashHaloEffect" type="Node2D" unique_id=592757132 node_paths=PackedStringArray("anims")]
 script = ExtResource("1_l5fef")
 anims = [NodePath("AnimationPlayer")]
+dur = 0.7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1264245572]
 libraries/ = SubResource("AnimationLibrary_fkqyj")
