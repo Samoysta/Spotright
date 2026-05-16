@@ -1,4 +1,4 @@
-res://Scenes/character.tscn
+res://Scenes/test_scene.tscn
 res://Scripts/interactiveItems/JumpPad.cs
 res://Scripts/bullets/Wepaon1Bullet.cs
 res://Scripts/Weapon1.cs
@@ -10,4 +10,3 @@ res://Scripts/Effect.cs
 res://Scripts/Character.cs
 res://Scripts/GameManager.cs
 res://Scripts/DamageItems/CircleBoys.cs
-res://Scenes/test_scene.tscn
