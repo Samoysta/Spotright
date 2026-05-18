@@ -6,6 +6,9 @@ using System.Formats.Tar;
 
 public partial class Character : CharacterBody2D
 {
+	PlayerData pd;
+	[Export] Node2D[] doors;
+	[Export] int [] doorIDs;
 	[Export] Camera2d camera;
 	[Export] float Speed;
 	[Export] float JumpVelocity;
@@ -72,9 +75,11 @@ public partial class Character : CharacterBody2D
 	float dieTimer = -11;
 	float birthTimer = -11;
 	float haloTimer;
+	bool restartAnim;
 
     public override void _Ready()
     {
+		pd = GetNode<PlayerData>("/root/PlayerData");
 		col = GetNode<CollisionShape2D>("CollisionShape2D");
         firstScale = characterSprite.Scale;
 		for (int i = 0; i < 12; i++)
@@ -112,7 +117,26 @@ public partial class Character : CharacterBody2D
 			ef.Scale = new Vector2(1,1);
 			baloonHaloEfs.Enqueue(ef);
 		}
-		lastDir = -1;
+		lastDir = pd.lastDir;
+		if (lastDir < 0)
+		{
+			characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
+		}
+		else if(lastDir > 0)
+		{
+			characterSprite.Scale = firstScale;
+		}	
+		if (pd.doorID != 0)
+		{
+			int index = Array.IndexOf(doorIDs, pd.doorID);
+			Node2D spawnps = doors[index].GetNode<Node2D>("spawnPos");
+			GlobalPosition = spawnps.GlobalPosition;
+			camera.GlobalPosition = GlobalPosition;
+			doors[index].Call("Starting");
+			cantInput = true;
+			characterSprite.Play("Idle");
+			isGrounded = true;
+		}
     }
     public override void _Process(double delta)
     {
@@ -130,6 +154,7 @@ public partial class Character : CharacterBody2D
 		else if (birthTimer < 0 && birthTimer > -10)
 		{
 			cantInput = false;
+			restartAnim = false;
 			canDie = true;
 			col.CallDeferred("set_disabled",false);
 			velocity = Vector2.Zero;
@@ -157,7 +182,10 @@ public partial class Character : CharacterBody2D
 		}
 		if (cantInput)
 		{
-			ReStartAnim();
+			if (restartAnim)
+			{
+				ReStartAnim();	
+			}
 		}
 		//JumpBufferInput
 		if (Input.IsActionJustPressed("Z"))
@@ -201,7 +229,7 @@ public partial class Character : CharacterBody2D
 			isLeftWalled = false;
 		}
 		//DüşmeAnim
-		if (velocity.Y > -JumpVelocity / 4 && !IsOnFloor())
+		if (velocity.Y > -JumpVelocity / 4 && !IsOnFloor() && !cantInput)
 		{
 			if (characterSprite.Animation != "Fall" && !isDashing)
 			{
@@ -527,6 +555,7 @@ public partial class Character : CharacterBody2D
 		AttemptCorrectionX(3);
 		canJump = true;
 		canAnim = true;
+		pd.lastDir = lastDir;
 	}
 
 	public void AddForce(Vector2 vel)
@@ -683,6 +712,7 @@ public partial class Character : CharacterBody2D
 		camera.Call("Shake", 20f);
 		canDie = false;
 		cantInput = true;
+		restartAnim = true;
 		col.Disabled = true;
 		velocity = Vector2.Zero;
 		Velocity = Vector2.Zero;
