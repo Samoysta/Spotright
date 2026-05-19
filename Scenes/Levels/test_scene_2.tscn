@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://y5iy8g2iaqnp" path="res://Scripts/Camera2d.cs" id="1_8noy4"]
 [ext_resource type="PackedScene" uid="uid://0iec1n5qwps5" path="res://Scenes/character.tscn" id="2_eg7ii"]
 [ext_resource type="PackedScene" uid="uid://o717f42cfwb8" path="res://Scenes/interactiveItems/door.tscn" id="3_eg7ii"]
+[ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="4_5kmqf"]
 
 [sub_resource type="Gradient" id="Gradient_x033f"]
 offsets = PackedFloat32Array(1)
@@ -124,3 +125,5 @@ position = Vector2(692, -45)
 doorId = 1
 character = NodePath("../Character")
 sceneName = "test_scene"
+
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("4_5kmqf")]

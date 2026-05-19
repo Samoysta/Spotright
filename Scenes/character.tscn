@@ -678,11 +678,12 @@ animations = [{
 offsets = PackedFloat32Array(0, 0.44581282, 0.8990148)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8546798, 1, 1, 1, 0)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("doors", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
 script = ExtResource("1_ushfy")
+doors = []
 Speed = 210.0
 JumpVelocity = 350.0
 coyotoTime = 0.1
@@ -697,7 +698,7 @@ dashEf = ExtResource("5_2mse5")
 wallSpeed = 200.0
 rightWallEffect = NodePath("RightWallEffect")
 leftWallEffect = NodePath("LeftWallEffect")
-dashSpeed = 550.0
+dashSpeed = 510.0
 dashCoolDown = 0.4
 dashHaloEf = ExtResource("4_a5ess")
 hitEf = ExtResource("5_a5ess")

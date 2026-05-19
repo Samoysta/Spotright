@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dp18l3lq6sar4"]
 
 [ext_resource type="PackedScene" uid="uid://0iec1n5qwps5" path="res://Scenes/character.tscn" id="1_3dogw"]
+[ext_resource type="Texture2D" uid="uid://5ue1fxxw4aui" path="res://Assets/Yaprak.png" id="2_8qgji"]
 [ext_resource type="Script" uid="uid://y5iy8g2iaqnp" path="res://Scripts/Camera2d.cs" id="2_hb2xm"]
 [ext_resource type="Texture2D" uid="uid://cdhvp5efkxh6a" path="res://Assets/Tilemaps/Area1.png" id="2_r5l72"]
 [ext_resource type="Texture2D" uid="uid://cvgs21q323s3u" path="res://Assets/Tilemaps/are1Grounds.png" id="4_yglu3"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="9_yglu3"]
 [ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="10_yglu3"]
 [ext_resource type="PackedScene" uid="uid://o717f42cfwb8" path="res://Scenes/interactiveItems/door.tscn" id="11_bwjpn"]
+[ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="12_02b08"]
 
 [sub_resource type="Gradient" id="Gradient_bwjpn"]
 offsets = PackedFloat32Array(1)
@@ -91,7 +93,7 @@ sources/0 = SubResource("TileSetAtlasSource_50ct6")
 texture = ExtResource("2_r5l72")
 6:1/0 = 0
 6:1/0/z_index = 1
-6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 2, 5, 2, 5, 8, -5, 8)
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -2, 5, -2, 5, 8, -5, 8)
 
 [sub_resource type="TileSet" id="TileSet_50ct6"]
 physics_layer_0/collision_layer = 1
@@ -158,10 +160,6 @@ texture = SubResource("CompressedTexture2D_bwjpn")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ibmi3")
 
-[sub_resource type="Environment" id="Environment_oho3u"]
-background_mode = 3
-glow_enabled = true
-
 [node name="testScene" type="Node2D" unique_id=676339024]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
@@ -207,6 +205,23 @@ navigation_enabled = false
 [node name="TileMapLayer" type="TileMapLayer" parent="Area1/AreaBGtiles" unique_id=1310540862]
 tile_map_data = PackedByteArray("AAD+////AAABAAEAAAADAP7/AAAAAAEAAAAEAP7/AAAAAAEAAAAGAP//AAAAAAAAAAAHAP//AAABAAEAAAAHAAAAAAAAAAEAAAAIAAAAAAABAAEAAAAIAP//AAABAAAAAAAMAP7/AAABAAAAAAAOAP7/AAAAAAEAAAAPAP7/AAAAAAAAAAAVAP3/AAABAAEAAAAWAP3/AAABAAEAAAAXAP3/AAABAAAAAAAYAP3/AAAAAAEAAAAYAPz/AAABAAAAAAAaAPr/AAAAAAEAAAAaAPv/AAABAAEAAAAbAPv/AAABAAAAAAAeAP3/AAAAAAEAAAAfAP3/AAABAAEAAAAfAP7/AAABAAAAAAAbAP7/AAABAAEAAAAbAP//AAAAAAEAAAAiAP//AAABAAAAAAAjAP//AAABAAAAAAAkAP//AAABAAAAAAAmAP7/AAABAAAAAAAnAP7/AAAAAAEAAAAnAPz/AAAAAAEAAAAoAPz/AAABAAAAAAAqAP7/AAAAAAEAAAArAP7/AAABAAAAAAAnAPj/AAABAAEAAAAuAP7/AAABAAEAAAAyAP7/AAAAAAAAAAA1AP7/AAABAAEAAAAwAP3/AAAAAAAAAAApAPr/AAABAAAAAAAMAPT/AAABAAAAAAALAPL/AAAAAAEAAAALAPP/AAAAAAEAAAAQAPP/AAABAAAAAAASAPL/AAABAAEAAAATAPL/AAABAAEAAAAYAPH/AAABAAEAAAAWAPL/AAAAAAAAAAAbAO//AAAAAAEAAAAcAO//AAAAAAEAAAAeAO7/AAAAAAEAAAAfAO7/AAAAAAEAAAAhAOz/AAABAAAAAAAmAO3/AAAAAAEAAAAjAO3/AAAAAAAAAAAoAO7/AAABAAAAAAAsAO3/AAABAAAAAAAsAOv/AAABAAAAAAAtAOz/AAABAAEAAAAxAO3/AAAAAAAAAAA0AOr/AAABAAAAAAA0AOv/AAAAAAEAAAAvAO3/AAAAAAAAAAAwAO3/AAAAAAEAAAA1AOz/AAABAAEAAAA=")
 tile_set = SubResource("TileSet_4qg1e")
+
+[node name="LeafEffect" type="CPUParticles2D" parent="Area1" unique_id=1795851427]
+z_index = 1
+position = Vector2(693, -468)
+amount = 100
+texture = ExtResource("2_8qgji")
+lifetime = 10.0
+preprocess = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1)
+direction = Vector2(-1, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -50.0
+angular_velocity_max = -50.0
 
 [node name="Plant1s" type="Node2D" parent="." unique_id=1200717658]
 
@@ -293,16 +308,16 @@ position = Vector2(1085, -96)
 [node name="Plant2s" type="Node2D" parent="." unique_id=1298780236]
 
 [node name="Plant1" parent="Plant2s" unique_id=2008575144 instance=ExtResource("9_yglu3")]
-position = Vector2(983, -303)
+position = Vector2(983, -304)
 
 [node name="Plant2" parent="Plant2s" unique_id=2124996452 instance=ExtResource("9_yglu3")]
-position = Vector2(951, -303)
+position = Vector2(950, -304)
 
 [node name="Plant3" parent="Plant2s" unique_id=1526934142 instance=ExtResource("9_yglu3")]
-position = Vector2(23, -191)
+position = Vector2(24, -192)
 
 [node name="Plant4" parent="Plant2s" unique_id=1685355421 instance=ExtResource("9_yglu3")]
-position = Vector2(77, -191)
+position = Vector2(77, -192)
 
 [node name="Plant5" parent="Plant2s" unique_id=1846200770 instance=ExtResource("9_yglu3")]
 position = Vector2(144, -208)
@@ -317,10 +332,10 @@ position = Vector2(480, -336)
 position = Vector2(672, -352)
 
 [node name="Plant9" parent="Plant2s" unique_id=148392594 instance=ExtResource("9_yglu3")]
-position = Vector2(765, -353)
+position = Vector2(765, -352)
 
 [node name="Plant10" parent="Plant2s" unique_id=1934013939 instance=ExtResource("9_yglu3")]
-position = Vector2(567, -65)
+position = Vector2(568, -64)
 
 [node name="Plant11" parent="Plant2s" unique_id=1241753402 instance=ExtResource("9_yglu3")]
 position = Vector2(748, -96)
@@ -367,15 +382,14 @@ tile_set = SubResource("TileSet_4blnk")
 position = Vector2(736, -149)
 cam = NodePath("../Camera2D")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=190148161]
-environment = SubResource("Environment_oho3u")
-
 [node name="Door" parent="." unique_id=465521397 node_paths=PackedStringArray("character") instance=ExtResource("11_bwjpn")]
 z_index = -1
 position = Vector2(998, -157)
 doorId = 1
 character = NodePath("../Character")
 sceneName = "test_scene_2"
+
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("12_02b08")]
 
 [editable path="CheckPoints/CheckPoint"]
 [editable path="CheckPoints/CheckPoint2"]

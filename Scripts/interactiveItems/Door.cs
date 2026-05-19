@@ -24,7 +24,7 @@ public partial class Door : Area2D
 	{
 		if (canSelect && !character.isDashing)
 		{
-			if (Input.IsActionJustPressed("Down") && character.IsOnFloor())
+			if (Input.IsActionJustPressed("Down") && character.IsOnFloor() && !character.cantInput)
 			{
 				if (!selected)
 				{

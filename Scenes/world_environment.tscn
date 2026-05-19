@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bbassb8vw28v0"]
+
+[sub_resource type="Environment" id="Environment_oho3u"]
+background_mode = 3
+glow_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.2
+adjustment_saturation = 1.1
+
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=795285756]
+environment = SubResource("Environment_oho3u")
