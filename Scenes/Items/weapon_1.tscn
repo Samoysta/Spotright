@@ -7,6 +7,62 @@
 [ext_resource type="PackedScene" uid="uid://dt3am85d7pvnu" path="res://Scenes/Effects/fire_effect.tscn" id="4_w0fot"]
 [ext_resource type="Texture2D" uid="uid://1ttp8wcfgwln" path="res://Assets/square.png" id="5_yf1aa"]
 
+[sub_resource type="Animation" id="Animation_54fwx"]
+resource_name = "Fire"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(0.4, -0.25, 0, 0.07100646, 0.49557307, 1.4, -0.016666668, -0.16666667, 0, 0, 0.6, -0.016666668, 0.13333333, 0, 0, 1.2, -0.01666667, -0.10000001, 0, 0, 0.9, -0.016905095, 0.050000016, 0, 0, 1, -0.017359152, -0.01666667, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40143058, 0.5055855)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(2, -0.25, 0, 0.033333335, -0.3999517, 0.6, -0.016666668, 0.23333335, 0, 0, 1.5, -0.016666668, -0.15, 0, 0, 0.8, -0.01666667, 0.11666667, 0, 0, 1.1, -0.016905095, -0.05000001, 0, 0, 1, -0.017359152, 0.01666667, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40143058, 0.5055855)
+}
+
+[sub_resource type="Animation" id="Animation_giknx"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_orj3k"]
+_data = {
+&"Fire": SubResource("Animation_54fwx"),
+&"RESET": SubResource("Animation_giknx")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b74"]
 size = Vector2(27, 8)
 
@@ -229,7 +285,7 @@ _data = {
 &"Shake": SubResource("Animation_7mtuy")
 }
 
-[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim")]
+[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim", "anim2")]
 z_index = 4
 collision_layer = 0
 collision_mask = 2
@@ -243,10 +299,16 @@ bul1 = ExtResource("2_b75o4")
 bulletPos = NodePath("bulletPos")
 effectPos = NodePath("effectPos")
 anim = NodePath("AnimationPlayer2")
+anim2 = NodePath("Sprite2D/AnimationPlayer")
 fireEf = ExtResource("4_w0fot")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=355800990]
+position = Vector2(-16, 0)
 texture = ExtResource("1_j0b74")
+offset = Vector2(16, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=368799208]
+libraries/ = SubResource("AnimationLibrary_orj3k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183355213]
 position = Vector2(0.5, 2)

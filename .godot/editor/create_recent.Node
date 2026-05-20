@@ -1,7 +1,8 @@
+Line2D
+AnimationPlayer
 CPUParticles2D
 Node2D
 TileMapLayer
-AnimationPlayer
 Sprite2D
 Label
 NinePatchRect

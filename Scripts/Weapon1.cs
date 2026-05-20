@@ -21,6 +21,7 @@ public partial class Weapon1 : Area2D
 	[Export] Node2D bulletPos;
 	[Export] Node2D effectPos;
 	[Export] AnimationPlayer anim;
+	[Export] AnimationPlayer anim2;
 	CollisionShape2D col;
 	float shootcd;
 	Vector2 pos;
@@ -149,6 +150,8 @@ public partial class Weapon1 : Area2D
 						Fire(i);
 					}
 					fireEffect();
+					anim2.Play("Fire");
+					anim2.Seek(0);
 				}	
 			}
 			if (ShootAmount <= 0 || !character.canDie)

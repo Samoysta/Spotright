@@ -18,8 +18,8 @@ public partial class Wepaon1Bullet : Node2D
 	{
 		velocity = speed * (float)delta;
 		MoveLocalX(velocity);
-		ray.TargetPosition = new Vector2(velocity,0);
-		line.SetPointPosition(1,new Vector2(velocity,0));
+		ray.TargetPosition = new Vector2(velocity * 2,0);
+		line.SetPointPosition(1,new Vector2(velocity * 2,0));
 		if (ray.IsColliding())
 		{
 			Node2D body = (Node2D)ray.GetCollider(0);
