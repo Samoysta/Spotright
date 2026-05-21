@@ -10,6 +10,7 @@ public partial class JumpPad : Area2D
 	[Export] float duration;
 	[Export] Camera2d camera;
 	[Export] CollisionShape2D staticCollision;
+	[Export] CollisionShape2D col;
 	AnimationPlayer anim;
 	Character player;
 	// Called when the node enters the scene tree for the first time.
@@ -22,6 +23,9 @@ public partial class JumpPad : Area2D
 	{
 		Vector2 targetPos = new Vector2(0,-16);
 		jumpPadChains.GlobalPosition = GlobalPosition + targetPos.Rotated(GlobalRotation);
+		staticCollision.GlobalPosition = jumpPad.GlobalPosition;
+		col.GlobalPosition = jumpPad.GlobalPosition;
+
 	}
 
 
@@ -61,16 +65,20 @@ public partial class JumpPad : Area2D
 		{
 			player.AddForce(new Vector2(0,-jumpVel));
 			player.dashCD = 0.02f;
+			player.anim.CallDeferred("play","Jump");
 		}
 		else if (GlobalRotationDegrees == -90)
 		{
 			player.AddForce(new Vector2(-jumpVel,-jumpVel/1.3f));
 			player.dashCD = player.dashCoolDown / 4;
+			player.anim.CallDeferred("play","Fall");
 		}
 		else if (GlobalRotationDegrees == 90)
 		{
 			player.AddForce(new Vector2(jumpVel,-jumpVel/1.3f));
 			player.dashCD = player.dashCoolDown / 4;
+			player.anim.CallDeferred("play","Fall");
 		}
+		player.anim.CallDeferred("seek", 0);
 	}
 }

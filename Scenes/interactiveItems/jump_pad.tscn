@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://d3ge2ipuqvgru" path="res://Assets/JumpPadChains.png" id="2_hr5l2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hr5l2"]
-size = Vector2(30, 8)
+size = Vector2(30, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7128u"]
-size = Vector2(24, 6)
+size = Vector2(24, 7)
 
-[node name="JumpPad" type="Area2D" unique_id=1182740953 node_paths=PackedStringArray("jumpPad", "jumpPadChains", "staticCollision")]
+[node name="JumpPad" type="Area2D" unique_id=1182740953 node_paths=PackedStringArray("jumpPad", "jumpPadChains", "staticCollision", "col")]
 collision_mask = 3
 script = ExtResource("1_7128u")
 jumpPad = NodePath("jumpPad")
@@ -18,9 +18,10 @@ jumpPadChains = NodePath("jumpPad/Polygon2D/jumpPadChains")
 jumpVel = 700.0
 duration = 0.5
 staticCollision = NodePath("StaticBody2D/CollisionShape2D")
+col = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=873054715]
-position = Vector2(0, -4)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_hr5l2")
 
 [node name="jumpPad" type="Sprite2D" parent="." unique_id=574123482]
@@ -39,7 +40,7 @@ texture = ExtResource("2_hr5l2")
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1836305170]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1962663997]
-position = Vector2(0, -4)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_7128u")
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]

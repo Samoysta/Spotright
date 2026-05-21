@@ -168,12 +168,14 @@ limit_left = -64
 limit_top = -400
 limit_right = 1104
 limit_bottom = 96
+editor_draw_limits = true
 script = ExtResource("2_hb2xm")
 target = NodePath("../Character")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=595125895]
 modulate = Color(0.01171082, 0.26301283, 0.11960135, 1)
 z_index = -4
+position = Vector2(42, -7)
 scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_rdbpf")
 

@@ -44,7 +44,7 @@ public partial class Character : CharacterBody2D
 	bool canJump = true;
 	float dashHaloCD;
 	[Export] AnimationPlayer dieAnim;
-	[Export] AnimationPlayer anim;
+	[Export] public AnimationPlayer anim;
 	Vector2 spawnPos;
 	public Vector2 velocity;
 	public Queue<Effect> jumpEfs = new ();
@@ -573,8 +573,6 @@ public partial class Character : CharacterBody2D
 			{
 				characterSprite.CallDeferred("play", "Jump");
 				characterSprite.SetDeferred("frame", 0);
-				anim.CallDeferred("play","Jump");
-				anim.CallDeferred("seek", 0);
 				SetDeferred("canAnim", false);
 			}	
 		}

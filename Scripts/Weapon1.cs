@@ -162,14 +162,6 @@ public partial class Weapon1 : Area2D
 		
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        if (character != null)
-		{
-			col.Disabled = character.selected;
-		}
-    }
-
 
 	void close()
 	{
@@ -195,6 +187,7 @@ public partial class Weapon1 : Area2D
 		t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
 		t.TweenProperty(this, "scale", new Vector2(1,1), 0.8f);
 		canSelect = true;
+		col.CallDeferred("set_disabled", false);
 	}
 
 	void BodyEntered2D(Node2D body)
@@ -211,6 +204,7 @@ public partial class Weapon1 : Area2D
 					CallDeferred("reparent", character);
 					canSelect = false;
 					character.selected = true;
+					col.CallDeferred("set_disabled", true);
 				}	
 			}
 		}
