@@ -1,7 +1,7 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1779352312
+::res://::1779367242
 ByteBounce.ttf::FontFile::3878172557356308564::1779117567::1779117567::1::::<><><>0<>0<>bc6b47d593bd19ac91ed996bb6e36378<>res://.godot/imported/ByteBounce.ttf-45a1997ea33af1300b66e86b471cea31.fontdata::
-export_presets.cfg::TextFile::-1::1777909002::0::1::::<><><>0<>0<><>::
+export_presets.cfg::TextFile::-1::1779354412::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1779217953
@@ -71,7 +71,7 @@ CheckPoint.cs::CSharpScript::1685584796082887805::1774383148::0::1::::<>Area2D<>
 Effect.cs::CSharpScript::1956472281889380932::1778909951::0::1::::<>Node2D<><>0<>0<><>::
 GameManager.cs::CSharpScript::8499533869409038686::1776624113::0::1::::<>Node<><>0<>0<><>::
 PlayerData.cs::CSharpScript::5855448322360978264::1779134092::0::1::::<>Node<><>0<>0<><>::
-Weapon1.cs::CSharpScript::7174967135630224001::1779304505::0::1::::<>Area2D<><>0<>0<><>::
+Weapon1.cs::CSharpScript::7174967135630224001::1779352691::0::1::::<>Area2D<><>0<>0<><>::
 ::res://Scripts/bullets/::1777609593
 Wepaon1Bullet.cs::CSharpScript::4435086319764540790::1779292172::0::1::::<>Node2D<><>0<>0<><>::
 ::res://Scripts/DamageItems/::1776623353
