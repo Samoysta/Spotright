@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cg635lbwuy6nc"]
+
+[ext_resource type="Script" uid="uid://ch4kw771ehewb" path="res://Scripts/Enviroment/Lamp.cs" id="1_j8o2f"]
+[ext_resource type="Texture2D" uid="uid://lsn85fywm7qf" path="res://Assets/Chain.png" id="1_tg70q"]
+[ext_resource type="Texture2D" uid="uid://bh7jjsontsgmb" path="res://Assets/Lamp1.png" id="2_w8lot"]
+
+[sub_resource type="Gradient" id="Gradient_w8lot"]
+offsets = PackedFloat32Array(0, 0.6706731)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j8o2f"]
+gradient = SubResource("Gradient_w8lot")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8lot"]
+size = Vector2(7, 112)
+
+[node name="Lamp" type="Node2D" unique_id=409278306]
+script = ExtResource("1_j8o2f")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=52843690]
+z_index = -2
+points = PackedVector2Array(0, 0, 0, 200)
+width = 16.0
+default_color = Color(0.5866749, 0.5866749, 0.5866748, 1)
+texture = ExtResource("1_tg70q")
+texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=636693869]
+position = Vector2(0, 203)
+texture = ExtResource("2_w8lot")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=2017733865]
+modulate = Color(1, 1, 0, 1)
+self_modulate = Color(1, 1, 0, 1)
+color = Color(1, 1, 0, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_j8o2f")
+texture_scale = 3.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=756996646]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=812634636]
+shape = SubResource("RectangleShape2D_w8lot")
+
+[connection signal="body_entered" from="Area2D" to="." method="BodyEntered2D"]

@@ -10,7 +10,7 @@ public partial class Character : CharacterBody2D
 	[Export] Node2D[] doors;
 	[Export] int [] doorIDs;
 	[Export] Camera2d camera;
-	[Export] float Speed;
+	[Export] public float Speed;
 	[Export] float JumpVelocity;
 	[Export] float coyotoTime;
 	float ct;

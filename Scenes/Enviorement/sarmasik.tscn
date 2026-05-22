@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c46665e7r24b5"]
+
+[ext_resource type="Script" uid="uid://depc4mrii8ykm" path="res://Scripts/Enviroment/Sarmasik.cs" id="1_xdjeu"]
+[ext_resource type="Texture2D" uid="uid://ctr70pa30bk31" path="res://Assets/SarmaşıkPart.png" id="2_35akk"]
+
+[sub_resource type="Curve" id="Curve_kailk"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.8804781, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="Sarmasik" type="Node2D" unique_id=1024922116 node_paths=PackedStringArray("line")]
+script = ExtResource("1_xdjeu")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1482066733]
+width = 4.0
+width_curve = SubResource("Curve_kailk")
+texture = ExtResource("2_35akk")
+texture_mode = 1

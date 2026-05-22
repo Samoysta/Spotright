@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cvgs21q323s3u" path="res://Assets/Tilemaps/are1Grounds.png" id="4_yglu3"]
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="5_d3awe"]
 [ext_resource type="Texture2D" uid="uid://bh048csbvasgu" path="res://Assets/Tilemaps/area1bgTiles.png" id="5_ibmi3"]
-[ext_resource type="PackedScene" uid="uid://dgnsfjxt3x2tt" path="res://Scenes/DamageItem/falleble_stone.tscn" id="9_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="9_d3awe"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="9_yglu3"]
 [ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="10_yglu3"]
 [ext_resource type="PackedScene" uid="uid://o717f42cfwb8" path="res://Scenes/interactiveItems/door.tscn" id="11_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="12_02b08"]
+[ext_resource type="PackedScene" uid="uid://cg635lbwuy6nc" path="res://Scenes/Enviorement/lamp.tscn" id="14_u0ded"]
+[ext_resource type="PackedScene" uid="uid://c46665e7r24b5" path="res://Scenes/Enviorement/sarmasik.tscn" id="15_nywed"]
 
 [sub_resource type="Gradient" id="Gradient_bwjpn"]
 offsets = PackedFloat32Array(1)
@@ -147,20 +148,12 @@ size = Vector2(45.595, 252.95749)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnimv"]
 size = Vector2(45.595, 260.9575)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bwjpn"]
-load_path = "res://.godot/imported/Area1.png-af99cfedcafba667c40dc0aeb362fc82.ctex"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ded"]
+size = Vector2(6, 112)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibmi3"]
-texture = SubResource("CompressedTexture2D_bwjpn")
-6:1/0 = 0
-6:1/0/z_index = 1
-6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 2, 5, 2, 5, 8, -5, 8)
+[node name="test_scene" type="Node2D" unique_id=676339024]
 
-[sub_resource type="TileSet" id="TileSet_4blnk"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_ibmi3")
-
-[node name="testScene" type="Node2D" unique_id=676339024]
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("12_02b08")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
 process_callback = 0
@@ -173,7 +166,7 @@ script = ExtResource("2_hb2xm")
 target = NodePath("../Character")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=595125895]
-modulate = Color(0.01171082, 0.26301283, 0.11960135, 1)
+modulate = Color(0, 0.26132688, 0, 1)
 z_index = -4
 position = Vector2(42, -7)
 scale = Vector2(45, 26)
@@ -191,7 +184,7 @@ tile_map_data = PackedByteArray("AAD9/wEAAAABAAAAAAD+/wEAAAACAAAAAAD//wEAAAABAAA
 tile_set = SubResource("TileSet_hb2xm")
 
 [node name="AreaHit" type="TileMapLayer" parent="Area1" unique_id=2107101390 groups=["DamageTile"]]
-tile_map_data = PackedByteArray("AAAOAAAAAAAGAAEAAAAPAAAAAAAGAAEAAAAQAAAAAAAGAAEAAAAUAAAAAAAGAAEAAAATAAAAAAAGAAEAAAAVAAAAAAAGAAEAAAAWAAAAAAAGAAEAAAAXAAAAAAAGAAEAAAAYAAAAAAAGAAEAAAAdAAAAAAAGAAEAAAAeAAAAAAAGAAEAAAAfAAAAAAAGAAEAAAAgAAAAAAAGAAEAAAAhAAAAAAAGAAEAAAAiAAAAAAAGAAEAAAAjAAAAAAAGAAEAAAAkAAAAAAAGAAEAAAAlAAAAAAAGAAEAAAAmAAAAAAAGAAEAAAAnAAAAAAAGAAEAAAAoAAAAAAAGAAEAAAApAAAAAAAGAAEAAAAqAAAAAAAGAAEAAAArAAAAAAAGAAEAAAAsAAAAAAAGAAEAAAAtAAAAAAAGAAEAAAAuAAAAAAAGAAEAAAAvAAAAAAAGAAEAAAAwAAAAAAAGAAEAAAAxAAAAAAAGAAEAAAAyAAAAAAAGAAEAAAAzAAAAAAAGAAEAAAA0AAAAAAAGAAEAAAA1AAAAAAAGAAEAAAAWAO//AAAGAAEAAFAWAPD/AAAGAAEAAFAZAO7/AAAGAAEAAFAQAPH/AAAGAAEAADARAPH/AAAGAAEAADASAPH/AAAGAAEAADATAPH/AAAGAAEAADAUAPH/AAAGAAEAADA=")
+tile_map_data = PackedByteArray("AAAOAAAAAAAGAAEAAAAPAAAAAAAGAAEAAAAQAAAAAAAGAAEAAAAUAAAAAAAGAAEAAAATAAAAAAAGAAEAAAAVAAAAAAAGAAEAAAAWAAAAAAAGAAEAAAAXAAAAAAAGAAEAAAAYAAAAAAAGAAEAAAAdAAAAAAAGAAEAAAAeAAAAAAAGAAEAAAAfAAAAAAAGAAEAAAAgAAAAAAAGAAEAAAAhAAAAAAAGAAEAAAAiAAAAAAAGAAEAAAAjAAAAAAAGAAEAAAAkAAAAAAAGAAEAAAAlAAAAAAAGAAEAAAAmAAAAAAAGAAEAAAAnAAAAAAAGAAEAAAAoAAAAAAAGAAEAAAApAAAAAAAGAAEAAAAqAAAAAAAGAAEAAAArAAAAAAAGAAEAAAAsAAAAAAAGAAEAAAAtAAAAAAAGAAEAAAAuAAAAAAAGAAEAAAAvAAAAAAAGAAEAAAAwAAAAAAAGAAEAAAAxAAAAAAAGAAEAAAAyAAAAAAAGAAEAAAAzAAAAAAAGAAEAAAA0AAAAAAAGAAEAAAA1AAAAAAAGAAEAAAAWAO//AAAGAAEAAFAWAPD/AAAGAAEAAFAZAO7/AAAGAAEAAFAQAPH/AAAGAAEAADARAPH/AAAGAAEAADASAPH/AAAGAAEAADATAPH/AAAGAAEAADAUAPH/AAAGAAEAADAgAOv/AAAGAAEAADAhAOv/AAAGAAEAADAmAOv/AAAGAAEAADAjAOv/AAAGAAEAADAiAOv/AAAGAAEAADAnAOv/AAAGAAEAADAoAOv/AAAGAAEAADA0AOr/AAAGAAEAADAzAOr/AAAGAAEAADA4AOz/AAAGAAEAADA=")
 tile_set = SubResource("TileSet_50ct6")
 
 [node name="AreaGround" type="TileMapLayer" parent="Area1" unique_id=1485644528]
@@ -372,13 +365,12 @@ position = Vector2(431, -96)
 position = Vector2(0, -68.52124)
 shape = SubResource("RectangleShape2D_tnimv")
 
-[node name="FallebleStone" parent="." unique_id=1153185839 node_paths=PackedStringArray("camera") instance=ExtResource("9_bwjpn")]
-position = Vector2(576, -304)
-camera = NodePath("../Camera2D")
+[node name="CheckPoint5" parent="CheckPoints" unique_id=212583396 instance=ExtResource("9_d3awe")]
+position = Vector2(575, -134)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="FallebleStone" unique_id=1719172340 groups=["DamageTile"]]
-tile_map_data = PackedByteArray("AAACAAEAAAAGAAEAAFD9/wAAAAAGAAEAAGA=")
-tile_set = SubResource("TileSet_4blnk")
+[node name="CollisionShape2D" parent="CheckPoints/CheckPoint5" index="0" unique_id=180739963]
+position = Vector2(0, -68.52124)
+shape = SubResource("RectangleShape2D_tnimv")
 
 [node name="weapon1" parent="." unique_id=1828208836 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
 position = Vector2(736, -149)
@@ -391,9 +383,160 @@ doorId = 1
 character = NodePath("../Character")
 sceneName = "test_scene_2"
 
-[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("12_02b08")]
+[node name="Lamps" type="Node2D" parent="." unique_id=2049166898]
+
+[node name="Lamp" parent="Lamps" unique_id=409278306 node_paths=PackedStringArray("character") instance=ExtResource("14_u0ded")]
+position = Vector2(931, -307)
+character = NodePath("../../Character")
+rotDeg = 10.0
+
+[node name="Line2D" parent="Lamps/Lamp" index="0" unique_id=52843690]
+points = PackedVector2Array(0, 0, 0, 100)
+
+[node name="Sprite2D" parent="Lamps/Lamp" index="1" unique_id=636693869]
+position = Vector2(0, 104)
+
+[node name="CollisionShape2D" parent="Lamps/Lamp/Area2D" parent_id_path=PackedInt32Array(409278306, 756996646) index="0" unique_id=812634636]
+position = Vector2(-0.25, 56)
+shape = SubResource("RectangleShape2D_u0ded")
+
+[node name="Lamp2" parent="Lamps" unique_id=1024987029 node_paths=PackedStringArray("character") instance=ExtResource("14_u0ded")]
+position = Vector2(1063, -307)
+character = NodePath("../../Character")
+rotDeg = 10.0
+
+[node name="Line2D" parent="Lamps/Lamp2" index="0" unique_id=52843690]
+points = PackedVector2Array(0, 0, 0, 100)
+
+[node name="Sprite2D" parent="Lamps/Lamp2" index="1" unique_id=636693869]
+position = Vector2(0, 104)
+
+[node name="CollisionShape2D" parent="Lamps/Lamp2/Area2D" parent_id_path=PackedInt32Array(1024987029, 756996646) index="0" unique_id=812634636]
+position = Vector2(-0.25, 56)
+shape = SubResource("RectangleShape2D_u0ded")
+
+[node name="Satmasiks" type="Node2D" parent="." unique_id=1300195875]
+
+[node name="Sarmasik" parent="Satmasiks" unique_id=1024922116 instance=ExtResource("15_nywed")]
+z_index = -1
+position = Vector2(1047, -306)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.3
+
+[node name="Sarmasik2" parent="Satmasiks" unique_id=1767579200 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(1020, -305)
+Speed = 4.0
+segmentAmount = 50.0
+length = 200.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik3" parent="Satmasiks" unique_id=1947492148 instance=ExtResource("15_nywed")]
+position = Vector2(-36, -194)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.3
+
+[node name="Sarmasik4" parent="Satmasiks" unique_id=876012445 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(-10, -193)
+Speed = 4.0
+segmentAmount = 50.0
+length = 200.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik5" parent="Satmasiks" unique_id=1281098828 instance=ExtResource("15_nywed")]
+z_index = -1
+position = Vector2(953, -306)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.3
+
+[node name="Sarmasik6" parent="Satmasiks" unique_id=2138324823 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(919, -306)
+Speed = 4.0
+segmentAmount = 50.0
+length = 130.0
+egim = 2.0
+dalgaYogunlugu = 0.4
+
+[node name="Sarmasik7" parent="Satmasiks" unique_id=911320967 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(227, -239)
+Speed = 4.0
+segmentAmount = 50.0
+length = 130.0
+egim = 2.0
+dalgaYogunlugu = 0.4
+
+[node name="Sarmasik8" parent="Satmasiks" unique_id=1468762588 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(382, -273)
+Speed = 4.0
+segmentAmount = 50.0
+length = 130.0
+egim = 2.0
+dalgaYogunlugu = 0.4
+
+[node name="Sarmasik9" parent="Satmasiks" unique_id=1760887586 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(496, -329)
+Speed = 4.0
+segmentAmount = 50.0
+length = 130.0
+egim = 2.0
+dalgaYogunlugu = 0.4
+
+[node name="Sarmasik10" parent="Satmasiks" unique_id=249911731 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(733, -352)
+Speed = 4.0
+segmentAmount = 50.0
+length = 130.0
+egim = 2.0
+dalgaYogunlugu = 0.4
+
+[node name="Sarmasik11" parent="Satmasiks" unique_id=2102908353 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(504, -336)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.3
+
+[node name="Sarmasik12" parent="Satmasiks" unique_id=675999498 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(721, -353)
+Speed = 3.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.9
+
+[node name="Sarmasik13" parent="Satmasiks" unique_id=1221281653 instance=ExtResource("15_nywed")]
+z_index = 1
+position = Vector2(240, -240)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.3
 
 [editable path="CheckPoints/CheckPoint"]
 [editable path="CheckPoints/CheckPoint2"]
 [editable path="CheckPoints/CheckPoint3"]
 [editable path="CheckPoints/CheckPoint4"]
+[editable path="CheckPoints/CheckPoint5"]
+[editable path="Lamps/Lamp"]
+[editable path="Lamps/Lamp2"]
