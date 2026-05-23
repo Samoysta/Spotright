@@ -73,6 +73,7 @@ public partial class Door : Area2D
 	{
 		if (name == "FadeIn")
 		{
+			pd.Items.Reparent(GetTree().Root);
 			GetTree().ChangeSceneToFile($"res://Scenes/Levels/{sceneName}.tscn");
 		}
 		else if (name == "FadeOut")

@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.PortableExecutable;
 
 public partial class Weapon1 : Area2D
 {
@@ -10,6 +12,9 @@ public partial class Weapon1 : Area2D
 	Vector2 firstPos;
 	float spawnCoolDown;
 	int shootA;
+	[Export] SceneManager sm;
+	[Export] public int Id;
+	[Export] public int roomId;
 	[Export] bool Golden;
 	[Export] Texture2D blueWeapon;
 	[Export] Texture2D goldenWeapon;
@@ -23,6 +28,7 @@ public partial class Weapon1 : Area2D
 	[Export] AnimationPlayer anim;
 	[Export] AnimationPlayer anim2;
 	CollisionShape2D col;
+	PlayerData pd;
 	float shootcd;
 	Vector2 pos;
 	Sprite2D gunSprite;
@@ -33,6 +39,7 @@ public partial class Weapon1 : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		pd = GetNode<PlayerData>("/root/PlayerData");
 		gunSprite = GetNode<Sprite2D>("Sprite2D");
 		if (Golden)
 		{
@@ -46,18 +53,42 @@ public partial class Weapon1 : Area2D
 		canSelect = true;
 		firstPos = GlobalPosition;
 		
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			Effect ef = (Effect)fireEf.Instantiate();
 			GetTree().CurrentScene.CallDeferred("add_child",ef);
 			fireEfs.Enqueue(ef);
 		}
 		col = GetNode<CollisionShape2D>("CollisionShape2D");
+		character = pd.character;
+	}
+
+	public void Init(Character player)
+	{
+		character = player;
+		character.selected = true;
+		cam = character.camera;
+		fireEfs.Clear();
+		for (int i = 0; i < 6; i++)
+		{
+			Effect ef = (Effect)fireEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child",ef);
+			fireEfs.Enqueue(ef);
+		}
+		sm = character.sm;
+		if (sm.weaponIds.Contains(Id))
+		{
+			int index = Array.IndexOf(sm.weaponIds,Id);
+			sm.weapons[index].QueueFree();
+			sm.weapons[index] = this;
+		}
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		col.CallDeferred("set_disabled", character.selected);
 		if (spawnCoolDown > 0)
 		{
 			spawnCoolDown -= (float)delta;
@@ -165,14 +196,20 @@ public partial class Weapon1 : Area2D
 
 	void close()
 	{
+		selected = false;
+		spawnCoolDown = 5f;
+		character.selected = false;
 		CallDeferred("reparent", GetTree().CurrentScene);
 		t?.Kill();
 		t = CreateTween();
 		t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-		t.TweenProperty(this, "scale", Vector2.Zero, 0.5f);
-		selected = false;
-		spawnCoolDown = 5f;
-		character.selected = false;
+		t.TweenProperty(this, "scale", Vector2.Zero, 0.5f).Finished += () =>
+		{
+			if (sm.roomId != roomId)
+			{
+				QueueFree();
+			}
+		};
 	}
 
 	void open()
@@ -196,12 +233,11 @@ public partial class Weapon1 : Area2D
 		{
 			if (canSelect)
 			{
-				character = (Character)body;
 				if (!character.selected)
 				{
 					anim.Play("queue");
 					selected = true;
-					CallDeferred("reparent", character);
+					CallDeferred("reparent", character.Items);
 					canSelect = false;
 					character.selected = true;
 					col.CallDeferred("set_disabled", true);

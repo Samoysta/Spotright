@@ -304,7 +304,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1.2, 0, 0, 0.13333334, -0.14571083, 1, -0.16666666, 0.0701468, 0.25, 0),
+"points": PackedFloat32Array(1.4, 0, 0, 0.033333335, -0.12799323, 1, -0.19999999, 0.031461596, 0.25, 0),
 "times": PackedFloat32Array(0, 0.46666667)
 }
 tracks/1/type = "bezier"
@@ -315,7 +315,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.83, 0, 0, 0.16666667, 0.13986176, 1, -0.13333333, -0.011281371, 0.25, 0),
+"points": PackedFloat32Array(0.7, 0, 0, 0.033333335, 0.1215592, 1, -0.099999994, -0.009906054, 0.25, 0),
 "times": PackedFloat32Array(0, 0.46666667)
 }
 
@@ -329,7 +329,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.4, 0, 0, 0, 0.49918577, 1, -0.39999998, -0.01928401, 0.25, 0),
+"points": PackedFloat32Array(0.4, 0, 0, 0, 0.45296797, 1, -0.26666665, 0.0061813593, 0.25, 0),
 "times": PackedFloat32Array(0, 0.56666666)
 }
 tracks/1/type = "bezier"
@@ -340,7 +340,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1.3, 0, 0, 0.033333335, -0.25991917, 1, -0.43333334, 0.0031478405, 0.25, 0),
+"points": PackedFloat32Array(1.3, 0, 0, 0.033333335, -0.25781345, 1, -0.29999998, 0.0061813593, 0.25, 0),
 "times": PackedFloat32Array(0, 0.56666666)
 }
 
@@ -449,7 +449,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
-size = Vector2(4, 25)
+size = Vector2(2, 29.5)
 
 [sub_resource type="Curve" id="Curve_owm7s"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -684,7 +684,7 @@ collision_layer = 2
 safe_margin = 0.001
 script = ExtResource("1_ushfy")
 doors = []
-Items = NodePath("")
+Items = NodePath("Items")
 Speed = 210.0
 JumpVelocity = 350.0
 coyotoTime = 0.1
@@ -741,13 +741,13 @@ position = Vector2(0, 1)
 texture = ExtResource("8_wbia7")
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
-position = Vector2(8, 0)
+position = Vector2(7, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWallCheck" unique_id=289782243]
 shape = SubResource("RectangleShape2D_owm7s")
 
 [node name="LeftWallCheck" type="Area2D" parent="." unique_id=303059102]
-position = Vector2(-8, 0)
+position = Vector2(-7, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWallCheck" unique_id=739879858]
 position = Vector2(-0.06375027, 0)
@@ -835,6 +835,8 @@ linear_accel_max = -100.0
 color_ramp = SubResource("Gradient_7iw6i")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
+
+[node name="Items" type="Node2D" parent="." unique_id=1440899725]
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]

@@ -1,13 +1,11 @@
 using Godot;
 using System;
 
-public partial class PlayerData : Node
+public partial class SceneManager : Node2D
 {
-	public int doorID = 0;
-	public int lastDir = -1;
-	public Character character;
-	public Node2D Items;
-	public SceneManager sm;
+	[Export] public int [] weaponIds;
+	[Export] public Node2D [] weapons;
+	[Export] public int roomId;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

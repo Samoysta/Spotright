@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://0iec1n5qwps5" path="res://Scenes/character.tscn" id="1_3dogw"]
 [ext_resource type="Texture2D" uid="uid://5ue1fxxw4aui" path="res://Assets/Yaprak.png" id="2_8qgji"]
 [ext_resource type="Script" uid="uid://y5iy8g2iaqnp" path="res://Scripts/Camera2d.cs" id="2_hb2xm"]
+[ext_resource type="PackedScene" uid="uid://m4pffx0tycsa" path="res://Scenes/scene_manager.tscn" id="2_nywed"]
 [ext_resource type="Texture2D" uid="uid://cdhvp5efkxh6a" path="res://Assets/Tilemaps/Area1.png" id="2_r5l72"]
 [ext_resource type="Texture2D" uid="uid://cvgs21q323s3u" path="res://Assets/Tilemaps/are1Grounds.png" id="4_yglu3"]
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="5_d3awe"]
 [ext_resource type="Texture2D" uid="uid://bh048csbvasgu" path="res://Assets/Tilemaps/area1bgTiles.png" id="5_ibmi3"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="9_d3awe"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="9_yglu3"]
-[ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="10_yglu3"]
 [ext_resource type="PackedScene" uid="uid://o717f42cfwb8" path="res://Scenes/interactiveItems/door.tscn" id="11_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="12_02b08"]
 [ext_resource type="PackedScene" uid="uid://cg635lbwuy6nc" path="res://Scenes/Enviorement/lamp.tscn" id="14_u0ded"]
@@ -59,6 +59,7 @@ texture = ExtResource("2_r5l72")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 7, 8, 7, 8, -8, -8, -8)
 2:1/0 = 0
 2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 7, 8, 7, 8, -8, -8, -8)
 5:1/0 = 0
 5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tnimv")
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -155,6 +156,11 @@ size = Vector2(6, 112)
 
 [node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("12_02b08")]
 
+[node name="SceneManager" parent="." unique_id=1910871571 node_paths=PackedStringArray("weapons") instance=ExtResource("2_nywed")]
+weaponIds = PackedInt32Array(0)
+weapons = [null]
+roomId = 1
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
 process_callback = 0
 limit_left = -64
@@ -172,7 +178,8 @@ position = Vector2(42, -7)
 scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_rdbpf")
 
-[node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("doors", "camera") instance=ExtResource("1_3dogw")]
+[node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("sm", "doors", "camera") instance=ExtResource("1_3dogw")]
+sm = NodePath("../SceneManager")
 doors = [NodePath("../Door")]
 doorIDs = PackedInt32Array(1)
 camera = NodePath("../Camera2D")
@@ -335,6 +342,9 @@ position = Vector2(568, -64)
 [node name="Plant11" parent="Plant2s" unique_id=1241753402 instance=ExtResource("9_yglu3")]
 position = Vector2(748, -96)
 
+[node name="Plant12" parent="Plant2s" unique_id=950652504 instance=ExtResource("9_yglu3")]
+position = Vector2(1063, -304)
+
 [node name="CheckPoints" type="Node2D" parent="." unique_id=809036090]
 
 [node name="CheckPoint" parent="CheckPoints" unique_id=1205404910 instance=ExtResource("9_d3awe")]
@@ -371,10 +381,6 @@ position = Vector2(575, -134)
 [node name="CollisionShape2D" parent="CheckPoints/CheckPoint5" index="0" unique_id=180739963]
 position = Vector2(0, -68.52124)
 shape = SubResource("RectangleShape2D_tnimv")
-
-[node name="weapon1" parent="." unique_id=1828208836 node_paths=PackedStringArray("cam") instance=ExtResource("10_yglu3")]
-position = Vector2(736, -149)
-cam = NodePath("../Camera2D")
 
 [node name="Door" parent="." unique_id=465521397 node_paths=PackedStringArray("character") instance=ExtResource("11_bwjpn")]
 z_index = -1
@@ -415,9 +421,9 @@ position = Vector2(0, 104)
 position = Vector2(-0.25, 56)
 shape = SubResource("RectangleShape2D_u0ded")
 
-[node name="Satmasiks" type="Node2D" parent="." unique_id=1300195875]
+[node name="Sarmasiks" type="Node2D" parent="." unique_id=1300195875]
 
-[node name="Sarmasik" parent="Satmasiks" unique_id=1024922116 instance=ExtResource("15_nywed")]
+[node name="Sarmasik" parent="Sarmasiks" unique_id=1024922116 instance=ExtResource("15_nywed")]
 z_index = -1
 position = Vector2(1047, -306)
 Speed = 4.0
@@ -426,7 +432,7 @@ length = 100.0
 egim = 2.0
 dalgaYogunlugu = 0.3
 
-[node name="Sarmasik2" parent="Satmasiks" unique_id=1767579200 instance=ExtResource("15_nywed")]
+[node name="Sarmasik2" parent="Sarmasiks" unique_id=1767579200 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(1020, -305)
 Speed = 4.0
@@ -435,7 +441,7 @@ length = 200.0
 egim = 2.0
 dalgaYogunlugu = 0.6
 
-[node name="Sarmasik3" parent="Satmasiks" unique_id=1947492148 instance=ExtResource("15_nywed")]
+[node name="Sarmasik3" parent="Sarmasiks" unique_id=1947492148 instance=ExtResource("15_nywed")]
 position = Vector2(-36, -194)
 Speed = 4.0
 segmentAmount = 50.0
@@ -443,7 +449,7 @@ length = 100.0
 egim = 2.0
 dalgaYogunlugu = 0.3
 
-[node name="Sarmasik4" parent="Satmasiks" unique_id=876012445 instance=ExtResource("15_nywed")]
+[node name="Sarmasik4" parent="Sarmasiks" unique_id=876012445 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(-10, -193)
 Speed = 4.0
@@ -452,7 +458,7 @@ length = 200.0
 egim = 2.0
 dalgaYogunlugu = 0.6
 
-[node name="Sarmasik5" parent="Satmasiks" unique_id=1281098828 instance=ExtResource("15_nywed")]
+[node name="Sarmasik5" parent="Sarmasiks" unique_id=1281098828 instance=ExtResource("15_nywed")]
 z_index = -1
 position = Vector2(953, -306)
 Speed = 4.0
@@ -461,7 +467,7 @@ length = 100.0
 egim = 2.0
 dalgaYogunlugu = 0.3
 
-[node name="Sarmasik6" parent="Satmasiks" unique_id=2138324823 instance=ExtResource("15_nywed")]
+[node name="Sarmasik6" parent="Sarmasiks" unique_id=2138324823 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(919, -306)
 Speed = 4.0
@@ -470,7 +476,7 @@ length = 130.0
 egim = 2.0
 dalgaYogunlugu = 0.4
 
-[node name="Sarmasik7" parent="Satmasiks" unique_id=911320967 instance=ExtResource("15_nywed")]
+[node name="Sarmasik7" parent="Sarmasiks" unique_id=911320967 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(227, -239)
 Speed = 4.0
@@ -479,7 +485,7 @@ length = 130.0
 egim = 2.0
 dalgaYogunlugu = 0.4
 
-[node name="Sarmasik8" parent="Satmasiks" unique_id=1468762588 instance=ExtResource("15_nywed")]
+[node name="Sarmasik8" parent="Sarmasiks" unique_id=1468762588 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(382, -273)
 Speed = 4.0
@@ -488,7 +494,7 @@ length = 130.0
 egim = 2.0
 dalgaYogunlugu = 0.4
 
-[node name="Sarmasik9" parent="Satmasiks" unique_id=1760887586 instance=ExtResource("15_nywed")]
+[node name="Sarmasik9" parent="Sarmasiks" unique_id=1760887586 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(496, -329)
 Speed = 4.0
@@ -497,7 +503,7 @@ length = 130.0
 egim = 2.0
 dalgaYogunlugu = 0.4
 
-[node name="Sarmasik10" parent="Satmasiks" unique_id=249911731 instance=ExtResource("15_nywed")]
+[node name="Sarmasik10" parent="Sarmasiks" unique_id=249911731 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(733, -352)
 Speed = 4.0
@@ -506,7 +512,7 @@ length = 130.0
 egim = 2.0
 dalgaYogunlugu = 0.4
 
-[node name="Sarmasik11" parent="Satmasiks" unique_id=2102908353 instance=ExtResource("15_nywed")]
+[node name="Sarmasik11" parent="Sarmasiks" unique_id=2102908353 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(504, -336)
 Speed = 4.0
@@ -515,7 +521,7 @@ length = 100.0
 egim = 2.0
 dalgaYogunlugu = 0.3
 
-[node name="Sarmasik12" parent="Satmasiks" unique_id=675999498 instance=ExtResource("15_nywed")]
+[node name="Sarmasik12" parent="Sarmasiks" unique_id=675999498 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(721, -353)
 Speed = 3.0
@@ -524,7 +530,7 @@ length = 300.0
 egim = 2.0
 dalgaYogunlugu = 0.9
 
-[node name="Sarmasik13" parent="Satmasiks" unique_id=1221281653 instance=ExtResource("15_nywed")]
+[node name="Sarmasik13" parent="Sarmasiks" unique_id=1221281653 instance=ExtResource("15_nywed")]
 z_index = 1
 position = Vector2(240, -240)
 Speed = 4.0

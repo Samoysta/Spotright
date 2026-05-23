@@ -7,9 +7,11 @@ using System.Formats.Tar;
 public partial class Character : CharacterBody2D
 {
 	PlayerData pd;
+	[Export] public SceneManager sm;
 	[Export] Node2D[] doors;
+	[Export] public Node2D Items;
 	[Export] int [] doorIDs;
-	[Export] Camera2d camera;
+	[Export] public Camera2d camera;
 	[Export] public float Speed;
 	[Export] float JumpVelocity;
 	[Export] float coyotoTime;
@@ -137,6 +139,23 @@ public partial class Character : CharacterBody2D
 			characterSprite.Play("Idle");
 			isGrounded = true;
 		}
+		pd.sm = sm;
+		if (pd.Items == null)
+		{
+			pd.Items = Items;	
+		}
+		else
+		{
+			Items.QueueFree();
+			Items = pd.Items;
+			Items.Reparent(this);
+			Items.GlobalPosition = GlobalPosition;
+			foreach (Node2D item in Items.GetChildren())
+			{
+				item.Call("Init", this);
+			}
+		}
+		pd.character = this;
     }
     public override void _Process(double delta)
     {
@@ -145,6 +164,12 @@ public partial class Character : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!isDashing && velocity.Y > 150 && IsOnFloor())
+		{
+			characterSprite.Play("Falled");	
+			anim.Play("Fall");
+			anim.Seek(0);
+		}
 		velocity = Velocity;
 		//restartAnim;
 		if (birthTimer >= 0)
@@ -298,12 +323,6 @@ public partial class Character : CharacterBody2D
 			if (!isGrounded)
 			{
 				SpawnJumpEffect();
-				if (!isDashing)
-				{
-					characterSprite.Play("Falled");	
-					anim.Play("Fall");
-					anim.Seek(0);
-				}
 				characterSprite.Frame = 0;
 				isGrounded = true;
 				if (Mathf.Abs(velocity.X - 0) < dashSpeed * 2)
@@ -312,7 +331,7 @@ public partial class Character : CharacterBody2D
 				}
 			}
 			//RunEffect
-			if (Mathf.Abs(Velocity.X - 0) > 10)
+			if (Mathf.Abs(Velocity.X - 0) > 10 || Input.IsActionPressed("Right") || Input.IsActionPressed("Left"))
 			{
 				if (!isDashing && canAnim)
 				{
@@ -552,7 +571,10 @@ public partial class Character : CharacterBody2D
 		}
 		GlobalPosition = GlobalPosition.Round();
 		AttemptCorrection(6);
-		AttemptCorrectionX(3);
+		if (isDashing)
+		{
+			AttemptCorrectionX(3);			
+		}
 		canJump = true;
 		canAnim = true;
 		pd.lastDir = lastDir;
@@ -711,7 +733,7 @@ public partial class Character : CharacterBody2D
 		canDie = false;
 		cantInput = true;
 		restartAnim = true;
-		col.Disabled = true;
+		col.CallDeferred("set_disabled",true);
 		velocity = Vector2.Zero;
 		Velocity = Vector2.Zero;
 		dieAnim.Play("Die");
