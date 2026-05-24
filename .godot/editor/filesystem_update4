@@ -1,6 +1,4 @@
-res://Scenes/Levels/test_scene.tscn
 res://Scenes/Levels/test_scene_2.tscn
-res://Scripts/Character.cs
 res://Scripts/DamageItems/CircleBoys.cs
 res://Scripts/Enviroment/Sarmasik.cs
 res://Scripts/Enviroment/Lamp.cs
@@ -10,11 +8,12 @@ res://Scripts/Plants/Plant1.cs
 res://Scripts/SceneManager.cs
 res://Scripts/Camera2d.cs
 res://Scripts/Effect.cs
+res://Scripts/Character.cs
 res://Scripts/PlayerData.cs
 res://Scripts/bullets/Wepaon1Bullet.cs
 res://Scripts/Weapon1.cs
 res://Scripts/interactiveItems/JumpPad.cs
 res://Scripts/DamageItems/FallebleStone.cs
 res://Scripts/GameManager.cs
-res://Scenes/DamageItem/circle_boys.tscn
+res://Scenes/Levels/test_scene.tscn
 res://Scenes/character.tscn
