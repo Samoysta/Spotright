@@ -384,7 +384,7 @@ shape = SubResource("RectangleShape2D_tnimv")
 
 [node name="Door" parent="." unique_id=465521397 node_paths=PackedStringArray("character") instance=ExtResource("11_bwjpn")]
 z_index = -1
-position = Vector2(998, -157)
+position = Vector2(998, -158)
 doorId = 1
 character = NodePath("../Character")
 sceneName = "test_scene_2"

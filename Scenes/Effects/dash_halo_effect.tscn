@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ba16wiucm6jo7"]
 
-[ext_resource type="Texture2D" uid="uid://du7u54bw6euu6" path="res://Assets/CharacterWhite.png" id="1_0v045"]
 [ext_resource type="Script" uid="uid://24y2vn7ev125" path="res://Scripts/Effect.cs" id="1_l5fef"]
+[ext_resource type="Texture2D" uid="uid://40jqvobsvkmj" path="res://Assets/Character-Sheet.png" id="2_l5fef"]
 
 [sub_resource type="Animation" id="Animation_0v045"]
 length = 0.001
@@ -74,5 +74,7 @@ libraries/ = SubResource("AnimationLibrary_fkqyj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=219609879]
 modulate = Color(1, 1, 1, 0)
-texture = ExtResource("1_0v045")
+texture = ExtResource("2_l5fef")
 flip_h = true
+hframes = 22
+frame = 20
