@@ -1,0 +1,110 @@
+[gd_scene format=4 uid="uid://dofnlgvyqd0a4"]
+
+[ext_resource type="Script" uid="uid://dssi22x854rxg" path="res://Scripts/interactiveItems/LockedWall.cs" id="1_pg7cc"]
+[ext_resource type="Texture2D" uid="uid://dwalc0nqsgini" path="res://Assets/LockedWallTileset.png" id="2_gwepd"]
+[ext_resource type="Texture2D" uid="uid://c2btwo5l6x3vt" path="res://Assets/LockOfWall.png" id="3_y8gch"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c1onc"]
+texture = ExtResource("2_gwepd")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_eucva"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_c1onc")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c1onc"]
+radius = 16.0
+
+[node name="LockedWall" type="Node2D" unique_id=919746307 node_paths=PackedStringArray("wallUp", "wallUpTargetPos", "wallDown", "wallDownTargetPos", "LockKey", "up", "down")]
+z_index = -2
+script = ExtResource("1_pg7cc")
+id = 1
+wallUp = NodePath("WallUp")
+wallUpTargetPos = NodePath("wallUpTarget")
+wallDown = NodePath("WallDown")
+wallDownTargetPos = NodePath("wallDownTarget")
+Speed = 5.0
+LockKey = NodePath("Key")
+up = NodePath("WallUp/Polygon2D/KeySprite")
+down = NodePath("WallDown/Polygon2D/KeySprite")
+keySpeed = 3.0
+
+[node name="WallUp" type="TileMapLayer" parent="." unique_id=1968044263 groups=["Ground"]]
+tile_map_data = PackedByteArray("AAD9//7/AAABAAIAAAD9////AAABAAMAAAD+//7/AAACAAIAAAD+////AAACAAMAAAD///7/AAADAAIAAAD/////AAADAAMAAAAAAP7/AAAEAAIAAAAAAP//AAAEAAMAAAABAP7/AAAFAAIAAAABAP//AAAFAAMAAAACAP7/AAABAAIAADACAP//AAAGAAMAAAD9//3/AAABAAIAAAD9//z/AAABAAIAAAD9//v/AAABAAIAAAD9//r/AAABAAEAAAD+//r/AAACAAEAAAD///r/AAADAAEAAAAAAPr/AAAEAAEAAAABAPr/AAAFAAEAAAACAPr/AAAGAAEAAAACAPv/AAABAAIAADACAPz/AAABAAIAADACAP3/AAABAAIAADD+//v/AAACAAIAAAD///z/AAACAAIAAAAAAPz/AAACAAIAAAAAAP3/AAACAAIAAAABAP3/AAACAAIAAAABAPz/AAACAAIAAAABAPv/AAACAAIAAAAAAPv/AAACAAIAAAD///v/AAACAAIAAAD+//3/AAACAAIAAAD+//z/AAACAAIAAAD///3/AAACAAIAAAA=")
+tile_set = SubResource("TileSet_eucva")
+
+[node name="Polygon2D" type="Polygon2D" parent="WallUp" unique_id=1449854081]
+clip_children = 1
+polygon = PackedVector2Array(-48, 0, 48, 0, 48, -24, -48, -24)
+
+[node name="KeySprite" type="Sprite2D" parent="WallUp/Polygon2D" unique_id=376875170]
+visible = false
+texture = ExtResource("3_y8gch")
+
+[node name="WallDown" type="TileMapLayer" parent="." unique_id=1833297080 groups=["Ground"]]
+z_index = -1
+tile_map_data = PackedByteArray("AAACAAAAAAABAAMAADACAAEAAAABAAIAADACAAIAAAABAAIAADACAAMAAAABAAIAADACAAQAAAABAAIAADACAAUAAAABAAEAADABAAAAAAACAAMAADABAAEAAAACAAIAADABAAIAAAACAAIAADABAAMAAAACAAIAADABAAQAAAACAAIAADABAAUAAAACAAEAADAAAAAAAAADAAMAADAAAAEAAAADAAIAADAAAAIAAAACAAIAADAAAAMAAAACAAIAADAAAAQAAAACAAIAADAAAAUAAAADAAEAADD//wAAAAAEAAMAADD//wEAAAAEAAIAADD//wIAAAACAAIAADD//wMAAAACAAIAADD//wQAAAACAAIAADD//wUAAAAEAAEAADD+/wAAAAAFAAMAADD+/wEAAAAFAAIAADD+/wIAAAACAAIAADD+/wMAAAACAAIAADD+/wQAAAACAAIAADD+/wUAAAAFAAEAADD9/wAAAAAGAAMAADD9/wEAAAABAAIAAAD9/wIAAAABAAIAAAD9/wMAAAABAAIAAAD9/wQAAAABAAIAAAD9/wUAAAAGAAEAADA=")
+tile_set = SubResource("TileSet_eucva")
+
+[node name="Polygon2D" type="Polygon2D" parent="WallDown" unique_id=1938197128]
+clip_children = 1
+polygon = PackedVector2Array(-48, 0, 48, 0, 48, 24, -48, 24)
+
+[node name="KeySprite" type="Sprite2D" parent="WallDown/Polygon2D" unique_id=347729387]
+visible = false
+texture = ExtResource("3_y8gch")
+
+[node name="wallUpTarget" type="Node2D" parent="." unique_id=500871978]
+position = Vector2(0, -80)
+
+[node name="wallDownTarget" type="Node2D" parent="." unique_id=1318648326]
+position = Vector2(0, 80)
+
+[node name="Key" type="Area2D" parent="." unique_id=2023911437]
+z_index = 2
+collision_layer = 0
+collision_mask = 2
+
+[node name="KeySprite" type="Sprite2D" parent="Key" unique_id=2119720216]
+texture = ExtResource("3_y8gch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key" unique_id=1920680288]
+shape = SubResource("CircleShape2D_c1onc")
+
+[connection signal="body_entered" from="Key" to="." method="BodyEntered2D"]

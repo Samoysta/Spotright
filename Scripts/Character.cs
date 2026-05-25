@@ -754,6 +754,7 @@ public partial class Character : CharacterBody2D
 			isZjustPressed = false;
 			isDashing = false;
 			dashD = 0;
+			ct = 0;
 		}
 	}
 

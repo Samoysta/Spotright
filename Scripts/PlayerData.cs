@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class PlayerData : Node
@@ -8,6 +9,7 @@ public partial class PlayerData : Node
 	public Character character;
 	public Node2D Items;
 	public SceneManager sm;
+	public Dictionary<int, string> LockedDoors = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
