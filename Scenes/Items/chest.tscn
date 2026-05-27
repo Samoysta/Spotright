@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://4p477vut2jxm"]
+
+[ext_resource type="Script" uid="uid://dyr0gn2dk60uv" path="res://Scripts/interactiveItems/Chest.cs" id="1_bti28"]
+[ext_resource type="Texture2D" uid="uid://wbxs3trlkv8k" path="res://Assets/Chest/ChestClosed.png" id="1_skqcg"]
+[ext_resource type="PackedScene" uid="uid://gp2cq7j8n8q3" path="res://Scenes/Items/coin.tscn" id="2_7becl"]
+[ext_resource type="Texture2D" uid="uid://d2yd6xsdlw62u" path="res://Assets/Chest/ChestOpened.png" id="2_qwb25"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwb25"]
+size = Vector2(96, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bti28"]
+size = Vector2(100, 44)
+
+[sub_resource type="Animation" id="Animation_skqcg"]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("chestSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.5, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.10000001, 0.23333335, 0.36666667, 0.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("chestSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1.5, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.10000001, 0.23333335, 0.36666667, 0.5)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("chestSprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_qwb25")]
+}
+
+[sub_resource type="Animation" id="Animation_bti28"]
+resource_name = "Opened"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("chestSprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_qwb25")]
+}
+
+[sub_resource type="Animation" id="Animation_qwb25"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("chestSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("chestSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("chestSprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_skqcg")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bti28"]
+_data = {
+&"Open": SubResource("Animation_skqcg"),
+&"Opened": SubResource("Animation_bti28"),
+&"RESET": SubResource("Animation_qwb25")
+}
+
+[node name="Chest" type="StaticBody2D" unique_id=1327340397 node_paths=PackedStringArray("anim")]
+script = ExtResource("1_bti28")
+Force = 300.0
+anim = NodePath("AnimationPlayer")
+Coin = ExtResource("2_7becl")
+
+[node name="chestSprite" type="Sprite2D" parent="." unique_id=447336330]
+position = Vector2(0, 24)
+texture = ExtResource("1_skqcg")
+offset = Vector2(0, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=445436469]
+shape = SubResource("RectangleShape2D_qwb25")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1235250691]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1288272218]
+shape = SubResource("RectangleShape2D_bti28")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=511823515]
+libraries/ = SubResource("AnimationLibrary_bti28")
+
+[connection signal="body_entered" from="Area2D" to="." method="BodyEntered2D"]
+[connection signal="body_exited" from="Area2D" to="." method="BodyExited2D"]

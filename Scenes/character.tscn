@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
 [ext_resource type="Texture2D" uid="uid://2jrx3sd8krxj" path="res://Assets/BaloonBoomSheet.png" id="10_kq7hj"]
 [ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="11_7iw6i"]
+[ext_resource type="FontFile" uid="uid://bviu62loexrxk" path="res://ByteBounce.ttf" id="12_l1rcp"]
+[ext_resource type="Texture2D" uid="uid://6f436w7nomeh" path="res://Assets/CoinSheet.png" id="13_le1tg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.6, 23.5)
@@ -649,11 +651,18 @@ animations = [{
 offsets = PackedFloat32Array(0, 0.44581282, 0.8990148)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8546798, 1, 1, 1, 0)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
+[sub_resource type="LabelSettings" id="LabelSettings_le1tg"]
+font = ExtResource("12_l1rcp")
+font_size = 315
+outline_size = 48
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
 script = ExtResource("1_ushfy")
+coinLabel = NodePath("UI/Coin/CoinLabel")
 doors = []
 Items = NodePath("Items")
 Speed = 210.0
@@ -662,7 +671,7 @@ coyotoTime = 0.1
 jumpTime = 0.19
 inputBufTimer = 0.1
 Gravity = 2.0
-accel = 1300.0
+accel = 1500.0
 characterSprite = NodePath("CollisionShape2D/body/Foot/CharacterSprite")
 foot = NodePath("CollisionShape2D/body/Foot")
 jumpEf = ExtResource("2_owm7s")
@@ -811,6 +820,22 @@ linear_accel_max = -100.0
 color_ramp = SubResource("Gradient_7iw6i")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
+
+[node name="Coin" type="Node2D" parent="UI" unique_id=1541988871]
+
+[node name="CoinLabel" type="Label" parent="UI/Coin" unique_id=1933778219]
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 72.0
+offset_bottom = 224.0
+scale = Vector2(0.09, 0.09)
+label_settings = SubResource("LabelSettings_le1tg")
+
+[node name="coinSprite" type="Sprite2D" parent="UI/Coin" unique_id=1460414189]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("13_le1tg")
+hframes = 4
 
 [node name="Items" type="Node2D" parent="." unique_id=1440899725]
 

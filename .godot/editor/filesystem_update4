@@ -1,4 +1,6 @@
-res://Scripts/Deneme.cs
+res://Scenes/Items/coin.tscn
+res://Scripts/interactiveItems/Coin.cs
+res://Scripts/interactiveItems/Chest.cs
 res://Scripts/interactiveItems/LockedWall.cs
 res://Scripts/DamageItems/CircleBoys.cs
 res://Scripts/Enviroment/Sarmasik.cs
@@ -11,11 +13,12 @@ res://Scripts/Camera2d.cs
 res://Scripts/Effect.cs
 res://Scripts/Character.cs
 res://Scripts/PlayerData.cs
-res://Scripts/GameManager.cs
 res://Scripts/bullets/Wepaon1Bullet.cs
 res://Scripts/Weapon1.cs
 res://Scripts/interactiveItems/JumpPad.cs
 res://Scripts/DamageItems/FallebleStone.cs
-res://Scenes/deneme.tscn
-res://Scenes/Effects/dash_halo_effect.tscn
+res://Scripts/GameManager.cs
 res://Scenes/Levels/test_scene_2.tscn
+res://Scenes/world_environment.tscn
+res://Scenes/character.tscn
+res://Scenes/interactiveItems/door.tscn

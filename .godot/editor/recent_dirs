@@ -1,8 +1,9 @@
+res://Assets/
+res://Scripts/interactiveItems/
+res://Scenes/Items/
 res://Scripts/
 res://Scenes/
-res://Assets/
 res://Scenes/interactiveItems/
-res://Scripts/interactiveItems/
 res://Scripts/Enviroment/
 res://Scenes/Enviorement/
 C:/Users/LENOVO/
@@ -11,7 +12,6 @@ res://Scenes/Effects/
 C:/Users/LENOVO/Dev/
 res://Scripts/bullets/
 res://Scenes/bullets/
-res://Scenes/Items/
 res://Scripts/DamageItems/
 res://Scenes/DamageItem/
 res://Scripts/Plants/

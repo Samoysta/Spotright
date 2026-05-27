@@ -172,10 +172,10 @@ position = Vector2(12, 21)
 texture = ExtResource("6_xx0ea")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1276345379]
+layer = 2
 
 [node name="BlackScreen" type="Sprite2D" parent="CanvasLayer" unique_id=76386330]
 visible = false
-z_index = 9
 position = Vector2(320, 180)
 texture = SubResource("GradientTexture2D_q5lc6")
 

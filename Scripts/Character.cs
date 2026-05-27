@@ -6,6 +6,8 @@ using System.Formats.Tar;
 
 public partial class Character : CharacterBody2D
 {
+	//UIs
+	[Export] public Label coinLabel;
 	PlayerData pd;
 	[Export] public SceneManager sm;
 	[Export] Node2D[] doors;
@@ -156,10 +158,14 @@ public partial class Character : CharacterBody2D
 			}
 		}
 		pd.character = this;
+		coinLabel.Text = $"{pd.coin}";
     }
     public override void _Process(double delta)
     {
-        
+        if (coinLabel.Text != $"{pd.coin}")
+		{
+			coinLabel.Text = $"{pd.coin}";
+		}
     }
 
 	public override void _PhysicsProcess(double delta)
@@ -325,9 +331,13 @@ public partial class Character : CharacterBody2D
 				SpawnJumpEffect();
 				characterSprite.Frame = 0;
 				isGrounded = true;
-				if (Mathf.Abs(velocity.X - 0) < dashSpeed * 2)
+				if (Mathf.Abs(velocity.X - 0) < Speed * 1.5f)
 				{
 					velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
+				}
+				else
+				{
+					velocity.X *= 0.75f;
 				}
 			}
 			//RunEffect
@@ -371,6 +381,18 @@ public partial class Character : CharacterBody2D
 				KillSelf();
 			}	
 		}
+		//sprite yönü
+		if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
+		{
+			if (lastDir < 0)
+			{
+				characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
+			}
+			else if(lastDir > 0)
+			{
+				characterSprite.Scale = firstScale;
+			}	
+		}
 		
 		//Dash
 		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash && !cantInput)
@@ -411,53 +433,6 @@ public partial class Character : CharacterBody2D
 		else if (!isDashing && !cantInput)
 		{
 			dashHaloCD = 0;
-			//sprite yönü
-			if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
-			{
-				if (lastDir < 0)
-				{
-					characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
-				}
-				else if(lastDir > 0)
-				{
-					characterSprite.Scale = firstScale;
-				}	
-			}
-			//Run
-			if (Input.IsActionPressed("Right"))
-			{
-				if (velocity.X <= Speed * 1.3f)
-				{
-					dir = 1;
-				}
-				else
-				{
-					if (!IsOnFloor())
-					{
-						dir = 1.3f;
-					}
-				}
-				lastDir = 1;
-			}
-			else if (Input.IsActionPressed("Left"))
-			{
-				if (velocity.X >= -Speed * 1.3f)
-				{
-					dir = -1;
-				}
-				else
-				{
-					if (!IsOnFloor())
-					{
-						dir = -1.3f;
-					}
-				}
-				lastDir = -1;
-			}
-			else
-			{
-				dir = 0;
-			}
 			//Jump
 			if (isZjustPressed && canJump)
 			{
@@ -496,6 +471,41 @@ public partial class Character : CharacterBody2D
 					canDash = true;
 
 				}
+			}
+			//Run
+			if (Input.IsActionPressed("Right"))
+			{
+				if (velocity.X <= Speed * 1.3f)
+				{
+					dir = 1;
+				}
+				else
+				{
+					if (!IsOnFloor())
+					{
+						dir = 1.3f;
+					}
+				}
+				lastDir = 1;
+			}
+			else if (Input.IsActionPressed("Left"))
+			{
+				if (velocity.X >= -Speed * 1.3f)
+				{
+					dir = -1;
+				}
+				else
+				{
+					if (!IsOnFloor())
+					{
+						dir = -1.3f;
+					}
+				}
+				lastDir = -1;
+			}
+			else
+			{
+				dir = 0;
 			}
 			if (isJumping)
 			{

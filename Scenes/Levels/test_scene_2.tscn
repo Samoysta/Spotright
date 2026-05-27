@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="9_b8at8"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="10_t307g"]
 [ext_resource type="PackedScene" uid="uid://dofnlgvyqd0a4" path="res://Scenes/interactiveItems/locked_wall.tscn" id="13_8bix5"]
+[ext_resource type="PackedScene" uid="uid://4p477vut2jxm" path="res://Scenes/Items/chest.tscn" id="14_4mavg"]
 
 [sub_resource type="Gradient" id="Gradient_x033f"]
 offsets = PackedFloat32Array(1)
@@ -737,6 +738,24 @@ position = Vector2(1729, -176)
 z_index = -1
 position = Vector2(1748, -176)
 
+[node name="Plant128" parent="Plants" unique_id=1051644124 instance=ExtResource("9_b8at8")]
+z_index = 2
+position = Vector2(1702, -175)
+
+[node name="Plant129" parent="Plants" unique_id=613768584 instance=ExtResource("9_b8at8")]
+modulate = Color(0.5641601, 0.56416, 0.56416, 1)
+z_index = -1
+position = Vector2(1675, -175)
+
+[node name="Plant130" parent="Plants" unique_id=221863486 instance=ExtResource("9_b8at8")]
+modulate = Color(0.5641601, 0.56416, 0.56416, 1)
+z_index = -1
+position = Vector2(1692, -175)
+
+[node name="Plant131" parent="Plants" unique_id=2140424228 instance=ExtResource("9_b8at8")]
+z_index = -1
+position = Vector2(1711, -175)
+
 [node name="Plants2" type="Node2D" parent="." unique_id=567485786]
 
 [node name="Plant2" parent="Plants2" unique_id=2008575144 instance=ExtResource("10_t307g")]
@@ -812,6 +831,14 @@ position = Vector2(0, 64)
 
 [node name="Key" parent="LockedWall" index="4" unique_id=2023911437]
 position = Vector2(168, 0)
+
+[node name="Chest" parent="." unique_id=1327340397 node_paths=PackedStringArray("cam") instance=ExtResource("14_4mavg")]
+position = Vector2(1744, -199)
+id = 1
+coinAmount = 50
+cam = NodePath("../Camera2D")
+Force = 500.0
+SpeedCoin = 500.0
 
 [editable path="CheckPoints/CheckPoint3"]
 [editable path="Lamps/Lamp"]
