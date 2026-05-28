@@ -161,7 +161,7 @@ weaponIds = PackedInt32Array(0)
 weapons = [null]
 roomId = 1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("target")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("character")]
 process_callback = 0
 limit_left = -64
 limit_top = -400
@@ -169,7 +169,7 @@ limit_right = 1104
 limit_bottom = 96
 editor_draw_limits = true
 script = ExtResource("2_hb2xm")
-target = NodePath("../Character")
+character = NodePath("../Character")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=595125895]
 modulate = Color(0.01171082, 0.26301283, 0.11960135, 1)

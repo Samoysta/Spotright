@@ -4,15 +4,20 @@ using System;
 public partial class LockedWall : Node2D
 {
 	[Export] int id;
+	[Export] Camera2d cam;
 	[Export] Node2D wallUp;
 	[Export] Node2D wallUpTargetPos;
 	[Export] Node2D wallDown;
 	[Export] Node2D wallDownTargetPos;
 	[Export] float Speed;
 	[Export] Node2D LockKey;
+	[Export] Sprite2D lockkeySprite;
 	[Export] Sprite2D up;
 	[Export] Sprite2D down;
 	[Export] float keySpeed;
+	[Export] AnimationPlayer keyAnim;
+	[Export] CpuParticles2D runef;
+	[Export] CpuParticles2D boomef;
 	bool selected;
 	bool opened;
 	Tween t;
@@ -58,18 +63,34 @@ public partial class LockedWall : Node2D
 		if (body is Character && !opened && !selected)
 		{
 			selected = true;
+			runef.Emitting = true;
+			keyAnim.Pause();
+			LockKey.Scale = new Vector2(0.5f,2f);
+			t2?.Kill();
+			t2 = CreateTween();
+			t2.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
+			t2.TweenProperty(LockKey, "scale", new Vector2(1,1), 1f);
 			t?.Kill();
 			t = CreateTween();
-			t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
-			t.TweenProperty(LockKey, "global_position", GlobalPosition, keySpeed);
+			t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+			t.TweenProperty(LockKey, "rotation_degrees", 180, 1f).Finished += () =>
+			{
+				t?.Kill();
+				t = CreateTween();
+				t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
+				t.TweenProperty(LockKey, "global_position", GlobalPosition, keySpeed);
+			};
 		}
 	}
 	public void OpenDoor()
 	{
+		boomef.Emitting = true;
+		runef.Emitting = false;
+		cam.Shake(30);
 		up.Visible = true;
 		down.Visible = true;
 		selected = false;
-		LockKey.Visible = false;
+		lockkeySprite.Visible = false;
 		opened = true;
 		t?.Kill();
 		t = CreateTween();

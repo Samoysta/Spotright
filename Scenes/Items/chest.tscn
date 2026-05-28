@@ -4,6 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://wbxs3trlkv8k" path="res://Assets/Chest/ChestClosed.png" id="1_skqcg"]
 [ext_resource type="PackedScene" uid="uid://gp2cq7j8n8q3" path="res://Scenes/Items/coin.tscn" id="2_7becl"]
 [ext_resource type="Texture2D" uid="uid://d2yd6xsdlw62u" path="res://Assets/Chest/ChestOpened.png" id="2_qwb25"]
+[ext_resource type="Texture2D" uid="uid://t8sgadpts1ln" path="res://Assets/Impact/im1-Sheet.png" id="5_k1c5p"]
+
+[sub_resource type="Gradient" id="Gradient_7becl"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k1c5p"]
+gradient = SubResource("Gradient_7becl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwb25"]
 size = Vector2(96, 46)
@@ -70,6 +77,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_qwb25")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("chestSprite/whiteSprite:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_bti28"]
@@ -172,6 +191,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ExtResource("1_skqcg")]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("chestSprite/whiteSprite:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bti28"]
 _data = {
@@ -180,16 +211,104 @@ _data = {
 &"RESET": SubResource("Animation_qwb25")
 }
 
-[node name="Chest" type="StaticBody2D" unique_id=1327340397 node_paths=PackedStringArray("anim")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouhxx"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1qw1"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax1rf"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qftac"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2bha"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4gh1"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqkur"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb76f"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grr76"]
+atlas = ExtResource("5_k1c5p")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsnro"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouhxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1qw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ax1rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qftac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2bha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4gh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqkur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb76f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grr76")
+}],
+"loop": false,
+"name": &"Impact",
+"speed": 15.0
+}]
+
+[sub_resource type="Curve" id="Curve_k1c5p"]
+_data = [Vector2(0, 0.20562994), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_ouhxx"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Chest" type="StaticBody2D" unique_id=1327340397 node_paths=PackedStringArray("imEf2", "anim", "ImpactEf")]
 script = ExtResource("1_bti28")
+imEf2 = NodePath("ImpactEf/CPUParticles2D")
 Force = 300.0
 anim = NodePath("AnimationPlayer")
 Coin = ExtResource("2_7becl")
+ImpactEf = NodePath("ImpactEf")
 
 [node name="chestSprite" type="Sprite2D" parent="." unique_id=447336330]
 position = Vector2(0, 24)
 texture = ExtResource("1_skqcg")
 offset = Vector2(0, -24)
+
+[node name="whiteSprite" type="Sprite2D" parent="chestSprite" unique_id=1362620330]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(2.861023e-06, -16)
+scale = Vector2(1.4999999, 0.49999997)
+texture = SubResource("GradientTexture2D_k1c5p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=445436469]
 shape = SubResource("RectangleShape2D_qwb25")
@@ -203,6 +322,29 @@ shape = SubResource("RectangleShape2D_bti28")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=511823515]
 libraries/ = SubResource("AnimationLibrary_bti28")
+
+[node name="ImpactEf" type="AnimatedSprite2D" parent="." unique_id=118393924]
+scale = Vector2(1.1, 1.1)
+sprite_frames = SubResource("SpriteFrames_tsnro")
+animation = &"Impact"
+frame = 8
+frame_progress = 1.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ImpactEf" unique_id=785017548]
+emitting = false
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+split_scale = true
+scale_curve_x = SubResource("Curve_k1c5p")
+scale_curve_y = SubResource("Curve_ouhxx")
 
 [connection signal="body_entered" from="Area2D" to="." method="BodyEntered2D"]
 [connection signal="body_exited" from="Area2D" to="." method="BodyExited2D"]

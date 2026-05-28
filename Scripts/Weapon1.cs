@@ -173,7 +173,7 @@ public partial class Weapon1 : Area2D
 							character.AddForce(new Vector2(-800,0).Rotated(GlobalRotation));	
 						}
 					}
-					cam.Shake(5);
+					cam.Shake(8);
 					ShootAmount--;
 					shootcd = shootCoolDown;
 					for (int i = -1; i < 2; i++)

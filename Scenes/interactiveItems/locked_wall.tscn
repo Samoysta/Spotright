@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dssi22x854rxg" path="res://Scripts/interactiveItems/LockedWall.cs" id="1_pg7cc"]
 [ext_resource type="Texture2D" uid="uid://dwalc0nqsgini" path="res://Assets/LockedWallTileset.png" id="2_gwepd"]
 [ext_resource type="Texture2D" uid="uid://c2btwo5l6x3vt" path="res://Assets/LockOfWall.png" id="3_y8gch"]
+[ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="4_gwepd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c1onc"]
 texture = ExtResource("2_gwepd")
@@ -51,7 +52,54 @@ sources/0 = SubResource("TileSetAtlasSource_c1onc")
 [sub_resource type="CircleShape2D" id="CircleShape2D_c1onc"]
 radius = 16.0
 
-[node name="LockedWall" type="Node2D" unique_id=919746307 node_paths=PackedStringArray("wallUp", "wallUpTargetPos", "wallDown", "wallDownTargetPos", "LockKey", "up", "down")]
+[sub_resource type="Animation" id="Animation_pg7cc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gwepd"]
+resource_name = "Turn"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8gch"]
+_data = {
+&"RESET": SubResource("Animation_pg7cc"),
+&"Turn": SubResource("Animation_gwepd")
+}
+
+[sub_resource type="Curve" id="Curve_pg7cc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.81779665, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_gwepd"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.61440676, 1), 0.0, 0.0, 0, 0, Vector2(0.7966102, 0.9917612), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="LockedWall" type="Node2D" unique_id=919746307 node_paths=PackedStringArray("wallUp", "wallUpTargetPos", "wallDown", "wallDownTargetPos", "LockKey", "lockkeySprite", "up", "down", "keyAnim", "runef", "boomef")]
 z_index = -2
 script = ExtResource("1_pg7cc")
 id = 1
@@ -61,9 +109,13 @@ wallDown = NodePath("WallDown")
 wallDownTargetPos = NodePath("wallDownTarget")
 Speed = 5.0
 LockKey = NodePath("Key")
+lockkeySprite = NodePath("Key/KeySprite")
 up = NodePath("WallUp/Polygon2D/KeySprite")
 down = NodePath("WallDown/Polygon2D/KeySprite")
 keySpeed = 3.0
+keyAnim = NodePath("Key/AnimationPlayer")
+runef = NodePath("Key/runEf")
+boomef = NodePath("Key/boomEf")
 
 [node name="WallUp" type="TileMapLayer" parent="." unique_id=1968044263 groups=["Ground"]]
 tile_map_data = PackedByteArray("AAD9//7/AAABAAIAAAD9////AAABAAMAAAD+//7/AAACAAIAAAD+////AAACAAMAAAD///7/AAADAAIAAAD/////AAADAAMAAAAAAP7/AAAEAAIAAAAAAP//AAAEAAMAAAABAP7/AAAFAAIAAAABAP//AAAFAAMAAAACAP7/AAABAAIAADACAP//AAAGAAMAAAD9//3/AAABAAIAAAD9//z/AAABAAIAAAD9//v/AAABAAIAAAD9//r/AAABAAEAAAD+//r/AAACAAEAAAD///r/AAADAAEAAAAAAPr/AAAEAAEAAAABAPr/AAAFAAEAAAACAPr/AAAGAAEAAAACAPv/AAABAAIAADACAPz/AAABAAIAADACAP3/AAABAAIAADD+//v/AAACAAIAAAD///z/AAACAAIAAAAAAPz/AAACAAIAAAAAAP3/AAACAAIAAAABAP3/AAACAAIAAAABAPz/AAACAAIAAAABAPv/AAACAAIAAAAAAPv/AAACAAIAAAD///v/AAACAAIAAAD+//3/AAACAAIAAAD+//z/AAACAAIAAAD///3/AAACAAIAAAA=")
@@ -102,9 +154,53 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="KeySprite" type="Sprite2D" parent="Key" unique_id=2119720216]
+z_index = 1
 texture = ExtResource("3_y8gch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Key" unique_id=1920680288]
 shape = SubResource("CircleShape2D_c1onc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Key" unique_id=1892013987]
+libraries/ = SubResource("AnimationLibrary_y8gch")
+autoplay = &"Turn"
+
+[node name="boomEf" type="CPUParticles2D" parent="Key" unique_id=1355490925]
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.27
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+linear_accel_min = -200.0
+linear_accel_max = -200.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+split_scale = true
+scale_curve_x = SubResource("Curve_pg7cc")
+scale_curve_y = SubResource("Curve_gwepd")
+color = Color(18.892157, 18.892157, 18.892157, 1)
+
+[node name="runEf" type="CPUParticles2D" parent="Key" unique_id=1436485238]
+emitting = false
+amount = 40
+texture = ExtResource("4_gwepd")
+lifetime = 2.0
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+linear_accel_min = -200.0
+linear_accel_max = -200.0
+scale_amount_min = 0.6
+scale_amount_max = 0.6
+split_scale = true
+scale_curve_x = SubResource("Curve_pg7cc")
+scale_curve_y = SubResource("Curve_gwepd")
 
 [connection signal="body_entered" from="Key" to="." method="BodyEntered2D"]

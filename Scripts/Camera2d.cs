@@ -3,7 +3,7 @@ using System;
 
 public partial class Camera2d : Camera2D
 {
-	[Export] Node2D target;
+	[Export] Character character;
 	[Export] public float ShakeStrength = 0f;
 	[Export] public float ShakeFade = 5f;
 	[Export] public float NoiseSpeed = 20f;
@@ -49,7 +49,7 @@ public partial class Camera2d : Camera2D
 			direction = Vector2.Zero;
 			Offset = originalOffset;
 		}
-		Vector2 pos = GlobalPosition.Lerp(target.GlobalPosition, 5 * (float)delta);
+		Vector2 pos = GlobalPosition.Lerp(character.GlobalPosition, 5 * (float)delta);
 		GlobalPosition = pos.Round();
 	}
 

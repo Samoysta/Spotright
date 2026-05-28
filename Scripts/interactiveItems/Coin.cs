@@ -13,7 +13,6 @@ public partial class Coin : CharacterBody2D
 	public override void _Ready()
 	{
 		pd = GetNode<PlayerData>("/root/PlayerData");
-		SetCollisionMaskValue(2,false);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,7 +21,7 @@ public partial class Coin : CharacterBody2D
 		if (jumpAmount <= 0)
 		{
 			velocity = Vector2.Zero;
-			if (GlobalPosition.DistanceTo(character.GlobalPosition) < 15f)
+			if (GlobalPosition.DistanceTo(character.GlobalPosition) < 14f)
 			{
 				pd.coin++;
 				QueueFree();
@@ -37,10 +36,6 @@ public partial class Coin : CharacterBody2D
 				{
 					velocity.X *= 0.5f;
 					velocity.Y *= -0.5f;
-				}
-				else
-				{
-					SetCollisionMaskValue(2,true);
 				}
 			}
 			else

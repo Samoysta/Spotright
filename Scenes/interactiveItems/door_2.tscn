@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://wori50jqkvq8"]
+
+[ext_resource type="Script" uid="uid://bavkovjcsphrn" path="res://Scripts/interactiveItems/Door2.cs" id="1_uffo4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dr24s"]
+size = Vector2(16, 67)
+
+[sub_resource type="Gradient" id="Gradient_ru50q"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uffo4"]
+gradient = SubResource("Gradient_ru50q")
+width = 640
+height = 360
+
+[sub_resource type="Animation" id="Animation_ru50q"]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vggml"]
+resource_name = "FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlackScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_q5lc6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnxsp"]
+_data = {
+&"FadeIn": SubResource("Animation_ru50q"),
+&"FadeOut": SubResource("Animation_vggml"),
+&"RESET": SubResource("Animation_q5lc6")
+}
+
+[node name="door2" type="Area2D" unique_id=1614684722 node_paths=PackedStringArray("anim", "col")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_uffo4")
+anim = NodePath("CanvasLayer/AnimationPlayer")
+col = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094678352]
+shape = SubResource("RectangleShape2D_dr24s")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=105686382]
+layer = 2
+
+[node name="BlackScreen" type="Sprite2D" parent="CanvasLayer" unique_id=1304770956]
+visible = false
+position = Vector2(320, 180)
+texture = SubResource("GradientTexture2D_uffo4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1802003324]
+libraries/ = SubResource("AnimationLibrary_rnxsp")
+autoplay = &"FadeOut"
+
+[node name="spawnPos" type="Node2D" parent="." unique_id=1944003547]
+position = Vector2(0, 54)
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="AnimFinished"]

@@ -65,7 +65,7 @@ public partial class Character : CharacterBody2D
 	bool isLeftWalled;
 	int leftWallAmount;
 	int rightWallAmount;
-	int lastDir;
+	public int lastDir;
 	bool canAnim;
 	public bool selected;
 	public bool cantInput;
@@ -126,7 +126,7 @@ public partial class Character : CharacterBody2D
 		{
 			characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
 		}
-		else if(lastDir > 0)
+		else if(lastDir >= 0)
 		{
 			characterSprite.Scale = firstScale;
 		}	
@@ -598,6 +598,7 @@ public partial class Character : CharacterBody2D
 			isDashing = false;
 			isJumping = false;
 			velocity = vel;
+			dashCD = 0;
 			Velocity = vel;
 			isZjustPressed = false;
 			canDash = true;

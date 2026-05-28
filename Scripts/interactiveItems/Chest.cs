@@ -9,10 +9,12 @@ public partial class Chest : StaticBody2D
 	[Export] Camera2d cam;
 	PlayerData pd;
 	bool opened;
+	[Export] CpuParticles2D imEf2;
 	[Export] float Force;
 	[Export] float SpeedCoin;
 	[Export] AnimationPlayer anim;
 	[Export] PackedScene Coin;
+	[Export] AnimatedSprite2D ImpactEf;
 	Character character;
 	RandomNumberGenerator rnd = new();
 	bool canOpen;
@@ -44,6 +46,7 @@ public partial class Chest : StaticBody2D
 				coins[i] = co;
 			}	
 		}
+		ImpactEf.Frame = 8;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,6 +56,10 @@ public partial class Chest : StaticBody2D
 		{
 			if (character.isDashing)
 			{
+				ImpactEf.Play("Impact");
+				ImpactEf.Frame = 0;
+				ImpactEf.GlobalPosition = character.GlobalPosition;
+				imEf2.Emitting = true;
 				ApplyForce();
 				anim.Play("Open");
 				opened = true;
