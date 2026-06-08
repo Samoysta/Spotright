@@ -64,7 +64,7 @@ public partial class LockedWall : Node2D
 		{
 			selected = true;
 			runef.Emitting = true;
-			keyAnim.Pause();
+			keyAnim.Play("Flash");
 			LockKey.Scale = new Vector2(0.5f,2f);
 			t2?.Kill();
 			t2 = CreateTween();

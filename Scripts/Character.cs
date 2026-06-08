@@ -606,6 +606,8 @@ public partial class Character : CharacterBody2D
 			{
 				characterSprite.CallDeferred("play", "Jump");
 				characterSprite.SetDeferred("frame", 0);
+				anim.CallDeferred("play", "Jump");
+				anim.Seek(0);
 				SetDeferred("canAnim", false);
 			}	
 		}
