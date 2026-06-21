@@ -80,8 +80,28 @@ public partial class Plant1 : Area2D
 			tween?.Kill();
 			tween = CreateTween();
 			tween.SetEase(Tween.EaseType.Out).SetTrans(tweener);
-			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(dir * rotAmount), dur / 4).Finished += () => {AnimFinished();};
+			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(dir * rotAmount), dur / 4).Finished += () => {ShakeFinished();};
 			isShaking = false;	
+		}
+	}
+
+	void ShakeFinished()
+	{
+		int target = 0;
+		if (plantSprite.Skew == Mathf.DegToRad(10))
+		{
+			target = -10;
+		}
+		else
+		{
+			target = 10;
+		}
+		if (!isShaking)
+		{
+			tween?.Kill();
+			tween = CreateTween();
+			tween.SetEase(Tween.EaseType.InOut).SetTrans(tweener);
+			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(target), dur/3).Finished += () => {AnimFinished();};	
 		}
 	}
 	void OnScreenEntered()

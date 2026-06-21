@@ -8,10 +8,10 @@ public partial class Weapon1 : Area2D
 {
 	Character character;
 	bool selected;
+	bool canShoot;
 	bool canSelect;
 	Vector2 firstPos;
 	float spawnCoolDown;
-	int shootA;
 	[Export] SceneManager sm;
 	[Export] public int Id;
 	[Export] public int roomId;
@@ -19,7 +19,7 @@ public partial class Weapon1 : Area2D
 	[Export] Texture2D blueWeapon;
 	[Export] Texture2D goldenWeapon;
 	[Export] Camera2d cam;
-	[Export] int ShootAmount;
+	[Export] int bulDeg;
 	[Export] Vector2 weaponMaxPos;
 	[Export] float shootCoolDown;
 	[Export] PackedScene bul1;
@@ -30,15 +30,17 @@ public partial class Weapon1 : Area2D
 	CollisionShape2D col;
 	PlayerData pd;
 	float shootcd;
-	Vector2 pos;
 	Sprite2D gunSprite;
 	[Export] PackedScene fireEf;
+	[Export] RayCast2D ray;
 	public Queue<Effect> fireEfs = new();
 	Tween t;
+	Vector2 pos;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		canShoot = true;
 		pd = GetNode<PlayerData>("/root/PlayerData");
 		gunSprite = GetNode<Sprite2D>("Sprite2D");
 		if (Golden)
@@ -49,7 +51,6 @@ public partial class Weapon1 : Area2D
 		{
 			gunSprite.Texture = blueWeapon;
 		}
-		shootA = ShootAmount;
 		canSelect = true;
 		firstPos = GlobalPosition;
 		
@@ -84,10 +85,26 @@ public partial class Weapon1 : Area2D
 		}
 
 	}
+    public override void _PhysicsProcess(double delta)
+    {
+		if (selected)
+		{
+			ray.GlobalPosition = character.GlobalPosition;	
+		}
+		else
+		{
+			ray.GlobalPosition = GlobalPosition;
+		}
+    }
+
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (character.IsOnFloor())
+		{
+			canShoot = true;
+		}
 		col.CallDeferred("set_disabled", character.selected);
 		if (spawnCoolDown > 0)
 		{
@@ -157,10 +174,20 @@ public partial class Weapon1 : Area2D
 						pos = new Vector2(-weaponMaxPos.X,0);
 					}
 				}
-				Position = Position.Lerp(pos,10 * (float)delta);
+				ray.TargetPosition = pos;
+				Vector2 targetPos;
+				if (ray.IsColliding())
+				{
+					targetPos = character.ToLocal(ray.GetCollisionPoint());
+				}
+				else
+				{
+					targetPos = pos;
+				}
+				Position = Position.Lerp(targetPos,10 * (float)delta);
 				LookAt(GlobalPosition + Position);
 
-				if (Input.IsActionJustPressed("X") && ShootAmount > 0 && shootcd <= 0)
+				if (Input.IsActionJustPressed("X") && shootcd <= 0 && canShoot)
 				{
 					if (!character.IsOnFloor())
 					{
@@ -174,7 +201,6 @@ public partial class Weapon1 : Area2D
 						}
 					}
 					cam.Shake(8);
-					ShootAmount--;
 					shootcd = shootCoolDown;
 					for (int i = -1; i < 2; i++)
 					{
@@ -183,9 +209,10 @@ public partial class Weapon1 : Area2D
 					fireEffect();
 					anim2.Play("Fire");
 					anim2.Seek(0);
+					canShoot = false;
 				}	
 			}
-			if (ShootAmount <= 0 || !character.canDie)
+			if (!character.canDie)
 			{
 				close();
 			}
@@ -214,7 +241,6 @@ public partial class Weapon1 : Area2D
 
 	void open()
 	{
-		ShootAmount = shootA;
 		anim.Play("RESET");
 		GlobalPosition = firstPos;
 		GlobalRotationDegrees = 0;
@@ -252,14 +278,14 @@ public partial class Weapon1 : Area2D
 		{
 			Wepaon1Bullet bul = character.bul1s.Dequeue();
 			bul.GlobalPosition = bulletPos.GlobalPosition;
-			bul.GlobalRotationDegrees = GlobalRotationDegrees + (index * 15f);
+			bul.GlobalRotationDegrees = GlobalRotationDegrees + (index * bulDeg);
 			bul.setOn();
 		}
 		else
 		{
 			Wepaon1Bullet bul = (Wepaon1Bullet)bul1.Instantiate();
 			bul.GlobalPosition = bulletPos.GlobalPosition;
-			bul.GlobalRotationDegrees = GlobalRotationDegrees + (index * 15f);
+			bul.GlobalRotationDegrees = GlobalRotationDegrees + (index * bulDeg);
 			GetTree().CurrentScene.AddChild(bul);
 			bul.Init(character);
 			bul.setOn();

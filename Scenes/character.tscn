@@ -726,13 +726,13 @@ position = Vector2(0, 1)
 texture = ExtResource("8_wbia7")
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
-position = Vector2(6, 0)
+position = Vector2(8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWallCheck" unique_id=289782243]
 shape = SubResource("RectangleShape2D_owm7s")
 
 [node name="LeftWallCheck" type="Area2D" parent="." unique_id=303059102]
-position = Vector2(-6, 0)
+position = Vector2(-8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWallCheck" unique_id=739879858]
 position = Vector2(-0.06375027, 0)

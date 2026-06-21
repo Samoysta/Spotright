@@ -182,7 +182,7 @@ scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_pt0jc")
 
 [node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("sm", "doors", "camera") instance=ExtResource("2_eg7ii")]
-position = Vector2(690, -13)
+position = Vector2(-17, -47)
 sm = NodePath("../SceneManager")
 doors = [NodePath("../Doors/Door"), NodePath("../Doors/door2")]
 doorIDs = PackedInt32Array(1, 2)
@@ -588,10 +588,12 @@ z_index = -1
 position = Vector2(40, 16)
 
 [node name="Plant70" parent="Plants" unique_id=2056273674 instance=ExtResource("9_b8at8")]
+modulate = Color(0.37111905, 0.37111905, 0.37111905, 1)
 z_index = -1
 position = Vector2(57, 16)
 
 [node name="Plant71" parent="Plants" unique_id=270175480 instance=ExtResource("9_b8at8")]
+modulate = Color(0.37111905, 0.37111905, 0.37111905, 1)
 z_index = -1
 position = Vector2(76, 16)
 
@@ -604,6 +606,7 @@ z_index = 2
 position = Vector2(27, 16)
 
 [node name="Plant74" parent="Plants" unique_id=1056000768 instance=ExtResource("9_b8at8")]
+modulate = Color(0.37111905, 0.37111905, 0.37111905, 1)
 z_index = -1
 position = Vector2(0, 16)
 
@@ -612,11 +615,13 @@ z_index = -1
 position = Vector2(17, 16)
 
 [node name="Plant76" parent="Plants" unique_id=1258394337 instance=ExtResource("9_b8at8")]
+modulate = Color(0.37111905, 0.37111905, 0.37111905, 1)
 z_index = -1
 position = Vector2(36, 16)
 
 [node name="Plant77" parent="Plants" unique_id=418816565 instance=ExtResource("9_b8at8")]
-z_index = 2
+modulate = Color(0.37111905, 0.37111905, 0.37111905, 1)
+z_index = -1
 position = Vector2(-31, 17)
 
 [node name="Plant90" parent="Plants" unique_id=1391549872 instance=ExtResource("9_b8at8")]
@@ -628,6 +633,7 @@ z_index = 2
 position = Vector2(-101, 16)
 
 [node name="Plant92" parent="Plants" unique_id=2041685363 instance=ExtResource("9_b8at8")]
+modulate = Color(0.37111905, 0.37111905, 0.37111905, 1)
 z_index = -1
 position = Vector2(-128, 16)
 
@@ -640,10 +646,12 @@ z_index = -1
 position = Vector2(-92, 16)
 
 [node name="Plant95" parent="Plants" unique_id=1547623603 instance=ExtResource("9_b8at8")]
+modulate = Color(0.2936601, 0.29366007, 0.29366007, 1)
 z_index = -1
 position = Vector2(-143, 16)
 
 [node name="Plant96" parent="Plants" unique_id=600605762 instance=ExtResource("9_b8at8")]
+modulate = Color(0.41368303, 0.4136831, 0.41368303, 1)
 z_index = -1
 position = Vector2(-124, 16)
 
@@ -853,7 +861,7 @@ position = Vector2(1584, -168)
 [node name="Chest" parent="." unique_id=1327340397 node_paths=PackedStringArray("cam") instance=ExtResource("14_4mavg")]
 position = Vector2(1808, 105)
 id = 1
-coinAmount = 100
+coinAmount = 30
 cam = NodePath("../Camera2D")
 Force = 500.0
 SpeedCoin = 500.0
