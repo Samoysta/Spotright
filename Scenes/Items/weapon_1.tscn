@@ -285,6 +285,9 @@ _data = {
 &"Shake": SubResource("Animation_7mtuy")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjohv"]
+size = Vector2(30, 6)
+
 [node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim", "anim2", "ray")]
 z_index = 4
 collision_layer = 0
@@ -312,7 +315,6 @@ offset = Vector2(16, 0)
 libraries/ = SubResource("AnimationLibrary_orj3k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183355213]
-position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_j0b74")
 
 [node name="bulletPos" type="Node2D" parent="." unique_id=1342991508]
@@ -341,4 +343,13 @@ speed_scale = 0.7
 [node name="gunPos" type="RayCast2D" parent="." unique_id=2039136103]
 top_level = true
 
+[node name="gunLimitBox" type="Area2D" parent="." unique_id=219891508]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gunLimitBox" unique_id=761439963]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_vjohv")
+
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="body_entered" from="gunLimitBox" to="." method="BodyEntered2D"]

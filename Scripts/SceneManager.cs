@@ -6,6 +6,7 @@ public partial class SceneManager : Node2D
 	[Export] public int [] weaponIds;
 	[Export] public Node2D [] weapons;
 	[Export] public int roomId;
+	[Export] public GunLimits gunLimitTileLayer;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

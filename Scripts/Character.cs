@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Formats.Tar;
+using System.Text;
 
 public partial class Character : CharacterBody2D
 {
@@ -29,7 +30,7 @@ public partial class Character : CharacterBody2D
 	[Export] Node2D foot;
 	[Export] PackedScene jumpEf;
 	[Export] PackedScene dashEf;
-	[Export] float wallSpeed;
+	[Export] public float wallSpeed;
 	[Export] CpuParticles2D rightWallEffect;
 	[Export] CpuParticles2D leftWallEffect;
 	[Export] float dashSpeed;
@@ -61,8 +62,8 @@ public partial class Character : CharacterBody2D
 	public bool isJumping;
 	Vector2 firstScale;
 	bool isGrounded;
-	bool isRightWalled;
-	bool isLeftWalled;
+	public bool isRightWalled;
+	public bool isLeftWalled;
 	int leftWallAmount;
 	int rightWallAmount;
 	public int lastDir;
@@ -239,8 +240,8 @@ public partial class Character : CharacterBody2D
 		}
 		
 		//WallEffects
-		rightWallEffect.CallDeferred("set_emitting",Velocity.Y > 0 && isRightWalled);
-		leftWallEffect.CallDeferred("set_emitting",Velocity.Y > 0 && isLeftWalled);
+		rightWallEffect.CallDeferred("set_emitting",Velocity.Y >= wallSpeed && isRightWalled);
+		leftWallEffect.CallDeferred("set_emitting",Velocity.Y >= wallSpeed && isLeftWalled);
 		//Wall Checks
 		if (rightWallAmount > 0)
 		{
@@ -289,8 +290,8 @@ public partial class Character : CharacterBody2D
 						characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
 						leftWallEffect.Emitting = true;
 					}
+					canDash = true;
 				}
-				canDash = true;
 			}
 		}
 		// Add the gravity.
@@ -341,7 +342,7 @@ public partial class Character : CharacterBody2D
 				}
 			}
 			//RunEffect
-			if (Mathf.Abs(Velocity.X - 0) > 10 || Input.IsActionPressed("Right") || Input.IsActionPressed("Left"))
+			if (Mathf.Abs(Velocity.X) > 10 || Input.IsActionPressed("Right") || Input.IsActionPressed("Left"))
 			{
 				if (!isDashing && canAnim)
 				{

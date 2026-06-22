@@ -105,6 +105,13 @@ public partial class Weapon1 : Area2D
 		{
 			canShoot = true;
 		}
+		else if (character.isRightWalled || character.isLeftWalled)
+		{
+			if (character.Velocity.Y > character.wallSpeed)
+			{
+				canShoot = true;
+			}
+		}
 		col.CallDeferred("set_disabled", character.selected);
 		if (spawnCoolDown > 0)
 		{
@@ -227,6 +234,7 @@ public partial class Weapon1 : Area2D
 		spawnCoolDown = 5f;
 		character.selected = false;
 		CallDeferred("reparent", GetTree().CurrentScene);
+		sm.gunLimitTileLayer.AnimPlay("Ending");
 		t?.Kill();
 		t = CreateTween();
 		t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
@@ -263,12 +271,17 @@ public partial class Weapon1 : Area2D
 				{
 					anim.Play("queue");
 					selected = true;
+					sm.gunLimitTileLayer.AnimPlay("Starting");
 					CallDeferred("reparent", character.Items);
 					canSelect = false;
 					character.selected = true;
 					col.CallDeferred("set_disabled", true);
 				}	
 			}
+		}
+		else if (body.GetParent().GetParent() == sm.gunLimitTileLayer)
+		{
+			close();
 		}
 	}
 

@@ -657,7 +657,7 @@ font_size = 315
 outline_size = 48
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "runEf", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -666,6 +666,7 @@ coinLabel = NodePath("UI/Coin/CoinLabel")
 doors = []
 Items = NodePath("Items")
 Speed = 210.0
+runEf = NodePath("")
 JumpVelocity = 350.0
 coyotoTime = 0.1
 jumpTime = 0.19

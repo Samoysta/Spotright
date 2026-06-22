@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://dhfv0hkfbcjcw"]
+
+[ext_resource type="Script" uid="uid://bvrdi8nnvftu8" path="res://Scripts/Enviroment/GunLimits.cs" id="2_6cf5i"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_17xf7"]
+load_path = "res://.godot/imported/Limit-Sheet.png-e5f4ae4ca8ea987d700a45c25e5159a5.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_210rg"]
+texture = SubResource("CompressedTexture2D_17xf7")
+texture_region_size = Vector2i(32, 32)
+0:0/animation_columns = 32
+0:0/animation_speed = 20.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/animation_frame_16/duration = 1.0
+0:0/animation_frame_17/duration = 1.0
+0:0/animation_frame_18/duration = 1.0
+0:0/animation_frame_19/duration = 1.0
+0:0/animation_frame_20/duration = 1.0
+0:0/animation_frame_21/duration = 1.0
+0:0/animation_frame_22/duration = 1.0
+0:0/animation_frame_23/duration = 1.0
+0:0/animation_frame_24/duration = 1.0
+0:0/animation_frame_25/duration = 1.0
+0:0/animation_frame_26/duration = 1.0
+0:0/animation_frame_27/duration = 1.0
+0:0/animation_frame_28/duration = 1.0
+0:0/animation_frame_29/duration = 1.0
+0:0/animation_frame_30/duration = 1.0
+0:0/animation_frame_31/duration = 1.0
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_6cf5i"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_210rg")
+
+[sub_resource type="Animation" id="Animation_17xf7"]
+resource_name = "Ending"
+length = 0.6333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.57254905, 0.7764706, 0.8627451, 0.29803923), Color(0.57254905, 0.7764706, 0.8627451, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_210rg"]
+resource_name = "Hitted"
+length = 0.43333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.6745098), Color(0.57254905, 0.7764706, 0.8627451, 0.29803923)]
+}
+
+[sub_resource type="Animation" id="Animation_6cf5i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.57254905, 0.7764706, 0.8627451, 0.29803923)]
+}
+
+[sub_resource type="Animation" id="Animation_j1427"]
+resource_name = "Starting"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.57254905, 0.7764706, 0.8627451, 0), Color(0.57254905, 0.7764706, 0.8627451, 0.29803923)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oii50"]
+_data = {
+&"Ending": SubResource("Animation_17xf7"),
+&"Hitted": SubResource("Animation_210rg"),
+&"RESET": SubResource("Animation_6cf5i"),
+&"Starting": SubResource("Animation_j1427")
+}
+
+[node name="gunLimits" type="Node2D" unique_id=1798283784 node_paths=PackedStringArray("anim")]
+script = ExtResource("2_6cf5i")
+anim = NodePath("tileMap/AnimationPlayer")
+
+[node name="tileMap" type="Node2D" parent="." unique_id=1819090245]
+visible = false
+modulate = Color(0.57254905, 0.7764706, 0.8627451, 0.29803923)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="tileMap" unique_id=353721860]
+tile_set = SubResource("TileSet_6cf5i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="tileMap" unique_id=1838105018]
+libraries/ = SubResource("AnimationLibrary_oii50")

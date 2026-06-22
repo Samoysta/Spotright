@@ -29,6 +29,11 @@ public partial class Wepaon1Bullet : Node2D
 				{
 					body.Call("TakeDamage");
 				}
+				Node2D gunLim = (Node2D)body.GetParent().GetParent();
+				if (gunLim is GunLimits)
+				{
+					gunLim.Call("AnimPlay","Hitted");
+				}
 				setOff();
 				spawnEffect();
 			}

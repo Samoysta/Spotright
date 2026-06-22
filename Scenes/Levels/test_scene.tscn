@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="5_d3awe"]
 [ext_resource type="Texture2D" uid="uid://bh048csbvasgu" path="res://Assets/Tilemaps/area1bgTiles.png" id="5_ibmi3"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="9_d3awe"]
+[ext_resource type="PackedScene" uid="uid://dhfv0hkfbcjcw" path="res://Scenes/Enviorement/gun_limits.tscn" id="9_nywed"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="9_yglu3"]
 [ext_resource type="PackedScene" uid="uid://o717f42cfwb8" path="res://Scenes/interactiveItems/door.tscn" id="11_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="12_02b08"]
@@ -47,19 +48,19 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 texture = ExtResource("2_r5l72")
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_oho3u")
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, -7, 8, -7, 8, 8, -7, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
 5:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4blnk")
-5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, -7, 8, -7, 8, 8, -7, 8)
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
 0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, 7, 8, 7, 8, -8, -7, -8)
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
 1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 7, 8, 7, 8, -8, -8, -8)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
 2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 7, 8, 7, 8, -8, -8, -8)
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
 5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tnimv")
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -71,16 +72,16 @@ texture = ExtResource("2_r5l72")
 2:2/0/z_index = 1
 1:0/0 = 0
 1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yglu3")
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, 8, -8, 8)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
 2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bwjpn")
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, 8, -8, 8)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
 3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ibmi3")
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(7, -7, -8, -7, -8, 8, 7, 8)
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0 = 0
 3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d3awe")
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(7, 7, 7, -8, -8, -8, -8, 7)
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
 3:2/0/z_index = 1
 4:0/0 = 0
@@ -156,10 +157,11 @@ size = Vector2(6, 112)
 
 [node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("12_02b08")]
 
-[node name="SceneManager" parent="." unique_id=1910871571 node_paths=PackedStringArray("weapons") instance=ExtResource("2_nywed")]
+[node name="SceneManager" parent="." unique_id=1910871571 node_paths=PackedStringArray("weapons", "gunLimitTileLayer") instance=ExtResource("2_nywed")]
 weaponIds = PackedInt32Array(0)
 weapons = [null]
 roomId = 1
+gunLimitTileLayer = NodePath("../Area1/gunLimits")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("character")]
 process_callback = 0
@@ -224,6 +226,12 @@ initial_velocity_min = 100.0
 initial_velocity_max = 100.0
 angular_velocity_min = -50.0
 angular_velocity_max = -50.0
+
+[node name="gunLimits" parent="Area1" unique_id=1798283784 instance=ExtResource("9_nywed")]
+z_index = -1
+
+[node name="TileMapLayer" parent="Area1/gunLimits/tileMap" parent_id_path=PackedInt32Array(1798283784, 1819090245) index="0" unique_id=353721860]
+tile_map_data = PackedByteArray("AAAZAPv/AQAAAAAAAAAZAAEAAQAAAAAAAAAZAAAAAQAAAAAAAAAZAP//AQAAAAAAAAAZAP7/AQAAAAAAAAAZAP3/AQAAAAAAAAAZAPz/AQAAAAAAAAAZAPr/AQAAAAAAAAAZAPn/AQAAAAAAAAAZAPj/AQAAAAAAAAAZAPf/AQAAAAAAAAAZAPb/AQAAAAAAAAAZAPX/AQAAAAAAAAAZAPT/AQAAAAAAAAAaAPT/AQAAAAAAAAAaAPX/AQAAAAAAAAAaAPb/AQAAAAAAAAAaAPf/AQAAAAAAAAAaAPj/AQAAAAAAAAAaAPn/AQAAAAAAAAAaAPr/AQAAAAAAAAAaAPv/AQAAAAAAAAAaAPz/AQAAAAAAAAAaAP3/AQAAAAAAAAAaAP7/AQAAAAAAAAAaAP//AQAAAAAAAAAaAAAAAQAAAAAAAAAaAAEAAQAAAAAAAAA=")
 
 [node name="Plant1s" type="Node2D" parent="." unique_id=1200717658]
 
@@ -539,6 +547,7 @@ length = 100.0
 egim = 2.0
 dalgaYogunlugu = 0.3
 
+[editable path="Area1/gunLimits"]
 [editable path="CheckPoints/CheckPoint"]
 [editable path="CheckPoints/CheckPoint2"]
 [editable path="CheckPoints/CheckPoint3"]

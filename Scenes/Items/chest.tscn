@@ -294,7 +294,8 @@ point_count = 2
 [node name="Chest" type="StaticBody2D" unique_id=1327340397 node_paths=PackedStringArray("imEf2", "anim", "ImpactEf")]
 script = ExtResource("1_bti28")
 imEf2 = NodePath("ImpactEf/CPUParticles2D")
-Force = 300.0
+Force = 500.0
+SpeedCoin = 500.0
 anim = NodePath("AnimationPlayer")
 Coin = ExtResource("2_7becl")
 ImpactEf = NodePath("ImpactEf")

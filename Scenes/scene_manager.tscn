@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" uid="uid://car8xp0s8q81u" path="res://Scripts/SceneManager.cs" id="1_mk1ro"]
 
-[node name="SceneManager" type="Node2D" unique_id=1910871571 node_paths=PackedStringArray("weapons")]
+[node name="SceneManager" type="Node2D" unique_id=1910871571]
 script = ExtResource("1_mk1ro")
-weapons = []
