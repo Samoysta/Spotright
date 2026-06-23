@@ -19,6 +19,7 @@ public partial class LockedWall : Node2D
 	[Export] CpuParticles2D runef;
 	[Export] CpuParticles2D boomef;
 	bool selected;
+	bool doorTechnicallyOpened;
 	bool opened;
 	Tween t;
 	Tween t2;
@@ -62,6 +63,8 @@ public partial class LockedWall : Node2D
 	{
 		if (body is Character && !opened && !selected)
 		{
+			doorTechnicallyOpened = true;
+			pd.LockedDoors.Add(id,"opened");
 			selected = true;
 			runef.Emitting = true;
 			keyAnim.Play("Flash");
@@ -100,6 +103,5 @@ public partial class LockedWall : Node2D
 		t2 = CreateTween();
 		t2.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
 		t2.TweenProperty(wallDown, "position", wallDownTargetPos.Position, Speed);
-		pd.LockedDoors.Add(id,"opened");
 	}
 }
