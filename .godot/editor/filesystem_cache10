@@ -1,10 +1,10 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1782192026
+::res://::1782289514
 ByteBounce.ttf::FontFile::3878172557356308564::1779117567::1779117567::1::::<><><>0<>0<>bc6b47d593bd19ac91ed996bb6e36378<>res://.godot/imported/ByteBounce.ttf-45a1997ea33af1300b66e86b471cea31.fontdata::
 export_presets.cfg::TextFile::-1::1779354412::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::7938102147349876917::1774191321::1774191363::1::::<><><>0<>0<>d3f330e37364b9b6067bb955c0c8de05<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1774191321::0::1::::<><><>0<>0<><>::
-::res://Assets/::1782114136
+::res://Assets/::1782289579
 BaloonBoomSheet.png::CompressedTexture2D::1914752938791357211::1778909611::1778909611::1::::<><><>0<>0<>ac9f5471f50a972729050f720b90c477<>res://.godot/imported/BaloonBoomSheet.png-7e2348c4c0c996ff1914dcaf06310788.ctex::
 bullethitsheet.png::CompressedTexture2D::3936809104858375028::1777703905::1777703906::1::::<><><>0<>0<>afd5168df3290e8ab74bd4b8892181c1<>res://.godot/imported/bullethitsheet.png-259e1bd15a14fc9f583edcdceb602088.ctex::
 Chain.png::CompressedTexture2D::810085916241142949::1779377110::1779377110::1::::<><><>0<>0<>97aedcf27d89b36611486571a53e94db<>res://.godot/imported/Chain.png-4ef1027e4f66e142857e70025ccaeb5b.ctex::
@@ -38,6 +38,8 @@ Yaprak.png::CompressedTexture2D::2147242462057567128::1779170929::1779170930::1:
 ::res://Assets/Chest/::1779946242
 ChestClosed.png::CompressedTexture2D::1547649073707297312::1779805428::1779805428::1::::<><><>0<>0<>ae5a35d1c3a295477235e99d591d3739<>res://.godot/imported/ChestClosed.png-081a72d614384c74dc7eb24b48f5170a.ctex::
 ChestOpened.png::CompressedTexture2D::9104144641988403558::1779805428::1779805428::1::::<><><>0<>0<>f7062f95b1d0cdda9ac19f4a35392ea8<>res://.godot/imported/ChestOpened.png-e92c62400e5b250ecd0824f55f59dd86.ctex::
+::res://Assets/Enemies/::1782289585
+Slime-Sheet.png::CompressedTexture2D::1663952757572062241::1782289585::1782289585::1::::<><><>0<>0<>1cfc94eba9bc9d8db08c29398340666f<>res://.godot/imported/Slime-Sheet.png-cbaf0f2268a1c6493d018c862bb471f7.ctex::
 ::res://Assets/Impact/::1779946242
 im1-Sheet.png::CompressedTexture2D::1402816120981886539::1779946218::1779946242::1::::<><><>0<>0<>8202ae7479269b85f3e26d906a55c32e<>res://.godot/imported/im1-Sheet.png-438ca7fdb314559b26cb7aa2bb1b01ff.ctex::
 ::res://Assets/Tilemaps/::1779950135
@@ -109,6 +111,6 @@ Coin.cs::CSharpScript::3746472249195943273::1779948973::0::1::::<>CharacterBody2
 Door2.cs::CSharpScript::2430405904579805443::1782121297::0::1::::<>Area2D<><>0<>0<><>::
 Door.cs::CSharpScript::1982290641335264480::1779510296::0::1::::<>Area2D<><>0<>0<><>::
 JumpPad.cs::CSharpScript::5124368227596123264::1779351634::0::1::::<>Area2D<><>0<>0<><>::
-LockedWall.cs::CSharpScript::8460355443716100736::1780037284::0::1::::<>Node2D<><>0<>0<><>::
+LockedWall.cs::CSharpScript::8460355443716100736::1782192199::0::1::::<>Node2D<><>0<>0<><>::
 ::res://Scripts/Plants/::1776417220
 Plant1.cs::CSharpScript::8375045807775997881::1781977229::0::1::::<>Area2D<><>0<>0<><>::

@@ -7,7 +7,9 @@ using System.Text;
 
 public partial class Character : CharacterBody2D
 {
-	//UIs
+
+	public int weaponDamage;
+	[Export] public int health;
 	[Export] public Label coinLabel;
 	PlayerData pd;
 	[Export] public SceneManager sm;
@@ -160,6 +162,15 @@ public partial class Character : CharacterBody2D
 		}
 		pd.character = this;
 		coinLabel.Text = $"{pd.coin}";
+		if (pd.health == 0)
+		{
+			pd.health = health;
+		}
+		else
+		{
+			health = pd.health;
+		}
+		weaponDamage = pd.weaponDamage;
     }
     public override void _Process(double delta)
     {
@@ -741,6 +752,12 @@ public partial class Character : CharacterBody2D
 	{
 		spawnPos = pos;
 	}
+	public void TakeDamage(int damage,Vector2 force)
+	{
+		pd.health -= damage;
+		AddForce(force);
+		camera.Call("Shake", 20f);
+	}
 	public void KillSelf()
 	{
 		camera.Call("Shake", 20f);
@@ -760,6 +777,7 @@ public partial class Character : CharacterBody2D
 		anim.CallDeferred("play","Died");
 		dieTimer = 0.3f;
 		haloTimer = 0;
+		pd.health --;
 	}
 	void AnimFinished(string animName)
 	{

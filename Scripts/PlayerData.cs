@@ -6,12 +6,16 @@ public partial class PlayerData : Node
 {
 	public int doorID = 0;
 	public int lastDir = -1;
+	public int health;
+	public int maxHealth;
+	public int weaponDamage = 1;
 	public Character character;
 	public Node2D Items;
 	public int coin;
 	public SceneManager sm;
 	public Dictionary<int, string> LockedDoors = new();
 	public Dictionary<int, string> LockedChests = new();
+	public Dictionary<int, string> killedEnemies = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

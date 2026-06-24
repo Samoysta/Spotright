@@ -8,6 +8,7 @@ public partial class Wepaon1Bullet : Node2D
 	[Export] float speed;
 	Character character;
 	float velocity;
+	int damage;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -27,9 +28,13 @@ public partial class Wepaon1Bullet : Node2D
 			{
 				if (body.HasMethod("TakeDamage"))
 				{
-					body.Call("TakeDamage");
+					body.Call("TakeDamage",damage);
 				}
-				Node2D gunLim = (Node2D)body.GetParent().GetParent();
+				Node2D gunLim = null;
+				if (body.GetParent().GetParent() is Node2D)
+				{
+					gunLim = (Node2D)body.GetParent().GetParent();
+				}
 				if (gunLim is GunLimits)
 				{
 					gunLim.Call("AnimPlay","Hitted");
@@ -42,6 +47,7 @@ public partial class Wepaon1Bullet : Node2D
 	public void Init(Character cha)
 	{
 		character = cha;
+		damage = character.weaponDamage;
 	}
 
 	public void setOff()
