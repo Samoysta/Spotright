@@ -136,7 +136,6 @@ character = NodePath("../Character")
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=1465755870]
 modulate = Color(0.01171082, 0.26301283, 0.11960135, 1)
 z_index = -4
-position = Vector2(56, -24)
 scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_rvcxn")
 
@@ -167,7 +166,7 @@ tile_set = SubResource("TileSet_2pirs")
 z_index = -1
 
 [node name="TileMapLayer" parent="area1/gunLimits/tileMap" parent_id_path=PackedInt32Array(1193628124, 1819090245) index="0" unique_id=353721860]
-tile_map_data = PackedByteArray("AAD0//X/AQAAAAAAAAD0//T/AQAAAAAAAAD0//P/AQAAAAAAAAD0//L/AQAAAAAAAAACAPj/AQAAAAAAAGADAPj/AQAAAAAAAGA=")
+tile_map_data = PackedByteArray("AAD0//X/AQAAAAAAAAD0//T/AQAAAAAAAAD0//P/AQAAAAAAAAD0//L/AQAAAAAAAAD0//3/AQAAAAAAAAD0//7/AQAAAAAAAAD0////AQAAAAAAAAD0/wAAAQAAAAAAAAA=")
 
 [node name="Doors" type="Node2D" parent="." unique_id=1103547319]
 
@@ -205,7 +204,13 @@ coinAmount = 50
 cam = NodePath("../Camera2D")
 
 [node name="Slime" parent="." unique_id=1871212296 instance=ExtResource("11_e2lx1")]
-position = Vector2(-156, -328)
+position = Vector2(-48, -326)
+id = 1
+
+[node name="Slime2" parent="." unique_id=1128420114 instance=ExtResource("11_e2lx1")]
+position = Vector2(-124, -326)
+id = 2
+reversed = true
 
 [editable path="area1/gunLimits"]
 [editable path="Doors/door2"]

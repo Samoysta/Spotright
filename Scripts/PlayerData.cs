@@ -6,8 +6,8 @@ public partial class PlayerData : Node
 {
 	public int doorID = 0;
 	public int lastDir = -1;
-	public int health;
-	public int maxHealth;
+	public int health = 100;
+	public int maxHealth = 100;
 	public int weaponDamage = 1;
 	public Character character;
 	public Node2D Items;

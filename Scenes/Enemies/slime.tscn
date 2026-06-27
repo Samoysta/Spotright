@@ -187,23 +187,38 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pfckq"]
-size = Vector2(16, 12)
+size = Vector2(16, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pm37t"]
-size = Vector2(16, 12)
+size = Vector2(16, 14)
 
-[node name="Slime" type="CharacterBody2D" unique_id=1871212296]
+[node name="Slime" type="CharacterBody2D" unique_id=1871212296 node_paths=PackedStringArray("sprite", "ray", "wallRay")]
 collision_layer = 4
+collision_mask = 5
+platform_on_leave = 2
+platform_floor_layers = 0
 script = ExtResource("1_pm37t")
 health = 5
-damage = 1
+sprite = NodePath("AnimatedSprite2D")
+damage = 10
 damageForce = Vector2(300, 300)
+speed = 50.0
+ray = NodePath("AnimatedSprite2D/floorRay")
+wallRay = NodePath("AnimatedSprite2D/wallRay")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2004041049]
 sprite_frames = SubResource("SpriteFrames_vyct5")
 animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.30669945
+
+[node name="floorRay" type="RayCast2D" parent="AnimatedSprite2D" unique_id=687424350]
+position = Vector2(12, 0)
+target_position = Vector2(0, 10)
+
+[node name="wallRay" type="RayCast2D" parent="AnimatedSprite2D" unique_id=1674756118]
+target_position = Vector2(12, 0)
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981715805]
 position = Vector2(3, 1)
@@ -216,13 +231,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1074686391]
 position = Vector2(3, 1)
 shape = SubResource("RectangleShape2D_pm37t")
-
-[node name="Right" type="RayCast2D" parent="." unique_id=687424350]
-position = Vector2(12, 0)
-target_position = Vector2(0, 10)
-
-[node name="Left" type="RayCast2D" parent="." unique_id=658258928]
-position = Vector2(-6, 0)
-target_position = Vector2(0, 10)
 
 [connection signal="body_entered" from="HitBox" to="." method="BodyEntered2D"]

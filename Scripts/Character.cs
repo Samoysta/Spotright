@@ -83,10 +83,19 @@ public partial class Character : CharacterBody2D
 	float birthTimer = -11;
 	float haloTimer;
 	bool restartAnim;
-
+	//healthbar
+	[Export] Sprite2D healthBar;
+	[Export] Sprite2D bloodBar;
+	[Export] Color healthFull;
+	[Export] Color healthZero;
+	Color firstCol;
     public override void _Ready()
     {
 		pd = GetNode<PlayerData>("/root/PlayerData");
+		firstCol = healthFull;
+		float xPos = (68f / pd.maxHealth * pd.health) - 68;
+		healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
+		bloodBar.Position = healthBar.Position;
 		col = GetNode<CollisionShape2D>("CollisionShape2D");
         firstScale = characterSprite.Scale;
 		for (int i = 0; i < 12; i++)
@@ -178,6 +187,13 @@ public partial class Character : CharacterBody2D
 		{
 			coinLabel.Text = $"{pd.coin}";
 		}
+		// Health Bar
+		float healthPercent = (float)pd.health / pd.maxHealth;
+		float xPos = (68f / pd.maxHealth * pd.health) - 68;
+		healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
+		healthBar.Modulate = healthZero.Lerp(healthFull, healthPercent);
+		healthBar.Modulate = Color.FromHsv(healthBar.Modulate.H,firstCol.S,firstCol.V);
+		bloodBar.Position = bloodBar.Position.Lerp(healthBar.Position, 4f * (float)delta);
     }
 
 	public override void _PhysicsProcess(double delta)
@@ -586,7 +602,7 @@ public partial class Character : CharacterBody2D
 		{
 			var collision = GetSlideCollision(i);
 			Node2D col = (Node2D)collision.GetCollider();
-			if (col.IsInGroup("DamageTile"))
+			if (col.IsInGroup("DamageTile") && canDie)
 			{
 				KillSelf();
 			}
@@ -777,7 +793,7 @@ public partial class Character : CharacterBody2D
 		anim.CallDeferred("play","Died");
 		dieTimer = 0.3f;
 		haloTimer = 0;
-		pd.health --;
+		pd.health -= 10;
 	}
 	void AnimFinished(string animName)
 	{
