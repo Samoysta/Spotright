@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://xybb88q22bvl" path="res://Assets/Enemies/Slime-Sheet.png" id="1_c2nj3"]
 [ext_resource type="Script" uid="uid://dvbuhboyam4ng" path="res://Scripts/Enemies/Slime.cs" id="1_pm37t"]
+[ext_resource type="PackedScene" uid="uid://gp2cq7j8n8q3" path="res://Scenes/Items/coin.tscn" id="2_4lx4x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm37t"]
 atlas = ExtResource("1_c2nj3")
@@ -192,7 +193,7 @@ size = Vector2(16, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pm37t"]
 size = Vector2(16, 14)
 
-[node name="Slime" type="CharacterBody2D" unique_id=1871212296 node_paths=PackedStringArray("sprite", "ray", "wallRay")]
+[node name="Slime" type="CharacterBody2D" unique_id=1871212296 node_paths=PackedStringArray("sprite", "ray", "wallRay", "col")]
 collision_layer = 4
 collision_mask = 5
 platform_on_leave = 2
@@ -205,6 +206,10 @@ damageForce = Vector2(300, 300)
 speed = 50.0
 ray = NodePath("AnimatedSprite2D/floorRay")
 wallRay = NodePath("AnimatedSprite2D/wallRay")
+SpeedCoin = 500.0
+coinAmount = 5
+col = NodePath("HitBox/CollisionShape2D")
+Coin = ExtResource("2_4lx4x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2004041049]
 sprite_frames = SubResource("SpriteFrames_vyct5")

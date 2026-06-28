@@ -203,14 +203,16 @@ id = 2
 coinAmount = 50
 cam = NodePath("../Camera2D")
 
-[node name="Slime" parent="." unique_id=1871212296 instance=ExtResource("11_e2lx1")]
+[node name="Slime" parent="." unique_id=1871212296 node_paths=PackedStringArray("character") instance=ExtResource("11_e2lx1")]
 position = Vector2(-48, -326)
 id = 1
+character = NodePath("../Character")
 
-[node name="Slime2" parent="." unique_id=1128420114 instance=ExtResource("11_e2lx1")]
+[node name="Slime2" parent="." unique_id=1128420114 node_paths=PackedStringArray("character") instance=ExtResource("11_e2lx1")]
 position = Vector2(-124, -326)
 id = 2
 reversed = true
+character = NodePath("../Character")
 
 [editable path="area1/gunLimits"]
 [editable path="Doors/door2"]

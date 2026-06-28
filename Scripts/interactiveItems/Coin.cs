@@ -8,6 +8,8 @@ public partial class Coin : CharacterBody2D
 	int jumpAmount = 5;
 	PlayerData pd;
 	public Character character;
+	[Export] AnimationPlayer anim;
+	bool taked;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,13 +20,14 @@ public partial class Coin : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		if (jumpAmount <= 0)
+		if (jumpAmount <= 0 && !taked)
 		{
 			velocity = Vector2.Zero;
 			if (GlobalPosition.DistanceTo(character.GlobalPosition) < 14f)
 			{
 				pd.coin++;
-				QueueFree();
+				taked = true;
+				anim.Play("Queue");
 			}
 		}
 		else
@@ -54,5 +57,13 @@ public partial class Coin : CharacterBody2D
 	public void AddForce(Vector2 vel)
 	{
 		velocity = vel;
+	}
+
+	public void AnimFinished(string animName)
+	{
+		if (animName == "Queue")
+		{
+			QueueFree();
+		}
 	}
 }

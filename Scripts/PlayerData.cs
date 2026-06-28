@@ -11,6 +11,9 @@ public partial class PlayerData : Node
 	public int weaponDamage = 1;
 	public Character character;
 	public Node2D Items;
+	public string savedScene = "test_scene";
+	public Vector2 savedPos = Vector2.Zero;
+	public bool isDied;
 	public int coin;
 	public SceneManager sm;
 	public Dictionary<int, string> LockedDoors = new();

@@ -73,6 +73,7 @@ public partial class Character : CharacterBody2D
 	public bool selected;
 	public bool cantInput;
 	CollisionShape2D col;
+	bool died;
 	//die Effecct
 	Vector2 center;
 	Vector2 start;
@@ -89,13 +90,13 @@ public partial class Character : CharacterBody2D
 	[Export] Color healthFull;
 	[Export] Color healthZero;
 	Color firstCol;
+	[Export] AnimationPlayer FadeAnim;
+	float undamagingTime;
+	public bool canTakeDamage = true;
+	[Export] AnimationPlayer flashAnim;
     public override void _Ready()
     {
 		pd = GetNode<PlayerData>("/root/PlayerData");
-		firstCol = healthFull;
-		float xPos = (68f / pd.maxHealth * pd.health) - 68;
-		healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
-		bloodBar.Position = healthBar.Position;
 		col = GetNode<CollisionShape2D>("CollisionShape2D");
         firstScale = characterSprite.Scale;
 		for (int i = 0; i < 12; i++)
@@ -171,7 +172,7 @@ public partial class Character : CharacterBody2D
 		}
 		pd.character = this;
 		coinLabel.Text = $"{pd.coin}";
-		if (pd.health == 0)
+		if (pd.health <= 0)
 		{
 			pd.health = health;
 		}
@@ -180,6 +181,20 @@ public partial class Character : CharacterBody2D
 			health = pd.health;
 		}
 		weaponDamage = pd.weaponDamage;
+		if (pd.isDied)
+		{
+			died = false;
+			pd.isDied = false;
+			pd.health = pd.maxHealth;
+			health = pd.health;
+			GlobalPosition = pd.savedPos;
+			FadeAnim.Play("FadeOut");
+			col.CallDeferred("set_disabled", false);
+		}
+		firstCol = healthFull;
+		float xPos = (68f / pd.maxHealth * pd.health) - 68;
+		healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
+		bloodBar.Position = healthBar.Position;
     }
     public override void _Process(double delta)
     {
@@ -198,6 +213,15 @@ public partial class Character : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (undamagingTime > 0)
+		{
+			undamagingTime -= (float)delta;
+			canTakeDamage = false;
+		}
+		else
+		{
+			canTakeDamage = true;
+		}
 		if (!isDashing && velocity.Y > 150 && IsOnFloor())
 		{
 			characterSprite.Play("Falled");	
@@ -212,10 +236,12 @@ public partial class Character : CharacterBody2D
 		}
 		else if (birthTimer < 0 && birthTimer > -10)
 		{
+			flashAnim.Play("Flash");
 			cantInput = false;
 			restartAnim = false;
 			canDie = true;
 			col.CallDeferred("set_disabled",false);
+			undamagingTime = 1;
 			velocity = Vector2.Zero;
 			Velocity = Vector2.Zero;
 			anim.CallDeferred("play","RESET");
@@ -616,6 +642,34 @@ public partial class Character : CharacterBody2D
 		canJump = true;
 		canAnim = true;
 		pd.lastDir = lastDir;
+		if (pd.health <= 0 && !died)
+		{
+			characterSprite.Play("Die");
+			died = true;
+			pd.isDied = true;
+			canDie = false;
+			cantInput = true;
+			velocity = Vector2.Zero;
+			Velocity = Vector2.Zero;
+			col.CallDeferred("set_disabled", true);
+			FadeAnim.Play("FadeIn");
+			pd.doorID = 0;
+			pd.Items = null;
+			pd.killedEnemies.Clear();
+		}
+	}
+
+	public void AnimFinished2(string animName)
+	{
+		if (animName == "FadeIn")
+		{
+			GetTree().ChangeSceneToFile($"res://Scenes/Levels/{pd.savedScene}.tscn");
+		}
+		else if(animName == "FadeOut")
+		{
+			cantInput = false;
+			canDie = true;
+		}
 	}
 
 	public void AddForce(Vector2 vel)
@@ -770,13 +824,28 @@ public partial class Character : CharacterBody2D
 	}
 	public void TakeDamage(int damage,Vector2 force)
 	{
-		pd.health -= damage;
-		AddForce(force);
-		camera.Call("Shake", 20f);
+		if (canTakeDamage)
+		{
+			pd.health -= damage;
+			if (pd.health > 0)
+			{
+				flashAnim.Play("Flash");
+			}
+			AddForce(force);
+			camera.Call("Shake", 20f);
+			undamagingTime = 1;	
+			canTakeDamage = false;
+		}
 	}
 	public void KillSelf()
 	{
+		flashAnim.Play("RESET");
 		camera.Call("Shake", 20f);
+		pd.health -= 10;
+		if (pd.health <= 0)
+		{
+			return;
+		}
 		canDie = false;
 		cantInput = true;
 		restartAnim = true;
@@ -793,7 +862,7 @@ public partial class Character : CharacterBody2D
 		anim.CallDeferred("play","Died");
 		dieTimer = 0.3f;
 		haloTimer = 0;
-		pd.health -= 10;
+		canTakeDamage = false;
 	}
 	void AnimFinished(string animName)
 	{

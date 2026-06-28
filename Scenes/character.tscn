@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 [ext_resource type="PackedScene" uid="uid://decfdj753vjxf" path="res://Scenes/Effects/baloon_halo_ef.tscn" id="6_l1rcp"]
 [ext_resource type="Texture2D" uid="uid://40jqvobsvkmj" path="res://Assets/Character-Sheet.png" id="7_7iw6i"]
+[ext_resource type="Texture2D" uid="uid://b2p74y62x60i0" path="res://Assets/CharacterDieSheet.png" id="8_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
 [ext_resource type="Texture2D" uid="uid://2jrx3sd8krxj" path="res://Assets/BaloonBoomSheet.png" id="10_kq7hj"]
 [ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="11_7iw6i"]
@@ -26,6 +27,54 @@ region = Rect2(2688, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_le1tg"]
 atlas = ExtResource("7_7iw6i")
 region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqg7f"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a5am"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbbpx"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncbtc"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edlx2"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2xv2"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha0n0"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4ibn"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mogsv"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksrvg"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1p4j"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc5tg"]
+atlas = ExtResource("8_dm6ib")
+region = Rect2(1408, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2daya"]
 atlas = ExtResource("7_7iw6i")
@@ -124,6 +173,47 @@ animations = [{
 "loop": false,
 "name": &"Dash",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqg7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a5am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbbpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncbtc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edlx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2xv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha0n0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4ibn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mogsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksrvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1p4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc5tg")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -423,6 +513,42 @@ _data = {
 &"RESET": SubResource("Animation_wbia7")
 }
 
+[sub_resource type="Animation" id="Animation_et0tf"]
+resource_name = "Flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hgna0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7tkn"]
+_data = {
+&"Flash": SubResource("Animation_et0tf"),
+&"RESET": SubResource("Animation_hgna0")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
 size = Vector2(4, 20)
 
@@ -659,7 +785,104 @@ font_size = 315
 outline_size = 48
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar")]
+[sub_resource type="Gradient" id="Gradient_ru50q"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dm6ib"]
+gradient = SubResource("Gradient_ru50q")
+width = 640
+height = 360
+
+[sub_resource type="Animation" id="Animation_dm6ib"]
+resource_name = "FadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.6, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_w85my"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_q5mnj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w85my"]
+_data = {
+&"FadeIn": SubResource("Animation_dm6ib"),
+&"FadeOut": SubResource("Animation_w85my"),
+&"RESET": SubResource("Animation_q5mnj")
+}
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -696,6 +919,8 @@ healthBar = NodePath("UI/HealthBar/healthbarbg/Polygon2D/healthBar")
 bloodBar = NodePath("UI/HealthBar/healthbarbg/Polygon2D/bloodBar")
 healthFull = Color(0.21364361, 0.66903806, 0.259857, 1)
 healthZero = Color(0.94602066, 0.22095028, 0.19325706, 1)
+FadeAnim = NodePath("UI/BlackScreen/AnimationPlayer")
+flashAnim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/AnimationPlayer2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 shape = SubResource("RectangleShape2D_ushfy")
@@ -711,10 +936,8 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_ejsiy")
-animation = &"Jump"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 1
-frame_progress = 1.0
 
 [node name="WhiteSprite" type="Sprite2D" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=314907965]
 modulate = Color(1, 1, 1, 0)
@@ -731,6 +954,9 @@ visible = false
 z_index = 2
 position = Vector2(0, 1)
 texture = ExtResource("8_wbia7")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=1143375699]
+libraries/ = SubResource("AnimationLibrary_s7tkn")
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
 position = Vector2(8, 0)
@@ -861,6 +1087,14 @@ texture = ExtResource("15_dm6ib")
 [node name="healthBar" type="Sprite2D" parent="UI/HealthBar/healthbarbg/Polygon2D" unique_id=690192437]
 texture = ExtResource("15_dm6ib")
 
+[node name="BlackScreen" type="Sprite2D" parent="UI" unique_id=1522531185]
+visible = false
+position = Vector2(320, 180)
+texture = SubResource("GradientTexture2D_dm6ib")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/BlackScreen" unique_id=1258180922]
+libraries/ = SubResource("AnimationLibrary_w85my")
+
 [node name="Items" type="Node2D" parent="." unique_id=1440899725]
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
@@ -868,3 +1102,4 @@ texture = ExtResource("15_dm6ib")
 [connection signal="body_entered" from="LeftWallCheck" to="." method="LeftWallEntered"]
 [connection signal="body_exited" from="LeftWallCheck" to="." method="LeftWallExited"]
 [connection signal="animation_finished" from="CharacterDie/AnimationPlayer" to="." method="AnimFinished"]
+[connection signal="animation_finished" from="UI/BlackScreen/AnimationPlayer" to="." method="AnimFinished2"]
