@@ -3,6 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://xybb88q22bvl" path="res://Assets/Enemies/Slime-Sheet.png" id="1_c2nj3"]
 [ext_resource type="Script" uid="uid://dvbuhboyam4ng" path="res://Scripts/Enemies/Slime.cs" id="1_pm37t"]
 [ext_resource type="PackedScene" uid="uid://gp2cq7j8n8q3" path="res://Scenes/Items/coin.tscn" id="2_4lx4x"]
+[ext_resource type="PackedScene" uid="uid://c3anwpccpkfvo" path="res://Scenes/Effects/slime_blood_ef.tscn" id="3_6kvin"]
+[ext_resource type="Shader" uid="uid://dxysefl3drh14" path="res://Scripts/Enemies/slime.gdshader" id="4_hm6tv"]
+[ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="6_larvs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_larvs"]
+resource_local_to_scene = true
+shader = ExtResource("4_hm6tv")
+shader_parameter/flash = false
+shader_parameter/col = Vector3(0.23, 1, 0.2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm37t"]
 atlas = ExtResource("1_c2nj3")
@@ -193,7 +202,48 @@ size = Vector2(16, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pm37t"]
 size = Vector2(16, 14)
 
-[node name="Slime" type="CharacterBody2D" unique_id=1871212296 node_paths=PackedStringArray("sprite", "ray", "wallRay", "col")]
+[sub_resource type="Animation" id="Animation_hm6tv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_larvs"]
+resource_name = "TakeDamage"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1396298),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16kjp"]
+_data = {
+&"RESET": SubResource("Animation_hm6tv"),
+&"TakeDamage": SubResource("Animation_larvs")
+}
+
+[sub_resource type="Curve" id="Curve_larvs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5805085, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Slime" type="CharacterBody2D" unique_id=1871212296 node_paths=PackedStringArray("sprite", "ray", "wallRay", "col", "anim", "dieEf")]
 collision_layer = 4
 collision_mask = 5
 platform_on_leave = 2
@@ -210,8 +260,12 @@ SpeedCoin = 500.0
 coinAmount = 5
 col = NodePath("HitBox/CollisionShape2D")
 Coin = ExtResource("2_4lx4x")
+slimeBloodEf = ExtResource("3_6kvin")
+anim = NodePath("AnimationPlayer")
+dieEf = NodePath("DieEffect")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2004041049]
+material = SubResource("ShaderMaterial_larvs")
 sprite_frames = SubResource("SpriteFrames_vyct5")
 animation = &"Idle"
 autoplay = "Idle"
@@ -236,5 +290,23 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1074686391]
 position = Vector2(3, 1)
 shape = SubResource("RectangleShape2D_pm37t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=299224938]
+libraries/ = SubResource("AnimationLibrary_16kjp")
+
+[node name="DieEffect" type="CPUParticles2D" parent="." unique_id=1727246377]
+emitting = false
+amount = 20
+texture = ExtResource("6_larvs")
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+linear_accel_min = -300.0
+linear_accel_max = -300.0
+scale_amount_min = 0.3
+scale_amount_curve = SubResource("Curve_larvs")
 
 [connection signal="body_entered" from="HitBox" to="." method="BodyEntered2D"]

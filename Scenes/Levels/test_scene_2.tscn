@@ -871,6 +871,10 @@ id = 1
 coinAmount = 30
 cam = NodePath("../Camera2D")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1017826216]
+color = Color(0.8500505, 0.85005057, 0.8500505, 1)
+blend_mode = 2
+
 [editable path="Doors/door2"]
 [editable path="Area/gunLimits"]
 [editable path="CheckPoints/CheckPoint3"]

@@ -22,7 +22,6 @@ public partial class Coin : CharacterBody2D
 	{
 		if (jumpAmount <= 0 && !taked)
 		{
-			velocity = Vector2.Zero;
 			if (GlobalPosition.DistanceTo(character.GlobalPosition) < 14f)
 			{
 				pd.coin++;
@@ -40,15 +39,20 @@ public partial class Coin : CharacterBody2D
 					velocity.X *= 0.5f;
 					velocity.Y *= -0.5f;
 				}
-			}
-			else
-			{
-				velocity += GetGravity() * 2 * (float)delta;
+				else
+				{
+					velocity = Vector2.Zero;
+				}
+
 			}
 			if (IsOnWall())
 			{
 				velocity.X *= -1;
 			}
+		}
+		if (!IsOnFloor())
+		{
+			velocity += GetGravity() * 2 * (float)delta;
 		}
 		Velocity = velocity;
 		MoveAndSlide();

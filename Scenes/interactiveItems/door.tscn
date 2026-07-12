@@ -145,30 +145,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -32.32242
-offset_right = 12.0
-offset_bottom = -8.322418
+offset_left = -16.0
+offset_top = -36.32242
+offset_right = 16.0
+offset_bottom = -4.322418
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(12, 12)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_q5lc6")
-region_rect = Rect2(45, 45, 38, 38)
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="Down" type="Sprite2D" parent="TexBox/NinePatchRect" unique_id=780055847]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(12, 14)
+position = Vector2(16, 16)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_aayor")
 
 [node name="Triangle" type="Sprite2D" parent="TexBox/NinePatchRect" unique_id=2060575548]
-position = Vector2(12, 21)
+position = Vector2(16, 26.185)
 texture = ExtResource("6_xx0ea")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1276345379]

@@ -43,6 +43,7 @@ enabled=PackedStringArray()
 
 Ground=""
 DamageTile=""
+"Secret Area"=""
 
 [input]
 

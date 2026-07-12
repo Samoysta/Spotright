@@ -25,7 +25,7 @@ public partial class Door2 : Area2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (entered)
 		{
@@ -36,10 +36,6 @@ public partial class Door2 : Area2D
 			character.Velocity = new Vector2(-dir * character.Speed,character.Velocity.Y);	
 		}
 	}
-    public override void _PhysicsProcess(double delta)
-    {
-		
-    }
 
 
 	public void BodyEntered2D(Node2D body)

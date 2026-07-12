@@ -101,10 +101,6 @@ public partial class Weapon1 : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (!selected)
-		{
-			
-		}
 		if (character.IsOnFloor())
 		{
 			canShoot = true;
@@ -136,17 +132,6 @@ public partial class Weapon1 : Area2D
 			}
 			if (!character.cantInput)
 			{
-				Vector2 scale = character.characterSprite.Scale;
-				if (scale.X > 0)
-				{
-					pos = new Vector2(weaponMaxPos.X, 0);
-					gunSprite.FlipV = false;
-				}
-				else
-				{
-					pos = new Vector2(-weaponMaxPos.X, 0);
-					gunSprite.FlipV = true;
-				}
 				if (Input.IsActionPressed("Up"))
 				{
 					pos = new Vector2(0,-weaponMaxPos.Y);
@@ -197,6 +182,17 @@ public partial class Weapon1 : Area2D
 				}
 				Position = Position.Lerp(targetPos,10 * (float)delta);
 				LookAt(GlobalPosition + Position);
+				Vector2 scale = character.characterSprite.Scale;
+				if (scale.X > 0)
+				{
+					pos = new Vector2(weaponMaxPos.X, 0);
+					gunSprite.FlipV = false;
+				}
+				else
+				{
+					pos = new Vector2(-weaponMaxPos.X, 0);
+					gunSprite.FlipV = true;
+				}
 
 				if (Input.IsActionJustPressed("X") && shootcd <= 0 && canShoot)
 				{
@@ -211,7 +207,6 @@ public partial class Weapon1 : Area2D
 							character.AddForce(new Vector2(-800,0).Rotated(GlobalRotation));	
 						}
 					}
-					cam.Shake(8);
 					shootcd = shootCoolDown;
 					for (int i = -1; i < 2; i++)
 					{

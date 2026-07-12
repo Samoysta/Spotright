@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://d3k2t8ij5tf67"]
+
+[ext_resource type="Script" uid="uid://ci8eqi806f8yk" path="res://Scripts/interactiveItems/ReadableStone.cs" id="1_6ckxe"]
+[ext_resource type="Texture2D" uid="uid://jyktl7on5wix" path="res://Assets/Readable Stones/1.png" id="1_bh1ex"]
+[ext_resource type="Texture2D" uid="uid://dkhrtvjwpl2og" path="res://Assets/UI/textBox.png" id="2_cdqip"]
+[ext_resource type="Texture2D" uid="uid://dtonfo65vtifq" path="res://Assets/UI/textBoxTreangle.png" id="3_6ckxe"]
+[ext_resource type="FontFile" uid="uid://bviu62loexrxk" path="res://ByteBounce.ttf" id="4_cdqip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3d1t"]
+size = Vector2(48, 6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ckxe"]
+font = ExtResource("4_cdqip")
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_6ckxe"]
+resource_name = "Loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("textBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -56), Vector2(0, -62)]
+}
+
+[sub_resource type="Animation" id="Animation_k3d1t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("textBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -56)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ccfd8"]
+_data = {
+&"Loop": SubResource("Animation_6ckxe"),
+&"RESET": SubResource("Animation_k3d1t")
+}
+
+[node name="ReadableStone" type="Area2D" unique_id=281572682 node_paths=PackedStringArray("readBox")]
+collision_mask = 2
+script = ExtResource("1_6ckxe")
+readBox = NodePath("textBox")
+textSpeed = 17.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2062473115]
+position = Vector2(0, -64)
+texture = ExtResource("1_bh1ex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1233445581]
+shape = SubResource("RectangleShape2D_k3d1t")
+
+[node name="textBox" type="Node2D" parent="." unique_id=2057139674]
+position = Vector2(0, -56)
+scale = Vector2(1e-05, 1e-05)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="textBox" unique_id=343386512]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -38.0
+offset_right = 32.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 16)
+size_flags_horizontal = 4
+texture = ExtResource("2_cdqip")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ucgen" type="Sprite2D" parent="textBox" unique_id=1668840433]
+position = Vector2(0, -10)
+texture = ExtResource("3_6ckxe")
+
+[node name="read" type="Label" parent="textBox" unique_id=575856255]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -28.0
+offset_right = 1106.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(342, 210.5)
+text = "Read"
+label_settings = SubResource("LabelSettings_6ckxe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1150636738]
+libraries/ = SubResource("AnimationLibrary_ccfd8")
+autoplay = &"Loop"
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="body_exited" from="." to="." method="BodyExited2D"]

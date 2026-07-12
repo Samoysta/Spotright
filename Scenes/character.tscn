@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://6f436w7nomeh" path="res://Assets/CoinSheet.png" id="13_le1tg"]
 [ext_resource type="Texture2D" uid="uid://bboq8vckk3vje" path="res://Assets/UI/healthBarBg.png" id="14_mvyft"]
 [ext_resource type="Texture2D" uid="uid://fsjgsnkxbqdw" path="res://Assets/UI/healthBar.png" id="15_dm6ib"]
+[ext_resource type="Texture2D" uid="uid://1hwn3fep2ncq" path="res://Assets/UI/blood.png" id="17_q5mnj"]
+[ext_resource type="Texture2D" uid="uid://dkhrtvjwpl2og" path="res://Assets/UI/textBox.png" id="18_w85my"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.6, 23.5)
@@ -781,9 +783,12 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.09863013, 1, 1, 1, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_le1tg"]
 font = ExtResource("12_l1rcp")
-font_size = 315
-outline_size = 48
+outline_size = 5
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_w85my"]
+offsets = PackedFloat32Array(0, 0.48522168, 0.8743842)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.87931037, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_ru50q"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -882,7 +887,184 @@ _data = {
 &"RESET": SubResource("Animation_q5mnj")
 }
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim")]
+[sub_resource type="Gradient" id="Gradient_dm6ib"]
+offsets = PackedFloat32Array(0.81490386, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 0.10980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q5mnj"]
+gradient = SubResource("Gradient_dm6ib")
+width = 640
+height = 360
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_s7tkn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nw3qc"]
+resource_name = "TakeDamage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtvxd"]
+_data = {
+&"RESET": SubResource("Animation_s7tkn"),
+&"TakeDamage": SubResource("Animation_nw3qc")
+}
+
+[sub_resource type="Animation" id="Animation_rtvxd"]
+resource_name = "Closing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.462289, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_1g2gg"]
+resource_name = "Opening"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.3077861, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4kq8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_px0br"]
+_data = {
+&"Closing": SubResource("Animation_rtvxd"),
+&"Opening": SubResource("Animation_1g2gg"),
+&"RESET": SubResource("Animation_4kq8q")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w85my"]
+size = Vector2(13, 26)
+
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -921,6 +1103,10 @@ healthFull = Color(0.21364361, 0.66903806, 0.259857, 1)
 healthZero = Color(0.94602066, 0.22095028, 0.19325706, 1)
 FadeAnim = NodePath("UI/BlackScreen/AnimationPlayer")
 flashAnim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/AnimationPlayer2")
+takeDamageAnim = NodePath("UI/DamageScreen/AnimationPlayer")
+bloodEf = NodePath("UI/HealthBar/healthbarbg/bloodEf")
+dialogAnim = NodePath("UI/NinePatchRect/AnimationPlayer")
+dialogText = NodePath("UI/NinePatchRect/dialogText")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 shape = SubResource("RectangleShape2D_ushfy")
@@ -1032,6 +1218,7 @@ texture_scale = 3.0
 [node name="birthBaloonEf" type="AnimatedSprite2D" parent="." unique_id=1345008411]
 top_level = true
 z_index = 1
+position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_k1duu")
 animation = &"Start"
 frame = 8
@@ -1058,11 +1245,10 @@ color_ramp = SubResource("Gradient_7iw6i")
 position = Vector2(0, 40)
 
 [node name="CoinLabel" type="Label" parent="UI/Coin" unique_id=1933778219]
-offset_left = 29.999998
-offset_top = 3.9999986
-offset_right = 70.0
-offset_bottom = 221.0
-scale = Vector2(0.05, 0.05)
+offset_left = 30.0
+offset_top = 4.9999986
+offset_right = 120.0
+offset_bottom = 222.0
 label_settings = SubResource("LabelSettings_le1tg")
 
 [node name="coinSprite" type="Sprite2D" parent="UI/Coin" unique_id=1460414189]
@@ -1087,6 +1273,18 @@ texture = ExtResource("15_dm6ib")
 [node name="healthBar" type="Sprite2D" parent="UI/HealthBar/healthbarbg/Polygon2D" unique_id=690192437]
 texture = ExtResource("15_dm6ib")
 
+[node name="bloodEf" type="CPUParticles2D" parent="UI/HealthBar/healthbarbg" unique_id=1433777100]
+emitting = false
+amount = 3
+texture = ExtResource("17_q5mnj")
+lifetime = 0.7
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+spread = 20.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+color_ramp = SubResource("Gradient_w85my")
+
 [node name="BlackScreen" type="Sprite2D" parent="UI" unique_id=1522531185]
 visible = false
 position = Vector2(320, 180)
@@ -1095,7 +1293,65 @@ texture = SubResource("GradientTexture2D_dm6ib")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/BlackScreen" unique_id=1258180922]
 libraries/ = SubResource("AnimationLibrary_w85my")
 
+[node name="DamageScreen" type="Sprite2D" parent="UI" unique_id=685110239]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(320, 180)
+texture = SubResource("GradientTexture2D_q5mnj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DamageScreen" unique_id=1266339023]
+libraries/ = SubResource("AnimationLibrary_rtvxd")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI" unique_id=166446194]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -162.0
+offset_right = 192.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(192, 64)
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("18_w85my")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/NinePatchRect" unique_id=1323563870]
+libraries/ = SubResource("AnimationLibrary_px0br")
+
+[node name="dialogText" type="RichTextLabel" parent="UI/NinePatchRect" unique_id=2096445725]
+layout_mode = 1
+offset_left = 7.9999995
+offset_top = 5.9999995
+offset_right = 374.0
+offset_bottom = 120.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("12_l1rcp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
 [node name="Items" type="Node2D" parent="." unique_id=1440899725]
+
+[node name="DetectBox" type="Area2D" parent="." unique_id=305499085]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox" unique_id=1921918501]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_w85my")
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]
@@ -1103,3 +1359,4 @@ libraries/ = SubResource("AnimationLibrary_w85my")
 [connection signal="body_exited" from="LeftWallCheck" to="." method="LeftWallExited"]
 [connection signal="animation_finished" from="CharacterDie/AnimationPlayer" to="." method="AnimFinished"]
 [connection signal="animation_finished" from="UI/BlackScreen/AnimationPlayer" to="." method="AnimFinished2"]
+[connection signal="body_entered" from="DetectBox" to="." method="DetectEntered2D"]

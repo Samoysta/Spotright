@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 
 public partial class Slime : CharacterBody2D
@@ -11,6 +12,7 @@ public partial class Slime : CharacterBody2D
 	[Export] Vector2 damageForce;
 	[Export] float speed;
 	[Export] bool reversed;
+	[Export] Camera2d cam;
 	RandomNumberGenerator rnd = new();
 	PlayerData pd;
 	int dir;
@@ -27,9 +29,17 @@ public partial class Slime : CharacterBody2D
 	//Money
 	[Export] PackedScene Coin;
 	Coin[] coins;
+	[Export] PackedScene slimeBloodEf;
+	public Queue<Effect> slimeBloodEfs = new ();
+	[Export] AnimationPlayer anim;
+	[Export] CpuParticles2D dieEf;
+	CollisionShape2D thisCol;
+	bool died;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		thisCol = GetNode<CollisionShape2D>("CollisionShape2D");
 		coins = new Coin[coinAmount];
 		rnd.Randomize();
 		pd = GetNode<PlayerData>("/root/PlayerData");
@@ -61,50 +71,67 @@ public partial class Slime : CharacterBody2D
 		{
 			dir = 1;
 		}
+		for (int i = 0; i < 9; i++)
+		{
+			Effect ef = (Effect)slimeBloodEf.Instantiate();
+			GetTree().CurrentScene.CallDeferred("add_child", ef);
+			slimeBloodEfs.Enqueue(ef);
+			ef.Visible = false;
+		}
 	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-		col.CallDeferred("set_disabled", !character.canTakeDamage);
-		velocity.Y = Velocity.Y;
-		if (!IsOnFloor())
+		if (!died)
 		{
-			velocity += 2 * GetGravity() * (float)delta;
-		}
-		if (!inProcees)
-		{
-			running = !running;
-			t1 = 2;
-			inProcees = true;
-		}
-		else
-		{
-			if (t1 > 0)
+			col.CallDeferred("set_disabled", !character.canTakeDamage);
+			velocity.Y = Velocity.Y;
+			if (!IsOnFloor())
 			{
-				t1 -= (float)delta;
+				velocity += 2 * GetGravity() * (float)delta;
+			}
+			if (!inProcees)
+			{
+				running = !running;
+				t1 = rnd.RandfRange(1,3);
+				inProcees = true;
 			}
 			else
 			{
-				inProcees = false;
-			}
-			if (running)
-			{
-				velocity.X = dir * speed;
-				if (!ray.IsColliding() || (wallRay.IsColliding() && IsOnWall()))
+				if (t1 > 0)
 				{
-					dir *= -1;
-					sprite.Scale *= new Vector2(-1,1);
+					t1 -= (float)delta;
+				}
+				else
+				{
+					inProcees = false;
+				}
+				if (running)
+				{
+					velocity.X = dir * speed;
+					if (!ray.IsColliding() || (wallRay.IsColliding() && IsOnWall()))
+					{
+						dir *= -1;
+						sprite.Scale *= new Vector2(-1,1);
+					}
+				}
+				else
+				{
+					velocity.X = 0;
 				}
 			}
-			else
+			Velocity = velocity;
+			MoveAndSlide();
+		}
+		
+		if (died)
+		{
+			if (!dieEf.Emitting)
 			{
-				velocity.X = 0;
+				QueueFree();
 			}
 		}
-		Velocity = velocity;
-		MoveAndSlide();
-		
     }
 
 	public void BodyEntered2D(Node2D body)
@@ -118,6 +145,8 @@ public partial class Slime : CharacterBody2D
 
 	public void TakeDamage(int dam)
 	{
+		anim.Play("TakeDamage");
+		anim.Seek(0);
 		health -= dam;	
 		if (health <= 0)
 		{
@@ -126,8 +155,22 @@ public partial class Slime : CharacterBody2D
 				pd.killedEnemies.Add(id, "killed");
 				SpawnCoin();	
 			}
-			QueueFree();
+			sprite.Visible = false;
+			col.CallDeferred("set_disabled",true);
+			thisCol.CallDeferred("set_disabled", true);
+			dieEf.Emitting = true;
+			died = true;
+			cam.Shake(10);
 		}
+	}
+	public void SetDamageEf(Vector2 dir)
+	{
+		Effect ef = slimeBloodEfs.Dequeue();
+		ef.GlobalPosition = GlobalPosition;
+		CpuParticles2D ef2 = ef.GetNode<CpuParticles2D>("bloodEf");
+		ef2.Direction = dir;
+		ef.setOn();
+		slimeBloodEfs.Enqueue(ef);
 	}
 
 	public void SpawnCoin()

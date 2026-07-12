@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://cgpq5i0sfldti"]
+
+[ext_resource type="Script" uid="uid://p66dpm8w7bi" path="res://Scripts/interactiveItems/CeilDoor.cs" id="1_8ixig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du172"]
+size = Vector2(48, 20)
+
+[sub_resource type="Gradient" id="Gradient_ru50q"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8ixig"]
+gradient = SubResource("Gradient_ru50q")
+width = 640
+height = 360
+
+[sub_resource type="Animation" id="Animation_ru50q"]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vggml"]
+resource_name = "FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlackScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_q5lc6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_su7qt"]
+_data = {
+&"FadeIn": SubResource("Animation_ru50q"),
+&"FadeOut": SubResource("Animation_vggml"),
+&"RESET": SubResource("Animation_q5lc6")
+}
+
+[node name="CeilDoor" type="Area2D" unique_id=176141941 node_paths=PackedStringArray("col", "anim", "spawnPos")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_8ixig")
+jumpSpeed = 700.0
+xSpeed = 150.0
+col = NodePath("CollisionShape2D")
+anim = NodePath("CanvasLayer/AnimationPlayer")
+spawnPos = NodePath("spawnPos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162292855]
+shape = SubResource("RectangleShape2D_du172")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1958561627]
+layer = 2
+
+[node name="BlackScreen" type="Sprite2D" parent="CanvasLayer" unique_id=1595729073]
+visible = false
+position = Vector2(320, 180)
+texture = SubResource("GradientTexture2D_8ixig")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=289824128]
+libraries/ = SubResource("AnimationLibrary_su7qt")
+autoplay = &"FadeOut"
+
+[node name="spawnPos" type="Node2D" parent="." unique_id=715691022]
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="AnimFinished"]

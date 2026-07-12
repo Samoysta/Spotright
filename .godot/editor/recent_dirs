@@ -1,5 +1,9 @@
-res://Assets/
+res://Scenes/Levels/
+res://Scripts/interactiveItems/
+res://Scenes/interactiveItems/
 res://Scripts/Enemies/
+res://Scenes/Effects/
+res://Assets/
 res://Scenes/Enemies/
 res://Assets/Enemies/
 res://Scripts/Enviroment/
@@ -7,13 +11,9 @@ res://Scenes/Enviorement/
 res://Scripts/
 res://Scenes/
 res://Assets/Impact/
-res://Scenes/Levels/
-res://Scripts/interactiveItems/
-res://Scenes/interactiveItems/
 res://Scenes/Items/
 C:/Users/LENOVO/
 res://Assets/Tilemaps/
-res://Scenes/Effects/
 C:/Users/LENOVO/Dev/
 res://Scripts/bullets/
 res://Scenes/bullets/

@@ -8,896 +8,918 @@ using System.Text;
 public partial class Character : CharacterBody2D
 {
 
-	public int weaponDamage;
-	[Export] public int health;
-	[Export] public Label coinLabel;
-	PlayerData pd;
-	[Export] public SceneManager sm;
-	[Export] Node2D[] doors;
-	[Export] public Node2D Items;
-	[Export] int [] doorIDs;
-	[Export] public Camera2d camera;
-	[Export] public float Speed;
-	[Export] float JumpVelocity;
-	[Export] float coyotoTime;
-	float ct;
-	[Export] float jumpTime;
-	float jumpT;
-	[Export] float inputBufTimer;
-	float ibt;
-	bool isZjustPressed;
-	[Export] float Gravity;
-	[Export] float accel;
-	[Export] public AnimatedSprite2D characterSprite;
-	[Export] Node2D foot;
-	[Export] PackedScene jumpEf;
-	[Export] PackedScene dashEf;
-	[Export] public float wallSpeed;
-	[Export] CpuParticles2D rightWallEffect;
-	[Export] CpuParticles2D leftWallEffect;
-	[Export] float dashSpeed;
-	[Export] public float dashCoolDown;
-	[Export] PackedScene dashHaloEf;
-	[Export] PackedScene hitEf;
-	[Export] PackedScene balHaloEf;
-	[Export] AnimatedSprite2D baloonBoomEf;
-	[Export] CpuParticles2D baloonBoomEfCpu;
-	public float dashCD;
-	public bool isDashing;
-	public bool canDie = true;
-	[Export] float dashDur;
-	float dashD;
-	bool canDash;
-	bool canJump = true;
-	float dashHaloCD;
-	[Export] AnimationPlayer dieAnim;
-	[Export] public AnimationPlayer anim;
-	Vector2 spawnPos;
-	public Vector2 velocity;
-	public Queue<Effect> jumpEfs = new ();
-	public Queue<Effect> dashEfs = new ();
-	public Queue<Effect> dashHaloEfs = new ();
-	public Queue<Effect> hitEffects = new ();
-	public Queue<Effect> baloonHaloEfs = new ();
-	public Queue<Wepaon1Bullet> bul1s = new();
-	float dir;
-	public bool isJumping;
-	Vector2 firstScale;
-	bool isGrounded;
-	public bool isRightWalled;
-	public bool isLeftWalled;
-	int leftWallAmount;
-	int rightWallAmount;
-	public int lastDir;
-	bool canAnim;
-	public bool selected;
-	public bool cantInput;
-	CollisionShape2D col;
-	bool died;
-	//die Effecct
-	Vector2 center;
-	Vector2 start;
-	Vector2 end;
-	float t1;
-	Tween t;
-	float dieTimer = -11;
-	float birthTimer = -11;
-	float haloTimer;
-	bool restartAnim;
-	//healthbar
-	[Export] Sprite2D healthBar;
-	[Export] Sprite2D bloodBar;
-	[Export] Color healthFull;
-	[Export] Color healthZero;
-	Color firstCol;
-	[Export] AnimationPlayer FadeAnim;
-	float undamagingTime;
-	public bool canTakeDamage = true;
-	[Export] AnimationPlayer flashAnim;
+    public int weaponDamage;
+    [Export] public int health;
+    [Export] public Label coinLabel;
+    PlayerData pd;
+    [Export] public SceneManager sm;
+    [Export] Node2D[] doors;
+    [Export] public Node2D Items;
+    [Export] int[] doorIDs;
+    [Export] public Camera2d camera;
+    [Export] public float Speed;
+    [Export] public float JumpVelocity;
+    [Export] float coyotoTime;
+    float ct;
+    [Export] float jumpTime;
+    float jumpT;
+    [Export] float inputBufTimer;
+    float ibt;
+    bool isZjustPressed;
+    [Export] float Gravity;
+    [Export] float accel;
+    [Export] public AnimatedSprite2D characterSprite;
+    [Export] Node2D foot;
+    [Export] PackedScene jumpEf;
+    [Export] PackedScene dashEf;
+    [Export] public float wallSpeed;
+    [Export] CpuParticles2D rightWallEffect;
+    [Export] CpuParticles2D leftWallEffect;
+    [Export] float dashSpeed;
+    [Export] public float dashCoolDown;
+    [Export] PackedScene dashHaloEf;
+    [Export] PackedScene hitEf;
+    [Export] PackedScene balHaloEf;
+    [Export] AnimatedSprite2D baloonBoomEf;
+    [Export] CpuParticles2D baloonBoomEfCpu;
+    public float dashCD;
+    public bool isDashing;
+    public bool canDie = true;
+    [Export] float dashDur;
+    float dashD;
+    bool canDash;
+    bool canJump = true;
+    float dashHaloCD;
+    [Export] AnimationPlayer dieAnim;
+    [Export] public AnimationPlayer anim;
+    Vector2 spawnPos;
+    public Vector2 velocity;
+    public Queue<Effect> jumpEfs = new();
+    public Queue<Effect> dashEfs = new();
+    public Queue<Effect> dashHaloEfs = new();
+    public Queue<Effect> hitEffects = new();
+    public Queue<Effect> baloonHaloEfs = new();
+    public Queue<Wepaon1Bullet> bul1s = new();
+    float dir;
+    public bool isJumping;
+    Vector2 firstScale;
+    bool isGrounded;
+    public bool isRightWalled;
+    public bool isLeftWalled;
+    int leftWallAmount;
+    int rightWallAmount;
+    public int lastDir;
+    bool canAnim;
+    public bool selected;
+    public bool cantInput;
+    CollisionShape2D col;
+    bool died;
+    //die Effecct
+    Vector2 center;
+    Vector2 start;
+    Vector2 end;
+    float t1;
+    Tween t;
+    float dieTimer = -11;
+    float birthTimer = -11;
+    float haloTimer;
+    bool restartAnim;
+    //UIs
+    [Export] Sprite2D healthBar;
+    [Export] Sprite2D bloodBar;
+    [Export] Color healthFull;
+    [Export] Color healthZero;
+    Color firstCol;
+    [Export] AnimationPlayer FadeAnim;
+    float undamagingTime;
+    public bool canTakeDamage = true;
+    [Export] AnimationPlayer flashAnim;
+    [Export] AnimationPlayer takeDamageAnim;
+    [Export] CpuParticles2D bloodEf;
+    [Export] public AnimationPlayer dialogAnim;
+    [Export] public RichTextLabel dialogText;
     public override void _Ready()
     {
-		pd = GetNode<PlayerData>("/root/PlayerData");
-		col = GetNode<CollisionShape2D>("CollisionShape2D");
+        pd = GetNode<PlayerData>("/root/PlayerData");
+        col = GetNode<CollisionShape2D>("CollisionShape2D");
         firstScale = characterSprite.Scale;
-		for (int i = 0; i < 12; i++)
-		{
-			Effect jef = (Effect)jumpEf.Instantiate();
-			GetTree().CurrentScene.CallDeferred("add_child", jef);
-			jef.Scale = new Vector2(1,1);
-			jumpEfs.Enqueue(jef);
-		}
-		for (int i = 0; i < 3; i++)
-		{
-			Effect def = (Effect)dashEf.Instantiate();
-			GetTree().CurrentScene.CallDeferred("add_child", def);
-			def.Scale = new Vector2(1,1);
-			dashEfs.Enqueue(def);
-		}
-		for (int i = 0; i < 6; i++)
-		{
-			Effect ef = (Effect)hitEf.Instantiate();
-			GetTree().CurrentScene.CallDeferred("add_child", ef);
-			ef.Scale = new Vector2(1,1);
-			hitEffects.Enqueue(ef);
-		}
-		for (int i = 0; i < 12; i++)
-		{
-			Effect def = (Effect)dashHaloEf.Instantiate();
-			GetTree().CurrentScene.CallDeferred("add_child", def);
-			def.Scale = new Vector2(1,1);
-			dashHaloEfs.Enqueue(def);
-		}
-		for (int i = 0; i < 12; i++)
-		{
-			Effect ef = (Effect)balHaloEf.Instantiate();
-			GetTree().CurrentScene.CallDeferred("add_child", ef);
-			ef.Scale = new Vector2(1,1);
-			baloonHaloEfs.Enqueue(ef);
-		}
-		lastDir = pd.lastDir;
-		if (lastDir < 0)
-		{
-			characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
-		}
-		else if(lastDir >= 0)
-		{
-			characterSprite.Scale = firstScale;
-		}	
-		if (pd.doorID != 0)
-		{
-			int index = Array.IndexOf(doorIDs, pd.doorID);
-			Node2D spawnps = doors[index].GetNode<Node2D>("spawnPos");
-			GlobalPosition = spawnps.GlobalPosition;
-			camera.GlobalPosition = GlobalPosition;
-			doors[index].Call("Starting");
-			cantInput = true;
-			characterSprite.Play("Idle");
-			isGrounded = true;
-		}
-		pd.sm = sm;
-		if (pd.Items == null)
-		{
-			pd.Items = Items;	
-		}
-		else
-		{
-			Items.QueueFree();
-			Items = pd.Items;
-			Items.Reparent(this);
-			Items.GlobalPosition = GlobalPosition;
-			foreach (Node2D item in Items.GetChildren())
-			{
-				item.Call("Init", this);
-			}
-		}
-		pd.character = this;
-		coinLabel.Text = $"{pd.coin}";
-		if (pd.health <= 0)
-		{
-			pd.health = health;
-		}
-		else
-		{
-			health = pd.health;
-		}
-		weaponDamage = pd.weaponDamage;
-		if (pd.isDied)
-		{
-			died = false;
-			pd.isDied = false;
-			pd.health = pd.maxHealth;
-			health = pd.health;
-			GlobalPosition = pd.savedPos;
-			FadeAnim.Play("FadeOut");
-			col.CallDeferred("set_disabled", false);
-		}
-		firstCol = healthFull;
-		float xPos = (68f / pd.maxHealth * pd.health) - 68;
-		healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
-		bloodBar.Position = healthBar.Position;
+        for (int i = 0; i < 12; i++)
+        {
+            Effect jef = (Effect)jumpEf.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", jef);
+            jef.Scale = new Vector2(1, 1);
+            jumpEfs.Enqueue(jef);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            Effect def = (Effect)dashEf.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", def);
+            def.Scale = new Vector2(1, 1);
+            dashEfs.Enqueue(def);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            Effect ef = (Effect)hitEf.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", ef);
+            ef.Scale = new Vector2(1, 1);
+            hitEffects.Enqueue(ef);
+        }
+        for (int i = 0; i < 12; i++)
+        {
+            Effect def = (Effect)dashHaloEf.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", def);
+            def.Scale = new Vector2(1, 1);
+            dashHaloEfs.Enqueue(def);
+        }
+        for (int i = 0; i < 12; i++)
+        {
+            Effect ef = (Effect)balHaloEf.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", ef);
+            ef.Scale = new Vector2(1, 1);
+            baloonHaloEfs.Enqueue(ef);
+        }
+        lastDir = pd.lastDir;
+        if (lastDir < 0)
+        {
+            characterSprite.Scale = new Vector2(-firstScale.X, firstScale.Y);
+        }
+        else if (lastDir >= 0)
+        {
+            characterSprite.Scale = firstScale;
+        }
+        if (pd.doorID != 0)
+        {
+            int index = Array.IndexOf(doorIDs, pd.doorID);
+            Node2D spawnps = doors[index].GetNode<Node2D>("spawnPos");
+            GlobalPosition = spawnps.GlobalPosition;
+            camera.GlobalPosition = GlobalPosition;
+            doors[index].Call("Starting");
+            cantInput = true;
+            characterSprite.Play("Idle");
+            isGrounded = true;
+        }
+        pd.sm = sm;
+        if (pd.Items == null)
+        {
+            pd.Items = Items;
+        }
+        else
+        {
+            Items.QueueFree();
+            Items = pd.Items;
+            Items.Reparent(this);
+            Items.GlobalPosition = GlobalPosition;
+            foreach (Node2D item in Items.GetChildren())
+            {
+                item.Call("Init", this);
+            }
+        }
+        pd.character = this;
+        coinLabel.Text = $"{pd.coin}";
+        if (pd.health <= 0)
+        {
+            pd.health = health;
+        }
+        else
+        {
+            health = pd.health;
+        }
+        weaponDamage = pd.weaponDamage;
+        if (pd.isDied)
+        {
+            died = false;
+            pd.isDied = false;
+            pd.health = pd.maxHealth;
+            health = pd.health;
+            GlobalPosition = pd.savedPos;
+            FadeAnim.Play("FadeOut");
+            col.CallDeferred("set_disabled", false);
+        }
+        firstCol = healthFull;
+        float xPos = (68f / pd.maxHealth * pd.health) - 68;
+        healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
+        bloodBar.Position = healthBar.Position;
     }
     public override void _Process(double delta)
     {
         if (coinLabel.Text != $"{pd.coin}")
-		{
-			coinLabel.Text = $"{pd.coin}";
-		}
-		// Health Bar
-		float healthPercent = (float)pd.health / pd.maxHealth;
-		float xPos = (68f / pd.maxHealth * pd.health) - 68;
-		healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
-		healthBar.Modulate = healthZero.Lerp(healthFull, healthPercent);
-		healthBar.Modulate = Color.FromHsv(healthBar.Modulate.H,firstCol.S,firstCol.V);
-		bloodBar.Position = bloodBar.Position.Lerp(healthBar.Position, 4f * (float)delta);
+        {
+            coinLabel.Text = $"{pd.coin}";
+        }
+        // Health Bar
+        float healthPercent = (float)pd.health / pd.maxHealth;
+        float xPos = (68f / pd.maxHealth * pd.health) - 68;
+        healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
+        healthBar.Modulate = healthZero.Lerp(healthFull, healthPercent);
+        healthBar.Modulate = Color.FromHsv(healthBar.Modulate.H, firstCol.S, firstCol.V);
+        bloodBar.Position = bloodBar.Position.Lerp(healthBar.Position, 4f * (float)delta);
+        if (healthPercent <= 0.2f && healthPercent > 0)
+        {
+            bloodEf.Emitting = true;
+            bloodEf.Position = new Vector2(healthBar.Position.X + 42, 0);
+        }
+        else
+        {
+            bloodEf.Emitting = false;
+        }
     }
 
-	public override void _PhysicsProcess(double delta)
-	{
-		if (undamagingTime > 0)
-		{
-			undamagingTime -= (float)delta;
-			canTakeDamage = false;
-		}
-		else
-		{
-			canTakeDamage = true;
-		}
-		if (!isDashing && velocity.Y > 150 && IsOnFloor())
-		{
-			characterSprite.Play("Falled");	
-			anim.Play("Fall");
-			anim.Seek(0);
-		}
-		velocity = Velocity;
-		//restartAnim;
-		if (birthTimer >= 0)
-		{
-			birthTimer -= (float)delta;
-		}
-		else if (birthTimer < 0 && birthTimer > -10)
-		{
-			flashAnim.Play("Flash");
-			cantInput = false;
-			restartAnim = false;
-			canDie = true;
-			col.CallDeferred("set_disabled",false);
-			undamagingTime = 1;
-			velocity = Vector2.Zero;
-			Velocity = Vector2.Zero;
-			anim.CallDeferred("play","RESET");
-			canDie = true;
-			isJumping = false;
-			baloonBoomEf.GlobalPosition = GlobalPosition;
-			baloonBoomEf.Play("Start");
-			baloonBoomEfCpu.Emitting = true;
-			birthTimer = -11;
-		}
-		if (dieTimer >= 0)
-		{
-			dieTimer -= (float)delta;
-		}
-		else if (dieTimer < 0 && dieTimer > -10)
-		{
-			t?.Kill();
-			t = CreateTween();
-			t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
-			t.TweenProperty(this, nameof(t1), 1, 0.7f);
-			t1 = Mathf.Clamp(t1,0,1);
-			dieTimer = -11;
-		}
-		if (cantInput)
-		{
-			if (restartAnim)
-			{
-				ReStartAnim();	
-			}
-		}
-		//JumpBufferInput
-		if (Input.IsActionJustPressed("Z"))
-		{
-			ibt = inputBufTimer;
-			isZjustPressed = true;
-		}
-		if (Input.IsActionJustReleased("Z"))
-		{
-			ibt = 0;
-			isZjustPressed = false;
-		}
-		if (ibt > 0)
-		{
-			ibt -= (float)delta;
-		}
-		else
-		{
-			isZjustPressed = false;
-		}
-		
-		//WallEffects
-		rightWallEffect.CallDeferred("set_emitting",Velocity.Y >= wallSpeed && isRightWalled);
-		leftWallEffect.CallDeferred("set_emitting",Velocity.Y >= wallSpeed && isLeftWalled);
-		//Wall Checks
-		if (rightWallAmount > 0)
-		{
-			isRightWalled = true;
-		}
-		else
-		{
-			isRightWalled = false;
-		}
+    public override void _PhysicsProcess(double delta)
+    {
+        if (undamagingTime > 0)
+        {
+            undamagingTime -= (float)delta;
+            canTakeDamage = false;
+        }
+        else
+        {
+            canTakeDamage = true;
+        }
+        if (!isDashing && velocity.Y > 150 && IsOnFloor())
+        {
+            characterSprite.Play("Falled");
+            anim.Play("Fall");
+            anim.Seek(0);
+        }
+        velocity = Velocity;
+        //restartAnim;
+        if (birthTimer >= 0)
+        {
+            birthTimer -= (float)delta;
+        }
+        else if (birthTimer < 0 && birthTimer > -10)
+        {
+            flashAnim.Play("Flash");
+            cantInput = false;
+            restartAnim = false;
+            canDie = true;
+            col.CallDeferred("set_disabled", false);
+            undamagingTime = 1;
+            velocity = Vector2.Zero;
+            Velocity = Vector2.Zero;
+            anim.CallDeferred("play", "RESET");
+            canDie = true;
+            isJumping = false;
+            baloonBoomEf.GlobalPosition = GlobalPosition;
+            baloonBoomEf.Play("Start");
+            baloonBoomEfCpu.Emitting = true;
+            birthTimer = -11;
+        }
+        if (dieTimer >= 0)
+        {
+            dieTimer -= (float)delta;
+        }
+        else if (dieTimer < 0 && dieTimer > -10)
+        {
+            t?.Kill();
+            t = CreateTween();
+            t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
+            t.TweenProperty(this, nameof(t1), 1, 0.7f);
+            t1 = Mathf.Clamp(t1, 0, 1);
+            dieTimer = -11;
+        }
+        if (cantInput)
+        {
+            if (restartAnim)
+            {
+                ReStartAnim();
+            }
+        }
+        //JumpBufferInput
+        if (Input.IsActionJustPressed("Z"))
+        {
+            ibt = inputBufTimer;
+            isZjustPressed = true;
+        }
+        if (Input.IsActionJustReleased("Z"))
+        {
+            ibt = 0;
+            isZjustPressed = false;
+        }
+        if (ibt > 0)
+        {
+            ibt -= (float)delta;
+        }
+        else
+        {
+            isZjustPressed = false;
+        }
 
-		if (leftWallAmount > 0)
-		{
-			isLeftWalled = true;
-		}
-		else
-		{
-			isLeftWalled = false;
-		}
-		//DüşmeAnim
-		if (velocity.Y > -JumpVelocity / 4 && !IsOnFloor() && !cantInput)
-		{
-			if (characterSprite.Animation != "Fall" && !isDashing)
-			{
-				if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
-				{
-					characterSprite.Play("Fall");	
-				}
-			}
-		}
-		//WallSpeed Sürtünme
-		if (velocity.Y > -JumpVelocity)
-		{
-			if (isRightWalled || isLeftWalled)
-			{
-				if (velocity.Y > wallSpeed)
-				{
-					velocity.Y = wallSpeed;
-					characterSprite.Play("Climb");
-					if (isRightWalled)
-					{
-						characterSprite.Scale = firstScale;
-						rightWallEffect.Emitting = true;
-					}
-					else
-					{
-						characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
-						leftWallEffect.Emitting = true;
-					}
-					canDash = true;
-				}
-			}
-		}
-		// Add the gravity.
-		if (!IsOnFloor() && !cantInput)
-		{
-			if (velocity.Y <= JumpVelocity * 1.5f && !cantInput)
-			{
-				if (isJumping)
-				{
-					velocity += Gravity * GetGravity() * (float)delta;
-				}
-				else
-				{
-					velocity += 1.2f * Gravity * GetGravity() * (float)delta;
-				}		
-			}
-			if (isGrounded)
-			{
-				isGrounded = false;
-			}
-			if (ct > 0)
-			{
-				ct -= (float)delta;
-			}
-			if (velocity.Y < 0)
-			{
-				ct = 0;
-			}
-			if (anim.CurrentAnimation == "Fall")
-			{
-				anim.Play("RESET");
-			}
-		}
-		if (IsOnFloor() && !cantInput)
-		{
-			if (!isGrounded)
-			{
-				SpawnJumpEffect();
-				characterSprite.Frame = 0;
-				isGrounded = true;
-				if (Mathf.Abs(velocity.X - 0) < Speed * 1.5f)
-				{
-					velocity.X = Mathf.Clamp(velocity.X,-Speed,Speed);
-				}
-				else
-				{
-					velocity.X *= 0.75f;
-				}
-			}
-			//RunEffect
-			if (Mathf.Abs(Velocity.X) > 10 || Input.IsActionPressed("Right") || Input.IsActionPressed("Left"))
-			{
-				if (!isDashing && canAnim)
-				{
-					characterSprite.Play("Run");	
-				}
-			}
-			else
-			{
-				if (!isDashing && canAnim)
-				{
-					if (characterSprite.Animation == "Falled")
-					{			
-						if (!characterSprite.IsPlaying())
-						{
-							characterSprite.Play("Idle");	
-						}
-					}
-					else
-					{
-						characterSprite.Play("Idle");
-					}	
-				}
-			}
-			canDash = true;
-			//CoyotoTime
-			ct = coyotoTime;
-		}
-		//Sıkışma
-		if (canDie)
-		{
-			if (IsOnFloor() && IsOnCeiling())
-			{
-				KillSelf();
-			}
-			if (isRightWalled && isLeftWalled)
-			{
-				KillSelf();
-			}	
-		}
-		//sprite yönü
-		if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
-		{
-			if (lastDir < 0)
-			{
-				characterSprite.Scale = new Vector2(-firstScale.X,firstScale.Y);
-			}
-			else if(lastDir > 0)
-			{
-				characterSprite.Scale = firstScale;
-			}	
-		}
-		
-		//Dash
-		if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash && !cantInput)
-		{
-			anim.Play("Dash");
-			dashD = dashDur;
-			dashCD = dashCoolDown;
-			isDashing = true;
-			ct = 0;
-			isZjustPressed = false;
-			isJumping = false;
-			characterSprite.Play("Dash");
-			SpawnDashEffect();
-		}
-		if (dashD > 0)
-		{
-			dashD -= (float)delta;
-		}
-		if (dashCD > 0)
-		{
-			dashCD -= (float)delta;
-		}
-		if (isDashing && !cantInput)
-		{
-			velocity.X = dashSpeed * lastDir;
-			velocity.Y = 0;
-			canDash = false;
-			if (dashHaloCD > 0)
-			{
-				dashHaloCD -= (float)delta;
-			}
-			else
-			{
-				SpawnDashHaloEffect();
-				dashHaloCD = dashDur / 5;
-			}
-		}
-		else if (!isDashing && !cantInput)
-		{
-			dashHaloCD = 0;
-			//Jump
-			if (isZjustPressed && canJump)
-			{
-				if (ct > 0)
-				{
-					SpawnJumpEffect();
-					characterSprite.Play("Jump");
-					anim.Play("Jump");
-					anim.Seek(0);
-					characterSprite.Frame = 0;
-					jumpT = jumpTime;
-					isJumping = true;	
-					isZjustPressed = false;	
-					ct = 0;
-					canDash = true;
-				}
-				else if(isRightWalled || isLeftWalled)
-				{
-					SpawnJumpEffect();	
-					if (isLeftWalled)
-					{
-						velocity.X = Speed;
-					}
-					else if (isRightWalled)
-					{
-						velocity.X = -Speed;
-					}
-					characterSprite.Play("Jump");
-					anim.Play("Jump");
-					anim.Seek(0);
-					characterSprite.Frame = 0;
-					isJumping = true;
-					jumpT = jumpTime;
-					isZjustPressed = false;
-					ct = 0;
-					canDash = true;
+        //WallEffects
+        rightWallEffect.CallDeferred("set_emitting", Velocity.Y >= wallSpeed && isRightWalled);
+        leftWallEffect.CallDeferred("set_emitting", Velocity.Y >= wallSpeed && isLeftWalled);
+        //Wall Checks
+        if (rightWallAmount > 0)
+        {
+            isRightWalled = true;
+        }
+        else
+        {
+            isRightWalled = false;
+        }
 
-				}
-			}
-			//Run
-			if (Input.IsActionPressed("Right"))
-			{
-				if (velocity.X <= Speed * 1.3f)
-				{
-					dir = 1;
-				}
-				else
-				{
-					if (!IsOnFloor())
-					{
-						dir = 1.3f;
-					}
-				}
-				lastDir = 1;
-			}
-			else if (Input.IsActionPressed("Left"))
-			{
-				if (velocity.X >= -Speed * 1.3f)
-				{
-					dir = -1;
-				}
-				else
-				{
-					if (!IsOnFloor())
-					{
-						dir = -1.3f;
-					}
-				}
-				lastDir = -1;
-			}
-			else
-			{
-				dir = 0;
-			}
-			if (isJumping)
-			{
-				velocity.Y = -JumpVelocity;
-				jumpT -= (float)delta;
-				if (Input.IsActionJustReleased("Z"))
-				{
-					isJumping = false;
-				}
-				if (jumpT <= 0)
-				{
-					isJumping = false;
-				}
-				if (IsOnCeiling())
-				{
-					isJumping = false;
-				}
-			}
-			//movement apply
-			if (IsOnFloor())
-			{
-				velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel * (float)delta); 	
-			}
-			else
-			{
-				velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.1f * (float)delta); 
-			}	
-		}
-		if(dashD <= 0)
-		{
-			if (isDashing)
-			{
-				if (Input.IsActionPressed("Right"))
-				{
-					if (velocity.X > 0)
-					{
-						velocity.X = Speed;	
-					}
-					else
-					{
-						velocity = Vector2.Zero;	
-					}
-				}
-				else if (Input.IsActionPressed("Left"))
-				{
-					if (velocity.X < 0)
-					{
-						velocity.X = -Speed;	
-					}
-					else
-					{
-						velocity = Vector2.Zero;	
-					}
-				}
-				else
-				{
-					velocity = Vector2.Zero;	
-				}
-				isDashing = false;
-			}
-		}
-		Velocity = velocity;
-		MoveAndSlide();
-		//Çarpışma kontrol
-		for (int i = 0; i < GetSlideCollisionCount(); i++)
-		{
-			var collision = GetSlideCollision(i);
-			Node2D col = (Node2D)collision.GetCollider();
-			if (col.IsInGroup("DamageTile") && canDie)
-			{
-				KillSelf();
-			}
-		}
-		GlobalPosition = GlobalPosition.Round();
-		AttemptCorrection(6);
-		if (isDashing)
-		{
-			AttemptCorrectionX(3);			
-		}
-		canJump = true;
-		canAnim = true;
-		pd.lastDir = lastDir;
-		if (pd.health <= 0 && !died)
-		{
-			characterSprite.Play("Die");
-			died = true;
-			pd.isDied = true;
-			canDie = false;
-			cantInput = true;
-			velocity = Vector2.Zero;
-			Velocity = Vector2.Zero;
-			col.CallDeferred("set_disabled", true);
-			FadeAnim.Play("FadeIn");
-			pd.doorID = 0;
-			pd.Items = null;
-			pd.killedEnemies.Clear();
-		}
-	}
+        if (leftWallAmount > 0)
+        {
+            isLeftWalled = true;
+        }
+        else
+        {
+            isLeftWalled = false;
+        }
+        //DüşmeAnim
+        if (velocity.Y > -JumpVelocity / 4 && !IsOnFloor() && !cantInput)
+        {
+            if (characterSprite.Animation != "Fall" && !isDashing)
+            {
+                if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
+                {
+                    characterSprite.Play("Fall");
+                }
+            }
+        }
+        //WallSpeed Sürtünme
+        if (velocity.Y > -JumpVelocity)
+        {
+            if (isRightWalled || isLeftWalled)
+            {
+                if (velocity.Y > wallSpeed)
+                {
+                    velocity.Y = wallSpeed;
+                    characterSprite.Play("Climb");
+                    if (isRightWalled)
+                    {
+                        characterSprite.Scale = firstScale;
+                        rightWallEffect.Emitting = true;
+                    }
+                    else
+                    {
+                        characterSprite.Scale = new Vector2(-firstScale.X, firstScale.Y);
+                        leftWallEffect.Emitting = true;
+                    }
+                    canDash = true;
+                }
+            }
+        }
+        // Add the gravity.
+        if (!IsOnFloor() && !cantInput)
+        {
+            if (velocity.Y <= JumpVelocity * 1.5f && !cantInput)
+            {
+                if (isJumping)
+                {
+                    velocity += Gravity * GetGravity() * (float)delta;
+                }
+                else
+                {
+                    velocity += 1.2f * Gravity * GetGravity() * (float)delta;
+                }
+            }
+            if (isGrounded)
+            {
+                isGrounded = false;
+            }
+            if (ct > 0)
+            {
+                ct -= (float)delta;
+            }
+            if (velocity.Y < 0)
+            {
+                ct = 0;
+            }
+            if (anim.CurrentAnimation == "Fall")
+            {
+                anim.Play("RESET");
+            }
+        }
+        if (IsOnFloor() && !cantInput)
+        {
+            if (!isGrounded)
+            {
+                SpawnJumpEffect();
+                characterSprite.Frame = 0;
+                isGrounded = true;
+                if (Mathf.Abs(velocity.X - 0) < Speed * 1.5f)
+                {
+                    velocity.X = Mathf.Clamp(velocity.X, -Speed, Speed);
+                }
+                else
+                {
+                    velocity.X *= 0.75f;
+                }
+            }
+            //RunEffect
+            if (Mathf.Abs(Velocity.X) > 10 || Input.IsActionPressed("Right") || Input.IsActionPressed("Left"))
+            {
+                if (!isDashing && canAnim)
+                {
+                    characterSprite.Play("Run");
+                }
+            }
+            else
+            {
+                if (!isDashing && canAnim)
+                {
+                    if (characterSprite.Animation == "Falled")
+                    {
+                        if (!characterSprite.IsPlaying())
+                        {
+                            characterSprite.Play("Idle");
+                        }
+                    }
+                    else
+                    {
+                        characterSprite.Play("Idle");
+                    }
+                }
+            }
+            canDash = true;
+            //CoyotoTime
+            ct = coyotoTime;
+        }
+        //Sıkışma
+        if (canDie)
+        {
+            if (IsOnFloor() && IsOnCeiling())
+            {
+                KillSelf();
+            }
+            if (isRightWalled && isLeftWalled)
+            {
+                KillSelf();
+            }
+        }
+        //sprite yönü
+        if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
+        {
+            if (lastDir < 0)
+            {
+                characterSprite.Scale = new Vector2(-firstScale.X, firstScale.Y);
+            }
+            else if (lastDir > 0)
+            {
+                characterSprite.Scale = firstScale;
+            }
+        }
 
-	public void AnimFinished2(string animName)
-	{
-		if (animName == "FadeIn")
-		{
-			GetTree().ChangeSceneToFile($"res://Scenes/Levels/{pd.savedScene}.tscn");
-		}
-		else if(animName == "FadeOut")
-		{
-			cantInput = false;
-			canDie = true;
-		}
-	}
+        //Dash
+        if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash && !cantInput)
+        {
+            anim.Play("Dash");
+            dashD = dashDur;
+            dashCD = dashCoolDown;
+            isDashing = true;
+            ct = 0;
+            isZjustPressed = false;
+            isJumping = false;
+            characterSprite.Play("Dash");
+            SpawnDashEffect();
+        }
+        if (dashD > 0)
+        {
+            dashD -= (float)delta;
+        }
+        if (dashCD > 0)
+        {
+            dashCD -= (float)delta;
+        }
+        if (isDashing && !cantInput)
+        {
+            velocity.X = dashSpeed * lastDir;
+            velocity.Y = 0;
+            canDash = false;
+            if (dashHaloCD > 0)
+            {
+                dashHaloCD -= (float)delta;
+            }
+            else
+            {
+                SpawnDashHaloEffect();
+                dashHaloCD = dashDur / 5;
+            }
+        }
+        else if (!isDashing && !cantInput)
+        {
+            dashHaloCD = 0;
+            //Jump
+            if (isZjustPressed && canJump)
+            {
+                if (ct > 0)
+                {
+                    SpawnJumpEffect();
+                    characterSprite.Play("Jump");
+                    anim.Play("Jump");
+                    anim.Seek(0);
+                    characterSprite.Frame = 0;
+                    jumpT = jumpTime;
+                    isJumping = true;
+                    isZjustPressed = false;
+                    ct = 0;
+                    canDash = true;
+                }
+                else if (isRightWalled || isLeftWalled)
+                {
+                    SpawnJumpEffect();
+                    if (isLeftWalled)
+                    {
+                        velocity.X = Speed;
+                    }
+                    else if (isRightWalled)
+                    {
+                        velocity.X = -Speed;
+                    }
+                    characterSprite.Play("Jump");
+                    anim.Play("Jump");
+                    anim.Seek(0);
+                    characterSprite.Frame = 0;
+                    isJumping = true;
+                    jumpT = jumpTime;
+                    isZjustPressed = false;
+                    ct = 0;
+                    canDash = true;
 
-	public void AddForce(Vector2 vel)
-	{
-		if (!cantInput)
-		{
-			canJump = false;
-			isDashing = false;
-			isJumping = false;
-			velocity = vel;
-			dashCD = 0;
-			Velocity = vel;
-			isZjustPressed = false;
-			canDash = true;
-			if (vel.Y < -JumpVelocity)
-			{
-				characterSprite.CallDeferred("play", "Jump");
-				characterSprite.SetDeferred("frame", 0);
-				anim.CallDeferred("play", "Jump");
-				anim.Seek(0);
-				SetDeferred("canAnim", false);
-			}	
-		}
-	}
+                }
+            }
+            //Run
+            if (Input.IsActionPressed("Right"))
+            {
+                if (velocity.X <= Speed * 1.3f)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    if (!IsOnFloor())
+                    {
+                        dir = 1.3f;
+                    }
+                }
+                lastDir = 1;
+            }
+            else if (Input.IsActionPressed("Left"))
+            {
+                if (velocity.X >= -Speed * 1.3f)
+                {
+                    dir = -1;
+                }
+                else
+                {
+                    if (!IsOnFloor())
+                    {
+                        dir = -1.3f;
+                    }
+                }
+                lastDir = -1;
+            }
+            else
+            {
+                dir = 0;
+            }
+            if (isJumping)
+            {
+                velocity.Y = -JumpVelocity;
+                jumpT -= (float)delta;
+                if (Input.IsActionJustReleased("Z"))
+                {
+                    isJumping = false;
+                }
+                if (jumpT <= 0)
+                {
+                    isJumping = false;
+                }
+                if (IsOnCeiling())
+                {
+                    isJumping = false;
+                }
+            }
+            //movement apply
+            if (IsOnFloor())
+            {
+                velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel * (float)delta);
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(velocity.X, dir * Speed, accel / 1.1f * (float)delta);
+            }
+        }
+        if (dashD <= 0)
+        {
+            if (isDashing)
+            {
+                if (Input.IsActionPressed("Right"))
+                {
+                    if (velocity.X > 0)
+                    {
+                        velocity.X = Speed;
+                    }
+                    else
+                    {
+                        velocity = Vector2.Zero;
+                    }
+                }
+                else if (Input.IsActionPressed("Left"))
+                {
+                    if (velocity.X < 0)
+                    {
+                        velocity.X = -Speed;
+                    }
+                    else
+                    {
+                        velocity = Vector2.Zero;
+                    }
+                }
+                else
+                {
+                    velocity = Vector2.Zero;
+                }
+                isDashing = false;
+            }
+        }
+        Velocity = velocity;
+        MoveAndSlide();
+        //Çarpışma kontrol
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            var collision = GetSlideCollision(i);
+            Node2D col = (Node2D)collision.GetCollider();
+            if (col.IsInGroup("DamageTile") && canDie)
+            {
+                KillSelf();
+            }
+        }
+        GlobalPosition = GlobalPosition.Round();
+        AttemptCorrection(6);
+        if (isDashing)
+        {
+            AttemptCorrectionX(3);
+        }
+        canJump = true;
+        canAnim = true;
+        pd.lastDir = lastDir;
+        if (pd.health <= 0 && !died)
+        {
+            characterSprite.Play("Die");
+            died = true;
+            pd.isDied = true;
+            canDie = false;
+            cantInput = true;
+            velocity = Vector2.Zero;
+            Velocity = Vector2.Zero;
+            col.CallDeferred("set_disabled", true);
+            FadeAnim.Play("FadeIn");
+            pd.doorID = 0;
+            pd.Items = null;
+            pd.killedEnemies.Clear();
+        }
+    }
 
-	public void AttemptCorrection(int amount)
-	{
-		float delta = (float)GetPhysicsProcessDeltaTime();
+    public void AnimFinished2(string animName)
+    {
+        if (animName == "FadeIn")
+        {
+            GetTree().ChangeSceneToFile($"res://Scenes/Levels/{pd.savedScene}.tscn");
+        }
+        else if (animName == "FadeOut")
+        {
+            cantInput = false;
+            canDie = true;
+        }
+    }
 
-		// sadece yukarı giderken (tavana çarpma)
-		if (Velocity.Y < 0 &&
-			TestMove(GlobalTransform, new Vector2(0, Velocity.Y * delta)))
-		{
-			for (int i = 1; i <= amount * 2; i++)
-			{
-				for (int j = -1; j <= 1; j += 2)
-				{
-					Vector2 offset = new Vector2(i * j / 2f, 0);
+    public void AddForce(Vector2 vel)
+    {
+        if (!cantInput)
+        {
+            canJump = false;
+            isDashing = false;
+            isJumping = false;
+            velocity = vel;
+            dashCD = 0;
+            Velocity = vel;
+            isZjustPressed = false;
+            canDash = true;
+            if (vel.Y < -JumpVelocity)
+            {
+                characterSprite.CallDeferred("play", "Jump");
+                characterSprite.SetDeferred("frame", 0);
+                anim.CallDeferred("play", "Jump");
+                anim.Seek(0);
+                SetDeferred("canAnim", false);
+            }
+        }
+    }
 
-					if (!TestMove(GlobalTransform.Translated(offset),new Vector2(0, Velocity.Y * delta)))
-					{
-						GlobalPosition += offset;
+    public void AttemptCorrection(int amount)
+    {
+        float delta = (float)GetPhysicsProcessDeltaTime();
 
-						// yatay hız ters yöndeyse sıfırla
-						if (Velocity.X * j < 0)
-							Velocity = new Vector2(0, Velocity.Y);
+        // sadece yukarı giderken (tavana çarpma)
+        if (Velocity.Y < 0 && TestMove(GlobalTransform, new Vector2(0, Velocity.Y * delta)))
+        {
+            for (int i = 1; i <= amount * 2; i++)
+            {
+                for (int j = -1; j <= 1; j += 2)
+                {
+                    Vector2 offset = new Vector2(i * j / 2f, 0);
 
-						return;
-					}
-				}
-			}
-		}
-	}
+                    if (!TestMove(GlobalTransform.Translated(offset), new Vector2(0, Velocity.Y * delta)))
+                    {
+                        GlobalPosition += offset;
 
-	public void AttemptCorrectionX(int amount)
-	{
-		float delta = (float)GetPhysicsProcessDeltaTime();
-		if (TestMove(GlobalTransform, new Vector2(velocity.X * delta, 0)) && !IsOnFloor() && velocity.Y >= 0)
-		{
-			for (int i = 1; i <= amount * 2; i++)
-			{
-				for (int j = -1; j <= 1; j += 2)
-				{
-					if (velocity.Y * j <= 0)
-					{
-						Vector2 offset = new Vector2(0 , i * j / 2f);
+                        // yatay hız ters yöndeyse sıfırla
+                        if (Velocity.X * j < 0)
+                            Velocity = new Vector2(0, Velocity.Y);
 
-						if (!TestMove(GlobalTransform.Translated(offset), new Vector2(velocity.X * delta, 0)))
-						{
-							GlobalPosition += offset;
-							return;
-						}		
-					}
-				}
-			}
-		}
-	}
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
-	void SpawnJumpEffect()
-	{
-		Effect ef = jumpEfs.Dequeue();
-		ef.GlobalPosition = foot.GlobalPosition;
-		ef.setOn();
-		jumpEfs.Enqueue(ef);
-	}
+    public void AttemptCorrectionX(int amount)
+    {
+        float delta = (float)GetPhysicsProcessDeltaTime();
+        if (TestMove(GlobalTransform, new Vector2(velocity.X * delta, 0)) && !IsOnFloor() && velocity.Y >= 0)
+        {
+            for (int i = 1; i <= amount * 2; i++)
+            {
+                for (int j = -1; j <= 1; j += 2)
+                {
+                    if (velocity.Y * j <= 0)
+                    {
+                        Vector2 offset = new Vector2(0, i * j / 2f);
 
-	void SpawnDashEffect()
-	{
-		Effect ef = dashEfs.Dequeue();
-		ef.GlobalPosition = GlobalPosition;
-		if (lastDir > 0)
-		{
-			ef.Scale = new Vector2(-1,1);
-		}
-		else
-		{
-			ef.Scale = new Vector2(1,1);
-		}
-		ef.setOn();
-		dashEfs.Enqueue(ef);
-	}
-	void SpawnDashHaloEffect()
-	{
-		Effect ef = dashHaloEfs.Dequeue();
-		ef.GlobalPosition = GlobalPosition;
-		if (lastDir > 0)
-		{
-			ef.Scale = new Vector2(-1,1);
-		}
-		else
-		{
-			ef.Scale = new Vector2(1,1);
-		}
-		ef.setOn();
-		dashHaloEfs.Enqueue(ef);
-	}
+                        if (!TestMove(GlobalTransform.Translated(offset), new Vector2(velocity.X * delta, 0)))
+                        {
+                            GlobalPosition += offset;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	void RightWallEntered(Node2D body)
-	{
-		if (body.IsInGroup("Ground"))
-		{
-			rightWallAmount ++;
-		}
-	}
-	void LeftWallEntered(Node2D body)
-	{
-		if (body.IsInGroup("Ground"))
-		{
-			leftWallAmount ++;
-		}
-	}
+    void SpawnJumpEffect()
+    {
+        Effect ef = jumpEfs.Dequeue();
+        ef.GlobalPosition = foot.GlobalPosition;
+        ef.setOn();
+        jumpEfs.Enqueue(ef);
+    }
 
-	void RightWallExited(Node2D body)
-	{
-		if (body.IsInGroup("Ground"))
-		{
-			rightWallAmount --;
-		}
-	}
+    void SpawnDashEffect()
+    {
+        Effect ef = dashEfs.Dequeue();
+        ef.GlobalPosition = GlobalPosition;
+        if (lastDir > 0)
+        {
+            ef.Scale = new Vector2(-1, 1);
+        }
+        else
+        {
+            ef.Scale = new Vector2(1, 1);
+        }
+        ef.setOn();
+        dashEfs.Enqueue(ef);
+    }
+    void SpawnDashHaloEffect()
+    {
+        Effect ef = dashHaloEfs.Dequeue();
+        ef.GlobalPosition = GlobalPosition;
+        if (lastDir > 0)
+        {
+            ef.Scale = new Vector2(-1, 1);
+        }
+        else
+        {
+            ef.Scale = new Vector2(1, 1);
+        }
+        ef.setOn();
+        dashHaloEfs.Enqueue(ef);
+    }
 
-	void LeftWallExited(Node2D body)
-	{
-		if (body.IsInGroup("Ground"))
-		{
-			leftWallAmount --;
-		}
-	}
+    void RightWallEntered(Node2D body)
+    {
+        if (body.IsInGroup("Ground"))
+        {
+            rightWallAmount++;
+        }
+    }
+    void LeftWallEntered(Node2D body)
+    {
+        if (body.IsInGroup("Ground"))
+        {
+            leftWallAmount++;
+        }
+    }
 
-	public void SetSpawnPos(Vector2 pos)
-	{
-		spawnPos = pos;
-	}
-	public void TakeDamage(int damage,Vector2 force)
-	{
-		if (canTakeDamage)
-		{
-			pd.health -= damage;
-			if (pd.health > 0)
-			{
-				flashAnim.Play("Flash");
-			}
-			AddForce(force);
-			camera.Call("Shake", 20f);
-			undamagingTime = 1;	
-			canTakeDamage = false;
-		}
-	}
-	public void KillSelf()
-	{
-		flashAnim.Play("RESET");
-		camera.Call("Shake", 20f);
-		pd.health -= 10;
-		if (pd.health <= 0)
-		{
-			return;
-		}
-		canDie = false;
-		cantInput = true;
-		restartAnim = true;
-		col.CallDeferred("set_disabled",true);
-		velocity = Vector2.Zero;
-		Velocity = Vector2.Zero;
-		dieAnim.Play("Die");
-		t1 = 0;
-		center = (GlobalPosition + spawnPos) / 2;
-		center.Y += GlobalPosition.DistanceTo(spawnPos) * 0.9f;
-		start = GlobalPosition - center;
-		end = spawnPos - center;
-		anim.CallDeferred("seek", 0);
-		anim.CallDeferred("play","Died");
-		dieTimer = 0.3f;
-		haloTimer = 0;
-		canTakeDamage = false;
-	}
-	void AnimFinished(string animName)
-	{
-		if (animName == "Die")
-		{
-			isZjustPressed = false;
-			isDashing = false;
-			dashD = 0;
-			ct = 0;
-		}
-	}
+    void RightWallExited(Node2D body)
+    {
+        if (body.IsInGroup("Ground"))
+        {
+            rightWallAmount--;
+        }
+    }
 
-	void ReStartAnim()
-	{
-		Vector2 result = start.Slerp(end,t1);
-		GlobalPosition = center + result;
-		//Effect Halo
-		if (haloTimer > 0)
-		{
-			haloTimer -= (float)GetPhysicsProcessDeltaTime();
-		}
-		else
-		{
-			Effect ef = baloonHaloEfs.Dequeue();
-			ef.GlobalPosition = characterSprite.GlobalPosition;
-			ef.setOn();
-			baloonHaloEfs.Enqueue(ef);	
-			haloTimer = 0.05f;
-		}
-		if (GlobalPosition.DistanceTo(spawnPos) < 1)
-		{
-			if (birthTimer < -10)
-			{
-				birthTimer = 0.3f;	
-			}
-		}
-	}
+    void LeftWallExited(Node2D body)
+    {
+        if (body.IsInGroup("Ground"))
+        {
+            leftWallAmount--;
+        }
+    }
+
+    public void SetSpawnPos(Vector2 pos)
+    {
+        spawnPos = pos;
+    }
+    public void TakeDamage(int damage, Vector2 force)
+    {
+        if (canTakeDamage)
+        {
+            takeDamageAnim.Play("TakeDamage");
+            pd.health -= damage;
+            if (pd.health > 0)
+            {
+                flashAnim.Play("Flash");
+            }
+            AddForce(force);
+            camera.Call("Shake", 20f);
+            undamagingTime = 1;
+            canTakeDamage = false;
+        }
+    }
+    public void KillSelf()
+    {
+        takeDamageAnim.Play("TakeDamage");
+        flashAnim.Play("RESET");
+        camera.Call("Shake", 20f);
+        pd.health -= 10;
+        if (pd.health <= 0)
+        {
+            return;
+        }
+        canDie = false;
+        cantInput = true;
+        restartAnim = true;
+        col.CallDeferred("set_disabled", true);
+        velocity = Vector2.Zero;
+        Velocity = Vector2.Zero;
+        dieAnim.Play("Die");
+        t1 = 0;
+        center = (GlobalPosition + spawnPos) / 2;
+        center.Y += GlobalPosition.DistanceTo(spawnPos) * 0.9f;
+        start = GlobalPosition - center;
+        end = spawnPos - center;
+        anim.CallDeferred("seek", 0);
+        anim.CallDeferred("play", "Died");
+        dieTimer = 0.3f;
+        haloTimer = 0;
+        canTakeDamage = false;
+    }
+    void AnimFinished(string animName)
+    {
+        if (animName == "Die")
+        {
+            isZjustPressed = false;
+            isDashing = false;
+            dashD = 0;
+            ct = 0;
+        }
+    }
+
+    void ReStartAnim()
+    {
+        Vector2 result = start.Slerp(end, t1);
+        GlobalPosition = center + result;
+        //Effect Halo
+        if (haloTimer > 0)
+        {
+            haloTimer -= (float)GetPhysicsProcessDeltaTime();
+        }
+        else
+        {
+            Effect ef = baloonHaloEfs.Dequeue();
+            ef.GlobalPosition = characterSprite.GlobalPosition;
+            ef.setOn();
+            baloonHaloEfs.Enqueue(ef);
+            haloTimer = 0.05f;
+        }
+        if (GlobalPosition.DistanceTo(spawnPos) < 1)
+        {
+            if (birthTimer < -10)
+            {
+                birthTimer = 0.3f;
+            }
+        }
+    }
+
+    public void DetectEntered2D(Node2D body)
+    {
+        if (body.IsInGroup("Secret Area"))
+        {
+            body.Call("Close");
+        }
+    }
 }

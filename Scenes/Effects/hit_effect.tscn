@@ -49,6 +49,7 @@ dur = 0.3
 libraries/ = SubResource("AnimationLibrary_4kr6v")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2134777629]
+modulate = Color(2.454227, 2.454227, 2.454227, 1)
 texture = ExtResource("1_rpxr8")
 hframes = 6
 frame = 5

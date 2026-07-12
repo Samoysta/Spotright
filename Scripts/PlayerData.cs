@@ -19,6 +19,7 @@ public partial class PlayerData : Node
 	public Dictionary<int, string> LockedDoors = new();
 	public Dictionary<int, string> LockedChests = new();
 	public Dictionary<int, string> killedEnemies = new();
+	public Dictionary<int, string> secretAreas = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
