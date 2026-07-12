@@ -29,7 +29,7 @@ public partial class CeilDoor : Area2D
 			}
 			else
 			{
-				character.Velocity = new Vector2(xSpeed, -jumpSpeed);
+				character.Velocity = new Vector2(pd.lastDir * xSpeed, -jumpSpeed);
 				character.characterSprite.Play("Jump");
 			}
 		}
@@ -47,12 +47,33 @@ public partial class CeilDoor : Area2D
 	{
 		if (body is Character)
 		{
+			float frame = 0;
+			if (anim.IsPlaying())
+			{
+				frame = 0.5f - (float)anim.CurrentAnimationPosition;	
+			}
 			anim.Play("FadeIn");
+			anim.Seek(frame);
+			pd.doorID = doorId;
+			character.cantInput = true;
 			if (!isFloored)
 			{
-				pd.doorID = doorId;
-				character.cantInput = true;
 				character.Velocity = new Vector2(character.Velocity.X, -character.JumpVelocity);
+			}
+		}
+	}
+
+	public void AreaExited2D(Node2D body)
+	{
+		if (body is Character)
+		{
+			if (anim.CurrentAnimation == "FadeOut")
+			{
+				if (!isFloored)
+				{
+					character.cantInput = false;
+					col.CallDeferred("set_disabled",false);	
+				}
 			}
 		}
 	}
@@ -65,9 +86,12 @@ public partial class CeilDoor : Area2D
 		}
 		else if (name == "FadeOut")
 		{
-			character.cantInput = false;
-			col.Disabled = false;
-			applyGravity = false;
+			if (!character.borning)
+			{
+				character.cantInput = false;
+				col.Disabled = false;
+				applyGravity = false;	
+			}
 		}
 	}
 

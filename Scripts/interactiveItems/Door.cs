@@ -78,7 +78,11 @@ public partial class Door : Area2D
 		}
 		else if (name == "FadeOut")
 		{
-			character.cantInput = false;
+			if (!character.borning)
+			{
+				character.cantInput = false;			
+			}
+
 		}
 	}
 

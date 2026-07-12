@@ -22,6 +22,7 @@ public partial class Character : CharacterBody2D
     [Export] float coyotoTime;
     float ct;
     [Export] float jumpTime;
+    public bool cantInput;
     float jumpT;
     [Export] float inputBufTimer;
     float ibt;
@@ -71,7 +72,6 @@ public partial class Character : CharacterBody2D
     public int lastDir;
     bool canAnim;
     public bool selected;
-    public bool cantInput;
     CollisionShape2D col;
     bool died;
     //die Effecct
@@ -98,6 +98,7 @@ public partial class Character : CharacterBody2D
     [Export] CpuParticles2D bloodEf;
     [Export] public AnimationPlayer dialogAnim;
     [Export] public RichTextLabel dialogText;
+    public bool borning; 
     public override void _Ready()
     {
         pd = GetNode<PlayerData>("/root/PlayerData");
@@ -153,9 +154,8 @@ public partial class Character : CharacterBody2D
             Node2D spawnps = doors[index].GetNode<Node2D>("spawnPos");
             GlobalPosition = spawnps.GlobalPosition;
             camera.GlobalPosition = GlobalPosition;
-            doors[index].Call("Starting");
+            doors[index].Call("Starting");   
             cantInput = true;
-            characterSprite.Play("Idle");
             isGrounded = true;
         }
         pd.sm = sm;
@@ -680,7 +680,11 @@ public partial class Character : CharacterBody2D
         }
         else if (animName == "FadeOut")
         {
-            cantInput = false;
+            if (!borning)
+            {
+                cantInput = false;   
+            }
+            borning = false;
             canDie = true;
         }
     }

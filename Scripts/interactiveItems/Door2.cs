@@ -59,9 +59,12 @@ public partial class Door2 : Area2D
 		}
 		else if (name == "FadeOut")
 		{
-			character.cantInput = false;
-			col.CallDeferred("set_disabled",false);
-			exited = false;
+			if (!character.borning)
+			{
+				character.cantInput = false;
+				col.CallDeferred("set_disabled",false);
+				exited = false;	
+			}
 		}
 	}
 	public void Starting()

@@ -79,11 +79,14 @@ _data = {
 &"RESET": SubResource("Animation_q5lc6")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ixig"]
+size = Vector2(53, 28)
+
 [node name="CeilDoor" type="Area2D" unique_id=176141941 node_paths=PackedStringArray("col", "anim", "spawnPos")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_8ixig")
-jumpSpeed = 700.0
+jumpSpeed = 500.0
 xSpeed = 150.0
 col = NodePath("CollisionShape2D")
 anim = NodePath("CanvasLayer/AnimationPlayer")
@@ -106,5 +109,13 @@ autoplay = &"FadeOut"
 
 [node name="spawnPos" type="Node2D" parent="." unique_id=715691022]
 
+[node name="Area2D" type="Area2D" parent="." unique_id=1117436050]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1060864949]
+shape = SubResource("RectangleShape2D_8ixig")
+
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
 [connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="AnimFinished"]
+[connection signal="body_exited" from="Area2D" to="." method="AreaExited2D"]
