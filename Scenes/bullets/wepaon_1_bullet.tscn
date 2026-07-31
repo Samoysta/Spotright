@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_nevk8")
 collision_mask = 5
 
 [node name="Line2D" type="Line2D" parent="." unique_id=798946049]
-points = PackedVector2Array(0, 0, 0, 0)
+points = PackedVector2Array(0, 0, 33.44, 0)
 width_curve = SubResource("Curve_0uswi")
 gradient = SubResource("Gradient_nevk8")
 end_cap_mode = 2

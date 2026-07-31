@@ -1,15 +1,19 @@
 using Godot;
 using System;
 
-public partial class SceneManager : Node2D
+public partial class LockedDoor : StaticBody2D
 {
-	[Export] public int [] weaponIds;
-	[Export] public Node2D [] weapons;
-	[Export] public int roomId;
-	[Export] public GunLimits gunLimitTileLayer;
+	PlayerData pd;
+	[Export] int Id;
+	[Export] AnimationPlayer anim;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		pd = GetNode<PlayerData>("/root/PlayerData");
+		if (pd.LockedDoors.ContainsKey(Id))
+		{
+			anim.Play("Set");
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

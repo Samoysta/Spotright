@@ -35,15 +35,6 @@ public partial class Wepaon1Bullet : Node2D
 				{
 					body.Call("SetDamageEf", Vector2.Right.Rotated(GlobalRotation));
 				}
-				Node2D gunLim = null;
-				if (body.GetParent().GetParent() is Node2D)
-				{
-					gunLim = (Node2D)body.GetParent().GetParent();
-				}
-				if (gunLim is GunLimits)
-				{
-					gunLim.Call("AnimPlay","Hitted");
-				}
 				setOff();
 				spawnEffect();
 			}
@@ -52,7 +43,11 @@ public partial class Wepaon1Bullet : Node2D
 	public void Init(Character cha)
 	{
 		character = cha;
-		damage = character.weaponDamage;
+		damage = character.weaponDamage * character.weaponDamageKat;
+		if (character.weaponDamageKat == 3)
+		{
+			line.Gradient.SetColor(1,Colors.Purple * 3);
+		}
 	}
 
 	public void setOff()

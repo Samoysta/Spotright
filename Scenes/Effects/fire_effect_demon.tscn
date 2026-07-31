@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://d1vxh1m10ojdy"]
+
+[ext_resource type="Script" uid="uid://24y2vn7ev125" path="res://Scripts/Effect.cs" id="1_pf6n4"]
+[ext_resource type="Texture2D" uid="uid://covp8eljv5n53" path="res://Assets/Impact/upgrade3Fire-Sheet.png" id="1_wo1ix"]
+
+[sub_resource type="Animation" id="Animation_x5hag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireEf:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_kqm81"]
+resource_name = "Start"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireEf:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ijrrk"]
+_data = {
+&"RESET": SubResource("Animation_x5hag"),
+&"Start": SubResource("Animation_kqm81")
+}
+
+[node name="fireEffectDemon" type="Node2D" unique_id=627542035 node_paths=PackedStringArray("anims")]
+z_index = 5
+script = ExtResource("1_pf6n4")
+anims = [NodePath("AnimationPlayer")]
+dur = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1713152730]
+libraries/ = SubResource("AnimationLibrary_ijrrk")
+speed_scale = 0.8
+
+[node name="FireEf" type="Sprite2D" parent="." unique_id=1812032450]
+position = Vector2(0, -2)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_wo1ix")
+hframes = 9
+frame = 8

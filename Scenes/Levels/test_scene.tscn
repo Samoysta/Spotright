@@ -3,16 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://0iec1n5qwps5" path="res://Scenes/character.tscn" id="1_3dogw"]
 [ext_resource type="Texture2D" uid="uid://5ue1fxxw4aui" path="res://Assets/Yaprak.png" id="2_8qgji"]
 [ext_resource type="Script" uid="uid://y5iy8g2iaqnp" path="res://Scripts/Camera2d.cs" id="2_hb2xm"]
-[ext_resource type="PackedScene" uid="uid://m4pffx0tycsa" path="res://Scenes/scene_manager.tscn" id="2_nywed"]
 [ext_resource type="Texture2D" uid="uid://cdhvp5efkxh6a" path="res://Assets/Tilemaps/Area1.png" id="2_r5l72"]
 [ext_resource type="Texture2D" uid="uid://cvgs21q323s3u" path="res://Assets/Tilemaps/are1Grounds.png" id="4_yglu3"]
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="5_d3awe"]
 [ext_resource type="Texture2D" uid="uid://bh048csbvasgu" path="res://Assets/Tilemaps/area1bgTiles.png" id="5_ibmi3"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="9_d3awe"]
-[ext_resource type="PackedScene" uid="uid://dhfv0hkfbcjcw" path="res://Scenes/Enviorement/gun_limits.tscn" id="9_nywed"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="9_yglu3"]
 [ext_resource type="PackedScene" uid="uid://o717f42cfwb8" path="res://Scenes/interactiveItems/door.tscn" id="11_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="12_02b08"]
+[ext_resource type="PackedScene" uid="uid://jp4u4g7bt051" path="res://Scenes/Enviorement/tutorial_area.tscn" id="14_nywed"]
 [ext_resource type="PackedScene" uid="uid://cg635lbwuy6nc" path="res://Scenes/Enviorement/lamp.tscn" id="14_u0ded"]
 [ext_resource type="PackedScene" uid="uid://c46665e7r24b5" path="res://Scenes/Enviorement/sarmasik.tscn" id="15_nywed"]
 
@@ -153,15 +152,12 @@ size = Vector2(45.595, 260.9575)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ded"]
 size = Vector2(6, 112)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4baa"]
+size = Vector2(66, 251)
+
 [node name="test_scene" type="Node2D" unique_id=676339024]
 
 [node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("12_02b08")]
-
-[node name="SceneManager" parent="." unique_id=1910871571 node_paths=PackedStringArray("weapons", "gunLimitTileLayer") instance=ExtResource("2_nywed")]
-weaponIds = PackedInt32Array(0)
-weapons = [null]
-roomId = 1
-gunLimitTileLayer = NodePath("../Area1/gunLimits")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2127184803 node_paths=PackedStringArray("character")]
 process_callback = 0
@@ -180,11 +176,11 @@ position = Vector2(42, -7)
 scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_rdbpf")
 
-[node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("sm", "doors", "camera") instance=ExtResource("1_3dogw")]
-sm = NodePath("../SceneManager")
+[node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("doors", "camera", "Abilities") instance=ExtResource("1_3dogw")]
 doors = [NodePath("../Door")]
 doorIDs = PackedInt32Array(1)
 camera = NodePath("../Camera2D")
+Abilities = [null, NodePath("Equips/weapon1")]
 
 [node name="Area1" type="Node2D" parent="." unique_id=592184306]
 
@@ -227,11 +223,23 @@ initial_velocity_max = 100.0
 angular_velocity_min = -50.0
 angular_velocity_max = -50.0
 
-[node name="gunLimits" parent="Area1" unique_id=1798283784 instance=ExtResource("9_nywed")]
+[node name="LeafEffect2" type="CPUParticles2D" parent="Area1" unique_id=1659491710]
 z_index = -1
-
-[node name="TileMapLayer" parent="Area1/gunLimits/tileMap" parent_id_path=PackedInt32Array(1798283784, 1819090245) index="0" unique_id=353721860]
-tile_map_data = PackedByteArray("AAAZAPv/AQAAAAAAAAAZAAEAAQAAAAAAAAAZAAAAAQAAAAAAAAAZAP//AQAAAAAAAAAZAP7/AQAAAAAAAAAZAP3/AQAAAAAAAAAZAPz/AQAAAAAAAAAZAPr/AQAAAAAAAAAZAPn/AQAAAAAAAAAZAPj/AQAAAAAAAAAZAPf/AQAAAAAAAAAZAPb/AQAAAAAAAAAZAPX/AQAAAAAAAAAZAPT/AQAAAAAAAAAaAPT/AQAAAAAAAAAaAPX/AQAAAAAAAAAaAPb/AQAAAAAAAAAaAPf/AQAAAAAAAAAaAPj/AQAAAAAAAAAaAPn/AQAAAAAAAAAaAPr/AQAAAAAAAAAaAPv/AQAAAAAAAAAaAPz/AQAAAAAAAAAaAP3/AQAAAAAAAAAaAP7/AQAAAAAAAAAaAP//AQAAAAAAAAAaAAAAAQAAAAAAAAAaAAEAAQAAAAAAAAA=")
+position = Vector2(693, -468)
+amount = 100
+texture = ExtResource("2_8qgji")
+lifetime = 10.0
+preprocess = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1)
+direction = Vector2(-1, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -50.0
+angular_velocity_max = -50.0
+color = Color(0.117109306, 0.11710932, 0.117109306, 1)
 
 [node name="Plant1s" type="Node2D" parent="." unique_id=1200717658]
 
@@ -551,7 +559,26 @@ dalgaYogunlugu = 0.3
 color = Color(0.8500505, 0.85005057, 0.8500505, 1)
 blend_mode = 2
 
-[editable path="Area1/gunLimits"]
+[node name="tutorialArea" parent="." unique_id=1274775226 node_paths=PackedStringArray("character") instance=ExtResource("14_nywed")]
+position = Vector2(142, -44)
+character = NodePath("../Character")
+tutoName = "Z"
+text = "Hold \"Z\" to Jump"
+
+[node name="CollisionShape2D" parent="tutorialArea" index="0" unique_id=854863810]
+position = Vector2(2, -42.5)
+shape = SubResource("RectangleShape2D_u4baa")
+
+[node name="tutorialArea2" parent="." unique_id=780564410 node_paths=PackedStringArray("character") instance=ExtResource("14_nywed")]
+position = Vector2(996, -166)
+character = NodePath("../Character")
+tutoName = "Down"
+text = "Press \"Down Arrow\" to Interact."
+
+[node name="CollisionShape2D" parent="tutorialArea2" index="0" unique_id=854863810]
+position = Vector2(2, -42.5)
+shape = SubResource("RectangleShape2D_u4baa")
+
 [editable path="CheckPoints/CheckPoint"]
 [editable path="CheckPoints/CheckPoint2"]
 [editable path="CheckPoints/CheckPoint3"]
@@ -559,3 +586,5 @@ blend_mode = 2
 [editable path="CheckPoints/CheckPoint5"]
 [editable path="Lamps/Lamp"]
 [editable path="Lamps/Lamp2"]
+[editable path="tutorialArea"]
+[editable path="tutorialArea2"]

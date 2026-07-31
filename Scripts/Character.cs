@@ -12,7 +12,6 @@ public partial class Character : CharacterBody2D
     [Export] public int health;
     [Export] public Label coinLabel;
     PlayerData pd;
-    [Export] public SceneManager sm;
     [Export] Node2D[] doors;
     [Export] public Node2D Items;
     [Export] int[] doorIDs;
@@ -63,7 +62,7 @@ public partial class Character : CharacterBody2D
     public Queue<Wepaon1Bullet> bul1s = new();
     float dir;
     public bool isJumping;
-    Vector2 firstScale;
+    public Vector2 firstScale;
     bool isGrounded;
     public bool isRightWalled;
     public bool isLeftWalled;
@@ -94,16 +93,42 @@ public partial class Character : CharacterBody2D
     float undamagingTime;
     public bool canTakeDamage = true;
     [Export] AnimationPlayer flashAnim;
-    [Export] AnimationPlayer takeDamageAnim;
+    [Export] public AnimationPlayer takeDamageAnim;
     [Export] CpuParticles2D bloodEf;
     [Export] public AnimationPlayer dialogAnim;
     [Export] public RichTextLabel dialogText;
     public bool borning; 
+    public int weaponDamageKat;
+    [Export] PackedScene takedItemEf;
+    public Queue<Effect> takedItemEfs = new();
+    //Audios
+    [Export] public Node2D[] Abilities;
+    [Export] public Node2D buttonMain;
+    [Export] public Control[] buttons;
+    [Export] public RichTextLabel[] buttonTexts;
+    public int currentAbilityNo;
+    RandomNumberGenerator rnd = new();
+    [Export] AudioStreamPlayer2D jumpG;
+    [Export] AudioStreamPlayer2D landG;
+    [Export] AudioStreamPlayer2D runG;
+    [Export] AudioStreamPlayer2D dashA;
+    [Export] AudioStreamPlayer2D takeDamageA;
+    [Export] AudioStreamPlayer2D wallSlideG;
     public override void _Ready()
     {
+        rnd.Randomize();
         pd = GetNode<PlayerData>("/root/PlayerData");
         col = GetNode<CollisionShape2D>("CollisionShape2D");
         firstScale = characterSprite.Scale;
+        currentAbilityNo = pd.currentAbilityid;
+        weaponDamageKat = pd.weaponDamageKat;
+        for (int i = 0; i < 6; i++)
+        {
+            Effect def = (Effect)takedItemEf.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", def);
+            def.Scale = new Vector2(1, 1);
+            takedItemEfs.Enqueue(def);
+        }
         for (int i = 0; i < 12; i++)
         {
             Effect jef = (Effect)jumpEf.Instantiate();
@@ -158,7 +183,6 @@ public partial class Character : CharacterBody2D
             cantInput = true;
             isGrounded = true;
         }
-        pd.sm = sm;
         if (pd.Items == null)
         {
             pd.Items = Items;
@@ -202,6 +226,27 @@ public partial class Character : CharacterBody2D
     }
     public override void _Process(double delta)
     {
+        if (Input.IsActionJustPressed("A") && !cantInput)
+        {
+            if (currentAbilityNo == pd.openedAbilityIds.Count - 1)
+            {
+                if (Abilities[pd.openedAbilityIds.Count-1] != null)
+                {
+                    Abilities[pd.openedAbilityIds.Count-1].Call("close");
+                }
+                currentAbilityNo = 0;
+            }
+            else
+            {
+                currentAbilityNo ++;
+                if (pd.openedAbilityIds[currentAbilityNo - 1] != 0)
+                {
+                    Abilities[pd.openedAbilityIds[currentAbilityNo - 1]].Call("close");   
+                }
+                Abilities[pd.openedAbilityIds[currentAbilityNo]].Call("open");
+            }
+            pd.currentAbilityid = currentAbilityNo;
+        }
         if (coinLabel.Text != $"{pd.coin}")
         {
             coinLabel.Text = $"{pd.coin}";
@@ -346,6 +391,11 @@ public partial class Character : CharacterBody2D
                 {
                     velocity.Y = wallSpeed;
                     characterSprite.Play("Climb");
+                    if (!wallSlideG.Playing)
+                    {
+                        wallSlideG.PitchScale = rnd.RandfRange(0.8f,1.2f);
+                        wallSlideG.Play();
+                    }
                     if (isRightWalled)
                     {
                         characterSprite.Scale = firstScale;
@@ -358,7 +408,19 @@ public partial class Character : CharacterBody2D
                     }
                     canDash = true;
                 }
+                else
+                {
+                    wallSlideG.Stop();   
+                }
             }
+            else
+            {
+                wallSlideG.Stop();
+            }
+        }
+        else
+        {
+            wallSlideG.Stop();
         }
         // Add the gravity.
         if (!IsOnFloor() && !cantInput)
@@ -398,6 +460,9 @@ public partial class Character : CharacterBody2D
                 SpawnJumpEffect();
                 characterSprite.Frame = 0;
                 isGrounded = true;
+                landG.Stop();
+                landG.Play();
+                landG.PitchScale = rnd.RandfRange(0.7f,0.86f);
                 if (Mathf.Abs(velocity.X - 0) < Speed * 1.5f)
                 {
                     velocity.X = Mathf.Clamp(velocity.X, -Speed, Speed);
@@ -413,6 +478,14 @@ public partial class Character : CharacterBody2D
                 if (!isDashing && canAnim)
                 {
                     characterSprite.Play("Run");
+                    if (!runG.Playing)
+                    {
+                        if (Mathf.Abs(velocity.X) >= Speed)
+                        {
+                            runG.PitchScale = rnd.RandfRange(0.8f,1.2f);
+                            runG.Play();   
+                        }
+                    }
                 }
             }
             else
@@ -468,6 +541,9 @@ public partial class Character : CharacterBody2D
             dashD = dashDur;
             dashCD = dashCoolDown;
             isDashing = true;
+            dashA.Stop();
+            dashA.PitchScale = rnd.RandfRange(0.6f,1);
+            dashA.Play();
             ct = 0;
             isZjustPressed = false;
             isJumping = false;
@@ -515,6 +591,9 @@ public partial class Character : CharacterBody2D
                     isZjustPressed = false;
                     ct = 0;
                     canDash = true;
+                    jumpG.Stop();
+                    jumpG.Play();
+                    jumpG.PitchScale = rnd.RandfRange(0.8f,1.2f);
                 }
                 else if (isRightWalled || isLeftWalled)
                 {
@@ -536,6 +615,9 @@ public partial class Character : CharacterBody2D
                     isZjustPressed = false;
                     ct = 0;
                     canDash = true;
+                    jumpG.Stop();
+                    jumpG.Play();
+                    jumpG.PitchScale = rnd.RandfRange(0.8f,1.2f);
 
                 }
             }
@@ -771,6 +853,14 @@ public partial class Character : CharacterBody2D
         ef.setOn();
         jumpEfs.Enqueue(ef);
     }
+    public void TakedItemEf(string itemName)
+    {
+        Effect ef = takedItemEfs.Dequeue();
+        ef.GlobalPosition = GlobalPosition;
+        ef.GetNode<Label>("Label/Label").Text = itemName;
+        ef.setOn();
+        takedItemEfs.Enqueue(ef);
+    }
 
     void SpawnDashEffect()
     {
@@ -847,6 +937,9 @@ public partial class Character : CharacterBody2D
             if (pd.health > 0)
             {
                 flashAnim.Play("Flash");
+                takeDamageA.Stop();
+                takeDamageA.PitchScale = rnd.RandfRange(1,1.7f);
+                takeDamageA.Play();
             }
             AddForce(force);
             camera.Call("Shake", 20f);
@@ -864,6 +957,9 @@ public partial class Character : CharacterBody2D
         {
             return;
         }
+        takeDamageA.Stop();
+        takeDamageA.PitchScale = rnd.RandfRange(1,1.7f);
+        takeDamageA.Play();
         canDie = false;
         cantInput = true;
         restartAnim = true;

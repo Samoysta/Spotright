@@ -24,6 +24,7 @@ public partial class LockedWall : Node2D
 	Tween t;
 	Tween t2;
 	PlayerData pd;
+	[Export] AudioStreamPlayer2D unLockedAudio;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -63,6 +64,7 @@ public partial class LockedWall : Node2D
 	{
 		if (body is Character && !opened && !selected)
 		{
+			unLockedAudio.Play();
 			doorTechnicallyOpened = true;
 			pd.LockedDoors.Add(id,"opened");
 			selected = true;

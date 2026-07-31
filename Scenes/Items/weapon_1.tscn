@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://cehwv5je66iyk"]
 
-[ext_resource type="Texture2D" uid="uid://ch6wdyvjh5jaa" path="res://Assets/weapon1.png" id="1_j0b74"]
+[ext_resource type="Texture2D" uid="uid://ch6wdyvjh5jaa" path="res://Assets/Weapon/weapon1.png" id="1_j0b74"]
 [ext_resource type="Script" uid="uid://dahuwpqippvjt" path="res://Scripts/Weapon1.cs" id="1_ric17"]
 [ext_resource type="PackedScene" uid="uid://ctn2lvp5n50qu" path="res://Scenes/bullets/wepaon_1_bullet.tscn" id="2_b75o4"]
-[ext_resource type="Texture2D" uid="uid://n8nvm0rofa23" path="res://Assets/weapon2.png" id="3_vjohv"]
+[ext_resource type="Texture2D" uid="uid://n8nvm0rofa23" path="res://Assets/Weapon/weapon2.png" id="3_vjohv"]
+[ext_resource type="Texture2D" uid="uid://eep47cpxil5" path="res://Assets/Weapon/DemonWeapon.png" id="4_63e2x"]
 [ext_resource type="PackedScene" uid="uid://dt3am85d7pvnu" path="res://Scenes/Effects/fire_effect.tscn" id="4_w0fot"]
-[ext_resource type="Texture2D" uid="uid://1ttp8wcfgwln" path="res://Assets/square.png" id="5_yf1aa"]
+[ext_resource type="AudioStream" uid="uid://bu06s6jjdgthl" path="res://Assets/Sounds/Character/Shoot.mp3" id="6_vjohv"]
+[ext_resource type="PackedScene" uid="uid://d1vxh1m10ojdy" path="res://Scenes/Effects/fire_effect_demon.tscn" id="7_7mtuy"]
+[ext_resource type="Texture2D" uid="uid://6mnk4xsx7euq" path="res://Assets/mud.png" id="8_ulpxk"]
 
 [sub_resource type="Animation" id="Animation_54fwx"]
 resource_name = "Fire"
@@ -66,168 +69,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b74"]
 size = Vector2(27, 8)
 
-[sub_resource type="Animation" id="Animation_yf1aa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("square:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_vjohv"]
-resource_name = "Turn"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("square:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5707964]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_63e2x"]
-_data = {
-&"RESET": SubResource("Animation_yf1aa"),
-&"Turn": SubResource("Animation_vjohv")
-}
-
-[sub_resource type="Animation" id="Animation_63e2x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("square:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1.5, 1.5)]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("square:self_modulate:r")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("square:self_modulate:g")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("square:self_modulate:b")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("square:self_modulate:a")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_ulpxk"]
-resource_name = "queue"
-length = 0.23333333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("square:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.22435783),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1.5, 1.5), Vector2(0, 0)]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("square:self_modulate:r")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 1, -0.03888889, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.23333333)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("square:self_modulate:g")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 1, -0.03888889, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.23333333)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("square:self_modulate:b")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 1, -0.03888889, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.23333333)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("square:self_modulate:a")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(1, -0.23333333, 0, 0.23333333, 0, 0, -0.03888889, 0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 0.23333333)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7x64"]
-_data = {
-&"RESET": SubResource("Animation_63e2x"),
-&"queue": SubResource("Animation_ulpxk")
-}
-
 [sub_resource type="Animation" id="Animation_c7x64"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -237,17 +78,6 @@ tracks/0/path = NodePath("Sprite2D:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("square:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
@@ -267,17 +97,6 @@ tracks/0/keys = {
 "points": PackedFloat32Array(-1, -0.25, 0, 0.16666667, 1.0942353, 2, -0.08388196, 0, 0.08278471, 0, -1, -0.26666665, 1.718325, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5032917, 1)
 }
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("square:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-1, -0.25, 0, 0.16666667, 1.0942353, 2, -0.08388196, 0, 0.08278471, 0, -1, -0.26666665, 1.718325, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5032917, 1)
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_54fwx"]
 _data = {
@@ -288,31 +107,47 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjohv"]
 size = Vector2(30, 6)
 
-[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim", "anim2", "ray")]
+[sub_resource type="Curve" id="Curve_c7x64"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_7mtuy"]
+offsets = PackedFloat32Array(0, 0.64285713, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.8940887, 0.8940887, 0.8940887, 1, 1, 1, 1, 0)
+
+[node name="weapon1" type="Area2D" unique_id=1828208836 node_paths=PackedStringArray("bulletPos", "effectPos", "anim2", "ray", "shootAudio", "demonEf", "demonEfPos")]
 z_index = 4
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ric17")
+itemId = 1
 blueWeapon = ExtResource("1_j0b74")
 goldenWeapon = ExtResource("3_vjohv")
+demonWeapon = ExtResource("4_63e2x")
 bulDeg = 2
 weaponMaxPos = Vector2(32, 32)
 shootCoolDown = 0.2
 bul1 = ExtResource("2_b75o4")
 bulletPos = NodePath("bulletPos")
 effectPos = NodePath("effectPos")
-anim = NodePath("AnimationPlayer2")
 anim2 = NodePath("Sprite2D/AnimationPlayer")
 fireEf = ExtResource("4_w0fot")
 ray = NodePath("gunPos")
+shootAudio = NodePath("ShootAudio")
+demonEf = NodePath("demonEffect")
+demonFireEf = ExtResource("7_7mtuy")
+demonEfPos = NodePath("Sprite2D/demonEffectPos")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=355800990]
 position = Vector2(-16, 0)
-texture = ExtResource("1_j0b74")
+texture = ExtResource("4_63e2x")
 offset = Vector2(16, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=368799208]
 libraries/ = SubResource("AnimationLibrary_orj3k")
+
+[node name="demonEffectPos" type="Node2D" parent="Sprite2D" unique_id=1582945844]
+position = Vector2(36, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183355213]
 shape = SubResource("RectangleShape2D_j0b74")
@@ -322,18 +157,6 @@ position = Vector2(-13, 0)
 
 [node name="effectPos" type="Node2D" parent="." unique_id=1009167323]
 position = Vector2(19, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=504464263]
-libraries/ = SubResource("AnimationLibrary_63e2x")
-autoplay = &"Turn"
-
-[node name="square" type="Sprite2D" parent="." unique_id=1283016935]
-modulate = Color(2.180467, 2.180467, 2.180467, 1)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_yf1aa")
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=514898849]
-libraries/ = SubResource("AnimationLibrary_c7x64")
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="." unique_id=345403748]
 libraries/ = SubResource("AnimationLibrary_54fwx")
@@ -350,6 +173,30 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="gunLimitBox" unique_id=761439963]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_vjohv")
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="." unique_id=1775521190]
+position = Vector2(2, 0)
+stream = ExtResource("6_vjohv")
+volume_db = -10.0
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="demonEffect" type="CPUParticles2D" parent="." unique_id=201918081]
+z_index = -1
+emitting = false
+amount = 50
+texture = ExtResource("8_ulpxk")
+lifetime = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(16.295, 1)
+gravity = Vector2(0, -200)
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+scale_amount_min = 0.6
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_c7x64")
+color = Color(0.28235295, 0, 0.5882353, 0.70980394)
+color_ramp = SubResource("Gradient_7mtuy")
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
 [connection signal="body_entered" from="gunLimitBox" to="." method="BodyEntered2D"]

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d3pasqaafais4" path="res://Assets/SavePoint/SavePoint.png" id="1_y3f71"]
 [ext_resource type="Texture2D" uid="uid://rwfxrqwgmp5c" path="res://Assets/SavePoint/CheckDot.png" id="2_n5t3q"]
 [ext_resource type="FontFile" uid="uid://bviu62loexrxk" path="res://ByteBounce.ttf" id="4_h8r3i"]
+[ext_resource type="AudioStream" uid="uid://bnftnghd6bumd" path="res://Assets/Sounds/Pop.mp3" id="5_b3ku7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8r3i"]
 size = Vector2(32, 2)
@@ -93,12 +94,13 @@ _data = {
 &"loop": SubResource("Animation_fppn3")
 }
 
-[node name="SavePoint" type="Area2D" unique_id=2004581094 node_paths=PackedStringArray("textBox", "spawnPos")]
+[node name="SavePoint" type="Area2D" unique_id=2004581094 node_paths=PackedStringArray("textBox", "spawnPos", "popAudio")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_n5t3q")
 textBox = NodePath("textBox")
 spawnPos = NodePath("SpawnPos")
+popAudio = NodePath("PopAudio")
 
 [node name="SavePoint" type="Sprite2D" parent="." unique_id=805246929]
 position = Vector2(0, 5)
@@ -165,6 +167,11 @@ autoplay = &"loop"
 
 [node name="SpawnPos" type="Node2D" parent="." unique_id=280160116]
 position = Vector2(0, 3)
+
+[node name="PopAudio" type="AudioStreamPlayer2D" parent="." unique_id=1889087030]
+stream = ExtResource("5_b3ku7")
+pitch_scale = 1.5
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
 [connection signal="body_exited" from="." to="." method="BodyExited2D"]

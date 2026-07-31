@@ -15,8 +15,11 @@ public partial class ReadableStone : Area2D
     [Export] float[] textSpeeds;
     RichTextLabel text;
     [Export] float textSpeed;
+    [Export] AudioStreamPlayer2D popAudio;
     bool textingStarted;
     int currentTextId;
+    int textBoxPastCharacterAmount;
+    [Export] AudioStreamPlayer2D textBoxAudio;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -80,7 +83,8 @@ public partial class ReadableStone : Area2D
             text.VisibleRatio += Mathf.Clamp(i * (float)delta * textSpeed * (1f / visibleLength),0,1);
             if (text.VisibleCharacters > 0)
             {
-                if (Texts[currentTextId].ElementAt(text.VisibleCharacters-1).ToString() == " ")
+                string a = Texts[currentTextId].ElementAt(text.VisibleCharacters-1).ToString();
+                if (a == " " || a == "\n")
                 {
                     text.VisibleCharacters++;
                 }   
@@ -103,6 +107,14 @@ public partial class ReadableStone : Area2D
                     {
                         character.dialogAnim.Play("Closing");
                     }
+                }
+            }
+            if (textBoxPastCharacterAmount != character.dialogText.VisibleCharacters)
+            {
+                textBoxPastCharacterAmount = character.dialogText.VisibleCharacters;
+                if (textBoxPastCharacterAmount != 0)
+                {
+                    textBoxAudio.Play();
                 }
             }
         }
@@ -132,6 +144,8 @@ public partial class ReadableStone : Area2D
         t = CreateTween();
         t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
         t.TweenProperty(readBox, "scale", new Vector2(1, 1), 0.8f);
+        popAudio.Stop();
+        popAudio.Play();
     }
 
     void AskAnimEnd()

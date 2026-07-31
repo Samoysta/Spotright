@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bc4papdi8t7ub" path="res://Scenes/Effects/hit_effect.tscn" id="5_a5ess"]
 [ext_resource type="Texture2D" uid="uid://dp07lj0j03xby" path="res://Assets/CharacterDieEffect-Sheet.png" id="5_ejsiy"]
 [ext_resource type="PackedScene" uid="uid://decfdj753vjxf" path="res://Scenes/Effects/baloon_halo_ef.tscn" id="6_l1rcp"]
+[ext_resource type="PackedScene" uid="uid://cx40al1ofqkrk" path="res://Scenes/Effects/item_name_text_effect.tscn" id="7_0wngn"]
 [ext_resource type="Texture2D" uid="uid://40jqvobsvkmj" path="res://Assets/Character-Sheet.png" id="7_7iw6i"]
 [ext_resource type="Texture2D" uid="uid://b2p74y62x60i0" path="res://Assets/CharacterDieSheet.png" id="8_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
@@ -18,6 +19,14 @@
 [ext_resource type="Texture2D" uid="uid://fsjgsnkxbqdw" path="res://Assets/UI/healthBar.png" id="15_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://1hwn3fep2ncq" path="res://Assets/UI/blood.png" id="17_q5mnj"]
 [ext_resource type="Texture2D" uid="uid://dkhrtvjwpl2og" path="res://Assets/UI/textBox.png" id="18_w85my"]
+[ext_resource type="AudioStream" uid="uid://bcedsc4ysa1ka" path="res://Assets/Sounds/Character/Jump-Grass.mp3" id="19_hgna0"]
+[ext_resource type="Script" uid="uid://bk5a54k8kflq4" path="res://Scripts/wavy_rich_text_ef.gd" id="19_px0br"]
+[ext_resource type="AudioStream" uid="uid://dxxm3ojef18t0" path="res://Assets/Sounds/Character/Land-Grass.mp3" id="20_s7tkn"]
+[ext_resource type="AudioStream" uid="uid://jtqimwbb6m0n" path="res://Assets/Sounds/Character/Run-Grass.ogg" id="21_s7tkn"]
+[ext_resource type="AudioStream" uid="uid://bwoxj17rsjuen" path="res://Assets/Sounds/Character/Dash.mp3" id="22_nw3qc"]
+[ext_resource type="AudioStream" uid="uid://c4y6k4oqgopft" path="res://Assets/Sounds/Character/TakeDamage.mp3" id="23_rtvxd"]
+[ext_resource type="AudioStream" uid="uid://cyf3dp6c57up" path="res://Assets/Sounds/Character/WallSlide-Grass.mp3" id="24_1g2gg"]
+[ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="25_4kq8q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.6, 23.5)
@@ -889,7 +898,7 @@ _data = {
 
 [sub_resource type="Gradient" id="Gradient_dm6ib"]
 offsets = PackedFloat32Array(0.81490386, 1)
-colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 0.10980392)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.10980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_q5mnj"]
 gradient = SubResource("Gradient_dm6ib")
@@ -926,13 +935,30 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_px0br"]
+resource_name = "miniFlash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtvxd"]
 _data = {
 &"RESET": SubResource("Animation_s7tkn"),
-&"TakeDamage": SubResource("Animation_nw3qc")
+&"TakeDamage": SubResource("Animation_nw3qc"),
+&"miniFlash": SubResource("Animation_px0br")
 }
 
 [sub_resource type="Animation" id="Animation_rtvxd"]
@@ -1061,10 +1087,18 @@ _data = {
 &"RESET": SubResource("Animation_4kq8q")
 }
 
+[sub_resource type="RichTextEffect" id="RichTextEffect_0wngn"]
+script = ExtResource("19_px0br")
+metadata/_custom_type_script = "uid://bk5a54k8kflq4"
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_px0br"]
+script = ExtResource("19_px0br")
+metadata/_custom_type_script = "uid://bk5a54k8kflq4"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w85my"]
 size = Vector2(13, 26)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "Abilities", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -1107,6 +1141,17 @@ takeDamageAnim = NodePath("UI/DamageScreen/AnimationPlayer")
 bloodEf = NodePath("UI/HealthBar/healthbarbg/bloodEf")
 dialogAnim = NodePath("UI/NinePatchRect/AnimationPlayer")
 dialogText = NodePath("UI/NinePatchRect/dialogText")
+takedItemEf = ExtResource("7_0wngn")
+Abilities = [null, NodePath("Equips/weapon1")]
+buttonMain = NodePath("UI/NinePatchRect/buttons")
+buttons = [NodePath("UI/NinePatchRect/buttons/Button1/NinePatchRect"), NodePath("UI/NinePatchRect/buttons/Button2/NinePatchRect")]
+buttonTexts = [NodePath("UI/NinePatchRect/buttons/Button1/NinePatchRect/RichTextLabel"), NodePath("UI/NinePatchRect/buttons/Button2/NinePatchRect/RichTextLabel")]
+jumpG = NodePath("Audio/JumpG")
+landG = NodePath("Audio/LandG")
+runG = NodePath("Audio/RunG")
+dashA = NodePath("Audio/DashA")
+takeDamageA = NodePath("Audio/TakeDamageA")
+wallSlideG = NodePath("Audio/WallSlideG")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914266422]
 shape = SubResource("RectangleShape2D_ushfy")
@@ -1341,7 +1386,68 @@ bbcode_enabled = true
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_0wngn")]
 visible_characters_behavior = 1
+
+[node name="buttons" type="Node2D" parent="UI/NinePatchRect" unique_id=2077030399]
+visible = false
+z_index = -1
+position = Vector2(0, -64)
+
+[node name="Button1" type="Node2D" parent="UI/NinePatchRect/buttons" unique_id=736449848]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/NinePatchRect/buttons/Button1" unique_id=1823916049]
+offset_left = 48.0
+offset_top = 140.0
+offset_right = 162.0
+offset_bottom = 184.0
+pivot_offset = Vector2(56, 22)
+texture = ExtResource("18_w85my")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/NinePatchRect/buttons/Button1/NinePatchRect" unique_id=816643111]
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("12_l1rcp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_px0br")]
+
+[node name="Button2" type="Node2D" parent="UI/NinePatchRect/buttons" unique_id=2050588853]
+position = Vector2(176, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/NinePatchRect/buttons/Button2" unique_id=73426087]
+offset_left = 48.0
+offset_top = 140.0
+offset_right = 162.0
+offset_bottom = 184.0
+pivot_offset = Vector2(57, 22)
+texture = ExtResource("18_w85my")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/NinePatchRect/buttons/Button2/NinePatchRect" unique_id=1978778993]
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("12_l1rcp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_px0br")]
 
 [node name="Items" type="Node2D" parent="." unique_id=1440899725]
 
@@ -1352,6 +1458,45 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox" unique_id=1921918501]
 position = Vector2(0.5, -2)
 shape = SubResource("RectangleShape2D_w85my")
+
+[node name="Audio" type="Node2D" parent="." unique_id=1421742292]
+
+[node name="JumpG" type="AudioStreamPlayer2D" parent="Audio" unique_id=998088536]
+stream = ExtResource("19_hgna0")
+volume_db = 11.0
+bus = &"SFX"
+
+[node name="LandG" type="AudioStreamPlayer2D" parent="Audio" unique_id=1267564325]
+stream = ExtResource("20_s7tkn")
+volume_db = 5.0
+pitch_scale = 0.66
+bus = &"SFX"
+
+[node name="RunG" type="AudioStreamPlayer2D" parent="Audio" unique_id=1093065815]
+stream = ExtResource("21_s7tkn")
+bus = &"SFX"
+
+[node name="DashA" type="AudioStreamPlayer2D" parent="Audio" unique_id=1242411265]
+stream = ExtResource("22_nw3qc")
+volume_db = 5.0
+pitch_scale = 0.6
+bus = &"SFX"
+
+[node name="TakeDamageA" type="AudioStreamPlayer2D" parent="Audio" unique_id=1397179157]
+stream = ExtResource("23_rtvxd")
+volume_db = -7.0
+bus = &"SFX"
+
+[node name="WallSlideG" type="AudioStreamPlayer2D" parent="Audio" unique_id=116189037]
+stream = ExtResource("24_1g2gg")
+bus = &"SFX"
+
+[node name="Equips" type="Node2D" parent="." unique_id=1412867639]
+
+[node name="weapon1" parent="Equips" unique_id=1828208836 node_paths=PackedStringArray("character") instance=ExtResource("25_4kq8q")]
+scale = Vector2(1e-05, 1e-05)
+character = NodePath("../..")
+Golden = true
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]

@@ -6,18 +6,16 @@ using System.Reflection.PortableExecutable;
 
 public partial class Weapon1 : Area2D
 {
-	Character character;
+	[Export] Character character;
+	[Export] int itemId;
 	bool selected;
-	bool canShoot;
+	public bool canShoot;
 	bool canSelect;
-	Vector2 firstPos;
-	float spawnCoolDown;
-	[Export] SceneManager sm;
-	[Export] public int Id;
-	[Export] public int roomId;
 	[Export] bool Golden;
+	[Export] bool Demon;
 	[Export] Texture2D blueWeapon;
 	[Export] Texture2D goldenWeapon;
+	[Export] Texture2D demonWeapon;
 	[Export] Camera2d cam;
 	[Export] int bulDeg;
 	[Export] Vector2 weaponMaxPos;
@@ -25,7 +23,6 @@ public partial class Weapon1 : Area2D
 	[Export] PackedScene bul1;
 	[Export] Node2D bulletPos;
 	[Export] Node2D effectPos;
-	[Export] AnimationPlayer anim;
 	[Export] AnimationPlayer anim2;
 	CollisionShape2D col;
 	PlayerData pd;
@@ -33,41 +30,81 @@ public partial class Weapon1 : Area2D
 	Sprite2D gunSprite;
 	[Export] PackedScene fireEf;
 	[Export] RayCast2D ray;
+	[Export] AudioStreamPlayer2D shootAudio;
+	[Export] CpuParticles2D demonEf;
+	[Export] PackedScene demonFireEf;
+	[Export] Node2D demonEfPos;
 	public Queue<Effect> fireEfs = new();
+	public Queue<Effect> fireEfsDemon = new();
 	Tween t;
 	Vector2 pos;
+	int damageKati;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		canShoot = true;
 		pd = GetNode<PlayerData>("/root/PlayerData");
 		gunSprite = GetNode<Sprite2D>("Sprite2D");
+		Golden = pd.weaponUpgradeNo == 2;
+		Demon = pd.weaponUpgradeNo == 3;
+		
+		canSelect = true;
+		if (!Demon)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				Effect ef = (Effect)fireEf.Instantiate();
+				GetTree().CurrentScene.CallDeferred("add_child",ef);
+				fireEfs.Enqueue(ef);
+			}	
+		}
+		else
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				Effect ef = (Effect)demonFireEf.Instantiate();
+				GetTree().CurrentScene.CallDeferred("add_child",ef);
+				fireEfsDemon.Enqueue(ef);
+			}	
+		}
+		col = GetNode<CollisionShape2D>("CollisionShape2D");
+		cam = character.camera;
+		if (pd.currentAbilityid == itemId)
+		{
+			open();
+		}
+		else
+		{
+			Scale = Vector2.Zero;
+		}
+		Position = weaponMaxPos * Mathf.Sign(pd.lastDir) * Vector2.Right;
+		gunSprite.FlipV = pd.lastDir < 0;
+		if (pd.lastDir < 0)
+		{
+			GlobalRotationDegrees = 180f;	
+		}
+		pos = Position;
+		ray.TargetPosition = pos;
 		if (Golden)
 		{
+			pd.weaponDamageKat = 2;
 			gunSprite.Texture = goldenWeapon;
+		}
+		else if (Demon)
+		{
+			pd.weaponDamageKat = 3;
+			gunSprite.Texture = demonWeapon;
 		}
 		else
 		{
 			gunSprite.Texture = blueWeapon;
+			pd.weaponDamageKat = 1;
 		}
-		canSelect = true;
-		firstPos = GlobalPosition;
-		
-		for (int i = 0; i < 6; i++)
-		{
-			Effect ef = (Effect)fireEf.Instantiate();
-			GetTree().CurrentScene.CallDeferred("add_child",ef);
-			fireEfs.Enqueue(ef);
-		}
-		col = GetNode<CollisionShape2D>("CollisionShape2D");
-		character = pd.character;
 	}
 
 	public void Init(Character player)
 	{
 		character = player;
-		character.selected = true;
 		cam = character.camera;
 		fireEfs.Clear();
 		for (int i = 0; i < 6; i++)
@@ -75,13 +112,6 @@ public partial class Weapon1 : Area2D
 			Effect ef = (Effect)fireEf.Instantiate();
 			GetTree().CurrentScene.CallDeferred("add_child",ef);
 			fireEfs.Enqueue(ef);
-		}
-		sm = character.sm;
-		if (sm.weaponIds.Contains(Id))
-		{
-			int index = Array.IndexOf(sm.weaponIds,Id);
-			sm.weapons[index].QueueFree();
-			sm.weapons[index] = this;
 		}
 
 	}
@@ -113,17 +143,6 @@ public partial class Weapon1 : Area2D
 			}
 		}
 		col.CallDeferred("set_disabled", character.selected);
-		if (spawnCoolDown > 0)
-		{
-			spawnCoolDown -= (float)delta;
-		}
-		else
-		{
-			if (Scale.Length() < 0.01f)
-			{
-				open();
-			}
-		}
 		if (selected)
 		{
 			if (shootcd > 0)
@@ -186,12 +205,13 @@ public partial class Weapon1 : Area2D
 				if (scale.X > 0)
 				{
 					pos = new Vector2(weaponMaxPos.X, 0);
-					gunSprite.FlipV = false;
+					gunSprite.FlipV = (character.GlobalPosition.X - GlobalPosition.X) * pos.X > 0;
+
 				}
 				else
 				{
 					pos = new Vector2(-weaponMaxPos.X, 0);
-					gunSprite.FlipV = true;
+					gunSprite.FlipV = (character.GlobalPosition.X - GlobalPosition.X) * pos.X < 0;
 				}
 
 				if (Input.IsActionJustPressed("X") && shootcd <= 0 && canShoot)
@@ -212,76 +232,54 @@ public partial class Weapon1 : Area2D
 					{
 						Fire(i);
 					}
-					fireEffect();
+					if (Demon)
+					{
+						fireEffectDemon();
+					}
+					else
+					{
+						fireEffect();	
+					}
 					anim2.Play("Fire");
 					anim2.Seek(0);
 					canShoot = false;
+					shootAudio.Stop();
+            		shootAudio.Play();
 				}	
-			}
-			if (!character.canDie)
-			{
-				close();
 			}
 		}
 		
 	}
 
 
-	void close()
+	public void close()
 	{
+		if (Demon)
+		{
+			demonEf.Emitting = false;	
+		}
 		selected = false;
-		spawnCoolDown = 5f;
-		character.selected = false;
-		CallDeferred("reparent", GetTree().CurrentScene);
-		sm.gunLimitTileLayer.AnimPlay("Ending");
 		t?.Kill();
 		t = CreateTween();
 		t.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-		t.TweenProperty(this, "scale", Vector2.Zero, 0.5f).Finished += () =>
-		{
-			if (sm.roomId != roomId)
-			{
-				QueueFree();
-			}
-		};
+		t.TweenProperty(this, "scale", Vector2.Zero, 0.2f);
 	}
 
-	void open()
+	public void open()
 	{
-		anim.Play("RESET");
-		GlobalPosition = firstPos;
-		GlobalRotationDegrees = 0;
-		gunSprite.FlipV = false;
+		Visible = true;
 		t?.Kill();
 		t = CreateTween();
-		t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-		t.TweenProperty(this, "scale", new Vector2(1,1), 0.8f);
-		canSelect = true;
-		col.CallDeferred("set_disabled", false);
-	}
-
-	void BodyEntered2D(Node2D body)
-	{
-		if (body is Character)
+		t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
+		t.TweenProperty(this, "scale", new Vector2(1,1), 0.2f).Finished += () =>
 		{
-			if (canSelect)
+			if (Demon)
 			{
-				if (!character.selected)
-				{
-					anim.Play("queue");
-					selected = true;
-					sm.gunLimitTileLayer.AnimPlay("Starting");
-					CallDeferred("reparent", character.Items);
-					canSelect = false;
-					character.selected = true;
-					col.CallDeferred("set_disabled", true);
-				}	
+				demonEf.Emitting = true;	
 			}
-		}
-		else if (body.GetParent().GetParent() == sm.gunLimitTileLayer)
-		{
-			close();
-		}
+		};
+		selected = true;
+		shootcd = shootCoolDown;
 	}
 
 	void Fire(int index)
@@ -311,5 +309,13 @@ public partial class Weapon1 : Area2D
 		ef.GlobalRotation = GlobalRotation;
 		ef.setOn();
 		fireEfs.Enqueue(ef);
+	}
+	void fireEffectDemon()
+	{
+		Effect ef = fireEfsDemon.Dequeue();
+		ef.GlobalPosition = demonEfPos.GlobalPosition;
+		ef.GlobalRotation = GlobalRotation;
+		ef.setOn();
+		fireEfsDemon.Enqueue(ef);
 	}
 }

@@ -13,6 +13,7 @@ public partial class Door : Area2D
 	[Export] string sceneName;
 	Tween t;
 	PlayerData pd;
+	[Export] AudioStreamPlayer2D popAudio;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -53,6 +54,8 @@ public partial class Door : Area2D
 			t = CreateTween();
 			t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
 			t.TweenProperty(TextBox, "scale", new Vector2(1,1), 0.7f);
+			popAudio.Stop();
+            popAudio.Play();
 			canSelect = true;
 		}
 	}

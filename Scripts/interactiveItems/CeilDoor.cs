@@ -60,6 +60,11 @@ public partial class CeilDoor : Area2D
 			{
 				character.Velocity = new Vector2(character.Velocity.X, -character.JumpVelocity);
 			}
+			else
+			{
+				character.Velocity = new Vector2(character.Velocity.X, character.JumpVelocity);
+			}
+			col.CallDeferred("set_disabled", true);
 		}
 	}
 

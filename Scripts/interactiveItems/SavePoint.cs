@@ -13,6 +13,7 @@ public partial class SavePoint : Area2D
 	bool canSave;
 	bool locked;
 	int tryAmount;
+	[Export] AudioStreamPlayer2D popAudio;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -34,6 +35,7 @@ public partial class SavePoint : Area2D
 		{
 			if (Input.IsActionJustPressed("Down"))
 			{
+				pd.killedEnemies.Clear();
 				canSave = false;
 				t?.Kill();
 				t = CreateTween();
@@ -50,6 +52,11 @@ public partial class SavePoint : Area2D
 				t2.TweenProperty(character, "global_position", pd.savedPos, 0.5f).Finished += () =>
 				{
 					locked = true;	
+					t2?.Kill();
+					t2 = CreateTween();
+					t2.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
+					t2.TweenProperty(pd, "health", pd.maxHealth, 0.5f);
+
 				};
 				character.characterSprite.Play("Die");
 			}
@@ -70,6 +77,8 @@ public partial class SavePoint : Area2D
 					character.AddForce(new Vector2(0,-500));
 					tryAmount = 0;
 				}
+				character.takeDamageAnim.Play("miniFlash");
+				character.takeDamageAnim.Seek(0);
 			}
 		}
 	}
@@ -82,6 +91,8 @@ public partial class SavePoint : Area2D
 			t = CreateTween();
 			t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
 			t.TweenProperty(textBox, "scale", new Vector2(1, 1), 0.8f);
+			popAudio.Stop();
+            popAudio.Play();
 		}
 	}
 

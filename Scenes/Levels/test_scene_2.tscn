@@ -7,16 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="4_5kmqf"]
 [ext_resource type="Texture2D" uid="uid://cvgs21q323s3u" path="res://Assets/Tilemaps/are1Grounds.png" id="4_8bix5"]
 [ext_resource type="PackedScene" uid="uid://wori50jqkvq8" path="res://Scenes/interactiveItems/door_2.tscn" id="4_c1onc"]
-[ext_resource type="PackedScene" uid="uid://m4pffx0tycsa" path="res://Scenes/scene_manager.tscn" id="5_bfa7f"]
 [ext_resource type="Texture2D" uid="uid://cdhvp5efkxh6a" path="res://Assets/Tilemaps/Area1.png" id="5_eucva"]
 [ext_resource type="PackedScene" uid="uid://bkbl2485nfyon" path="res://Scenes/DamageItem/circle_boys.tscn" id="6_njgtr"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="7_27uqw"]
 [ext_resource type="PackedScene" uid="uid://cg635lbwuy6nc" path="res://Scenes/Enviorement/lamp.tscn" id="8_l8p3y"]
-[ext_resource type="PackedScene" uid="uid://dhfv0hkfbcjcw" path="res://Scenes/Enviorement/gun_limits.tscn" id="8_ldvrw"]
 [ext_resource type="PackedScene" uid="uid://b61l4unlje0ta" path="res://Scenes/Enviorement/plant_1.tscn" id="9_b8at8"]
 [ext_resource type="PackedScene" uid="uid://cme2g365d40uu" path="res://Scenes/Enviorement/plant_2.tscn" id="10_t307g"]
 [ext_resource type="PackedScene" uid="uid://dofnlgvyqd0a4" path="res://Scenes/interactiveItems/locked_wall.tscn" id="13_8bix5"]
 [ext_resource type="PackedScene" uid="uid://4p477vut2jxm" path="res://Scenes/Items/chest.tscn" id="14_4mavg"]
+[ext_resource type="PackedScene" uid="uid://jp4u4g7bt051" path="res://Scenes/Enviorement/tutorial_area.tscn" id="16_eucva"]
+[ext_resource type="PackedScene" uid="uid://c46665e7r24b5" path="res://Scenes/Enviorement/sarmasik.tscn" id="17_ldvrw"]
+[ext_resource type="Texture2D" uid="uid://5ue1fxxw4aui" path="res://Assets/Yaprak.png" id="18_ev6gp"]
 
 [sub_resource type="Gradient" id="Gradient_eucva"]
 offsets = PackedFloat32Array(1)
@@ -182,12 +183,12 @@ position = Vector2(56, -24)
 scale = Vector2(45, 26)
 texture = SubResource("GradientTexture2D_pt0jc")
 
-[node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("sm", "doors", "camera") instance=ExtResource("2_eg7ii")]
-position = Vector2(-17, -47)
-sm = NodePath("../SceneManager")
+[node name="Character" parent="." unique_id=815620444 node_paths=PackedStringArray("doors", "camera", "Abilities") instance=ExtResource("2_eg7ii")]
+position = Vector2(688, -47)
 doors = [NodePath("../Doors/Door"), NodePath("../Doors/door2")]
 doorIDs = PackedInt32Array(1, 2)
 camera = NodePath("../Camera2D")
+Abilities = [null, NodePath("Equips/weapon1")]
 
 [node name="Doors" type="Node2D" parent="." unique_id=1711565305]
 
@@ -236,19 +237,7 @@ navigation_enabled = false
 tile_map_data = PackedByteArray("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")
 tile_set = SubResource("TileSet_ldvrw")
 
-[node name="gunLimits" parent="Area" unique_id=1798283784 instance=ExtResource("8_ldvrw")]
-z_index = -1
-
-[node name="TileMapLayer" parent="Area/gunLimits/tileMap" parent_id_path=PackedInt32Array(1798283784, 1819090245) index="0" unique_id=353721860]
-tile_map_data = PackedByteArray("AAA1AAMAAQAAAAAAAAA1AAIAAQAAAAAAAAA4AAEAAQAAAAAAAGA3AAEAAQAAAAAAAGA2AAEAAQAAAAAAAGA1AAEAAQAAAAAAAAA=")
-
 [node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("4_5kmqf")]
-
-[node name="SceneManager" parent="." unique_id=1910871571 node_paths=PackedStringArray("weapons", "gunLimitTileLayer") instance=ExtResource("5_bfa7f")]
-weaponIds = PackedInt32Array(0)
-weapons = [null]
-roomId = 2
-gunLimitTileLayer = NodePath("../Area/gunLimits")
 
 [node name="CircleBoyss" type="Node2D" parent="." unique_id=372581655]
 
@@ -875,8 +864,230 @@ cam = NodePath("../Camera2D")
 color = Color(0.8500505, 0.85005057, 0.8500505, 1)
 blend_mode = 2
 
+[node name="tutorialArea" parent="." unique_id=1274775226 node_paths=PackedStringArray("character") instance=ExtResource("16_eucva")]
+position = Vector2(686, -91)
+character = NodePath("../Character")
+tutoName = "C"
+text = "Press \"C\" to Dash."
+
+[node name="Sarmasiks" type="Node2D" parent="." unique_id=2076000202]
+
+[node name="Sarmasik2" parent="Sarmasiks" unique_id=1024922116 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(856, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik3" parent="Sarmasiks" unique_id=1174295146 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(1024, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik4" parent="Sarmasiks" unique_id=244999399 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(1200, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik5" parent="Sarmasiks" unique_id=802866911 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(1456, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik6" parent="Sarmasiks" unique_id=2114773613 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(1744, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik7" parent="Sarmasiks" unique_id=952380187 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(1608, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik8" parent="Sarmasiks" unique_id=412224490 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(1472, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik9" parent="Sarmasiks" unique_id=1872349759 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(656, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 300.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik10" parent="Sarmasiks" unique_id=2110299612 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(704, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 137.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik11" parent="Sarmasiks" unique_id=1933581335 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(360, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 137.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik12" parent="Sarmasiks" unique_id=1679444438 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(440, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 167.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik13" parent="Sarmasiks" unique_id=1060245152 instance=ExtResource("17_ldvrw")]
+z_index = 1
+position = Vector2(224, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 167.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik14" parent="Sarmasiks" unique_id=384731523 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(-24, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 127.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik15" parent="Sarmasiks" unique_id=1612156224 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(-56, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 78.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik16" parent="Sarmasiks" unique_id=1304683807 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(-152, -144)
+Speed = 4.0
+segmentAmount = 50.0
+length = 169.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik17" parent="Sarmasiks" unique_id=1853921044 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(888, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 145.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik18" parent="Sarmasiks" unique_id=1506890955 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(992, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 120.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik19" parent="Sarmasiks" unique_id=1548998660 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(1056, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 91.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik20" parent="Sarmasiks" unique_id=2128349224 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(1216, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 568.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik21" parent="Sarmasiks" unique_id=1781961072 instance=ExtResource("17_ldvrw")]
+z_index = -1
+position = Vector2(1168, -288)
+Speed = 4.0
+segmentAmount = 50.0
+length = 149.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="LeafEffect" type="CPUParticles2D" parent="." unique_id=1640343928]
+z_index = 1
+position = Vector2(1104, -448)
+amount = 100
+texture = ExtResource("18_ev6gp")
+lifetime = 10.0
+preprocess = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(1500, 1)
+direction = Vector2(-1, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -50.0
+angular_velocity_max = -50.0
+
+[node name="LeafEffect2" type="CPUParticles2D" parent="." unique_id=2074755658]
+z_index = -1
+position = Vector2(1096, -448)
+amount = 100
+texture = ExtResource("18_ev6gp")
+lifetime = 10.0
+preprocess = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(1500, 1)
+direction = Vector2(-1, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -50.0
+angular_velocity_max = -50.0
+color = Color(0.117109306, 0.11710932, 0.117109306, 1)
+
 [editable path="Doors/door2"]
-[editable path="Area/gunLimits"]
 [editable path="CheckPoints/CheckPoint3"]
 [editable path="Lamps/Lamp"]
 [editable path="Lamps/Lamp2"]

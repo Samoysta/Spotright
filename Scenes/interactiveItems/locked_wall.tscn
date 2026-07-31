@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dwalc0nqsgini" path="res://Assets/LockedWallTileset.png" id="2_gwepd"]
 [ext_resource type="Texture2D" uid="uid://c2btwo5l6x3vt" path="res://Assets/LockOfWall.png" id="3_y8gch"]
 [ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="4_gwepd"]
+[ext_resource type="AudioStream" uid="uid://oqyanc6a2k3t" path="res://Assets/Sounds/LockTouch.mp3" id="5_y8gch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c1onc"]
 texture = ExtResource("2_gwepd")
@@ -159,7 +160,7 @@ gradient = SubResource("Gradient_luduk")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="LockedWall" type="Node2D" unique_id=919746307 node_paths=PackedStringArray("wallUp", "wallUpTargetPos", "wallDown", "wallDownTargetPos", "LockKey", "lockkeySprite", "up", "down", "keyAnim", "runef", "boomef")]
+[node name="LockedWall" type="Node2D" unique_id=919746307 node_paths=PackedStringArray("wallUp", "wallUpTargetPos", "wallDown", "wallDownTargetPos", "LockKey", "lockkeySprite", "up", "down", "keyAnim", "runef", "boomef", "unLockedAudio")]
 z_index = -2
 script = ExtResource("1_pg7cc")
 id = 1
@@ -176,6 +177,7 @@ keySpeed = 3.0
 keyAnim = NodePath("Key/AnimationPlayer")
 runef = NodePath("Key/runEf")
 boomef = NodePath("Key/boomEf")
+unLockedAudio = NodePath("unLockedAudio")
 
 [node name="WallUp" type="TileMapLayer" parent="." unique_id=1968044263 groups=["Ground"]]
 tile_map_data = PackedByteArray("AAD9//7/AAABAAIAAAD9////AAABAAMAAAD+//7/AAACAAIAAAD+////AAACAAMAAAD///7/AAADAAIAAAD/////AAADAAMAAAAAAP7/AAAEAAIAAAAAAP//AAAEAAMAAAABAP7/AAAFAAIAAAABAP//AAAFAAMAAAACAP7/AAABAAIAADACAP//AAAGAAMAAAD9//3/AAABAAIAAAD9//z/AAABAAIAAAD9//v/AAABAAIAAAD9//r/AAABAAEAAAD+//r/AAACAAEAAAD///r/AAADAAEAAAAAAPr/AAAEAAEAAAABAPr/AAAFAAEAAAACAPr/AAAGAAEAAAACAPv/AAABAAIAADACAPz/AAABAAIAADACAP3/AAABAAIAADD+//v/AAACAAIAAAD///z/AAACAAIAAAAAAPz/AAACAAIAAAAAAP3/AAACAAIAAAABAP3/AAACAAIAAAABAPz/AAACAAIAAAABAPv/AAACAAIAAAAAAPv/AAACAAIAAAD///v/AAACAAIAAAD+//3/AAACAAIAAAD+//z/AAACAAIAAAD///3/AAACAAIAAAA=")
@@ -267,5 +269,10 @@ scale_curve_y = SubResource("Curve_gwepd")
 modulate = Color(1, 1, 1, 0)
 z_index = 1
 texture = SubResource("GradientTexture2D_3h2rk")
+
+[node name="unLockedAudio" type="AudioStreamPlayer2D" parent="." unique_id=1756908282]
+stream = ExtResource("5_y8gch")
+volume_db = 8.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="Key" to="." method="BodyEntered2D"]
