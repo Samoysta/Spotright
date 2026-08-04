@@ -29,6 +29,7 @@ public partial class PlayerData : Node
 	public override void _Ready()
 	{
 		openedAbilityIds.Add(0);
+		openedAbilityIds.Add(1);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

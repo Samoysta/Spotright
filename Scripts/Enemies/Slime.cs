@@ -177,7 +177,7 @@ public partial class Slime : CharacterBody2D
 	{
 		for (int i = 0; i < coinAmount; i++)
 		{
-			float degree = rnd.RandfRange(75,105);
+			float degree = rnd.RandfRange(-75,-105);
 			Coin co = coins[i];
 			co.GlobalPosition = GlobalPosition;
 			co.Visible = true;

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://l2gnlylftv7a"]
+
+[ext_resource type="Script" uid="uid://24y2vn7ev125" path="res://Scripts/Effect.cs" id="1_x2x48"]
+[ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="2_76anv"]
+
+[sub_resource type="Curve" id="Curve_tdat6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.30084747, 1), -0.11923143, -0.11923143, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_x2x48"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_76anv"]
+resource_name = "Start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_taual"]
+_data = {
+&"RESET": SubResource("Animation_x2x48"),
+&"Start": SubResource("Animation_76anv")
+}
+
+[node name="tırtılDamageEf" type="Node2D" unique_id=1009985198 node_paths=PackedStringArray("anims")]
+script = ExtResource("1_x2x48")
+anims = [NodePath("AnimationPlayer")]
+dur = 1.1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1146827401]
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_tdat6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2074528589]
+libraries/ = SubResource("AnimationLibrary_taual")
+
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("2_76anv")]

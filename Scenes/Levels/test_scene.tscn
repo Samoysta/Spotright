@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://jp4u4g7bt051" path="res://Scenes/Enviorement/tutorial_area.tscn" id="14_nywed"]
 [ext_resource type="PackedScene" uid="uid://cg635lbwuy6nc" path="res://Scenes/Enviorement/lamp.tscn" id="14_u0ded"]
 [ext_resource type="PackedScene" uid="uid://c46665e7r24b5" path="res://Scenes/Enviorement/sarmasik.tscn" id="15_nywed"]
+[ext_resource type="PackedScene" uid="uid://bh27536j6hx17" path="res://Scenes/light.tscn" id="15_u4baa"]
 
 [sub_resource type="Gradient" id="Gradient_bwjpn"]
 offsets = PackedFloat32Array(1)
@@ -555,10 +556,6 @@ length = 100.0
 egim = 2.0
 dalgaYogunlugu = 0.3
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1369498492]
-color = Color(0.8500505, 0.85005057, 0.8500505, 1)
-blend_mode = 2
-
 [node name="tutorialArea" parent="." unique_id=1274775226 node_paths=PackedStringArray("character") instance=ExtResource("14_nywed")]
 position = Vector2(142, -44)
 character = NodePath("../Character")
@@ -578,6 +575,9 @@ text = "Press \"Down Arrow\" to Interact."
 [node name="CollisionShape2D" parent="tutorialArea2" index="0" unique_id=854863810]
 position = Vector2(2, -42.5)
 shape = SubResource("RectangleShape2D_u4baa")
+
+[node name="Light" parent="." unique_id=738098916 instance=ExtResource("15_u4baa")]
+energy = 1.65
 
 [editable path="CheckPoints/CheckPoint"]
 [editable path="CheckPoints/CheckPoint2"]

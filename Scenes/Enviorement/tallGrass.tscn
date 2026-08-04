@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b81y2nkuacudx"]
+
+[ext_resource type="Script" uid="uid://drk61swkx40jl" path="res://Scripts/Plants/Plant1.cs" id="1_cid8l"]
+[ext_resource type="Texture2D" uid="uid://cbj1fb50thoa8" path="res://Assets/Enviorement/tallGrass1.png" id="2_rbyds"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cid8l"]
+size = Vector2(14, 32)
+
+[node name="tallGrass" type="Area2D" unique_id=1826984889 node_paths=PackedStringArray("plantSprite")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_cid8l")
+plantSprite = NodePath("Sprite2D")
+tweener = 4
+dur = 1.0
+rot = 10.0
+rotAmount = 17.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305047815]
+texture = ExtResource("2_rbyds")
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568079694]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_cid8l")
+
+[node name="visible" type="VisibleOnScreenEnabler2D" parent="." unique_id=1649806187]
+rect = Rect2(-12, -36, 23, 39)
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="screen_entered" from="visible" to="." method="OnScreenEntered"]
+[connection signal="screen_exited" from="visible" to="." method="OnScreenExited"]

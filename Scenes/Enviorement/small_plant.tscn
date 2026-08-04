@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c8qa8v5jcu5mp"]
+
+[ext_resource type="Script" uid="uid://drk61swkx40jl" path="res://Scripts/Plants/Plant1.cs" id="1_e7hgt"]
+[ext_resource type="Texture2D" uid="uid://csknlallcl6eg" path="res://Assets/Enviorement/plant2.png" id="2_7ujmc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1e5n"]
+size = Vector2(14, 12)
+
+[node name="smallPlant" type="Area2D" unique_id=1826984889 node_paths=PackedStringArray("plantSprite")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_e7hgt")
+plantSprite = NodePath("Sprite2D")
+tweener = 4
+dur = 1.0
+rot = 15.0
+rotAmount = 26.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305047815]
+texture = ExtResource("2_7ujmc")
+offset = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568079694]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_x1e5n")
+
+[node name="visible" type="VisibleOnScreenEnabler2D" parent="." unique_id=1649806187]
+rect = Rect2(-12, -22, 23, 25)
+
+[connection signal="body_entered" from="." to="." method="BodyEntered2D"]
+[connection signal="screen_entered" from="visible" to="." method="OnScreenEntered"]
+[connection signal="screen_exited" from="visible" to="." method="OnScreenExited"]

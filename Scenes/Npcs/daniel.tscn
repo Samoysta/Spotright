@@ -294,12 +294,10 @@ position = Vector2(0.5, 15)
 shape = SubResource("RectangleShape2D_ofn0u")
 
 [node name="textBox" type="Node2D" parent="." unique_id=1750900556]
-light_mask = 0
 position = Vector2(0, -22)
 scale = Vector2(1e-05, 1e-05)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="textBox" unique_id=1623608549]
-light_mask = 0
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -320,12 +318,10 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="ucgen" type="Sprite2D" parent="textBox" unique_id=913895814]
-light_mask = 0
 position = Vector2(0, -10)
 texture = ExtResource("4_426bt")
 
 [node name="read" type="Label" parent="textBox" unique_id=151223260]
-light_mask = 0
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

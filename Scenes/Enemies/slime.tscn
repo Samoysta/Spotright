@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://xybb88q22bvl" path="res://Assets/Enemies/Slime-Sheet.png" id="1_c2nj3"]
 [ext_resource type="Script" uid="uid://dvbuhboyam4ng" path="res://Scripts/Enemies/Slime.cs" id="1_pm37t"]
 [ext_resource type="PackedScene" uid="uid://gp2cq7j8n8q3" path="res://Scenes/Items/coin.tscn" id="2_4lx4x"]
-[ext_resource type="PackedScene" uid="uid://c3anwpccpkfvo" path="res://Scenes/Effects/slime_blood_ef.tscn" id="3_6kvin"]
+[ext_resource type="PackedScene" uid="uid://c3anwpccpkfvo" path="res://Scenes/Effects/Enemies/slime_blood_ef.tscn" id="3_6kvin"]
 [ext_resource type="Shader" uid="uid://dxysefl3drh14" path="res://Scripts/Enemies/slime.gdshader" id="4_hm6tv"]
 [ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="6_larvs"]
 
@@ -200,7 +200,7 @@ animations = [{
 size = Vector2(16, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pm37t"]
-size = Vector2(16, 14)
+size = Vector2(22, 14)
 
 [sub_resource type="Animation" id="Animation_hm6tv"]
 length = 0.001
@@ -288,7 +288,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1074686391]
-position = Vector2(3, 1)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_pm37t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=299224938]

@@ -739,7 +739,6 @@ public partial class Character : CharacterBody2D
         pd.lastDir = lastDir;
         if (pd.health <= 0 && !died)
         {
-            characterSprite.Play("Die");
             died = true;
             pd.isDied = true;
             canDie = false;
@@ -751,6 +750,7 @@ public partial class Character : CharacterBody2D
             pd.doorID = 0;
             pd.Items = null;
             pd.killedEnemies.Clear();
+            characterSprite.CallDeferred("play","Die");
         }
     }
 

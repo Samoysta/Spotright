@@ -14,6 +14,8 @@ plantSprite = NodePath("Sprite2D")
 tweener = 4
 dur = 2.0
 isCeiling = true
+rot = 10.0
+rotAmount = 23.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=191002549]
 texture = ExtResource("1_hkdra")

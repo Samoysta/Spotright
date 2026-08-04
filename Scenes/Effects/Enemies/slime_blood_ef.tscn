@@ -72,7 +72,7 @@ _data = {
 }
 
 [sub_resource type="Curve" id="Curve_rhbfg"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5084746, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.53587365), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5084746, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_82lb6"]
@@ -82,9 +82,10 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 z_index = 1
 script = ExtResource("1_gima3")
 anims = [NodePath("AnimationPlayer")]
-dur = 0.8
+dur = 1.05
 
 [node name="bloodEf" type="CPUParticles2D" parent="." unique_id=1744002292]
+modulate = Color(2.844042, 2.844042, 2.844042, 1)
 emitting = false
 amount = 10
 lifetime = 0.7

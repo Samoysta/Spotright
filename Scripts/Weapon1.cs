@@ -228,10 +228,7 @@ public partial class Weapon1 : Area2D
 						}
 					}
 					shootcd = shootCoolDown;
-					for (int i = -1; i < 2; i++)
-					{
-						Fire(i);
-					}
+					Fire(0);
 					if (Demon)
 					{
 						fireEffectDemon();

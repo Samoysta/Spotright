@@ -10,6 +10,8 @@ public partial class Plant1 : Area2D
 	[Export] bool isCeiling;
 	Tween tween;
 	bool isShaking;
+	[Export] float rot;
+	[Export] float rotAmount;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,14 +30,14 @@ public partial class Plant1 : Area2D
 
 	void AnimFinished()
 	{
-		int target = 0;
-		if (plantSprite.Skew == Mathf.DegToRad(10))
+		float target = 0;
+		if (plantSprite.Skew == Mathf.DegToRad(rot))
 		{
-			target = -10;
+			target = -rot;
 		}
 		else
 		{
-			target = 10;
+			target = rot;
 		}
 		if (!isShaking)
 		{
@@ -75,26 +77,26 @@ public partial class Plant1 : Area2D
 					dir = -1;
 				}
 			}
-			float rotAmount = Mathf.Abs(character.Velocity.X / (25 / 3));
-			rotAmount = Mathf.Clamp(rotAmount,-30,30);
+			float targetrot = Mathf.Abs(character.Velocity.X / (rotAmount / 3));
+			targetrot = Mathf.Clamp(targetrot,-rotAmount,rotAmount);
 			tween?.Kill();
 			tween = CreateTween();
 			tween.SetEase(Tween.EaseType.Out).SetTrans(tweener);
-			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(dir * rotAmount), dur / 4).Finished += () => {ShakeFinished();};
+			tween.TweenProperty(plantSprite,"skew", Mathf.DegToRad(dir * targetrot), dur / 4).Finished += () => {ShakeFinished();};
 			isShaking = false;	
 		}
 	}
 
 	void ShakeFinished()
 	{
-		int target = 0;
-		if (plantSprite.Skew == Mathf.DegToRad(10))
+		float target = 0;
+		if (plantSprite.Skew == Mathf.DegToRad(rot))
 		{
-			target = -10;
+			target = -rot;
 		}
 		else
 		{
-			target = 10;
+			target = rot;
 		}
 		if (!isShaking)
 		{
