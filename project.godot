@@ -40,7 +40,6 @@ project/assembly_name="Skiper"
 movie_writer/video_quality=1.0
 movie_writer/ogv/encoding_speed=1
 movie_writer/movie_file="C:/Users/Public/Downloads/GodotGame.png"
-movie_writer/fps=144
 
 [editor_plugins]
 

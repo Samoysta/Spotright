@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public partial class Daniel : Area2D
+public partial class DanielsFather : Node2D
 {
     [Export] Character character;
+	Camera2d cam;
     [Export] Node2D readBox;
     Tween t;
     bool characterEntered;
@@ -20,7 +21,6 @@ public partial class Daniel : Area2D
     int currentTextId;
     int textBoxPastCharacterAmount;
     [Export] AudioStreamPlayer2D textBoxAudio;
-	[Export] Node2D eyes;
     bool isSelecting;
     int selectIndex;
     PlayerData pd;
@@ -29,25 +29,18 @@ public partial class Daniel : Area2D
     bool SetUpAnim;
     bool canSelect;
     Tween t3;
-    [Export] AnimationPlayer giveGunAnim;
-    [Export] CpuParticles2D giveEf;
-    float timer1;
-    bool givedGun = false;
+	[Export] AnimationTree animtree;
+	[Export] PackedScene heart;
+	[Export] bool startSpawn;
+	bool spawned;
+	[Export] CpuParticles2D takeCpu;
+	[Export] Node2D heartSpawnPos;
+	Node2D currentheart;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         pd = GetNode<PlayerData>("/root/PlayerData");
         character.dialogAnim.AnimationFinished += (animName) => {AnimFinished(animName);};
-        giveGunAnim.AnimationFinished += (animName) =>
-        {
-            if (animName == "GiveGun")
-            {
-                giveEf.Emitting = true;
-                timer1 = 1.5f;
-                character.TakedItemEf("Blue Danigun");
-                givedGun = true;
-            }
-        };
         text = character.dialogText;
         text.VisibleRatio = 0;
         for (int i = 0; i < Texts.Length; i++)
@@ -55,36 +48,29 @@ public partial class Daniel : Area2D
             Texts[i] = Texts[i].Replace("\\n","\n");
 			Texts[i] = Texts[i].Replace("//","/");
         }
-        if (pd.talkedNpcs.Contains("Daniel"))
-        {
-            if (pd.openedAbilityIds.Contains(1))
-            {
-                currentTextId = 8;
-            }
-            else
-            {
-                currentTextId = 4;
-            }
-            text.Text = Texts[currentTextId];
-        }
+		if (pd.talkedNpcs.Contains("DanielsFather"))
+		{
+			currentTextId = 12;
+			if (!pd.takedHearts.Contains("Forest"))
+			{
+				CallDeferred("SpawnHeart");
+			}
+		}
+		cam = character.camera;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        if (timer1 > 0)
-        {
-            timer1 -= (float)delta;
-        }
-        else
-        {
-            if (givedGun)
-            {
-                givedGun = false;
-                character.cantInput = false;   
-                AskAnimStart();
-            }
-        }
+		if (!spawned)
+		{
+			if (startSpawn)
+			{
+				SpawnHeart();
+				cam.Shake(20);
+				spawned = true;
+			}
+		}
         if (SetUpAnim)
         {
             character.lastDir = Mathf.Sign(characterTargetPos.GlobalPosition.X - character.GlobalPosition.X);
@@ -100,16 +86,6 @@ public partial class Daniel : Area2D
             }
             character.Velocity = character.velocity;
         }
-		if (character.GlobalPosition.DistanceTo(GlobalPosition) < 200)
-		{
-			eyes.Position = eyes.Position.Lerp(new Vector2(
-			(character.GlobalPosition.X - GlobalPosition.X) / 30,0),5 * (float)delta);
-			eyes.Position = new Vector2(Mathf.Clamp(eyes.Position.X,-4,4),0);
-		}
-		else
-		{
-			eyes.Position = eyes.Position.Lerp(Vector2.Zero, 5 * (float)delta);
-		}
         if (characterEntered)
         {
             if (character.Velocity.Y == 0)
@@ -164,30 +140,6 @@ public partial class Daniel : Area2D
                     text.VisibleCharacters++;
                 }   
             }
-            if (text.VisibleRatio == 1 && !isSelecting)
-            {
-                if (currentTextId == 4)
-                {
-                    t3?.Kill();
-                    t3 = CreateTween();
-                    t3.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-                    t3.TweenProperty(character.buttonMain, "position", new Vector2(0,0), 0.3f);
-                    canSelect = true;
-                    character.buttonMain.Visible = true;
-                    isSelecting = true;
-                    character.buttonTexts[0].Text = "Yes, please";
-                    character.buttonTexts[1].Text = "No, thanks";
-                    selectIndex = 0;
-                    t2?.Kill();
-                    t2 = CreateTween();
-                    t2.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-                    t2.TweenProperty(character.buttons[0], "scale", new Vector2(1.3f,1.3f), 0.4f);
-                    t?.Kill();
-                    t = CreateTween();
-                    t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-                    t.TweenProperty(character.buttons[1], "scale", new Vector2(1f,1f), 0.4f);
-                }
-            }
             if (isSelecting)
             {
                 if (Input.IsActionJustPressed("Right") && canSelect)
@@ -241,9 +193,20 @@ public partial class Daniel : Area2D
                     {
                         if (Texts.Length > currentTextId + 1)
                         {
-                            if (new[] {6,7,8,9}.Contains(currentTextId))
+                            if (new[] {9,11,12}.Contains(currentTextId))
                             {
                                 character.dialogAnim.Play("Closing");
+								textingStarted = false;
+								if (currentTextId == 9)
+								{
+									animtree.Set("parameters/conditions/give", true);
+									animtree.Set("parameters/conditions/idle", false);
+									currentTextId++;
+								}
+								else if (currentTextId == 12 || currentTextId == 11)
+								{
+									currentTextId++;
+								}
                             }
                             else
                             {
@@ -255,6 +218,8 @@ public partial class Daniel : Area2D
                         else
                         {
                             character.dialogAnim.Play("Closing");
+							textingStarted = false;
+							currentTextId --;
                         }   
                     }
                     else
@@ -272,17 +237,8 @@ public partial class Daniel : Area2D
                                 {
                                     currentTextId = 5;
                                 }
-                                text.VisibleRatio = 0;
-                                text.Text = Texts[currentTextId];
-                                isSelecting = false;
-                                t3?.Kill();
-                                t3 = CreateTween();
-                                t3.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-                                t3.TweenProperty(character.buttonMain, "position", new Vector2(0,-64), 0.3f).Finished += () =>
-                                {
-                                    character.buttonMain.Visible = false;
-                                };
-                            }   
+                            }  
+							SelectFinished(); 
                             canSelect = false;
                         }
                     }
@@ -293,7 +249,7 @@ public partial class Daniel : Area2D
                 textBoxPastCharacterAmount = character.dialogText.VisibleCharacters;
                 if (textBoxPastCharacterAmount != 0)
                 {
-                    if (!textBoxAudio.Playing)
+					if (!textBoxAudio.Playing)
 					{
 						textBoxAudio.Play();	
 					}
@@ -308,49 +264,17 @@ public partial class Daniel : Area2D
         {
             textingStarted = true;   
             text.VisibleRatio = 0;
-            if (currentTextId != 0)
-            {
-                if (currentTextId == 6)
-                {
-                    currentTextId = 4;   
-                }
-                else if (currentTextId == 7)
-                {
-                    currentTextId = 8;
-                }
-                else if (currentTextId == 8)
-                {
-                    currentTextId = 9;
-                }
-                else if (currentTextId == 9)
-                {
-                    currentTextId = 8;
-                }
-            }
-            else
-            {
-                currentTextId = 0;
-            }
             text.Text = Texts[currentTextId];
         }
         else if(animName == "Closing")
         {
             textingStarted = false;
-            character.cantInput = false;
             text.Text = "";
-            if (!pd.talkedNpcs.Contains("Daniel"))
-            {
-                pd.talkedNpcs.Add("Daniel");                
-            }
-            if (currentTextId == 7)
-            {
-                character.cantInput = true;
-                giveGunAnim.Play("GiveGun");
-            }
-            else
-            {
-                AskAnimStart();
-            }
+			if (currentTextId - 1 != 9)
+			{
+				character.cantInput = false;
+				AskAnimStart();
+			}
 
         }
     }
@@ -388,4 +312,76 @@ public partial class Daniel : Area2D
             characterEntered = false;
         }
     }
+
+	public void SetButton(string but1, string but2)
+	{
+		t3?.Kill();
+        t3 = CreateTween();
+        t3.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        t3.TweenProperty(character.buttonMain, "position", new Vector2(0,0), 0.3f);
+        canSelect = true;
+        character.buttonMain.Visible = true;
+        isSelecting = true;
+        character.buttonTexts[0].Text = but1;
+        character.buttonTexts[1].Text = but2;
+        selectIndex = 0;
+        t2?.Kill();
+        t2 = CreateTween();
+        t2.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        t2.TweenProperty(character.buttons[0], "scale", new Vector2(1.3f,1.3f), 0.4f);
+        t?.Kill();
+        t = CreateTween();
+        t.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        t.TweenProperty(character.buttons[1], "scale", new Vector2(1f,1f), 0.4f);
+	}
+
+	public void SelectFinished()
+	{
+		text.VisibleRatio = 0;
+        text.Text = Texts[currentTextId];
+        isSelecting = false;
+        t3?.Kill();
+        t3 = CreateTween();
+        t3.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        t3.TweenProperty(character.buttonMain, "position", new Vector2(0,-64), 0.3f).Finished += () =>
+        {
+            character.buttonMain.Visible = false;
+        };
+	}
+
+	public void GiveAnimFinished(string animName)
+	{
+		if (animName == "Give Element")
+		{
+			animtree.Set("parameters/conditions/idle", true);
+			animtree.Set("parameters/conditions/give", false);
+			character.dialogAnim.Play("Opening");
+		}
+	}
+
+	public void SpawnHeart()
+	{
+		Area2D item = (Area2D)heart.Instantiate();
+		item.BodyEntered += (body) => heartCollected(body);
+		item.GlobalPosition = heartSpawnPos.GlobalPosition;
+		GetTree().CurrentScene.AddChild(item);
+		currentheart = item;
+		if (!pd.talkedNpcs.Contains("DanielsFather"))
+		{
+			pd.talkedNpcs.Add("DanielsFather");	
+		}
+	}
+	public void heartCollected(Node2D body)
+	{
+		if (body is Character)
+		{
+			takeCpu.Emitting = true;
+			currentheart.QueueFree();
+			if (!pd.takedHearts.Contains("Forest"))
+			{
+				pd.takedHearts.Add("Forest");		
+			}
+			cam.Shake(20);
+		}
+	}
 }

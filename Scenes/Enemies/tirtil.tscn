@@ -225,7 +225,7 @@ animations = [{
 [node name="Tirtil" type="CharacterBody2D" unique_id=516382335 node_paths=PackedStringArray("ray1", "col", "dieEf", "mainCol", "eyes", "anim", "sleepyEf", "awakeEf", "anim2", "dustEf")]
 collision_layer = 4
 script = ExtResource("1_621cf")
-health = 5
+health = 500
 damage = 20
 speed = 430.0
 ray1 = NodePath("RayCast2D")

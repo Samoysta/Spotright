@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://dkfk627wyqj1o"]
+
+[ext_resource type="Texture2D" uid="uid://cx0okv4uaix1y" path="res://Assets/Hearts/heart of forest.png" id="1_wlwcc"]
+[ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="2_sliwm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fbqs"]
+
+[sub_resource type="Curve" id="Curve_r58ym"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7280335, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_a5ud8"]
+offsets = PackedFloat32Array(0, 0.5121359, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8033981, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_1p0ny"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_wlwcc"]
+resource_name = "Loop"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D/heartsprite/sphere:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.999498),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D/heartsprite/sphere:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sliwm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D/heartsprite/sphere:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D/heartsprite/sphere:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fbqs"]
+_data = {
+&"Loop": SubResource("Animation_wlwcc"),
+&"RESET": SubResource("Animation_sliwm")
+}
+
+[node name="ForestHeart" type="Area2D" unique_id=1394641917]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=660981721]
+self_modulate = Color(1, 1, 1, 0)
+shape = SubResource("RectangleShape2D_7fbqs")
+
+[node name="heartsprite" type="Sprite2D" parent="CollisionShape2D" unique_id=1692856358]
+self_modulate = Color(1.2502502, 1.2502502, 1.2502502, 1)
+texture = ExtResource("1_wlwcc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CollisionShape2D/heartsprite" unique_id=578455738]
+modulate = Color(0, 4.415934, 0.46060535, 1)
+z_index = -1
+amount = 25
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_r58ym")
+color_ramp = SubResource("Gradient_a5ud8")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="CollisionShape2D/heartsprite" unique_id=778543624]
+visible = false
+modulate = Color(2.0684493, 0.74240345, 0.18988435, 1)
+z_index = -1
+amount = 200
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 5.5
+gravity = Vector2(0, -25)
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_1p0ny")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="CollisionShape2D/heartsprite" unique_id=1184320556]
+modulate = Color(4.415934, 4.415934, 0.46060535, 1)
+z_index = -2
+amount = 25
+lifetime = 2.0
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_r58ym")
+color_ramp = SubResource("Gradient_a5ud8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/heartsprite" unique_id=517699952]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_7fbqs")
+autoplay = &"Loop"
+
+[node name="sphere" type="Sprite2D" parent="CollisionShape2D/heartsprite" unique_id=2040968338]
+z_index = 1
+texture = ExtResource("1_wlwcc")
+
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("2_sliwm")]

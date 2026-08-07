@@ -33,6 +33,7 @@ public partial class Character : CharacterBody2D
     [Export] PackedScene jumpEf;
     [Export] PackedScene dashEf;
     [Export] public float wallSpeed;
+    [Export] CpuParticles2D runEf;
     [Export] CpuParticles2D rightWallEffect;
     [Export] CpuParticles2D leftWallEffect;
     [Export] float dashSpeed;
@@ -271,6 +272,7 @@ public partial class Character : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        runEf.Emitting = characterSprite.Animation == "Run";
         if (undamagingTime > 0)
         {
             undamagingTime -= (float)delta;

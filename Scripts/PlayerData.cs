@@ -25,11 +25,11 @@ public partial class PlayerData : Node
 	public Dictionary<int, string> secretAreas = new();
 	public List<string> talkedNpcs = new();
 	public List<string> showedTutos = new();
+	public List<string> takedHearts = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		openedAbilityIds.Add(0);
-		openedAbilityIds.Add(1);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://24y2vn7ev125" path="res://Scripts/Effect.cs" id="1_bprkt"]
 [ext_resource type="Texture2D" uid="uid://6mnk4xsx7euq" path="res://Assets/mud.png" id="1_tcuon"]
+[ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="3_gyifg"]
 
 [sub_resource type="Animation" id="Animation_tcuon"]
 length = 0.001
@@ -106,3 +107,5 @@ angular_velocity_min = -50.0
 angular_velocity_max = 50.0
 scale_amount_curve = SubResource("Curve_tcuon")
 color_ramp = SubResource("Gradient_bprkt")
+
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("3_gyifg")]

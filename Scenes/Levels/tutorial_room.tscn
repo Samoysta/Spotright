@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://wori50jqkvq8" path="res://Scenes/interactiveItems/door_2.tscn" id="4_vswh0"]
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="5_bqtfe"]
 [ext_resource type="Texture2D" uid="uid://cqdg8p113cgta" path="res://Assets/DamageTile/DamageTileCalı.png" id="6_5ddov"]
+[ext_resource type="Texture2D" uid="uid://cj3jniet41mt6" path="res://Assets/Enviorement/FireTabela.png" id="6_06gkl"]
 [ext_resource type="Script" uid="uid://rgr2cdubphtm" path="res://Scripts/interactiveItems/SecretArea.cs" id="7_cs77a"]
 [ext_resource type="PackedScene" uid="uid://btt4fcdfixipy" path="res://Scenes/check_point.tscn" id="8_5otsa"]
 [ext_resource type="PackedScene" uid="uid://4p477vut2jxm" path="res://Scenes/Items/chest.tscn" id="9_2pirs"]
@@ -441,7 +442,7 @@ tile_map_data = PackedByteArray("AAAYAP//AAACAAMAAAAYAAAAAAADAAQAAAAZAP//AAACAAQ
 tile_set = SubResource("TileSet_cs77a")
 
 [node name="hitarea" type="TileMapLayer" parent="area1" unique_id=1101746444 groups=["DamageTile"]]
-tile_map_data = PackedByteArray("AAALAP3/AAAGAAEAAGALAPz/AAAGAAEAAGALAPv/AAAGAAEAAGAJAPj/AAAGAAEAAFAJAPf/AAAGAAEAAFAJAPb/AAAGAAEAAFALAPL/AAAGAAEAAGALAPP/AAAGAAEAAGALAPH/AAAGAAEAAGAJAO7/AAAGAAEAAFAJAO3/AAAGAAEAAFAJAOz/AAAGAAEAAFALAOn/AAAGAAEAAGALAOj/AAAGAAEAAGALAOf/AAAGAAEAAGDf/+n/AAAGAAEAAADg/+n/AAAGAAEAAADe/+n/AAAGAAEAAADd/+n/AAAGAAEAAAA=")
+tile_map_data = PackedByteArray("AAAJAPj/AAAGAAEAAFAJAPf/AAAGAAEAAFAJAPb/AAAGAAEAAFALAPL/AAAGAAEAAGALAPP/AAAGAAEAAGALAPH/AAAGAAEAAGDf/+n/AAAGAAEAAADg/+n/AAAGAAEAAADe/+n/AAAGAAEAAADd/+n/AAAGAAEAAAA=")
 tile_set = SubResource("TileSet_2pirs")
 
 [node name="Damage" type="TileMapLayer" parent="area1" unique_id=1351893602 groups=["DamageTile"]]
@@ -470,6 +471,10 @@ libraries/ = SubResource("AnimationLibrary_62dy4")
 [node name="TileMapLayer" type="TileMapLayer" parent="area1/secretArea" unique_id=1902800962]
 tile_map_data = PackedByteArray("AADr//H/AAABAAEAAADr//T/AAABAAAAAADs//X/AAABAAAAAADv//b/AAAAAAEAAADw//L/AAAAAAEAAADv//T/AAABAAAAAADy//X/AAABAAAAAAD0//P/AAAAAAEAAAD2//f/AAAAAAAAAAD3//f/AAABAAEAAAD4//f/AAAAAAEAAAD4//b/AAAAAAEAAAD3//P/AAAAAAAAAAD4//P/AAAAAAEAAAD8//L/AAABAAEAAAD8//P/AAAAAAAAAAD9//P/AAAAAAAAAAD+//X/AAABAAEAAAAAAPL/AAAAAAAAAAABAPL/AAABAAEAAAACAPL/AAAAAAEAAAACAPX/AAAAAAEAAAD///L/AAABAAEAAAA=")
 tile_set = SubResource("TileSet_lb4tn")
+
+[node name="FireTabela" type="Sprite2D" parent="area1" unique_id=904962266]
+position = Vector2(-608, -80)
+texture = ExtResource("6_06gkl")
 
 [node name="Doors" type="Node2D" parent="." unique_id=1103547319]
 

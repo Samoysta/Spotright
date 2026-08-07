@@ -102,7 +102,7 @@ libraries/ = SubResource("AnimationLibrary_rnxsp")
 autoplay = &"FadeOut"
 
 [node name="spawnPos" type="Node2D" parent="." unique_id=1944003547]
-position = Vector2(0, 54)
+position = Vector2(0, 24)
 
 [connection signal="body_entered" from="." to="." method="BodyEntered2D"]
 [connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="AnimFinished"]

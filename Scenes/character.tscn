@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
 [ext_resource type="Texture2D" uid="uid://2jrx3sd8krxj" path="res://Assets/BaloonBoomSheet.png" id="10_kq7hj"]
 [ext_resource type="Texture2D" uid="uid://31bbtjuompb8" path="res://Assets/littleStar.png" id="11_7iw6i"]
+[ext_resource type="Texture2D" uid="uid://6mnk4xsx7euq" path="res://Assets/mud.png" id="11_8iu2w"]
 [ext_resource type="FontFile" uid="uid://bviu62loexrxk" path="res://ByteBounce.ttf" id="12_l1rcp"]
 [ext_resource type="Texture2D" uid="uid://6f436w7nomeh" path="res://Assets/CoinSheet.png" id="13_le1tg"]
 [ext_resource type="Texture2D" uid="uid://bboq8vckk3vje" path="res://Assets/UI/healthBarBg.png" id="14_mvyft"]
@@ -560,6 +561,14 @@ _data = {
 &"RESET": SubResource("Animation_hgna0")
 }
 
+[sub_resource type="Curve" id="Curve_0wngn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6694915, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_0wngn"]
+offsets = PackedFloat32Array(0, 0.2093596, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
 size = Vector2(4, 20)
 
@@ -1098,7 +1107,7 @@ metadata/_custom_type_script = "uid://bk5a54k8kflq4"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w85my"]
 size = Vector2(13, 26)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "Abilities", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "runEf", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "Abilities", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -1119,6 +1128,7 @@ foot = NodePath("CollisionShape2D/body/Foot")
 jumpEf = ExtResource("2_owm7s")
 dashEf = ExtResource("5_2mse5")
 wallSpeed = 200.0
+runEf = NodePath("CollisionShape2D/body/Foot/run ef")
 rightWallEffect = NodePath("RightWallEffect")
 leftWallEffect = NodePath("LeftWallEffect")
 dashSpeed = 510.0
@@ -1188,6 +1198,19 @@ texture = ExtResource("8_wbia7")
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="CollisionShape2D/body/Foot/CharacterSprite" unique_id=1143375699]
 libraries/ = SubResource("AnimationLibrary_s7tkn")
+
+[node name="run ef" type="CPUParticles2D" parent="CollisionShape2D/body/Foot" unique_id=557415575]
+emitting = false
+amount = 5
+texture = ExtResource("11_8iu2w")
+lifetime = 0.5
+gravity = Vector2(0, -70)
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_0wngn")
+color_ramp = SubResource("Gradient_0wngn")
 
 [node name="RightWallCheck" type="Area2D" parent="." unique_id=1727512323]
 position = Vector2(8, 0)
@@ -1375,9 +1398,9 @@ libraries/ = SubResource("AnimationLibrary_px0br")
 
 [node name="dialogText" type="RichTextLabel" parent="UI/NinePatchRect" unique_id=2096445725]
 layout_mode = 1
-offset_left = 7.9999995
+offset_left = 15.0
 offset_top = 5.9999995
-offset_right = 374.0
+offset_right = 367.0
 offset_bottom = 120.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("12_l1rcp")
