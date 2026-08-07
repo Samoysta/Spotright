@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://c4y6k4oqgopft" path="res://Assets/Sounds/Character/TakeDamage.mp3" id="23_rtvxd"]
 [ext_resource type="AudioStream" uid="uid://cyf3dp6c57up" path="res://Assets/Sounds/Character/WallSlide-Grass.mp3" id="24_1g2gg"]
 [ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="25_4kq8q"]
+[ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="29_vl1po"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.6, 23.5)
@@ -566,7 +567,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6694915, 1), 0.0, 0.0, 0, 0, V
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_0wngn"]
-offsets = PackedFloat32Array(0, 0.2093596, 1)
+offsets = PackedFloat32Array(0, 0.061576355, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owm7s"]
@@ -594,7 +595,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterDie/CPUParticles2D:emitting")
+tracks/1/path = NodePath("CharacterDie/dieEf:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -654,7 +655,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterDie/CPUParticles2D:emitting")
+tracks/1/path = NodePath("CharacterDie/dieEf:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -794,6 +795,10 @@ animations = [{
 "name": &"Start",
 "speed": 20.0
 }]
+
+[sub_resource type="Curve" id="Curve_bagv5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.69491524, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_7iw6i"]
 offsets = PackedFloat32Array(0, 0.70689654, 0.8990148)
@@ -1107,7 +1112,7 @@ metadata/_custom_type_script = "uid://bk5a54k8kflq4"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w85my"]
 size = Vector2(13, 26)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "runEf", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "Abilities", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "runEf", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "takeDamageEf", "dieAnim", "anim", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "Abilities", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -1139,6 +1144,7 @@ balHaloEf = ExtResource("6_l1rcp")
 baloonBoomEf = NodePath("birthBaloonEf")
 baloonBoomEfCpu = NodePath("birthBaloonEf/birthBaloonEfCpu")
 dashDur = 0.2
+takeDamageEf = NodePath("CharacterDie/takeDamageEf")
 dieAnim = NodePath("CharacterDie/AnimationPlayer")
 anim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/AnimationPlayer")
 healthBar = NodePath("UI/HealthBar/healthbarbg/Polygon2D/healthBar")
@@ -1258,7 +1264,31 @@ frame = 3
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_a5ess")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="CharacterDie" unique_id=410001754]
+[node name="dieEf" type="CPUParticles2D" parent="CharacterDie" unique_id=410001754]
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
+z_index = 2
+emitting = false
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 2092616623
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 240.0
+linear_accel_min = -240.0
+linear_accel_max = -240.0
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+split_scale = true
+scale_curve_x = SubResource("Curve_ejsiy")
+scale_curve_y = SubResource("Curve_2mse5")
+color_ramp = SubResource("Gradient_reotu")
+
+[node name="takeDamageEf" type="CPUParticles2D" parent="CharacterDie" unique_id=1233446013]
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
 z_index = 2
 emitting = false
 lifetime = 0.7
@@ -1267,7 +1297,7 @@ explosiveness = 1.0
 particle_flag_align_y = true
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 240.0
+initial_velocity_min = 100.0
 initial_velocity_max = 240.0
 linear_accel_min = -240.0
 linear_accel_max = -240.0
@@ -1293,18 +1323,22 @@ frame = 8
 frame_progress = 1.0
 
 [node name="birthBaloonEfCpu" type="CPUParticles2D" parent="birthBaloonEf" unique_id=892318483]
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
 emitting = false
 texture = ExtResource("11_7iw6i")
 one_shot = true
 explosiveness = 1.0
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 linear_accel_min = -100.0
 linear_accel_max = -100.0
+scale_amount_min = 0.1
+scale_amount_max = 1.2
+scale_amount_curve = SubResource("Curve_bagv5")
 color_ramp = SubResource("Gradient_7iw6i")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1810757195]
@@ -1520,6 +1554,8 @@ bus = &"SFX"
 scale = Vector2(1e-05, 1e-05)
 character = NodePath("../..")
 Golden = true
+
+[node name="WorldEnvironment" parent="." unique_id=795285756 instance=ExtResource("29_vl1po")]
 
 [connection signal="body_entered" from="RightWallCheck" to="." method="RightWallEntered"]
 [connection signal="body_exited" from="RightWallCheck" to="." method="RightWallExited"]

@@ -47,6 +47,7 @@ public partial class Character : CharacterBody2D
     public bool isDashing;
     public bool canDie = true;
     [Export] float dashDur;
+    [Export] CpuParticles2D takeDamageEf;
     float dashD;
     bool canDash;
     bool canJump = true;
@@ -947,6 +948,7 @@ public partial class Character : CharacterBody2D
             camera.Call("Shake", 20f);
             undamagingTime = 1;
             canTakeDamage = false;
+            takeDamageEf.Emitting = true;
         }
     }
     public void KillSelf()
