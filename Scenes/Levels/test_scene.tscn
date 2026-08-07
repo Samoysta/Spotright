@@ -577,7 +577,6 @@ position = Vector2(2, -42.5)
 shape = SubResource("RectangleShape2D_u4baa")
 
 [node name="Light" parent="." unique_id=738098916 instance=ExtResource("15_u4baa")]
-energy = 1.65
 
 [editable path="CheckPoints/CheckPoint"]
 [editable path="CheckPoints/CheckPoint2"]

@@ -645,7 +645,7 @@ point_count = 7
 
 [sub_resource type="Gradient" id="Gradient_0edej"]
 offsets = PackedFloat32Array(0, 0.5344828, 1)
-colors = PackedColorArray(4.1370068, 0.6137164, 5.3924317, 1, 0.4998479, 5.1754804, 1.6490483, 1, 0.33825153, 5.3924317, 1.4034195, 1)
+colors = PackedColorArray(6.075371, 0.92292774, 7.9112988, 1, 0.8044808, 7.9112988, 2.5515738, 1, 0.52008915, 7.9112988, 2.0777857, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wosh6"]
 font = ExtResource("11_0edej")
