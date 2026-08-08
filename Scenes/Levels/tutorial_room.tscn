@@ -1101,6 +1101,7 @@ texture = ExtResource("17_62dy4")
 libraries/ = SubResource("AnimationLibrary_6mqod")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Lever/LevelStone" unique_id=168545278]
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
 position = Vector2(0, -3)
 emitting = false
 amount = 40
@@ -1173,6 +1174,123 @@ position = Vector2(80, -512)
 Speed = 4.0
 segmentAmount = 50.0
 length = 148.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik3" parent="Sarmasiks" unique_id=739235401 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-16, -400)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik4" parent="Sarmasiks" unique_id=2113164095 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-200, -400)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik5" parent="Sarmasiks" unique_id=346083557 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-432, -432)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik6" parent="Sarmasiks" unique_id=242590303 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-616, -432)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik7" parent="Sarmasiks" unique_id=2138370566 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-560, -432)
+Speed = 4.0
+segmentAmount = 50.0
+length = 56.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik8" parent="Sarmasiks" unique_id=155806936 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-360, -432)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik9" parent="Sarmasiks" unique_id=845077461 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-560, -128)
+Speed = 4.0
+segmentAmount = 50.0
+length = 231.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik10" parent="Sarmasiks" unique_id=364973324 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-728, -112)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik11" parent="Sarmasiks" unique_id=719183961 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-536, -128)
+Speed = 4.0
+segmentAmount = 50.0
+length = 234.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik12" parent="Sarmasiks" unique_id=617687638 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(-472, -96)
+Speed = 4.0
+segmentAmount = 50.0
+length = 100.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik13" parent="Sarmasiks" unique_id=1805209037 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(264, -512)
+Speed = 4.0
+segmentAmount = 91.0
+length = 151.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik14" parent="Sarmasiks" unique_id=966930733 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(360, -512)
+Speed = 4.0
+segmentAmount = 91.0
+length = 151.0
+egim = 2.0
+dalgaYogunlugu = 0.6
+
+[node name="Sarmasik15" parent="Sarmasiks" unique_id=1016356548 instance=ExtResource("21_gb8ia")]
+z_index = -1
+position = Vector2(328, -512)
+Speed = 4.0
+segmentAmount = 91.0
+length = 258.0
 egim = 2.0
 dalgaYogunlugu = 0.6
 

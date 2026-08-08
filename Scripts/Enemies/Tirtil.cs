@@ -172,6 +172,7 @@ public partial class Tirtil : CharacterBody2D
 
 	public void TakeDamage(int damage)
 	{
+		pd.energyAmount++;
 		health -= damage;
 		anim.Play("Flash");
 		anim.Seek(0);

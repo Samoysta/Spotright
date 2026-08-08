@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class PlayerData : Node
 {
 	public int doorID = 0;
+	public float energyAmount;
 	public int lastDir = -1;
 	public int health = 100;
 	public int maxHealth = 100;

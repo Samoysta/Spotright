@@ -85,6 +85,8 @@ public partial class Character : CharacterBody2D
     float birthTimer = -11;
     float haloTimer;
     bool restartAnim;
+    [Export] Sprite2D EnergyBar;
+    [Export] Polygon2D energyBarLeftStick;
     //UIs
     [Export] Sprite2D healthBar;
     [Export] Sprite2D bloodBar;
@@ -104,7 +106,10 @@ public partial class Character : CharacterBody2D
     [Export] PackedScene takedItemEf;
     public Queue<Effect> takedItemEfs = new();
     //Audios
+    [Export] public AnimationPlayer swordAnim;
     [Export] public Node2D[] Abilities;
+    [Export] public Node2D[] abilityLogos;
+    [Export] public Node2D selectSprite;
     [Export] public Node2D buttonMain;
     [Export] public Control[] buttons;
     [Export] public RichTextLabel[] buttonTexts;
@@ -225,10 +230,18 @@ public partial class Character : CharacterBody2D
         float xPos = (68f / pd.maxHealth * pd.health) - 68;
         healthBar.Position = new Vector2(xPos, healthBar.Position.Y);
         bloodBar.Position = healthBar.Position;
+        selectSprite.Position = abilityLogos[pd.currentAbilityid].Position;
+        for (int i = 0; i < pd.openedAbilityIds.Count; i++)
+        {
+            abilityLogos[i].Visible = true;
+        }
+        EnergyBar.Position = new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0);
     }
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("A") && !cantInput)
+        energyBarLeftStick.Visible = pd.energyAmount > 0;
+        selectSprite.Position = selectSprite.Position.Lerp(abilityLogos[currentAbilityNo].Position, 8 * (float)delta);
+        if (Input.IsActionJustPressed("A") && !cantInput && !swordAnim.IsPlaying())
         {
             if (currentAbilityNo == pd.openedAbilityIds.Count - 1)
             {
@@ -269,11 +282,14 @@ public partial class Character : CharacterBody2D
         {
             bloodEf.Emitting = false;
         }
+        // Energy Bar
+        pd.energyAmount = Mathf.Clamp(pd.energyAmount,0,15);
+        EnergyBar.Position = EnergyBar.Position.Lerp(new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0), 8 * (float)delta);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        runEf.Emitting = characterSprite.Animation == "Run";
+        runEf.Emitting = characterSprite.Animation == "Run" && Velocity.X != 0;
         if (undamagingTime > 0)
         {
             undamagingTime -= (float)delta;
@@ -377,7 +393,7 @@ public partial class Character : CharacterBody2D
         //DüşmeAnim
         if (velocity.Y > -JumpVelocity / 4 && !IsOnFloor() && !cantInput)
         {
-            if (characterSprite.Animation != "Fall" && !isDashing)
+            if (characterSprite.Animation != "Fall" && !isDashing && !swordAnim.IsPlaying())
             {
                 if (!((isRightWalled || isLeftWalled) && velocity.Y >= wallSpeed))
                 {
@@ -426,7 +442,7 @@ public partial class Character : CharacterBody2D
             wallSlideG.Stop();
         }
         // Add the gravity.
-        if (!IsOnFloor() && !cantInput)
+        if (!IsOnFloor() && !cantInput && !swordAnim.IsPlaying())
         {
             if (velocity.Y <= JumpVelocity * 1.5f && !cantInput)
             {
@@ -456,6 +472,19 @@ public partial class Character : CharacterBody2D
                 anim.Play("RESET");
             }
         }
+        if (!cantInput)
+        {
+            if (Input.IsActionJustPressed("LeftShift") && !swordAnim.IsPlaying() && pd.energyAmount >= 5)
+            {
+                swordAnim.CallDeferred("play","Sword");
+                velocity = Vector2.Zero;
+                isJumping = false;
+                isZjustPressed = false;
+                isDashing = false;
+                pd.energyAmount -= 5;
+                EnergyBar.Position = new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0);
+            }
+        }
         if (IsOnFloor() && !cantInput)
         {
             if (!isGrounded)
@@ -478,22 +507,29 @@ public partial class Character : CharacterBody2D
             //RunEffect
             if (Mathf.Abs(Velocity.X) > 10 || Input.IsActionPressed("Right") || Input.IsActionPressed("Left"))
             {
-                if (!isDashing && canAnim)
+                if (!isDashing && canAnim && !swordAnim.IsPlaying())
                 {
-                    characterSprite.Play("Run");
-                    if (!runG.Playing)
+                    if (Velocity.X != 0)
                     {
-                        if (Mathf.Abs(velocity.X) >= Speed)
+                        characterSprite.Play("Run");
+                        if (!runG.Playing)
                         {
-                            runG.PitchScale = rnd.RandfRange(0.8f,1.2f);
-                            runG.Play();   
-                        }
+                            if (Mathf.Abs(velocity.X) >= Speed)
+                            {
+                                runG.PitchScale = rnd.RandfRange(0.8f,1.2f);
+                                runG.Play();   
+                            }
+                        }   
+                    }
+                    else
+                    {
+                        characterSprite.Play("Idle");
                     }
                 }
             }
             else
             {
-                if (!isDashing && canAnim)
+                if (!isDashing && canAnim && !swordAnim.IsPlaying())
                 {
                     if (characterSprite.Animation == "Falled")
                     {
@@ -538,7 +574,7 @@ public partial class Character : CharacterBody2D
         }
 
         //Dash
-        if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash && !cantInput)
+        if (Input.IsActionJustPressed("C") && dashCD <= 0 && canDash && !cantInput && !swordAnim.IsPlaying())
         {
             anim.Play("Dash");
             dashD = dashDur;
@@ -576,7 +612,7 @@ public partial class Character : CharacterBody2D
                 dashHaloCD = dashDur / 5;
             }
         }
-        else if (!isDashing && !cantInput)
+        else if (!isDashing && !cantInput && !swordAnim.IsPlaying())
         {
             dashHaloCD = 0;
             //Jump
@@ -786,6 +822,7 @@ public partial class Character : CharacterBody2D
             Velocity = vel;
             isZjustPressed = false;
             canDash = true;
+            swordAnim.CallDeferred("play", "RESET");
             if (vel.Y < -JumpVelocity)
             {
                 characterSprite.CallDeferred("play", "Jump");
@@ -949,6 +986,7 @@ public partial class Character : CharacterBody2D
             undamagingTime = 1;
             canTakeDamage = false;
             takeDamageEf.Emitting = true;
+            swordAnim.CallDeferred("play", "RESET");
         }
     }
     public void KillSelf()
@@ -957,6 +995,7 @@ public partial class Character : CharacterBody2D
         flashAnim.Play("RESET");
         camera.Call("Shake", 20f);
         pd.health -= 10;
+        swordAnim.CallDeferred("play", "RESET");
         if (pd.health <= 0)
         {
             return;
@@ -1024,6 +1063,25 @@ public partial class Character : CharacterBody2D
         if (body.IsInGroup("Secret Area"))
         {
             body.Call("Close");
+        }
+    }
+
+    public void SwordEntered(Node2D body)
+    {
+        if (body.HasMethod("TakeDamage"))
+        {
+            body.Call("TakeDamage", pd.weaponDamageKat * pd.weaponDamage * 5);
+        }
+        if (body.HasMethod("SetDamageEf"))
+        {
+            if (characterSprite.Scale.X < 0)
+            {
+                body.Call("SetDamageEf",Vector2.Left);
+            }
+            else
+            {
+                body.Call("SetDamageEf",Vector2.Right);
+            }
         }
     }
 }

@@ -46,6 +46,7 @@ public partial class Daniel : Area2D
                 timer1 = 1.5f;
                 character.TakedItemEf("Blue Danigun");
                 givedGun = true;
+                character.abilityLogos[1].Visible = true;
             }
         };
         text = character.dialogText;

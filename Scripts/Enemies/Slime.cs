@@ -148,6 +148,7 @@ public partial class Slime : CharacterBody2D
 		anim.Play("TakeDamage");
 		anim.Seek(0);
 		health -= dam;	
+		pd.energyAmount++;
 		if (health <= 0)
 		{
 			if (!pd.killedEnemies.ContainsKey(id))
