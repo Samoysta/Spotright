@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Formats.Tar;
+using System.Linq;
 using System.Text;
 
 public partial class Character : CharacterBody2D
@@ -107,6 +108,8 @@ public partial class Character : CharacterBody2D
     public Queue<Effect> takedItemEfs = new();
     //Audios
     [Export] public AnimationPlayer swordAnim;
+    [Export] public AnimationPlayer blueFlashAnim;
+    float pastEnergy;
     [Export] public Node2D[] Abilities;
     [Export] public Node2D[] abilityLogos;
     [Export] public Node2D selectSprite;
@@ -239,6 +242,17 @@ public partial class Character : CharacterBody2D
     }
     public override void _Process(double delta)
     {
+        if (pastEnergy != pd.energyAmount)
+        {
+            if (pastEnergy < pd.energyAmount)
+            {
+                if (pd.energyAmount is 5 or 10 or 15)
+                {
+                    blueFlashAnim.Play("Flash");
+                }
+            }
+        }
+        pastEnergy = pd.energyAmount;
         energyBarLeftStick.Visible = pd.energyAmount > 0;
         selectSprite.Position = selectSprite.Position.Lerp(abilityLogos[currentAbilityNo].Position, 8 * (float)delta);
         if (Input.IsActionJustPressed("A") && !cantInput && !swordAnim.IsPlaying())
@@ -284,7 +298,8 @@ public partial class Character : CharacterBody2D
         }
         // Energy Bar
         pd.energyAmount = Mathf.Clamp(pd.energyAmount,0,15);
-        EnergyBar.Position = EnergyBar.Position.Lerp(new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0), 8 * (float)delta);
+
+        EnergyBar.Position = EnergyBar.Position.Lerp(new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0), 10 * (float)delta);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -482,7 +497,6 @@ public partial class Character : CharacterBody2D
                 isZjustPressed = false;
                 isDashing = false;
                 pd.energyAmount -= 5;
-                EnergyBar.Position = new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0);
             }
         }
         if (IsOnFloor() && !cantInput)

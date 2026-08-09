@@ -28,3 +28,8 @@ points = PackedVector2Array(0, 0, 33.44, 0)
 width_curve = SubResource("Curve_0uswi")
 gradient = SubResource("Gradient_nevk8")
 end_cap_mode = 2
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=910582134]
+rect = Rect2(-80, -10, 138, 20)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ScreenExited2D"]

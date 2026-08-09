@@ -214,7 +214,7 @@ public partial class Weapon1 : Area2D
 					gunSprite.FlipV = (character.GlobalPosition.X - GlobalPosition.X) * pos.X < 0;
 				}
 
-				if (Input.IsActionJustPressed("X") && shootcd <= 0 && canShoot)
+				if (Input.IsActionJustPressed("X") && shootcd <= 0 && canShoot && !character.swordAnim.IsPlaying())
 				{
 					if (!character.IsOnFloor())
 					{

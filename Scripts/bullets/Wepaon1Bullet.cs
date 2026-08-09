@@ -76,4 +76,8 @@ public partial class Wepaon1Bullet : Node2D
 		ef.setOn();
 		character.hitEffects.Enqueue(ef);
 	}
+	public void ScreenExited2D()
+	{
+		setOff();
+	}
 }
