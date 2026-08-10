@@ -300,7 +300,7 @@ public partial class Character : CharacterBody2D
         }
         // Energy Bar
         pd.energyAmount = Mathf.Clamp(pd.energyAmount,0,15);
-
+        pastEnergy = pd.energyAmount;
         EnergyBar.Position = EnergyBar.Position.Lerp(new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0), 10 * (float)delta);
     }
 
