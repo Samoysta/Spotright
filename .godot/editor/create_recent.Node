@@ -1,8 +1,8 @@
-VisibleOnScreenNotifier2D
+Node2D
 AnimationPlayer
 Sprite2D
+VisibleOnScreenNotifier2D
 Polygon2D
-Node2D
 CollisionShape2D
 Area2D
 AnimatedSprite2D
@@ -12,4 +12,3 @@ TileMapLayer
 GPUParticles2D
 RayCast2D
 CharacterBody2D
-StaticBody2D

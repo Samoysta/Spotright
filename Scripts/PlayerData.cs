@@ -19,7 +19,7 @@ public partial class PlayerData : Node
 	//||-----------------------------------Kaydedilecekler---------------------------------||
 
 	public int coin;
-	public int maxHealth = 500;
+	public int maxHealth = 100;
 	public List<int> openedAbilityIds = new();
 	public string savedScene = "test_scene";
 	public Vector2 savedPos = Vector2.Zero;

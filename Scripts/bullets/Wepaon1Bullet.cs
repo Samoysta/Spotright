@@ -52,11 +52,14 @@ public partial class Wepaon1Bullet : Node2D
 
 	public void setOff()
 	{
-		Visible = false;
-		ray.Enabled = false;
-		character.bul1s.Enqueue(this);
-		SetProcess(false);
-		SetPhysicsProcess(false);
+		if (Visible)
+		{
+			Visible = false;
+			ray.Enabled = false;
+			character.bul1s.Enqueue(this);
+			SetProcess(false);
+			SetPhysicsProcess(false);	
+		}
 	}
 
 	public void setOn()

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b4gnhuu12i6cg" path="res://Scripts/bullets/Wepaon1Bullet.cs" id="1_nevk8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nevk8"]
-size = Vector2(2, 20)
+size = Vector2(3.085, 6.93)
 
 [sub_resource type="Curve" id="Curve_0uswi"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.6768643), 0.0, 0.0, 0, 0]

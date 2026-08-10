@@ -748,7 +748,7 @@ parameters/conditions/idle = false
 position = Vector2(0, -88)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="HeartPos" unique_id=1206796515]
-self_modulate = Color(10.5787325, 10.5787325, 10.5787325, 1)
+self_modulate = Color(3.6144817, 3.6144817, 3.6144817, 1)
 emitting = false
 texture = ExtResource("5_e0b8e")
 trail_section_subdivisions = 352

@@ -108,6 +108,8 @@ public partial class Character : CharacterBody2D
     public Queue<Effect> takedItemEfs = new();
     //Audios
     [Export] public AnimationPlayer swordAnim;
+    [Export] public AnimationPlayer energyUseAnim;
+    [Export] public Node2D energyUseAnimPos;
     [Export] public AnimationPlayer blueFlashAnim;
     float pastEnergy;
     [Export] public Node2D[] Abilities;
@@ -497,6 +499,11 @@ public partial class Character : CharacterBody2D
                 isZjustPressed = false;
                 isDashing = false;
                 pd.energyAmount -= 5;
+                energyUseAnimPos.GlobalPosition = EnergyBar.GlobalPosition + new Vector2(16,0);
+                energyUseAnim.Play("UseFlashEf");
+                energyUseAnim.Seek(0);
+                EnergyBar.Position = new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0);
+                camera.Shake(10);
             }
         }
         if (IsOnFloor() && !cantInput)
@@ -1085,6 +1092,7 @@ public partial class Character : CharacterBody2D
         if (body.HasMethod("TakeDamage"))
         {
             body.Call("TakeDamage", pd.weaponDamageKat * pd.weaponDamage * 5);
+            pd.energyAmount--;
         }
         if (body.HasMethod("SetDamageEf"))
         {

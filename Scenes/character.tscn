@@ -1074,6 +1074,76 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.70689654, 0.8990148)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.09863013, 1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_80j7h"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oslv8"]
+gradient = SubResource("Gradient_80j7h")
+width = 16
+height = 14
+
+[sub_resource type="Animation" id="Animation_t521p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k1duu"]
+resource_name = "UseFlashEf"
+length = 0.23333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22597797),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_755ar"]
+_data = {
+&"RESET": SubResource("Animation_t521p"),
+&"UseFlashEf": SubResource("Animation_k1duu")
+}
+
 [sub_resource type="Gradient" id="Gradient_dq5a7"]
 offsets = PackedFloat32Array(0.80528843, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.07450981)
@@ -1429,7 +1499,7 @@ metadata/_custom_type_script = "uid://bk5a54k8kflq4"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w85my"]
 size = Vector2(13, 26)
 
-[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "runEf", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "takeDamageEf", "dieAnim", "anim", "EnergyBar", "energyBarLeftStick", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "swordAnim", "blueFlashAnim", "Abilities", "abilityLogos", "selectSprite", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
+[node name="Character" type="CharacterBody2D" unique_id=815620444 node_paths=PackedStringArray("coinLabel", "doors", "Items", "characterSprite", "foot", "runEf", "rightWallEffect", "leftWallEffect", "baloonBoomEf", "baloonBoomEfCpu", "takeDamageEf", "dieAnim", "anim", "EnergyBar", "energyBarLeftStick", "healthBar", "bloodBar", "FadeAnim", "flashAnim", "takeDamageAnim", "bloodEf", "dialogAnim", "dialogText", "swordAnim", "energyUseAnim", "energyUseAnimPos", "blueFlashAnim", "Abilities", "abilityLogos", "selectSprite", "buttonMain", "buttons", "buttonTexts", "jumpG", "landG", "runG", "dashA", "takeDamageA", "wallSlideG")]
 z_index = 1
 collision_layer = 2
 safe_margin = 0.001
@@ -1478,6 +1548,8 @@ dialogAnim = NodePath("UI/NinePatchRect/AnimationPlayer")
 dialogText = NodePath("UI/NinePatchRect/dialogText")
 takedItemEf = ExtResource("7_0wngn")
 swordAnim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/CharacterSword/AnimationPlayer")
+energyUseAnim = NodePath("UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos/UseEfFlashSprite/AnimationPlayer")
+energyUseAnimPos = NodePath("UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos")
 blueFlashAnim = NodePath("UI/EnergyBar/energyBarFlash/AnimationPlayer")
 Abilities = [null, NodePath("Equips/weapon1")]
 abilityLogos = [NodePath("UI/ItemLogos/None"), NodePath("UI/ItemLogos/Weapon")]
@@ -1695,6 +1767,18 @@ polygon = PackedVector2Array(-24, -7, 24, -7, 24, 7, -24, 7)
 
 [node name="EnergyBar" type="Sprite2D" parent="UI/EnergyBar/EnergyBarBG/Polygon2D" unique_id=974409956]
 texture = ExtResource("18_80j7h")
+
+[node name="FlashPos" type="Node2D" parent="UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar" unique_id=833304517]
+top_level = true
+position = Vector2(144, 24)
+
+[node name="UseEfFlashSprite" type="Sprite2D" parent="UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos" unique_id=1984252315]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+texture = SubResource("GradientTexture2D_oslv8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos/UseEfFlashSprite" unique_id=2114183346]
+libraries/ = SubResource("AnimationLibrary_755ar")
 
 [node name="Polygon2D2" type="Polygon2D" parent="UI/EnergyBar/EnergyBarBG" unique_id=940279162]
 clip_children = 2
