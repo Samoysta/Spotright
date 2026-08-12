@@ -9,10 +9,12 @@ public partial class Wepaon1Bullet : Node2D
 	Character character;
 	float velocity;
 	int damage;
+	[Export] AudioStreamPlayer2D hitEffectEnemy;
+	RandomNumberGenerator rnd = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		rnd.Randomize();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,6 +32,8 @@ public partial class Wepaon1Bullet : Node2D
 				if (body.HasMethod("TakeDamage"))
 				{
 					body.Call("TakeDamage",damage);
+					hitEffectEnemy.Play();
+					hitEffectEnemy.PitchScale = rnd.RandfRange(0.8f,1.2f);
 				}
 				if (body.HasMethod("SetDamageEf"))
 				{

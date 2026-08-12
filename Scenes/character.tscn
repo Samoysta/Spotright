@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://decfdj753vjxf" path="res://Scenes/Effects/baloon_halo_ef.tscn" id="6_l1rcp"]
 [ext_resource type="PackedScene" uid="uid://cx40al1ofqkrk" path="res://Scenes/Effects/item_name_text_effect.tscn" id="7_0wngn"]
 [ext_resource type="Texture2D" uid="uid://40jqvobsvkmj" path="res://Assets/Character-Sheet.png" id="7_7iw6i"]
+[ext_resource type="PackedScene" uid="uid://cisdmfifeucyu" path="res://Scenes/Effects/hit_effect_sword.tscn" id="8_80j7h"]
 [ext_resource type="Texture2D" uid="uid://b2p74y62x60i0" path="res://Assets/CharacterDieSheet.png" id="8_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://coioeqex2ktxo" path="res://Assets/dieOrb.png" id="8_wbia7"]
 [ext_resource type="Texture2D" uid="uid://c4sbtpxa6s5gh" path="res://Assets/CharacterRunHolySheet.png" id="10_ivxna"]
@@ -37,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://cay0sfxj46cu6" path="res://Assets/UI/ItemLogos/Weapon.png" id="24_l51qt"]
 [ext_resource type="PackedScene" uid="uid://cehwv5je66iyk" path="res://Scenes/Items/weapon_1.tscn" id="25_4kq8q"]
 [ext_resource type="PackedScene" uid="uid://bbassb8vw28v0" path="res://Scenes/world_environment.tscn" id="29_vl1po"]
+[ext_resource type="AudioStream" uid="uid://cjb77cv8we00t" path="res://Assets/Sounds/Slash.mp3" id="37_oslv8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ushfy"]
 size = Vector2(15.6, 23.5)
@@ -758,6 +760,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../../../../Audio/Slash:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_1xufk"]
 resource_name = "Sword"
@@ -821,6 +835,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1.001358e-05, 1.001358e-05), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../../../../Audio/Slash:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.39229208),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dq5a7"]
@@ -1121,6 +1147,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_k1duu"]
 resource_name = "UseFlashEf"
@@ -1161,12 +1199,28 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_755ar"]
 _data = {
 &"RESET": SubResource("Animation_t521p"),
 &"UseFlashEf": SubResource("Animation_k1duu")
 }
+
+[sub_resource type="Curve" id="Curve_dq5a7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_dq5a7"]
 offsets = PackedFloat32Array(0.80528843, 1)
@@ -1572,6 +1626,7 @@ dialogAnim = NodePath("UI/NinePatchRect/AnimationPlayer")
 dialogText = NodePath("UI/NinePatchRect/dialogText")
 takedItemEf = ExtResource("7_0wngn")
 swordAnim = NodePath("CollisionShape2D/body/Foot/CharacterSprite/CharacterSword/AnimationPlayer")
+hitEffectSword = ExtResource("8_80j7h")
 energyUseAnim = NodePath("UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos/UseEfFlashSprite/AnimationPlayer")
 energyUseAnimPos = NodePath("UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos")
 blueFlashAnim = NodePath("UI/EnergyBar/energyBarFlash/AnimationPlayer")
@@ -1804,6 +1859,24 @@ texture = SubResource("GradientTexture2D_oslv8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos/UseEfFlashSprite" unique_id=2114183346]
 libraries/ = SubResource("AnimationLibrary_755ar")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="UI/EnergyBar/EnergyBarBG/Polygon2D/EnergyBar/FlashPos" unique_id=1660980198]
+modulate = Color(0, 1.4319406, 2.8223546, 1)
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 1516568542
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_dq5a7")
 
 [node name="Polygon2D2" type="Polygon2D" parent="UI/EnergyBar/EnergyBarBG" unique_id=940279162]
 clip_children = 2
@@ -2043,6 +2116,10 @@ bus = &"SFX"
 
 [node name="WallSlideG" type="AudioStreamPlayer2D" parent="Audio" unique_id=116189037]
 stream = ExtResource("24_1g2gg")
+bus = &"SFX"
+
+[node name="Slash" type="AudioStreamPlayer2D" parent="Audio" unique_id=280513770]
+stream = ExtResource("37_oslv8")
 bus = &"SFX"
 
 [node name="Equips" type="Node2D" parent="." unique_id=1412867639]

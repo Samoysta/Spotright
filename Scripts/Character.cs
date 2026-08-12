@@ -108,6 +108,8 @@ public partial class Character : CharacterBody2D
     public Queue<Effect> takedItemEfs = new();
     //Audios
     [Export] public AnimationPlayer swordAnim;
+    [Export] PackedScene hitEffectSword;
+    public Queue<Effect> hitEffectSwords = new();
     [Export] public AnimationPlayer energyUseAnim;
     [Export] public Node2D energyUseAnimPos;
     [Export] public AnimationPlayer blueFlashAnim;
@@ -140,6 +142,13 @@ public partial class Character : CharacterBody2D
             GetTree().CurrentScene.CallDeferred("add_child", def);
             def.Scale = new Vector2(1, 1);
             takedItemEfs.Enqueue(def);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            Effect def = (Effect)hitEffectSword.Instantiate();
+            GetTree().CurrentScene.CallDeferred("add_child", def);
+            def.Scale = new Vector2(1, 1);
+            hitEffectSwords.Enqueue(def);
         }
         for (int i = 0; i < 12; i++)
         {
@@ -241,6 +250,7 @@ public partial class Character : CharacterBody2D
             abilityLogos[i].Visible = true;
         }
         EnergyBar.Position = new Vector2((pd.energyAmount * (48f / 15f)) - 48, 0);
+        pastEnergy = pd.energyAmount;
     }
     public override void _Process(double delta)
     {
@@ -1096,6 +1106,7 @@ public partial class Character : CharacterBody2D
         }
         if (body.HasMethod("SetDamageEf"))
         {
+            SpawnHitEffectSword(body);
             if (characterSprite.Scale.X < 0)
             {
                 body.Call("SetDamageEf",Vector2.Left);
@@ -1105,5 +1116,22 @@ public partial class Character : CharacterBody2D
                 body.Call("SetDamageEf",Vector2.Right);
             }
         }
+    }
+
+    public void SpawnHitEffectSword(Node2D body)
+    {
+        camera.Shake(20);
+        Effect ef = hitEffectSwords.Dequeue();
+        ef.GlobalPosition = new Vector2(body.GlobalPosition.X, GlobalPosition.Y);
+        if (lastDir > 0)
+        {
+            ef.Scale = new Vector2(1, 1);
+        }
+        else
+        {
+            ef.Scale = new Vector2(-1, 1);
+        }
+        ef.setOn();
+        hitEffectSwords.Enqueue(ef);
     }
 }

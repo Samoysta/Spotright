@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctn2lvp5n50qu"]
 
 [ext_resource type="Script" uid="uid://b4gnhuu12i6cg" path="res://Scripts/bullets/Wepaon1Bullet.cs" id="1_nevk8"]
+[ext_resource type="AudioStream" uid="uid://brna53wipiw28" path="res://Assets/Sounds/BulletHitSFX.mp3" id="2_i7lwx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nevk8"]
 size = Vector2(3.085, 6.93)
@@ -12,12 +13,13 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_nevk8"]
 colors = PackedColorArray(3.2944162, 3.2944162, 3.2944162, 1, 3.2944162, 3.2944162, 0, 1)
 
-[node name="wepaon1bullet" type="Node2D" unique_id=836278390 node_paths=PackedStringArray("ray", "line")]
+[node name="wepaon1bullet" type="Node2D" unique_id=836278390 node_paths=PackedStringArray("ray", "line", "hitEffectEnemy")]
 z_index = 1
 script = ExtResource("1_nevk8")
 ray = NodePath("RayCast2D")
 line = NodePath("Line2D")
 speed = 1000.0
+hitEffectEnemy = NodePath("EnemyHitEf")
 
 [node name="RayCast2D" type="ShapeCast2D" parent="." unique_id=1266736009]
 shape = SubResource("RectangleShape2D_nevk8")
@@ -31,5 +33,12 @@ end_cap_mode = 2
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=910582134]
 rect = Rect2(-80, -10, 138, 20)
+
+[node name="EnemyHitEf" type="AudioStreamPlayer2D" parent="." unique_id=1188491518]
+stream = ExtResource("2_i7lwx")
+volume_db = -4.64
+max_distance = 1000.0
+attenuation = 2.2973964
+bus = &"SFX"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ScreenExited2D"]

@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://cisdmfifeucyu"]
+
+[ext_resource type="Script" uid="uid://24y2vn7ev125" path="res://Scripts/Effect.cs" id="1_sud2u"]
+[ext_resource type="Texture2D" uid="uid://c6bjlgeeqth6" path="res://Assets/Levers/LeverImpactSheet.png" id="2_meahn"]
+[ext_resource type="AudioStream" uid="uid://c10tup0cqk03t" path="res://Assets/Sounds/EnemyFleshEffect.mp3" id="3_meahn"]
+
+[sub_resource type="Animation" id="Animation_lhh6j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFlesh:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_vce6j"]
+resource_name = "Start"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFlesh:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n0g8s"]
+_data = {
+&"RESET": SubResource("Animation_lhh6j"),
+&"Start": SubResource("Animation_vce6j")
+}
+
+[node name="HitEffectSword" type="Node2D" unique_id=116364753 node_paths=PackedStringArray("anims")]
+script = ExtResource("1_sud2u")
+anims = [NodePath("AnimationPlayer")]
+dur = 1.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=682555590]
+libraries/ = SubResource("AnimationLibrary_n0g8s")
+speed_scale = 0.6
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1490522948]
+visible = false
+scale = Vector2(3.445, 1)
+texture = ExtResource("2_meahn")
+hframes = 3
+
+[node name="EnemyFlesh" type="AudioStreamPlayer2D" parent="." unique_id=1264925837]
+stream = ExtResource("3_meahn")
+bus = &"SFX"

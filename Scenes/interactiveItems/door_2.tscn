@@ -93,6 +93,7 @@ shape = SubResource("RectangleShape2D_dr24s")
 layer = 2
 
 [node name="BlackScreen" type="Sprite2D" parent="CanvasLayer" unique_id=1304770956]
+visible = false
 position = Vector2(320, 180)
 texture = SubResource("GradientTexture2D_uffo4")
 
